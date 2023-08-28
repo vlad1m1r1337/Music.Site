@@ -3,6 +3,7 @@ import '../css/signin.css';
 import '../css/style.css';
 import '../css/signup.css';
 import '../css/index.css';
+import PlayList from './PlayList';
 
 export default function CenterBlockContent() {
 	return (
@@ -18,130 +19,11 @@ export default function CenterBlockContent() {
 				</div>
 			</div>
 			<div class="content__playlist playlist">
-				<div class="playlist__item">
-				<div class="playlist__track track">
-					<div class="track__title">
-					<div class="track__title-image">
-						<svg class="track__title-svg" alt="music">
-						<use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-						</svg>
-					</div>
-					<div class="track__title-text">
-						<a class="track__title-link" href="http://"
-						>Guilt <span class="track__title-span"></span
-						></a>
-					</div>
-					</div>
-					<div class="track__author">
-					<a class="track__author-link" href="http://">Nero</a>
-					</div>
-					<div class="track__album">
-					<a class="track__album-link" href="http://"
-						>Welcome Reality</a
-					>
-					</div>
-					<div class="track__time">
-					<svg class="track__time-svg" alt="time">
-						<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-					</svg>
-					<span class="track__time-text">4:44</span>
-					</div>
-				</div>
-				</div>
-
-				<div class="playlist__item">
-				<div class="playlist__track track">
-					<div class="track__title">
-					<div class="track__title-image">
-						<svg class="track__title-svg" alt="music">
-						<use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-						</svg>
-					</div>
-					<div class="track__title-text">
-						<a class="track__title-link" href="http://"
-						>Elektro <span class="track__title-span"></span
-						></a>
-					</div>
-					</div>
-					<div class="track__author">
-					<a class="track__author-link" href="http://"
-						>Dynoro, Outwork, Mr. Gee</a
-					>
-					</div>
-					<div class="track__album">
-					<a class="track__album-link" href="http://">Elektro</a>
-					</div>
-					<div class="track__time">
-					<svg class="track__time-svg" alt="time">
-						<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-					</svg>
-					<span class="track__time-text">2:22</span>
-					</div>
-				</div>
-				</div>
-
-				<div class="playlist__item">
-				<div class="playlist__track track">
-					<div class="track__title">
-					<div class="track__title-image">
-						<svg class="track__title-svg" alt="music">
-						<use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-						</svg>
-					</div>
-					<div class="track__title-text">
-						<a class="track__title-link" href="http://"
-						>I’m Fire <span class="track__title-span"></span
-						></a>
-					</div>
-					</div>
-					<div class="track__author">
-					<a class="track__author-link" href="http://"
-						>Ali Bakgor</a
-					>
-					</div>
-					<div class="track__album">
-					<a class="track__album-link" href="http://">I’m Fire</a>
-					</div>
-					<div class="track__time">
-					<svg class="track__time-svg" alt="time">
-						<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-					</svg>
-					<span class="track__time-text">2:22</span>
-					</div>
-				</div>
-				</div>
-
-				<div class="playlist__item">
-				<div class="playlist__track track">
-					<div class="track__title">
-					<div class="track__title-image">
-						<svg class="track__title-svg" alt="music">
-						<use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-						</svg>
-					</div>
-					<div class="track__title-text">
-						<a class="track__title-link" href="http://"
-						>Non Stop
-						<span class="track__title-span">(Remix)</span></a
-						>
-					</div>
-					</div>
-					<div class="track__author">
-					<a class="track__author-link" href="http://"
-						>Стоункат, Psychopath</a
-					>
-					</div>
-					<div class="track__album">
-					<a class="track__album-link" href="http://">Non Stop</a>
-					</div>
-					<div class="track__time">
-					<svg class="track__time-svg" alt="time">
-						<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-					</svg>
-					<span class="track__time-text">4:12</span>
-					</div>
-				</div>
-				</div>
+				<PlayList track={"Guilt "} executor={"Nero"} album={"Welcome Reality"} time={"4:44"}/>
+				<PlayList track={"Elektro "} executor={"Dynoro, Outwork, Mr. Gee"} album={"Elektro"} time={"2:22"}/>
+				<PlayList track={"I’m Fire "} executor={"Ali Bakgor"} album={"I’m Fire"} time={"2:22"}/>
+				<PlayList track={"Non Stop"} track_add={"(Remix)"} executor={"Стоункат, Psychopath"}
+						album={"Non Stop"} time={"4:12"}/>
 
 				<div class="playlist__item">
 				<div class="playlist__track track">
