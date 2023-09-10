@@ -8,8 +8,20 @@ import AudioPlayer from './components/AudioPlayer.jsx';
 import NavMenu from './components/NavMenu.jsx';
 import TrackList from './components/TrackList.jsx';
 import SideBar from './components/SideBar.jsx';
+//import { useEffect, useState } from 'react';
 
 function App() {
+    // const [isLoading, setIsLoading] = useState(true);
+
+    // useEffect(() => {
+    //   const delay = 5000;
+
+    //   setTimeout(() => {
+    //     setIsLoading(false);
+    //     console.log("Loading finished after 5 seconds");
+    //   }, delay);
+    // }, [])
+
   return (
     <div className="App">
       <div class="wrapper">
