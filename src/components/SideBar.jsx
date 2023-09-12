@@ -3,8 +3,20 @@ import '../css/signin.css';
 import '../css/style.css';
 import '../css/signup.css';
 import '../css/index.css';
+import { useEffect, useState } from 'react';
+import SideBarImages from './SideBarImages';
 
 export default function SideBar() {
+	const [isLoading, setIsLoading] = useState(true);
+	
+	useEffect(() => {
+		setIsLoading(true);
+		setTimeout(() => {
+			// Once the operation is complete, set isLoading to false
+			setIsLoading(false);
+		  }, 5000);
+	}, []);
+
 	return (
 		<div class="main__sidebar sidebar">
 		<div class="sidebar__personal">
@@ -17,33 +29,15 @@ export default function SideBar() {
 		</div>
 		<div class="sidebar__block">
 		  <div class="sidebar__list">
-			<div class="sidebar__item">
+			{isLoading ? (<div class="sidebar__item">
 			  <a class="sidebar__link" href="https://my.sky.pro/student-cabinet/showcase">
 				<img
 				  class="sidebar__img"
-				  src="img/playlist01.png"
+				  src="img/placeholders/big.png"
 				  alt="day's playlist"
 				/>
 			  </a>
-			</div>
-			<div class="sidebar__item">
-			  <a class="sidebar__link" href="https://my.sky.pro/student-cabinet/showcase">
-				<img
-				  class="sidebar__img"
-				  src="img/playlist02.png"
-				  alt="day's playlist"
-				/>
-			  </a>
-			</div>
-			<div class="sidebar__item">
-			  <a class="sidebar__link" href="https://my.sky.pro/student-cabinet/showcase">
-				<img
-				  class="sidebar__img"
-				  src="img/playlist03.png"
-				  alt="day's playlist"
-				/>
-			  </a>
-			</div>
+			</div>) : <SideBarImages />}	
 		  </div>
 		</div>
 	  </div>
