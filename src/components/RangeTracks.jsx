@@ -8,17 +8,17 @@ import { useState } from 'react';
 
 export default function RangeTracks() {
 
-	const [performer, setVisiblePerformer] = useState(true);
+	const [performer, setVisiblePerformer] = useState(false);
 
 	const toggleVisibilityPerformer = () => setVisiblePerformer(!performer);
 
 
-	const [year, setVisibleYear] = useState(true);
+	const [year, setVisibleYear] = useState(false);
 
 	const toggleVisibilityYear = () => setVisibleYear(!year);
 
 
-	const [genre, setVisibleGenre] = useState(true);
+	const [genre, setVisibleGenre] = useState(false);
 
 	const toggleVisibilityGenre = () => setVisibleGenre(!genre);
 

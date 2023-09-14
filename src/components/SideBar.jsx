@@ -1,8 +1,3 @@
-import '../App.css';
-import '../css/signin.css';
-import '../css/style.css';
-import '../css/signup.css';
-import '../css/index.css';
 import { useEffect, useState } from 'react';
 import SideBarImages from './SideBarImages';
 
@@ -12,9 +7,8 @@ export default function SideBar() {
 	useEffect(() => {
 		setIsLoading(true);
 		setTimeout(() => {
-			// Once the operation is complete, set isLoading to false
 			setIsLoading(false);
-		  }, 5000);
+		}, 5000);
 	}, []);
 
 	return (

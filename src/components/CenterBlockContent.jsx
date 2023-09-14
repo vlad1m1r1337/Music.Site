@@ -1,11 +1,7 @@
-import '../App.css';
-import '../css/signin.css';
-import '../css/style.css';
-import '../css/signup.css';
-import '../css/index.css';
 import Track from './Track';
 
 export default function CenterBlockContent() {
+
 	return (
 		<div class="centerblock__content">
 			<div class="content__title playlist-title">
