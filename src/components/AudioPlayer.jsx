@@ -1,10 +1,15 @@
-import '../App.css';
-import '../css/signin.css';
-import '../css/style.css';
-import '../css/signup.css';
-import '../css/index.css';
+import { useEffect, useState } from 'react';
 
 export default function AudioPlayer() {
+	const [isLoading, setIsLoading] = useState(true);
+	
+	useEffect(() => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 5000);
+	}, []);
+
 	return (
 		<div class="bar">
 		<div class="bar__content">
@@ -41,6 +46,10 @@ export default function AudioPlayer() {
 
 			  <div class="player__track-play track-play">
 				<div class="track-play__contain">
+				{isLoading ? (
+				<div>
+					<img src="img/placeholders/track_3.png" alt="track 3" />
+				</div>) : (<>
 				  <div class="track-play__image">
 					<svg class="track-play__svg" alt="music">
 					  <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
@@ -54,6 +63,7 @@ export default function AudioPlayer() {
 				  <div class="track-play__album">
 					<a class="track-play__album-link" href="http://">Баста</a>
 				  </div>
+				  </>)}
 				</div>
 
 				<div class="track-play__like-dis">
