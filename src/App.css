@@ -905,3 +905,39 @@ body {
   align-items: center;
 }
 
+.search__pop_menu {
+  margin: 50px 0 0 0;
+  background-color: #313131;
+  border: 1px solid #313131;
+  border-radius: 12px;
+  transition: 0.3s;
+  color: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  width: 248px;
+}
+
+.search__pop_menu.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu__item:hover {
+  color: #B672FF;
+  text-decoration: underline;
+}
+
+/* .menu__list_track {
+  width: auto;
+} */
+
+.range__buttons {
+  display: flex;
+}

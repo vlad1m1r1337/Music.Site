@@ -1,20 +1,28 @@
 import { useState } from "react"
 
+// import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+
 export default function SearchPopup({name}) {
 
-	const [state, ReverseState] = useState(false);
-
-	const toggleState = () => ReverseState(!state);
+	const [isOpen, setOpen] = useState(false);
 
 	return (
-		<div onClick={toggleState} class="performer">
-			<div class="filter__button button-author _btn-text">
-				{name}
+		<>
+			<div class="range__buttons">
+				<div onClick={() => setOpen(!isOpen)} class="filter__button button-author _btn-text">
+					{name}
+				</div>
+				<nav className={`search__pop_menu ${isOpen ? "active" : ""}`}>
+					<ul className="menu__list_track">
+						<li className="menu__item">1</li>
+						<li className="menu__item">2</li>
+						<li className="menu__item">3</li>
+						<li className="menu__item">4</li>
+						<li className="menu__item">5</li>
+						<li className="menu__item">6</li>
+					</ul>
+				</nav>
 			</div>
-			{state && (
-			<div>
-				<img src="img/ranking/perfomer.png" alt="ranging" />
-			</div>)}
-		</div>
+		</>
 	)
 }
