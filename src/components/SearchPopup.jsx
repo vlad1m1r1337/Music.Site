@@ -1,7 +1,5 @@
 import { useState } from "react"
 
-// import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-
 export default function SearchPopup({name}) {
 
 	const [isOpen, setOpen] = useState(false);
