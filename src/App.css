@@ -180,11 +180,6 @@ body {
   padding: 18px 0 10px 0;
 }
 
-.menu__item {
-  padding: 5px 0;
-  margin-bottom: 16px;
-}
-
 .menu__link {
   color: #ffffff;
   font-weight: 400;
@@ -927,6 +922,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 5px 0;
+  margin-bottom: 16px;
+}
+
+.left__menu_item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px 0;
+  margin-bottom: 16px;
 }
 
 .menu__item:hover {
@@ -934,10 +939,11 @@ body {
   text-decoration: underline;
 }
 
-/* .menu__list_track {
-  width: auto;
-} */
-
 .range__buttons {
   display: flex;
+}
+
+.pop__menu_find {
+  overflow: auto;
+  height: 150px;
 }
