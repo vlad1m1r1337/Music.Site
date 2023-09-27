@@ -945,5 +945,15 @@ body {
 
 .pop__menu_find {
   overflow: auto;
-  height: 150px;
+  height: 133px;
+}
+
+.pop__menu_find::-webkit-scrollbar-thumb {
+  background-color: #f1f1f1; /* Цвет ползунка */
+  border-radius: 6px; /* Закругленные углы ползунка */
+  margin-right: 5px;
+}
+
+.pop__menu_find::-webkit-scrollbar {
+  width: 12px; /* Ширина скроллбара */
 }
