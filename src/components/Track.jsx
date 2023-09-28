@@ -19,12 +19,6 @@ export default function PlayList({track, track_add, executor, album, time}) {
 								<div class="track__title">
 									<img src="/img/placeholders/track.png" alt="track_placeholder" />
 								</div>
-								<div class="track__time">
-									<svg class="track__time-svg" alt="time">
-										<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-									</svg>
-									<span class="track__time-text">0:00</span>
-								</div>
 							</div>
 						</>
 					) : (

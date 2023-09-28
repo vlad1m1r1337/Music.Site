@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 export default function NavMenu() {
-	const [visible, setVisible] = useState(true);
+	const [visible, setVisible] = useState(false);
 
 	const toggleVisibility = () => setVisible(!visible);
 
