@@ -3,9 +3,14 @@ import { useClickOutside } from "../hooks/useClickOutside";
 
 export default function SearchPopup({ name, arr }) {
   const [isOpen, setOpen] = useState(false);
-  const menuRef = useRef(null);
+  const menuRef = useRef(null); 
+  function waitForDelayAndRun() {
+    setTimeout(() => {
+      if (isOpen) setTimeout(() => setOpen(false), 50);
+    }, 50);
+  }
   useClickOutside(menuRef, () => {
-    if (isOpen) setTimeout(() => setOpen(false), 50);
+    waitForDelayAndRun();
   });
 
   let scroll = arr.length > 3 ? 1 : 0
@@ -13,7 +18,7 @@ export default function SearchPopup({ name, arr }) {
   return (
     <>
       <div className="range__buttons">
-        <div onClick={() => setOpen(!isOpen)} className="filter__button button-author _btn-text">
+        <div className="filter__button button-author _btn-text" onClick={() => setOpen(!isOpen)}>
           {name}
         </div>
         <nav className={`search__pop_menu ${isOpen ? "active" : ""}`} ref={menuRef}>
