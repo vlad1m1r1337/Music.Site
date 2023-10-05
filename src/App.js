@@ -5,7 +5,7 @@ import './css/signup.css';
 import './css/index.css';
 
 import AudioPlayer from './components/AudioPlayer.jsx';
-import NavMenu from './components/NavMenu.jsx';
+import NavMenu from './components/NavMenu/NavMenu.jsx';
 import TrackList from './components/TrackList.jsx';
 import SideBar from './components/SideBar.jsx';
 //import { useEffect, useState } from 'react';
