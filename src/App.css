@@ -565,19 +565,11 @@ body {
 }
 
 .bar__content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+
 }
 
 .bar__player-progress {
-  width: 100%;
-  height: 5px;
-  background: #2e2e2e;
+
 }
 
 .bar__player-block {
@@ -595,19 +587,7 @@ body {
 }
 
 .bar__player {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+
 }
 
 .bar__volume-block {

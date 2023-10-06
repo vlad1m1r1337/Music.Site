@@ -1,4 +1,59 @@
 import { useEffect, useState } from 'react';
+import styled from "styled-components";
+
+const StyledBar = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(28, 28, 28, 0.5);
+`
+
+const StyledBarContent = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+`
+
+const StyledBarPlayerProgress = styled.div`
+  width: 100%;
+  height: 5px;
+  background: #2e2e2e;
+`
+
+const StyledBarPlayerBlock = styled.div`
+  height: 73px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+`
+
+const StyledBarPlayer = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+`
 
 export default function AudioPlayer() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -11,11 +66,11 @@ export default function AudioPlayer() {
 	}, []);
 
 	return (
-		<div class="bar">
-		<div class="bar__content">
-		  <div class="bar__player-progress"></div>
-		  <div class="bar__player-block">
-			<div class="bar__player player">
+		<StyledBar>
+		<StyledBarContent>
+		  <StyledBarPlayerProgress></StyledBarPlayerProgress>
+		  <StyledBarPlayerBlock>
+			<StyledBarPlayer>
 			  <div class="player__controls">
 				<div class="player__btn-prev">
 				  <svg class="player__btn-prev-svg" alt="prev">
@@ -81,7 +136,7 @@ export default function AudioPlayer() {
 				  </div>
 				</div>
 			  </div>
-			</div>
+			</StyledBarPlayer>
 			<div class="bar__volume-block volume">
 			  <div class="volume__content">
 				<div class="volume__image">
@@ -98,8 +153,8 @@ export default function AudioPlayer() {
 				</div>
 			  </div>
 			</div>
-		  </div>
-		</div>
-	  </div>
+		  </StyledBarPlayerBlock>
+		</StyledBarContent>
+	  </StyledBar>
 	);
   }
