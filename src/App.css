@@ -698,7 +698,10 @@ body {
 }
 
 .track-play__like-svg {
-
+  width: 14px;
+  height: 12px;
+  fill: transparent;
+  stroke: #696969;
 }
 
 .track-play__dislike {

@@ -66,20 +66,19 @@ export default function AudioPlayer() {
 					  </S.TrackPlayAlbum>
 					  </>)}
 				</S.TrackPlayContain>
-
 				<S.TrackPlayLikeDis>
-				  <S.TrackPlayLike class="_btn-icon">
-					<S.TrackPlayLikeSvg alt="like">
-					  <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-					</S.TrackPlayLikeSvg>
-				  </S.TrackPlayLike>
-				  <div class="track-play__dislike _btn-icon">
-					<svg class="track-play__dislike-svg" alt="dislike">
-					  <use
-						xlinkHref="img/icon/sprite.svg#icon-dislike"
-					  ></use>
-					</svg>
-				  </div>
+					<div class="track-play__like _btn-icon">
+						<svg class="track-play__like-svg" alt="like">
+							<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+						</svg>
+					</div>
+					<div class="track-play__dislike _btn-icon">
+						<svg class="track-play__dislike-svg" alt="dislike">
+							<use
+								xlinkHref="img/icon/sprite.svg#icon-dislike"
+							></use>
+						</svg>
+					</div>
 				</S.TrackPlayLikeDis>
 			  </S.PlayerTrackPlay>
 				</S.BarPlayer>
