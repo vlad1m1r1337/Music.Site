@@ -55,6 +55,84 @@ const StyledBarPlayer = styled.div`
   justify-content: flex-start;
 `
 
+const StyledPlayerControls = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding: 0 27px 0 31px;
+`
+
+const StyledPlayerBtnPrev = styled.div`
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 23px;
+`
+
+const StyledPlayerBtnPrevSvg = styled.svg`
+  width: 15px;
+  height: 14px;
+`
+
+const StyledPlayerBtnPlay = styled.div`
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 23px;
+`
+
+const StyledPlayerBtnPlaySvg = styled.svg`
+  width: 22px;
+  height: 20px;
+  fill: #d9d9d9;
+`
+
+const StyledPlayerBtnNext = styled.div`
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 28px;
+  fill: #a53939;
+`
+
+const StyledPlayerBtnNextSvg = styled.svg`
+  width: 15px;
+  height: 14px;
+  fill: inherit;
+  stroke: #d9d9d9;
+`
+
+const StyledPlayerBtnRepeat = styled.div`
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 24px;
+`
+
+// const Styled = styled.div`
+//
+// `
+
 export default function AudioPlayer() {
 	const [isLoading, setIsLoading] = useState(true);
 	
@@ -71,22 +149,22 @@ export default function AudioPlayer() {
 		  <StyledBarPlayerProgress></StyledBarPlayerProgress>
 		  <StyledBarPlayerBlock>
 			<StyledBarPlayer>
-			  <div class="player__controls">
-				<div class="player__btn-prev">
-				  <svg class="player__btn-prev-svg" alt="prev">
+			  <StyledPlayerControls>
+				<StyledPlayerBtnPrev>
+				  <StyledPlayerBtnPrevSvg alt="prev">
 					<use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
-				  </svg>
-				</div>
-				<div class="player__btn-play _btn">
-				  <svg class="player__btn-play-svg" alt="play">
+				  </StyledPlayerBtnPrevSvg>
+				</StyledPlayerBtnPrev>
+				<StyledPlayerBtnPlay class="_btn">
+				  <StyledPlayerBtnPlaySvg alt="play">
 					<use xlinkHref="img/icon/sprite.svg#icon-play"></use>
-				  </svg>
-				</div>
-				<div class="player__btn-next">
-				  <svg class="player__btn-next-svg" alt="next">
+				  </StyledPlayerBtnPlaySvg>
+				</StyledPlayerBtnPlay>
+				<StyledPlayerBtnNext>
+				  <StyledPlayerBtnNextSvg alt="next">
 					<use xlinkHref="img/icon/sprite.svg#icon-next"></use>
-				  </svg>
-				</div>
+				  </StyledPlayerBtnNextSvg>
+				</StyledPlayerBtnNext>
 				<div class="player__btn-repeat _btn-icon">
 				  <svg class="player__btn-repeat-svg" alt="repeat">
 					<use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
@@ -97,7 +175,7 @@ export default function AudioPlayer() {
 					<use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
 				  </svg>
 				</div>
-			  </div>
+			  </StyledPlayerControls>
 
 			  <div class="player__track-play track-play">
 				<div class="track-play__contain">
