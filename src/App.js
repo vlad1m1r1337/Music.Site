@@ -7,8 +7,7 @@ import './css/index.css';
 import AudioPlayer from './components/AudioPlayer/AudioPlayer.jsx';
 import NavMenu from './components/NavMenu/NavMenu.jsx';
 import TrackList from './components/TrackList.jsx';
-import SideBar from './components/SideBar.jsx';
-//import { useEffect, useState } from 'react';
+import SideBar from './components/SideBar/SideBar.jsx';
 
 function App() {
   return (
@@ -21,7 +20,6 @@ function App() {
           <SideBar/>
         </main>
         <AudioPlayer />
-        <footer class="footer"></footer>
       </div>
     </div>
     </div>
