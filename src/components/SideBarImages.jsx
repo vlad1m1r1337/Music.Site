@@ -3,11 +3,25 @@ import '../css/signin.css';
 import '../css/style.css';
 import '../css/signup.css';
 import '../css/index.css';
+import styled from "styled-components";
+
+//
+// const Styled = styled.div`
+//
+// `
+
+const StyledSidebarItem = styled.div`
+	width: 250px;
+	height: 150px;
+	&: not(:last-child) {
+	margin-bottom: 30px;
+}
+`
 
 export default function sideBarImages() {
 	return (
 		<>
-		<div class="sidebar__item">
+		<StyledSidebarItem>
 			  <a class="sidebar__link" href="https://my.sky.pro/student-cabinet/showcase">
 				<img
 				  class="sidebar__img"
@@ -15,8 +29,8 @@ export default function sideBarImages() {
 				  alt="day's playlist"
 				/>
 			  </a>
-			</div>
-			<div class="sidebar__item">
+			</StyledSidebarItem>
+			<StyledSidebarItem>
 			  <a class="sidebar__link" href="https://my.sky.pro/student-cabinet/showcase">
 				<img
 				  class="sidebar__img"
@@ -24,8 +38,8 @@ export default function sideBarImages() {
 				  alt="day's playlist"
 				/>
 			  </a>
-			</div>
-			<div class="sidebar__item">
+			</StyledSidebarItem>
+			<StyledSidebarItem>
 			  <a class="sidebar__link" href="https://my.sky.pro/student-cabinet/showcase">
 				<img
 				  class="sidebar__img"
@@ -33,7 +47,7 @@ export default function sideBarImages() {
 				  alt="day's playlist"
 				/>
 			  </a>
-			</div>
+			</StyledSidebarItem>
 			</>
 	)
 }
