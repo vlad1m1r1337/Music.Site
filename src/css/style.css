@@ -292,20 +292,7 @@ body {
 }
 
 .content__title {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  margin-bottom: 24px;
+
 }
 
 .content__playlist {
@@ -341,7 +328,7 @@ body {
 }
 
 .col02 {
-  width: 321px;
+
 }
 
 .col03 {

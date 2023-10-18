@@ -8,7 +8,7 @@ import SearchCenter from "./SearchCenter.jsx";
 
 import RangeTracks from "./RangeTracks.jsx";
 
-import CenterBlockContent from "./CenterBlockContent.jsx";
+import CenterBlockContent from "./CenterBlockContent/CenterBlockContent.jsx";
 
 export default function TrackList() {
 	return (

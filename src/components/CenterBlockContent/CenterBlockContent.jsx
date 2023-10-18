@@ -1,20 +1,20 @@
-import Track from './Track';
-
+import Track from '../Track';
+import * as S from './CenterBlockContent.styles'
 export default function CenterBlockContent() {
 
 	return (
-		<div class="centerblock__content">
-			<div class="content__title playlist-title">
-				<div class="playlist-title__col col01">Трек</div>
-				<div class="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-				<div class="playlist-title__col col03">АЛЬБОМ</div>
-				<div class="playlist-title__col col04">
-				<svg class="playlist-title__svg" alt="time">
-					<use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
-				</svg>
-				</div>
-			</div>
-			<div class="content__playlist playlist">
+		<S.CenterBlockContent>
+			<S.ContentTitle>
+				<S.Col01>Трек</S.Col01>
+				<S.Col02>ИСПОЛНИТЕЛЬ</S.Col02>
+				<S.Col03>АЛЬБОМ</S.Col03>
+				<S.Col04>
+					<S.PlayListTitleSvg alt="time">
+						<use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
+					</S.PlayListTitleSvg>
+				</S.Col04>
+			</S.ContentTitle>
+			<S.ContentPlayList>
 				<Track track={"Guilt "} executor={"Nero"}
 						album={"Welcome Reality"} time={"4:44"}/>
 				<Track track={"Elektro "} executor={"Dynoro, Outwork, Mr. Gee"}
@@ -35,7 +35,7 @@ export default function CenterBlockContent() {
 						album={"How Deep Is Your Love"} time={"3:32"}/>
 				<Track track={"Morena"} executor={"Tom Boxer"}
 						album={"Soundz Made in Romania"} time={"3:36"}/>
-			</div>
-			</div>
+			</S.ContentPlayList>
+			</S.CenterBlockContent>
 	)
 }
