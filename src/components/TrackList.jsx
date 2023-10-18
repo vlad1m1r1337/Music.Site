@@ -6,7 +6,7 @@ import '../css/index.css';
 
 import SearchCenter from "./SearchCenter.jsx";
 
-import RangeTracks from "./RangeTracks.jsx";
+import RangeTracks from "./RangeTracks/RangeTracks.jsx";
 
 import CenterBlockContent from "./CenterBlockContent/CenterBlockContent.jsx";
 

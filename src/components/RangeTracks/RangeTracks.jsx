@@ -1,5 +1,6 @@
 // Ваш родительский компонент
-import SearchPopup from './SearchPopup.jsx';
+import SearchPopup from '../SearchPopup.jsx';
+import * as S from './RangeTracks.styles'
 
 export default function RangeTracks() {
   const perf_arr = ["Nero", "Dynoro, Outwork, Mr. Gee", "Ali Bakgor", "Стоункат, Psychopath"];
@@ -8,13 +9,13 @@ export default function RangeTracks() {
   
   return (
     <>
-      <h2 className="centerblock__h2">Треки</h2>
-      <div className="centerblock__filter filter">
-        <div className="filter__title">Искать по:</div>
+      <S.CenterBlockH2>Треки</S.CenterBlockH2>
+      <S.CenterBlockFilter>
+        <S.FilterTitle>Искать по:</S.FilterTitle>
         <SearchPopup name={"исполнителю"} arr={perf_arr} />
         <SearchPopup name={"году выпуска"} arr={year_arr} />
         <SearchPopup name={"жанру"} arr={genre_arr} />
-      </div>
+      </S.CenterBlockFilter>
     </>
   );
 }
