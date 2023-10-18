@@ -1,5 +1,13 @@
 import { useState , useRef} from "react";
-import { useClickOutside } from "../hooks/useClickOutside";
+import { useClickOutside } from "../../hooks/useClickOutside";
+import styled from "styled-components";
+// const Styled = styled.div`
+//
+// `
+
+const StyledRangeButtons = styled.div`
+
+`
 
 export default function SearchPopup({ name, arr }) {
   const [isOpen, setOpen] = useState(false);
@@ -17,7 +25,7 @@ export default function SearchPopup({ name, arr }) {
 
   return (
     <>
-      <div className="range__buttons">
+      <div>
         <div className="filter__button button-author _btn-text" onClick={() => setOpen(!isOpen)}>
           {name}
         </div>

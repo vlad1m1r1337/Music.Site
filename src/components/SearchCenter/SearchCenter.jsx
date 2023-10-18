@@ -1,21 +1,17 @@
-import '../App.css';
-import '../css/signin.css';
-import '../css/style.css';
-import '../css/signup.css';
-import '../css/index.css';
+import {CenterBlockSearch, SearchText} from "./SearchCenter.styles";
 
 export default function SearchCenter() {
 	return (
-		<div class="centerblock__search search">
+		<CenterBlockSearch>
 		  <svg class="search__svg">
 			<use xlinkHref="img/icon/sprite.svg#icon-search"></use>
 		  </svg>
-		  <input
+		  <SearchText
 			class="search__text"
 			type="search"
 			placeholder="Поиск"
 			name="search"
 		  />
-		</div>
+		</CenterBlockSearch>
 	)
 }

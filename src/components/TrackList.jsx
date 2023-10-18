@@ -4,7 +4,7 @@ import '../css/style.css';
 import '../css/signup.css';
 import '../css/index.css';
 
-import SearchCenter from "./SearchCenter.jsx";
+import SearchCenter from "./SearchCenter/SearchCenter.jsx";
 
 import RangeTracks from "./RangeTracks/RangeTracks.jsx";
 

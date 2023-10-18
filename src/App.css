@@ -137,19 +137,7 @@ body {
 }
 
 .centerblock__search {
-  width: 100%;
-  border-bottom: 1px solid #4e4e4e;
-  margin-bottom: 51px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+
 }
 
 .centerblock__h2 {
@@ -691,8 +679,7 @@ body {
   text-decoration: underline;
 }
 
-.range__buttons {
-  display: flex;
+.range__buttons {  display: flex;
 }
 
 .pop__menu_find {

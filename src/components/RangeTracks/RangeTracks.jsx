@@ -1,5 +1,5 @@
 // Ваш родительский компонент
-import SearchPopup from '../SearchPopup.jsx';
+import SearchPopup from '../SearchPopup/SearchPopup.jsx';
 import * as S from './RangeTracks.styles'
 
 export default function RangeTracks() {
