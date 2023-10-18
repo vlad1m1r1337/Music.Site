@@ -120,11 +120,7 @@ body {
 }
 
 .main__centerblock {
-  width: auto;
-  -webkit-box-flex: 3;
-  -ms-flex-positive: 3;
-  flex-grow: 3;
-  padding: 20px 40px 20px 111px;
+
 }
 
 .main__sidebar {
@@ -281,65 +277,23 @@ body {
 }
 
 .playlist__track {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+
 }
 
 .track__title {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 447px;
+
 }
 
 .track__title-image {
-  width: 51px;
-  height: 51px;
-  padding: 16px;
-  background: #313131;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  margin-right: 17px;
+
 }
 
 .track__title-svg {
-  width: 18px;
-  height: 17px;
-  fill: transparent;
-  stroke: #4e4e4e;
+
 }
 
 .track__title-link {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
+
 }
 
 .track__title-span {
@@ -351,22 +305,11 @@ body {
 }
 
 .track__author {
-  width: 321px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+
 }
 
 .track__author-link {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
-  text-align: left;
+
 }
 
 .track__album {
@@ -374,28 +317,15 @@ body {
 }
 
 .track__album-link {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #696969;
+
 }
 
 .track__time-svg {
-  width: 14px;
-  height: 12px;
-  margin-right: 17px;
-  fill: transparent;
-  stroke: #696969;
+
 }
 
 .track__time-text {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  text-align: right;
-  color: #696969;
+
 }
 
 .sidebar__personal-name {
@@ -444,8 +374,7 @@ body {
 }
 
 .sidebar__img {
-  width: 100%;
-  height: auto;
+
 }
 
 .bar {
@@ -628,19 +557,7 @@ body {
 }
 
 .track_placeholder {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+
 }
 
 .search__pop_menu {

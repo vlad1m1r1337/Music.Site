@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import SideBarImages from '../SideBarImages';
+import SideBarImages from '../SideBarImages/SideBarImages';
 import * as S from './SideBar.styles'
 
 export default function SideBar() {
