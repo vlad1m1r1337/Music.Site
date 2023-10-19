@@ -275,20 +275,18 @@ export const TrackPlayLikeDis = styled.div`
 `
 
 export const BtnIcon = styled.div`
-    &: hover svg {
+    &:hover svg {
       fill: transparent;
       stroke: #acacac;
       cursor: pointer;
     }
-    &: active svg {
-      fill: transparent;
-      stroke: #ffffff;
-      cursor: pointer;
+    &:active svg {
+    fill: transparent;
+    stroke: #ffffff;
     }
-    &: active {
-      fill: #696969;
-      stroke: #ffffff;
-      cursor: pointer;
+    &:active {
+    fill: #696969;
+    stroke: #ffffff;
     }
 `
 

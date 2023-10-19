@@ -16,6 +16,14 @@ export const CenterBlockSearch = styled.div`
 	align-items: center;
 `
 
+export const SearchSvg = styled.svg`
+  width: 17px;
+  height: 17px;
+  margin-right: 5px;
+  stroke: #ffffff;
+  fill: transparent;
+`
+
 export const SearchText = styled.input`
   -webkit-box-flex: 100;
   -ms-flex-positive: 100;

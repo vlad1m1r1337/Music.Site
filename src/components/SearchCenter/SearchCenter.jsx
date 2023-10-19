@@ -1,17 +1,16 @@
-import {CenterBlockSearch, SearchText} from "./SearchCenter.styles";
+import * as S from "./SearchCenter.styles";
 
 export default function SearchCenter() {
 	return (
-		<CenterBlockSearch>
-		  <svg class="search__svg">
+		<S.CenterBlockSearch>
+		  <S.SearchSvg>
 			<use xlinkHref="img/icon/sprite.svg#icon-search"></use>
-		  </svg>
-		  <SearchText
-			class="search__text"
+		  </S.SearchSvg>
+		  <S.SearchText
 			type="search"
 			placeholder="Поиск"
 			name="search"
 		  />
-		</CenterBlockSearch>
+		</S.CenterBlockSearch>
 	)
 }

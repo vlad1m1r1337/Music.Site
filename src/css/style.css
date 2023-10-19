@@ -37,13 +37,6 @@
   cursor: pointer;
 }
 
-._btn-icon:active .track-play__like-svg,
-._btn-icon:active .track-play__dislike-svg {
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
-}
-
 .main {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
