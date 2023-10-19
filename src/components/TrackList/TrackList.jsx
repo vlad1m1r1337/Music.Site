@@ -1,8 +1,3 @@
-import '../../App.css';
-import '../../css/signin.css';
-import '../../css/style.css';
-import '../../css/signup.css';
-import '../../css/index.css';
 import SearchCenter from "../SearchCenter/SearchCenter.jsx";
 import RangeTracks from "../RangeTracks/RangeTracks.jsx";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent.jsx";

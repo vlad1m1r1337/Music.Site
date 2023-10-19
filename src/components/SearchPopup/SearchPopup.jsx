@@ -1,13 +1,10 @@
 import { useState , useRef} from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
-import styled from "styled-components";
-// const Styled = styled.div`
+// import styled from "styled-components";
+
+// const StyledFilterButton = styled.div`
 //
 // `
-
-const StyledRangeButtons = styled.div`
-
-`
 
 export default function SearchPopup({ name, arr }) {
   const [isOpen, setOpen] = useState(false);
@@ -21,12 +18,12 @@ export default function SearchPopup({ name, arr }) {
     waitForDelayAndRun();
   });
 
-  let scroll = arr.length > 3 ? 1 : 0
+  const scroll = arr.length > 3 ? 1 : 0
 
   return (
     <>
       <div>
-        <div className="filter__button button-author _btn-text" onClick={() => setOpen(!isOpen)}>
+        <div className="filter__button _btn-text" onClick={() => setOpen(!isOpen)}>
           {name}
         </div>
         <nav className={`search__pop_menu ${isOpen ? "active" : ""}`} ref={menuRef}>
