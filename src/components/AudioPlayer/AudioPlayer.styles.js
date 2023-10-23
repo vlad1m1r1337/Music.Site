@@ -274,6 +274,33 @@ export const TrackPlayLikeDis = styled.div`
     margin-left: 26%;
 `
 
+export const BtnIcon = styled.div`
+    &:hover svg {
+      fill: transparent;
+      stroke: #acacac;
+      cursor: pointer;
+    }
+    &:active svg {
+    fill: transparent;
+    stroke: #ffffff;
+    }
+    &:active {
+    fill: #696969;
+    stroke: #ffffff;
+    }
+`
+
+export const TrackPlayLike = styled(BtnIcon)`
+  padding: 5px;
+`
+
+export const TrackPlayLikeSvg = styled.svg`
+  width: 14px;
+  height: 12px;
+  fill: transparent;
+  stroke: #696969;
+`
+
 export const TrackPlayAlbumLink = styled.a`
 	font-style: normal;
 	font-weight: 400;
@@ -325,6 +352,10 @@ export const VolumeProgress = styled.div`
 	width: 109px;
 `
 
-export const VolumeProgressLine = styled.input`
-	width: 109px;
+export const Btn = styled.input`
+  cursor: pointer;
+`
+
+export const VolumeProgressLine = styled(Btn)`
+  width: 109px;
 `

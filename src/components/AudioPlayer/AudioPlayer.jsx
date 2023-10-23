@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as S from './AudioPlayer.styles'
+import {VolumeProgressLine, VolumeProgressLineBtn} from "./AudioPlayer.styles";
 
 export default function AudioPlayer() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -89,9 +90,8 @@ export default function AudioPlayer() {
 						<use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
 					  </S.VolumeSvg>
 					</S.VolumeImage>
-					<S.VolumeProgress class="_btn">
+					<S.VolumeProgress>
 					  <S.VolumeProgressLine
-						class="_btn"
 						type="range"
 						name="range"
 					  />
