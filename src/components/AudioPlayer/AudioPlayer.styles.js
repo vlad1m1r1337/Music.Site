@@ -284,10 +284,28 @@ export const BtnIcon = styled.div`
     fill: transparent;
     stroke: #ffffff;
     }
+    &:active {
+    .track-play__like-svg {
+      fill: #696969;
+      stroke: #ffffff;
+      cursor: pointer;
+    }
+    }
+    &:active {
+    .track-play__dislike-svg {
+      fill: #696969;
+      stroke: #ffffff;
+      cursor: pointer;
+    }
+    }
 `
 
 export const TrackPlayLike = styled(BtnIcon)`
   padding: 5px;
+`
+
+export const TrackPlayDislike = styled(BtnIcon)`
+  margin-left: 28.5px;
 `
 
 export const TrackPlayLikeSvg = styled.svg`

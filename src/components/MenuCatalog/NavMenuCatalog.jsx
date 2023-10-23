@@ -1,6 +1,5 @@
 import * as S from './NavMenuCatalog.styles'
 
-
 export default function NavMenuCatalog() {
 	return (
 		<S.NavMenu>

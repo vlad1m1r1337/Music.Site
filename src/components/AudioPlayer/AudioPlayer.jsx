@@ -67,18 +67,18 @@ export default function AudioPlayer() {
 					  </>)}
 				</S.TrackPlayContain>
 				<S.TrackPlayLikeDis>
-					<div class="track-play__like _btn-icon">
+					<S.TrackPlayLike>
 						<svg class="track-play__like-svg" alt="like">
 							<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
 						</svg>
-					</div>
-					<div class="track-play__dislike _btn-icon">
+					</S.TrackPlayLike>
+					<S.TrackPlayDislike>
 						<svg class="track-play__dislike-svg" alt="dislike">
 							<use
 								xlinkHref="img/icon/sprite.svg#icon-dislike"
 							></use>
 						</svg>
-					</div>
+					</S.TrackPlayDislike>
 				</S.TrackPlayLikeDis>
 			  </S.PlayerTrackPlay>
 				</S.BarPlayer>
