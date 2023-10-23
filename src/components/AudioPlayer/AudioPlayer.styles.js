@@ -284,10 +284,6 @@ export const BtnIcon = styled.div`
     fill: transparent;
     stroke: #ffffff;
     }
-    &:active {
-    fill: #696969;
-    stroke: #ffffff;
-    }
 `
 
 export const TrackPlayLike = styled(BtnIcon)`
