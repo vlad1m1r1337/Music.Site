@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import * as S from './AudioPlayer.styles'
-import {VolumeProgressLine, VolumeProgressLineBtn} from "./AudioPlayer.styles";
 
 export default function AudioPlayer() {
 	const [isLoading, setIsLoading] = useState(true);
