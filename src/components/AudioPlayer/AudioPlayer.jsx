@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as S from './AudioPlayer.styles'
+import {TrackPlayDislikeSvg, TrackPlayLikeSvg} from "./AudioPlayer.styles";
 
 export default function AudioPlayer() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -68,16 +69,16 @@ export default function AudioPlayer() {
 				</S.TrackPlayContain>
 				<S.TrackPlayLikeDis>
 					<S.TrackPlayLike>
-						<svg className="track-play__like-svg" alt="like">
+						<S.TrackPlayLikeSvg className="track-play__like-svg" alt="like">
 							<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-						</svg>
+						</S.TrackPlayLikeSvg>
 					</S.TrackPlayLike>
 					<S.TrackPlayDislike>
-						<svg className="track-play__dislike-svg" alt="dislike">
+						<S.TrackPlayDislikeSvg className="track-play__dislike-svg" alt="dislike">
 							<use
 								xlinkHref="img/icon/sprite.svg#icon-dislike"
 							></use>
-						</svg>
+						</S.TrackPlayDislikeSvg>
 					</S.TrackPlayDislike>
 				</S.TrackPlayLikeDis>
 			  </S.PlayerTrackPlay>

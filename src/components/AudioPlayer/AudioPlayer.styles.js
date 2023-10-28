@@ -315,6 +315,13 @@ export const TrackPlayLikeSvg = styled.svg`
   stroke: #696969;
 `
 
+export const TrackPlayDislikeSvg = styled.svg`
+  width: 14.34px;
+  height: 13px;
+  fill: transparent;
+  stroke: #696969;
+`
+
 export const TrackPlayAlbumLink = styled.a`
 	font-style: normal;
 	font-weight: 400;
