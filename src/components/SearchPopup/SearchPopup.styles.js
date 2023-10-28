@@ -38,15 +38,15 @@ export const SearchPopupMenu = styled.nav`
   visibility: hidden;
   position: absolute;
   width: 248px;
-  ${props => props.isOpen && `
+  ${props => props.$isOpen && `
     opacity: 1;
     visibility: visible;
   `}
 `
 
 export const PopMenuFind = styled.ul`
-  overflow: ${props => (props.scroll ? 'auto' : '')};
-  height: ${props => (props.scroll ? '133px' : '')};
+  overflow: ${props => (props.$scroll ? 'auto' : '')};
+  height: ${props => (props.$scroll ? '133px' : '')};
   
   &::-webkit-scrollbar-thumb {
   background-color: #f1f1f1;

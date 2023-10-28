@@ -21,8 +21,8 @@ export default function SearchPopup({ name, arr }) {
         <S.BtnText onClick={() => setOpen(!isOpen)}>
           {name}
         </S.BtnText>
-        <S.SearchPopupMenu isOpen={isOpen} ref={menuRef}>
-          <S.PopMenuFind scroll={scroll}>
+        <S.SearchPopupMenu $isOpen={isOpen} ref={menuRef}>
+          <S.PopMenuFind $scroll={scroll}>
             {arr.map((item, index) => (
               <S.MenuItem key={index}>{item}</S.MenuItem>
             ))}
