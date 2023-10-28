@@ -1,5 +1,3 @@
-// import './App.css';
-
 import AudioPlayer from './components/AudioPlayer/AudioPlayer.jsx';
 import NavMenu from './components/NavMenu/NavMenu.jsx';
 import TrackList from './components/TrackList/TrackList.jsx';
