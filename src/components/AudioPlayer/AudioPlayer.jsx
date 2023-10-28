@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import * as S from './AudioPlayer.styles'
-import {TrackPlayDislikeSvg, TrackPlayLikeSvg} from "./AudioPlayer.styles";
 
 export default function AudioPlayer() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -103,4 +102,3 @@ export default function AudioPlayer() {
 	  </S.Bar>
 	);
   }
-  
