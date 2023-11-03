@@ -1,9 +1,6 @@
-import AudioPlayer from './components/AudioPlayer/AudioPlayer.jsx';
-import NavMenu from './components/NavMenu/NavMenu.jsx';
-import TrackList from './components/TrackList/TrackList.jsx';
-import SideBar from './components/SideBar/SideBar.jsx';
+import {AppRoutes} from "./routes";
+import React from "react";
 import {createGlobalStyle} from "styled-components";
-import * as S from "./App.styles"
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -46,19 +43,9 @@ const GlobalStyle = createGlobalStyle`
 
 export default function App() {
   return (
-    <div>
+    <>
         <GlobalStyle/>
-            <S.Wrapper>
-                <S.Container>
-                    <S.Main>
-                      <NavMenu/>
-                      <TrackList/>
-                      <SideBar/>
-                    </S.Main>
-                    <AudioPlayer />
-                </S.Container>
-            </S.Wrapper>
-    </div>
+        <AppRoutes/>
+    </>
   );
-}
-
+};
