@@ -48,16 +48,16 @@ export default function App() {
   return (
     <div>
         <GlobalStyle/>
-          <S.Wrapper>
-            <S.Container>
-                <S.Main>
-                  <NavMenu/>
-                  <TrackList/>
-                  <SideBar/>
-                </S.Main>
-            <AudioPlayer />
-            </S.Container>
-        </S.Wrapper>
+            <S.Wrapper>
+                <S.Container>
+                    <S.Main>
+                      <NavMenu/>
+                      <TrackList/>
+                      <SideBar/>
+                    </S.Main>
+                    <AudioPlayer />
+                </S.Container>
+            </S.Wrapper>
     </div>
   );
 }
