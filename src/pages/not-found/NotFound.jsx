@@ -8,17 +8,57 @@ import styled from "styled-components";
 
 
 const StyledErrorNumber = styled.div`
-display: flex;
-justify-content: space-around;
-font-size: 160px;
-font-weight: 400;
-line-height: 168px;
-letter-spacing: 0px;
-text-align: left;
+  margin-top: 282px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
-
+const Styled = styled.div`
 
 `
+
+const StyledParagraphNotFound = styled.p`
+  font-size: 32px;
+  font-weight: 400;
+`
+
+
+const StyledPageNotFound = styled.div`
+  margin: 3px 0 19px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+const Styled404 = styled.p`
+  width: 255px;
+  height: 168px;
+  font-weight: 400;
+  font-size: 160px;
+`
+
+const StyledParagraph = styled.p`
+  margin-bottom: 36px;
+  color:#4E4E4E;
+`
+
+const StyledButton = styled.button`
+    width: 278px;
+    height: 52px;
+    border-radius: 6px;
+    color: white;
+    background-color: #580EA2;
+    border: none;
+    transition: 0.2s;
+    &: hover {
+      background-color: #3F007D;
+    }
+    &: active {
+      background-color: #271A58;
+    }
+`
+
 export const  NotFound = () => {
     return (
         <>
@@ -40,15 +80,15 @@ export const  NotFound = () => {
                             </SidebarPersonal>
                         </MainSidebar>
                     </S.Main>
-                    {/*<StyledErrorNumber>*/}
-                    {/*    <p>404</p>*/}
-                    {/*    <div>*/}
-                    {/*        <p>Страница не найдена</p>*/}
-                    {/*        <img src="/img/crying.png"/>*/}
-                    {/*    </div>*/}
-                    {/*    <p>Возможно, она была удалена или перенесена на другой адрес</p>*/}
-                    {/*    <button>Вернуться на главную</button>*/}
-                    {/*</StyledErrorNumber>*/}
+                    <StyledErrorNumber>
+                        <Styled404>404</Styled404>
+                        <StyledPageNotFound>
+                            <StyledParagraphNotFound>Страница не найдена</StyledParagraphNotFound>
+                            <img src="/img/crying.png"/>
+                        </StyledPageNotFound>
+                        <StyledParagraph>Возможно, она была удалена или перенесена на другой адрес</StyledParagraph>
+                        <StyledButton>Вернуться на главную</StyledButton>
+                    </StyledErrorNumber>
                     <AudioPlayer />
                 </S.Container>
             </S.Wrapper>
