@@ -8,7 +8,8 @@ import styled from "styled-components";
 
 
 const StyledErrorNumber = styled.div`
-  margin-top: 282px;
+  position: relative;
+  margin-top: 285px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,7 +23,6 @@ const StyledParagraphNotFound = styled.p`
   font-size: 32px;
   font-weight: 400;
 `
-
 
 const StyledPageNotFound = styled.div`
   margin: 3px 0 19px 0;
@@ -44,6 +44,9 @@ const StyledParagraph = styled.p`
 `
 
 const StyledButton = styled.button`
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
     width: 278px;
     height: 52px;
     border-radius: 6px;
