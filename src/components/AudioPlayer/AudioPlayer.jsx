@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import * as S from './AudioPlayer.styles'
+import * as SAudio from './AudioPlayer.styles'
 
 export default function AudioPlayer() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -12,93 +12,93 @@ export default function AudioPlayer() {
 	}, []);
 
 	return (
-		<S.Bar>
-		<S.BarContent>
-		  <S.BarPlayerProgress></S.BarPlayerProgress>
-		  <S.BarPlayerBlock>
-			<S.BarPlayer>
-			  <S.PlayerControls>
-				<S.PlayerBtnPrev>
-				  <S.PlayerBtnPrevSvg alt="prev">
+		<SAudio.Bar>
+		<SAudio.BarContent>
+		  <SAudio.BarPlayerProgress></SAudio.BarPlayerProgress>
+		  <SAudio.BarPlayerBlock>
+			<SAudio.BarPlayer>
+			  <SAudio.PlayerControls>
+				<SAudio.PlayerBtnPrev>
+				  <SAudio.PlayerBtnPrevSvg alt="prev">
 					<use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
-				  </S.PlayerBtnPrevSvg>
-				</S.PlayerBtnPrev>
-				<S.PlayerBtnPlay>
-				  <S.PlayerBtnPlaySvg alt="play">
+				  </SAudio.PlayerBtnPrevSvg>
+				</SAudio.PlayerBtnPrev>
+				<SAudio.PlayerBtnPlay>
+				  <SAudio.PlayerBtnPlaySvg alt="play">
 					<use xlinkHref="img/icon/sprite.svg#icon-play"></use>
-				  </S.PlayerBtnPlaySvg>
-				</S.PlayerBtnPlay>
-				<S.PlayerBtnNext>
-				  <S.PlayerBtnNextSvg alt="next">
+				  </SAudio.PlayerBtnPlaySvg>
+				</SAudio.PlayerBtnPlay>
+				<SAudio.PlayerBtnNext>
+				  <SAudio.PlayerBtnNextSvg alt="next">
 					<use xlinkHref="img/icon/sprite.svg#icon-next"></use>
-				  </S.PlayerBtnNextSvg>
-				</S.PlayerBtnNext>
-				<S.PlayerBtnRepeat>
-				  <S.PlayerBtnRepeatSvg alt="repeat">
+				  </SAudio.PlayerBtnNextSvg>
+				</SAudio.PlayerBtnNext>
+				<SAudio.PlayerBtnRepeat>
+				  <SAudio.PlayerBtnRepeatSvg alt="repeat">
 					<use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
-				  </S.PlayerBtnRepeatSvg>
-				</S.PlayerBtnRepeat>
-				<S.PlayerBtnShuffle>
-				  <S.PlayerBtnShuffleSvg alt="shuffle">
+				  </SAudio.PlayerBtnRepeatSvg>
+				</SAudio.PlayerBtnRepeat>
+				<SAudio.PlayerBtnShuffle>
+				  <SAudio.PlayerBtnShuffleSvg alt="shuffle">
 					<use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-				  </S.PlayerBtnShuffleSvg>
-				</S.PlayerBtnShuffle>
-			  </S.PlayerControls>
-				<S.PlayerTrackPlay>
-				<S.TrackPlayContain>
+				  </SAudio.PlayerBtnShuffleSvg>
+				</SAudio.PlayerBtnShuffle>
+			  </SAudio.PlayerControls>
+				<SAudio.PlayerTrackPlay>
+				<SAudio.TrackPlayContain>
 					{isLoading ? (
 					<div>
 						<img src="img/placeholders/track_3.png" alt="track 3" />
 					</div>) : (<>
-					  <S.TrackPlayImage>
-						<S.TrackPlaySvg alt="music">
+					  <SAudio.TrackPlayImage>
+						<SAudio.TrackPlaySvg alt="music">
 						  <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-						</S.TrackPlaySvg>
-					  </S.TrackPlayImage>
-					  <S.TrackPlayAuthor>
-						<S.TrackPlayAuthorLink href="http://"
+						</SAudio.TrackPlaySvg>
+					  </SAudio.TrackPlayImage>
+					  <SAudio.TrackPlayAuthor>
+						<SAudio.TrackPlayAuthorLink href="http://"
 						  >Ты та...
-						</S.TrackPlayAuthorLink
+						</SAudio.TrackPlayAuthorLink
 						>
-					  </S.TrackPlayAuthor>
-					  <S.TrackPlayAlbum>
-						<S.TrackPlayAlbumLink href="http://">Баста</S.TrackPlayAlbumLink>
-					  </S.TrackPlayAlbum>
+					  </SAudio.TrackPlayAuthor>
+					  <SAudio.TrackPlayAlbum>
+						<SAudio.TrackPlayAlbumLink href="http://">Баста</SAudio.TrackPlayAlbumLink>
+					  </SAudio.TrackPlayAlbum>
 					  </>)}
-				</S.TrackPlayContain>
-				<S.TrackPlayLikeDis>
-					<S.TrackPlayLike>
-						<S.TrackPlayLikeSvg className="track-play__like-svg" alt="like">
+				</SAudio.TrackPlayContain>
+				<SAudio.TrackPlayLikeDis>
+					<SAudio.TrackPlayLike>
+						<SAudio.TrackPlayLikeSvg className="track-play__like-svg" alt="like">
 							<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-						</S.TrackPlayLikeSvg>
-					</S.TrackPlayLike>
-					<S.TrackPlayDislike>
-						<S.TrackPlayDislikeSvg className="track-play__dislike-svg" alt="dislike">
+						</SAudio.TrackPlayLikeSvg>
+					</SAudio.TrackPlayLike>
+					<SAudio.TrackPlayDislike>
+						<SAudio.TrackPlayDislikeSvg className="track-play__dislike-svg" alt="dislike">
 							<use
 								xlinkHref="img/icon/sprite.svg#icon-dislike"
 							></use>
-						</S.TrackPlayDislikeSvg>
-					</S.TrackPlayDislike>
-				</S.TrackPlayLikeDis>
-			  </S.PlayerTrackPlay>
-				</S.BarPlayer>
-				<S.BarVolumeBlock>
-				  <S.VolumeContent>
-					<S.VolumeImage>
-					  <S.VolumeSvg alt="volume">
+						</SAudio.TrackPlayDislikeSvg>
+					</SAudio.TrackPlayDislike>
+				</SAudio.TrackPlayLikeDis>
+			  </SAudio.PlayerTrackPlay>
+				</SAudio.BarPlayer>
+				<SAudio.BarVolumeBlock>
+				  <SAudio.VolumeContent>
+					<SAudio.VolumeImage>
+					  <SAudio.VolumeSvg alt="volume">
 						<use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
-					  </S.VolumeSvg>
-					</S.VolumeImage>
-					<S.VolumeProgress>
-					  <S.VolumeProgressLine
+					  </SAudio.VolumeSvg>
+					</SAudio.VolumeImage>
+					<SAudio.VolumeProgress>
+					  <SAudio.VolumeProgressLine
 						type="range"
 						name="range"
 					  />
-					</S.VolumeProgress>
-				  </S.VolumeContent>
-				</S.BarVolumeBlock>
-		  </S.BarPlayerBlock>
-		</S.BarContent>
-	  </S.Bar>
+					</SAudio.VolumeProgress>
+				  </SAudio.VolumeContent>
+				</SAudio.BarVolumeBlock>
+		  </SAudio.BarPlayerBlock>
+		</SAudio.BarContent>
+	  </SAudio.Bar>
 	);
   }

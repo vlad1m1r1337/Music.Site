@@ -3,7 +3,7 @@ export default function sideBarImages() {
 	return (
 		<>
 		<S.SidebarItem>
-			  <S.SideBarLink href="https://my.sky.pro/student-cabinet/showcase">
+			  <S.SideBarLink to="/category/1">
 				<S.SideBarImg
 				  src="img/playlist01.png"
 				  alt="day's playlist"
@@ -11,7 +11,7 @@ export default function sideBarImages() {
 			  </S.SideBarLink>
 			</S.SidebarItem>
 			<S.SidebarItem>
-			  <S.SideBarLink href="https://my.sky.pro/student-cabinet/showcase">
+			  <S.SideBarLink to="/category/2">
 				<S.SideBarImg
 				  src="img/playlist02.png"
 				  alt="day's playlist"
@@ -19,7 +19,7 @@ export default function sideBarImages() {
 			  </S.SideBarLink>
 			</S.SidebarItem>
 			<S.SidebarItem>
-			  <S.SideBarLink href="https://my.sky.pro/student-cabinet/showcase">
+			  <S.SideBarLink to="/category/3">
 				<S.SideBarImg
 				  src="img/playlist03.png"
 				  alt="day's playlist"

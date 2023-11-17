@@ -25,7 +25,7 @@ export default function SideBar() {
 		<S.SideBarBlock>
 		  <S.SideBarList>
 			{isLoading ? (<S.SideBarItem>
-			  <S.SideBarLink href="https://my.sky.pro/student-cabinet/showcase">
+			  <S.SideBarLink to='/'>
 				<S.SideBarImg
 				  src="img/placeholders/big.png"
 				  alt="day's playlist"

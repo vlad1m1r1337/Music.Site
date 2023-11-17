@@ -15,10 +15,6 @@ const StyledErrorNumber = styled.div`
   align-items: center;
 `
 
-const Styled = styled.div`
-
-`
-
 const StyledParagraphNotFound = styled.p`
   font-size: 32px;
   font-weight: 400;
@@ -87,7 +83,7 @@ export const  NotFound = () => {
                         <Styled404>404</Styled404>
                         <StyledPageNotFound>
                             <StyledParagraphNotFound>Страница не найдена</StyledParagraphNotFound>
-                            <img src="/img/crying.png"/>
+                            <img src="/img/crying.png" alt="crying png"/>
                         </StyledPageNotFound>
                         <StyledParagraph>Возможно, она была удалена или перенесена на другой адрес</StyledParagraph>
                         <StyledButton>Вернуться на главную</StyledButton>
