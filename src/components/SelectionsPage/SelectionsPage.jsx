@@ -6,7 +6,6 @@ import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
 import CenterBlockContentCutted from "../CenterBlockContent/CenterBlockContentCutted";
 import {useParams} from "react-router-dom";
-import SideBar from "../SideBar/SideBar";
 
 const StyledH = styled.h1`
   width: 706px;

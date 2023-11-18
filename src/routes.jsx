@@ -4,13 +4,8 @@ import {MainPage} from "./pages/main/MainPage";
 import {Login} from "./pages/login/Login";
 import {Registration} from "./pages/registration/Registration";
 import {NotFound} from "./pages/not-found/NotFound";
-import {DaysPlayList} from "./pages/days-play-list/DaysPlayList";
-import {HundredHits} from "./pages/hundred-hits/HundredHits";
-import {IndieCharge} from "./pages/indie-charge/IndieCharge";
-import {Favorites} from "./pages/favorites/Favorites";
 import {SelectionsPage} from "./components/SelectionsPage/SelectionsPage";
 import {ProtectedRoute} from "./components/protected-route";
-import {useParams} from "react-router-dom";
 
 export const AppRoutes = () => {
     return (
