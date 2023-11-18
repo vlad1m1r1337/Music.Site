@@ -6,6 +6,7 @@ import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
 import CenterBlockContentCutted from "../CenterBlockContent/CenterBlockContentCutted";
 import {useParams} from "react-router-dom";
+import SideBar from "../SideBar/SideBar";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -19,19 +20,17 @@ const StyledH = styled.h1`
 export const  SelectionsPage = ({header}) => {
     const params = useParams();
     let Header;
-    if  (!header) {
+    if  (header === undefined) {
         if (params.id === '1') {
-            Header = 'Плейлист дня';
+            Header = "Плейлист дня";
         }
         else if(params.id === '2') {
-            Header = '100 танцевальных хитов';
+            Header = "100 танцевальных хитов";
         }
         else if(params.id === '3') {
-            Header = 'Инди заряд';
+            Header = "Инди заряд";
         }
-    }
-    else {
-        Header = header;
+        header = Header;
     }
     return (
         <>
@@ -41,7 +40,7 @@ export const  SelectionsPage = ({header}) => {
                         <NavMenu/>
                         <SS.MainCenterBlock>
                             <SearchCenter/>
-                            <StyledH>{Header}</StyledH>
+                            <StyledH>{header}</StyledH>
                             <CenterBlockContentCutted/>
                         </SS.MainCenterBlock>
                     </S.Main>

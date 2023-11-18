@@ -5,6 +5,7 @@ import NavMenu from "../../components/NavMenu/NavMenu";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import SearchCenter from "../../components/SearchCenter/SearchCenter";
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
 
 
 const StyledErrorNumber = styled.div`
@@ -59,6 +60,10 @@ const StyledButton = styled.button`
 `
 
 export const  NotFound = () => {
+    const navigate = useNavigate();
+    const handleButtonClick = () => {
+        navigate('/');
+    };
     return (
         <>
             <S.Wrapper>
@@ -86,7 +91,7 @@ export const  NotFound = () => {
                             <img src="/img/crying.png" alt="crying png"/>
                         </StyledPageNotFound>
                         <StyledParagraph>Возможно, она была удалена или перенесена на другой адрес</StyledParagraph>
-                        <StyledButton>Вернуться на главную</StyledButton>
+                        <StyledButton onClick={handleButtonClick}>Вернуться на главную</StyledButton>
                     </StyledErrorNumber>
                     <AudioPlayer />
                 </S.Container>
