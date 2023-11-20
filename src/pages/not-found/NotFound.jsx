@@ -4,60 +4,8 @@ import {SidebarPersonal, SidebarPersonalName, SideBarIcon, MainSidebar} from "..
 import NavMenu from "../../components/NavMenu/NavMenu";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import SearchCenter from "../../components/SearchCenter/SearchCenter";
-import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
-
-
-const StyledErrorNumber = styled.div`
-  position: relative;
-  margin-top: 285px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const StyledParagraphNotFound = styled.p`
-  font-size: 32px;
-  font-weight: 400;
-`
-
-const StyledPageNotFound = styled.div`
-  margin: 3px 0 19px 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`
-
-const Styled404 = styled.p`
-  width: 255px;
-  height: 168px;
-  font-weight: 400;
-  font-size: 160px;
-`
-
-const StyledParagraph = styled.p`
-  margin-bottom: 36px;
-  color:#4E4E4E;
-`
-
-const StyledButton = styled.button`
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 24px;
-    width: 278px;
-    height: 52px;
-    border-radius: 6px;
-    color: white;
-    background-color: #580EA2;
-    border: none;
-    transition: 0.2s;
-    &: hover {
-      background-color: #3F007D;
-    }
-    &: active {
-      background-color: #271A58;
-    }
-`
+import * as NFS from "./NotFound.styles";
 
 export const  NotFound = () => {
     const navigate = useNavigate();
@@ -84,15 +32,15 @@ export const  NotFound = () => {
                             </SidebarPersonal>
                         </MainSidebar>
                     </S.Main>
-                    <StyledErrorNumber>
-                        <Styled404>404</Styled404>
-                        <StyledPageNotFound>
-                            <StyledParagraphNotFound>Страница не найдена</StyledParagraphNotFound>
+                    <NFS.ErrorNumber>
+                        <NFS.FourZeroFour>404</NFS.FourZeroFour>
+                        <NFS.PageNotFound>
+                            <NFS.ParagraphNotFound>Страница не найдена</NFS.ParagraphNotFound>
                             <img src="/img/crying.png" alt="crying png"/>
-                        </StyledPageNotFound>
-                        <StyledParagraph>Возможно, она была удалена или перенесена на другой адрес</StyledParagraph>
-                        <StyledButton onClick={handleButtonClick}>Вернуться на главную</StyledButton>
-                    </StyledErrorNumber>
+                        </NFS.PageNotFound>
+                        <NFS.Paragraph>Возможно, она была удалена или перенесена на другой адрес</NFS.Paragraph>
+                        <NFS.Button onClick={handleButtonClick}>Вернуться на главную</NFS.Button>
+                    </NFS.ErrorNumber>
                     <AudioPlayer />
                 </S.Container>
             </S.Wrapper>

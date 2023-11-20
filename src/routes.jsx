@@ -7,13 +7,14 @@ import {NotFound} from "./pages/not-found/NotFound";
 import {SelectionsPage} from "./components/SelectionsPage/SelectionsPage";
 import {ProtectedRoute} from "./components/protected-route";
 
-export const AppRoutes = () => {
+export const AppRoutes = ({myKey}) => {
+    console.log(myKey);
     return (
        <>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/registr" element={<Registration/>}/>
-                <Route element={<ProtectedRoute isAllowed={Boolean(localStorage.length)} />}>
+                <Route element={<ProtectedRoute isAllowed={myKey} />}>
                     <Route path="/favorites" element={<SelectionsPage header={"Мои треки"} />} />
                     <Route path="/category/:id" element={<SelectionsPage/>}/>
                     <Route path="/" element={<MainPage />} />

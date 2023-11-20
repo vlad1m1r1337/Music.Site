@@ -42,10 +42,15 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default function App() {
+    function checkLocalStorageValue() {
+        const storedValue = localStorage.getItem('user');
+
+        return storedValue !== null && storedValue === 'key';
+    }
   return (
     <>
         <GlobalStyle/>
-        <AppRoutes/>
+        <AppRoutes myKey={checkLocalStorageValue()}/>
     </>
   );
 };
