@@ -23,9 +23,9 @@ export const AppRoutes = () => {
                 <Route path="/login" element={<Login isAllowed={isAllowed} setAllowed={updateIsAllowed}/>}/>
                 <Route path="/registr" element={<Registration/>}/>
                 <Route element={<ProtectedRoute isAllowed={isAllowed} />}>
-                    <Route path="/favorites" element={<SelectionsPage header={"Мои треки"} />} />
-                    <Route path="/category/:id" element={<SelectionsPage/>}/>
-                    <Route path="/" element={<MainPage isAllowd={isAllowed} setAllowed={updateIsAllowed}/>} />
+                    <Route path="/favorites" element={<SelectionsPage header={"Мои треки"} setAllowed={updateIsAllowed}/>} />
+                    <Route path="/category/:id" element={<SelectionsPage setAllowed={updateIsAllowed}/>}/>
+                    <Route path="/" element={<MainPage setAllowed={updateIsAllowed}/>} />
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>

@@ -5,7 +5,7 @@ export default function sideBarImages() {
 		<S.SidebarItem>
 			  <S.SideBarLink to="/category/1">
 				<S.SideBarImg
-				  src="img/playlist01.png"
+				  src="/img/playlist01.png"
 				  alt="day's playlist"
 				/>
 			  </S.SideBarLink>
@@ -13,7 +13,7 @@ export default function sideBarImages() {
 			<S.SidebarItem>
 			  <S.SideBarLink to="/category/2">
 				<S.SideBarImg
-				  src="img/playlist02.png"
+				  src="/img/playlist02.png"
 				  alt="day's playlist"
 				/>
 			  </S.SideBarLink>
@@ -21,7 +21,7 @@ export default function sideBarImages() {
 			<S.SidebarItem>
 			  <S.SideBarLink to="/category/3">
 				<S.SideBarImg
-				  src="img/playlist03.png"
+				  src="/img/playlist03.png"
 				  alt="day's playlist"
 				/>
 			  </S.SideBarLink>

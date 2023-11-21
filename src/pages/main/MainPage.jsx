@@ -4,7 +4,7 @@ import TrackList from "../../components/TrackList/TrackList";
 import SideBar from "../../components/SideBar/SideBar";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 
-export const  MainPage = ({isAllowed, setAllowed}) => {
+export const  MainPage = ({setAllowed}) => {
     return (
         <>
                 <S.Wrapper>
@@ -12,7 +12,7 @@ export const  MainPage = ({isAllowed, setAllowed}) => {
                         <S.Main>
                             <NavMenu/>
                             <TrackList/>
-                            <SideBar isAllowed={isAllowed} setAllowed={setAllowed}/>
+                            <SideBar setAllowed={setAllowed}/>
                         </S.Main>
                         <AudioPlayer />
                     </S.Container>

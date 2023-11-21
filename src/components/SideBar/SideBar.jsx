@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SideBarImages from '../SideBarImages/SideBarImages';
 import * as S from './SideBar.styles'
 
-export default function SideBar({isAllowed, setAllowed}) {
+export default function SideBar({setAllowed}) {
 	const [isLoading, setIsLoading] = useState(true);
 	
 	useEffect(() => {
@@ -23,7 +23,7 @@ export default function SideBar({isAllowed, setAllowed}) {
 		  <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
 		  <S.SideBarIcon>
 			<svg onClick={signOut} alt="logout">
-			  <use xlinkHref="img/icon/sprite.svg#logout"></use>
+			  <use xlinkHref="/img/icon/sprite.svg#logout"></use>
 			</svg>
 		  </S.SideBarIcon>
 		</S.SidebarPersonal>
@@ -32,7 +32,7 @@ export default function SideBar({isAllowed, setAllowed}) {
 			{isLoading ? (<S.SideBarItem>
 			  <S.SideBarLink to='/'>
 				<S.SideBarImg
-				  src="img/placeholders/big.png"
+				  src="/img/placeholders/big.png"
 				  alt="day's playlist"
 				/>
 			  </S.SideBarLink>

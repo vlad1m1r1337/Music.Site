@@ -6,6 +6,7 @@ import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
 import CenterBlockContentCutted from "../CenterBlockContent/CenterBlockContentCutted";
 import {useParams} from "react-router-dom";
+import SideBarAuth from "../SideBarAuth/SideBarAuth";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -16,9 +17,9 @@ const StyledH = styled.h1`
   margin-bottom: 37px;
 `
 
-export const  SelectionsPage = ({header}) => {
-    const params = useParams();
+export const  SelectionsPage = ({header, setAllowed}) => {
     let Header;
+    const params = useParams();
     if  (header === undefined) {
         if (params.id === '1') {
             Header = "Плейлист дня";
@@ -42,6 +43,7 @@ export const  SelectionsPage = ({header}) => {
                             <StyledH>{header}</StyledH>
                             <CenterBlockContentCutted/>
                         </SS.MainCenterBlock>
+                        <SideBarAuth setAllowed={setAllowed}/>
                     </S.Main>
                     <AudioPlayer />
                 </S.Container>
