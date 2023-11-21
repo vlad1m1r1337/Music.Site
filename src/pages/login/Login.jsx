@@ -8,18 +8,20 @@ body {
 }
 `
 
-export const Login = () => {
+export const Login = ({isAllowed, setAllowed}) => {
     const navigate = useNavigate();
-    const handleSignInClick = () => {
+
+    const inputValidator = () => {
         const InputMail = document.getElementById("input_mail");
         const InputPassword = document.getElementById("input_password");
-        if (!InputMail.value.length || !InputPassword.value.length)
-            return;
-        localStorage.setItem('user', 'key');navigate("/", { replace: true });
-        window.location.reload();
-        setTimeout(() => {
-            navigate("/", { replace: true });
-        }, 3000)
+        return !(!InputMail.value.length || !InputPassword.value.length);
+    }
+    const handleSignInClick = () => {
+        if (!inputValidator())
+            return ;
+        localStorage.setItem('user', 'key');
+        setAllowed(true);
+        navigate("/", { replace: true });
     }
     const handleRegistryClick = () => {
         navigate("/registr", { replace: true });

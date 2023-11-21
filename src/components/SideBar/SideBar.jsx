@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SideBarImages from '../SideBarImages/SideBarImages';
 import * as S from './SideBar.styles'
 
-export default function SideBar() {
+export default function SideBar({isAllowed, setAllowed}) {
 	const [isLoading, setIsLoading] = useState(true);
 	
 	useEffect(() => {
@@ -12,12 +12,17 @@ export default function SideBar() {
 		}, 5000);
 	}, []);
 
+	const signOut = () => {
+		localStorage.removeItem('user');
+		setAllowed(false);
+	}
+
 	return (
 		<S.MainSidebar>
 		<S.SidebarPersonal>
 		  <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
 		  <S.SideBarIcon>
-			<svg alt="logout">
+			<svg onClick={signOut} alt="logout">
 			  <use xlinkHref="img/icon/sprite.svg#logout"></use>
 			</svg>
 		  </S.SideBarIcon>

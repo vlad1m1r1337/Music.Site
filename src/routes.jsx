@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Route, Routes} from "react-router-dom";
 import {MainPage} from "./pages/main/MainPage";
 import {Login} from "./pages/login/Login";
@@ -7,19 +7,27 @@ import {NotFound} from "./pages/not-found/NotFound";
 import {SelectionsPage} from "./components/SelectionsPage/SelectionsPage";
 import {ProtectedRoute} from "./components/protected-route";
 
-export const AppRoutes = ({myKey}) => {
-    console.log(myKey);
+export const AppRoutes = () => {
+    const checkKey = () => {
+        const storedValue = localStorage.getItem('user');
+
+        return storedValue !== null && storedValue;
+    }
+    const [isAllowed, setAllowed] = useState(checkKey);
+    const updateIsAllowed = () => {
+        setAllowed(!isAllowed);
+    }
     return (
        <>
             <Routes>
-                <Route path="/login" element={<Login/>}/>
+                <Route path="/login" element={<Login isAllowed={isAllowed} setAllowed={updateIsAllowed}/>}/>
                 <Route path="/registr" element={<Registration/>}/>
-                <Route element={<ProtectedRoute isAllowed={myKey} />}>
+                <Route element={<ProtectedRoute isAllowed={isAllowed} />}>
                     <Route path="/favorites" element={<SelectionsPage header={"Мои треки"} />} />
                     <Route path="/category/:id" element={<SelectionsPage/>}/>
-                    <Route path="/" element={<MainPage />} />
+                    <Route path="/" element={<MainPage isAllowd={isAllowed} setAllowed={updateIsAllowed}/>} />
                 </Route>
-                <Route path="/*" element={<NotFound/>}/>
+                <Route path="*" element={<NotFound/>}/>
             </Routes>
        </>
     )
