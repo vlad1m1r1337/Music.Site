@@ -10,7 +10,7 @@ export default function CenterBlockContentCutted() {
                 <S.Col03>АЛЬБОМ</S.Col03>
                 <S.Col04>
                     <S.PlayListTitleSvg alt="time">
-                        <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-watch"></use>
                     </S.PlayListTitleSvg>
                 </S.Col04>
             </S.ContentTitle>
