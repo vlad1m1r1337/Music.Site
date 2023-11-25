@@ -98,6 +98,11 @@ export const PlayerBtnPlaySvg = styled.svg`
   fill: #d9d9d9;
 `
 
+export const PlayerBtnPlayImg = styled.img`
+  width: 22px;
+  height: 20px;
+`
+
 export const PlayerBtnNext = styled.div`
   padding: 5px;
   display: -webkit-box;

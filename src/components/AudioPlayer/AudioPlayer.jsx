@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import * as SAudio from './AudioPlayer.styles'
+import ProgressBar from "../ProgressBar/ProgressBar";
+import SideBarAuth from "../SideBarAuth/SideBarAuth";
+import {PlayerBtnPlayImg} from "./AudioPlayer.styles";
 
 export default function AudioPlayer() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -11,11 +14,29 @@ export default function AudioPlayer() {
 		}, 5000);
 	}, []);
 
+	const [isPlaying, setIsPlaying] = useState(false);
+	const audioRef = useRef(null);
+
+	const handleStart = () => {
+		audioRef.current.play();
+		setIsPlaying(true);
+	};
+
+	const handleStop = () => {
+		audioRef.current.pause();
+		setIsPlaying(false);
+	};
+
+	const togglePlay = isPlaying ? handleStop : handleStart;
+
 	return (
 		<SAudio.Bar>
+		<audio ref={audioRef}>
+			<source src="https://skypro-music-api.skyeng.tech/media/music_files/Alexander_Nakarada_-_Chase.mp3" type="audio/mpeg" />
+		</audio>
 		<SAudio.BarContent>
-		  <SAudio.BarPlayerProgress></SAudio.BarPlayerProgress>
-		  <SAudio.BarPlayerBlock>
+			<ProgressBar></ProgressBar>
+			<SAudio.BarPlayerBlock>
 			<SAudio.BarPlayer>
 			  <SAudio.PlayerControls>
 				<SAudio.PlayerBtnPrev>
@@ -23,11 +44,17 @@ export default function AudioPlayer() {
 					<use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
 				  </SAudio.PlayerBtnPrevSvg>
 				</SAudio.PlayerBtnPrev>
-				<SAudio.PlayerBtnPlay>
-				  <SAudio.PlayerBtnPlaySvg alt="play">
-					<use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
-				  </SAudio.PlayerBtnPlaySvg>
-				</SAudio.PlayerBtnPlay>
+				{isPlaying ?
+					<SAudio.PlayerBtnPlay onClick={togglePlay}>
+						<SAudio.PlayerBtnPlayImg src="/img/icon/stop.svg" alt="stop_play" alt="play">
+						</SAudio.PlayerBtnPlayImg>
+					</SAudio.PlayerBtnPlay> :
+					<SAudio.PlayerBtnPlay onClick={togglePlay}>
+						<SAudio.PlayerBtnPlaySvg alt="play">
+							<use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
+						</SAudio.PlayerBtnPlaySvg>
+					</SAudio.PlayerBtnPlay>
+			  	}
 				<SAudio.PlayerBtnNext>
 				  <SAudio.PlayerBtnNextSvg alt="next">
 					<use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
