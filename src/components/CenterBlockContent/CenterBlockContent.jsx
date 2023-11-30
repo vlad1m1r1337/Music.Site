@@ -1,7 +1,7 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles'
 export default function CenterBlockContent() {
-
+	
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>

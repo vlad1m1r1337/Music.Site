@@ -46,7 +46,7 @@ export default function AudioPlayer() {
 				</SAudio.PlayerBtnPrev>
 				{isPlaying ?
 					<SAudio.PlayerBtnPlay onClick={togglePlay}>
-						<SAudio.PlayerBtnPlayImg src="/img/icon/stop.svg" alt="stop_play" alt="play">
+						<SAudio.PlayerBtnPlayImg src="/img/icon/stop.svg" alt="stop_play">
 						</SAudio.PlayerBtnPlayImg>
 					</SAudio.PlayerBtnPlay> :
 					<SAudio.PlayerBtnPlay onClick={togglePlay}>
