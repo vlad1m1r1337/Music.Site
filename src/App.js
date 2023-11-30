@@ -1,6 +1,7 @@
 import {AppRoutes} from "./routes";
-import React from "react";
+import React, {useState} from "react";
 import {createGlobalStyle} from "styled-components";
+import axios from "axios";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -40,12 +41,14 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 `
-
+const [books, setBooks] = useState(null);
 export default function App() {
   return (
     <>
-        <GlobalStyle/>
-        <AppRoutes/>
+        {/*<GlobalStyle/>*/}
+        {/*<AppRoutes/>*/}
+        <h1>Hello World !</h1>
+
     </>
   );
 };
