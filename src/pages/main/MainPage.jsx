@@ -3,8 +3,11 @@ import NavMenu from "../../components/NavMenu/NavMenu";
 import TrackList from "../../components/TrackList/TrackList";
 import SideBar from "../../components/SideBar/SideBar";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
+import {useState} from "react";
 
 export const  MainPage = ({setAllowed}) => {
+    const [id, setId] = useState(0)
+
     return (
         <>
                 <S.Wrapper>
@@ -14,7 +17,7 @@ export const  MainPage = ({setAllowed}) => {
                             <TrackList/>
                             <SideBar setAllowed={setAllowed}/>
                         </S.Main>
-                        <AudioPlayer />
+                        {id &&  <AudioPlayer id={id}/>}
                     </S.Container>
                 </S.Wrapper>
         </>

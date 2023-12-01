@@ -9,6 +9,10 @@ export default function PlayList({track, track_add, executor, album, time}) {
 		}, 5000);
 	}, []);
 
+	const Alert = () => {
+		alert("alert");
+	}
+
 	return (
 		<S.PlayListItem>
 					{isLoading ? 
@@ -29,7 +33,7 @@ export default function PlayList({track, track_add, executor, album, time}) {
 												<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
 											</S.TrackTitleSvg>
 									</S.TrackTitleImage>
-									<S.TrackTitleLink>{track} <S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
+									<S.TrackTitleLink onClick={Alert}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
 							</S.TrackTitle>
 							<S.TrackAuthor>
 								<S.TrackAuthorLink href="http://">{executor}</S.TrackAuthorLink>

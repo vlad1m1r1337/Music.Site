@@ -4,7 +4,7 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
 import {PlayerBtnPlayImg} from "./AudioPlayer.styles";
 
-export default function AudioPlayer() {
+export default function AudioPlayer({id}) {
 	const [isLoading, setIsLoading] = useState(true);
 	
 	useEffect(() => {
@@ -28,6 +28,8 @@ export default function AudioPlayer() {
 	};
 
 	const togglePlay = isPlaying ? handleStop : handleStart;
+
+
 
 	return (
 		<SAudio.Bar>
