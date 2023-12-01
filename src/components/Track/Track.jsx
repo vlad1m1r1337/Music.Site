@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import * as S from './Track.styles'
 export default function PlayList({track, track_add, executor, album, time}) {
 	const [isLoading, setIsLoading] = useState(true);
-	
 	useEffect(() => {
 		setIsLoading(true);
 		setTimeout(() => {
@@ -30,11 +29,7 @@ export default function PlayList({track, track_add, executor, album, time}) {
 												<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
 											</S.TrackTitleSvg>
 									</S.TrackTitleImage>
-									<div>
-										<S.TrackTitleLink href="http://"
-										>{track} <S.TrackTitleSpan>{track_add}</S.TrackTitleSpan
-										></S.TrackTitleLink>
-									</div>
+									<S.TrackTitleLink>{track} <S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
 							</S.TrackTitle>
 							<S.TrackAuthor>
 								<S.TrackAuthorLink href="http://">{executor}</S.TrackAuthorLink>
@@ -42,12 +37,10 @@ export default function PlayList({track, track_add, executor, album, time}) {
 							<S.TrackAlbum>
 								<S.TrackAlbumLink href="http://">{album}</S.TrackAlbumLink>
 							</S.TrackAlbum>
-							<div>
-								<S.TrackTimeSvg alt="time">
-									<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-								</S.TrackTimeSvg>
-								<S.TrackTimeText>{time}</S.TrackTimeText>
-							</div>
+							<S.TrackTimeSvg alt="time">
+								<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+							</S.TrackTimeSvg>
+							<S.TrackTimeText>{time}</S.TrackTimeText>
 						</S.PlaylistTrack>
 					</>
 					)}
