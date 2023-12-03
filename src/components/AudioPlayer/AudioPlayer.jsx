@@ -4,7 +4,7 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
 import {PlayerBtnPlayImg} from "./AudioPlayer.styles";
 
-export default function AudioPlayer({id}) {
+export default function AudioPlayer({id, tracks}) {
 	const [isLoading, setIsLoading] = useState(true);
 	
 	useEffect(() => {
@@ -12,6 +12,7 @@ export default function AudioPlayer({id}) {
 		setTimeout(() => {
 			setIsLoading(false);
 		}, 5000);
+
 	}, []);
 
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -29,12 +30,25 @@ export default function AudioPlayer({id}) {
 
 	const togglePlay = isPlaying ? handleStop : handleStart;
 
+	let name;
+	let author;
+	let sound;
 
+	if (tracks !== undefined) {
+		name = tracks.name;
+		author = tracks.author;
+		sound = tracks.track_file;
+	}
+	else {
+		name = "name";
+		author = "author";
+	}
+	console.log(name, sound);
 
 	return (
 		<SAudio.Bar>
 		<audio ref={audioRef}>
-			<source src="https://skypro-music-api.skyeng.tech/media/music_files/Alexander_Nakarada_-_Chase.mp3" type="audio/mpeg" />
+			<source src={sound} type="audio/mpeg" />
 		</audio>
 		<SAudio.BarContent>
 			<ProgressBar></ProgressBar>
@@ -86,12 +100,12 @@ export default function AudioPlayer({id}) {
 					  </SAudio.TrackPlayImage>
 					  <SAudio.TrackPlayAuthor>
 						<SAudio.TrackPlayAuthorLink href="http://"
-						  >Ты та...
+						  >{name}
 						</SAudio.TrackPlayAuthorLink
 						>
 					  </SAudio.TrackPlayAuthor>
 					  <SAudio.TrackPlayAlbum>
-						<SAudio.TrackPlayAlbumLink href="http://">Баста</SAudio.TrackPlayAlbumLink>
+						<SAudio.TrackPlayAlbumLink href="http://">{author}</SAudio.TrackPlayAlbumLink>
 					  </SAudio.TrackPlayAlbum>
 					  </>)}
 				</SAudio.TrackPlayContain>

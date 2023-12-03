@@ -3,10 +3,29 @@ import NavMenu from "../../components/NavMenu/NavMenu";
 import TrackList from "../../components/TrackList/TrackList";
 import SideBar from "../../components/SideBar/SideBar";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export const  MainPage = ({setAllowed}) => {
-    const [id, setId] = useState(1)
+    const [id, setId] = useState(-1);
+
+    const [tracks, setTracks] = useState(null);
+
+    const apiURL = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(apiURL);
+                setTracks(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        // console.log(tracks[8].author);
+
+        fetchData();
+    }, []);
 
     return (
         <>
@@ -14,10 +33,10 @@ export const  MainPage = ({setAllowed}) => {
                     <S.Container>
                         <S.Main>
                             <NavMenu/>
-                            <TrackList trackId={id}/>
+                            <TrackList tracks={tracks} setId={setId} id={id}/>
                             <SideBar setAllowed={setAllowed}/>
                         </S.Main>
-                        {id &&  <AudioPlayer id={id}/>}
+                        {(id >= 0) &&  <AudioPlayer tracks={tracks[id]}/>}
                     </S.Container>
                 </S.Wrapper>
         </>

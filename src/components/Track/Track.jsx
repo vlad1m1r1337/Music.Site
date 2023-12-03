@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as S from './Track.styles'
-export default function PlayList({track, track_add, executor, album, time}) {
+export default function PlayList({setId, objId, id, trackId, track, track_add, executor, album, time}) {
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		setIsLoading(true);
@@ -33,7 +33,7 @@ export default function PlayList({track, track_add, executor, album, time}) {
 												<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
 											</S.TrackTitleSvg>
 									</S.TrackTitleImage>
-									<S.TrackTitleLink onClick={Alert}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
+									<S.TrackTitleLink onClick={() => setId(objId = id - 8)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
 							</S.TrackTitle>
 							<S.TrackAuthor>
 								<S.TrackAuthorLink href="http://">{executor}</S.TrackAuthorLink>
