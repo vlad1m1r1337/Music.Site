@@ -3,7 +3,7 @@ import * as S from './CenterBlockContent.styles';
 import {useState, useEffect} from "react";
 import axios from "axios";
 
-export default function CenterBlockContent() {
+export default function CenterBlockContent({trackId}) {
 	const [tracks, setTracks] = useState(null);
 
 	const apiURL = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
@@ -40,12 +40,12 @@ export default function CenterBlockContent() {
 						const name = track.name;
 						const author = track.author;
 						const album = track.album;
-						const dur_in_seconds = track.duration_in_seconds;
-						const minutes = Math.floor(dur_in_seconds / 60);
-						const seconds = dur_in_seconds % 60 < 10 ? "0" + dur_in_seconds % 60 : dur_in_seconds % 60;
+						const dur_in_sec = Number(track.duration_in_seconds);
+						const minutes = Math.floor(dur_in_sec / 60);
+						const seconds = dur_in_sec % 60 < 10 ? "0" + dur_in_sec % 60 : dur_in_sec % 60;
 						const time = minutes + ":" + seconds;
 						return (
-								<Track id={id} track={name} executor={author} album={album} time={time}/>
+								<Track onClick={() => {trackId = id}} id={id} track={name} executor={author} album={album} time={time}/>
 							)
 					})
 				}

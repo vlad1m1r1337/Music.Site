@@ -6,7 +6,7 @@ import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import {useState} from "react";
 
 export const  MainPage = ({setAllowed}) => {
-    const [id, setId] = useState(0)
+    const [id, setId] = useState(1)
 
     return (
         <>
@@ -14,7 +14,7 @@ export const  MainPage = ({setAllowed}) => {
                     <S.Container>
                         <S.Main>
                             <NavMenu/>
-                            <TrackList/>
+                            <TrackList trackId={id}/>
                             <SideBar setAllowed={setAllowed}/>
                         </S.Main>
                         {id &&  <AudioPlayer id={id}/>}
