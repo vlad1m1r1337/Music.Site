@@ -1,7 +1,5 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
-import {useState, useEffect} from "react";
-import axios from "axios";
 
 export default function CenterBlockContent({tracks, setId, objId}) {
 	return (

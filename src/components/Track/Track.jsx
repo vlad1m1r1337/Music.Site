@@ -6,12 +6,8 @@ export default function PlayList({setId, objId, id, trackId, track, track_add, e
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-		}, 5000);
+		}, 50);
 	}, []);
-
-	const Alert = () => {
-		alert("alert");
-	}
 
 	return (
 		<S.PlayListItem>

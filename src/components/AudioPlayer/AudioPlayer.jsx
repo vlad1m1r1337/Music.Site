@@ -1,12 +1,9 @@
 import {useEffect, useRef, useState} from 'react';
 import * as SAudio from './AudioPlayer.styles'
 import ProgressBar from "../ProgressBar/ProgressBar";
-import SideBarAuth from "../SideBarAuth/SideBarAuth";
-import {PlayerBtnPlayImg} from "./AudioPlayer.styles";
 
 export default function AudioPlayer({id, tracks}) {
 	const [isLoading, setIsLoading] = useState(true);
-	
 	useEffect(() => {
 		setIsLoading(true);
 		setTimeout(() => {
@@ -15,14 +12,12 @@ export default function AudioPlayer({id, tracks}) {
 
 	}, []);
 
-	const [isPlaying, setIsPlaying] = useState(false);
+	const [isPlaying, setIsPlaying] = useState(true);
 	const audioRef = useRef(null);
-
 	const handleStart = () => {
 		audioRef.current.play();
 		setIsPlaying(true);
 	};
-
 	const handleStop = () => {
 		audioRef.current.pause();
 		setIsPlaying(false);
@@ -34,6 +29,9 @@ export default function AudioPlayer({id, tracks}) {
 	let author;
 	let sound;
 
+	useEffect(() => {
+		audioRef.current.load();
+	}, [tracks])
 	if (tracks !== undefined) {
 		name = tracks.name;
 		author = tracks.author;
@@ -43,11 +41,10 @@ export default function AudioPlayer({id, tracks}) {
 		name = "name";
 		author = "author";
 	}
-	console.log(name, sound);
 
 	return (
 		<SAudio.Bar>
-		<audio ref={audioRef}>
+		<audio autoPlay ref={audioRef}>
 			<source src={sound} type="audio/mpeg" />
 		</audio>
 		<SAudio.BarContent>
