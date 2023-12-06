@@ -21,9 +21,7 @@ export const  MainPage = ({setAllowed}) => {
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-        };
-        // console.log(tracks[8].author);
-
+        }
         fetchData();
     }, []);
 

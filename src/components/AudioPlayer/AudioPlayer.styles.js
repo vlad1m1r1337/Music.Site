@@ -154,8 +154,8 @@ export const PlayerBtnRepeatSvg = styled.svg`
 	width: 18px;
 	height: 12px;
 	fill: transparent;
-    stroke: ${props => (props.repeat ? '#696969' : '#ffffff')};
-`
+    stroke: ${props => (props.$repeat ? '#696969' : '#ffffff')};
+  `
 
 export const PlayerBtnShuffle = styled.div`
 	padding: 5px;
@@ -387,3 +387,8 @@ export const Btn = styled.input`
 export const VolumeProgressLine = styled(Btn)`
   width: 109px;
 `
+export const Container = styled.div`
+  //display: flex;
+  //justify-content: flex-end;
+`
+
