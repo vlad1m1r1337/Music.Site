@@ -1,30 +1,11 @@
 import {useEffect, useRef, useState} from 'react';
 import * as SAudio from './AudioPlayer.styles'
 import ProgressBar from "../ProgressBar/ProgressBar";
+import AudioPlayerInfo from "../AudioPlayerInfo/AudioPlayerInfo";
+import AudioPlayerPlayButton from "../AudioPlayerPlayButton/AudioPlayerPlayButton";
 
 export default function AudioPlayer({id, tracks}) {
-	const [isLoading, setIsLoading] = useState(true);
-	useEffect(() => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 5000);
-
-	}, []);
-
-	const [isPlaying, setIsPlaying] = useState(true);
 	const audioRef = useRef(null);
-	const handleStart = () => {
-		audioRef.current.play();
-		setIsPlaying(true);
-	};
-	const handleStop = () => {
-		audioRef.current.pause();
-		setIsPlaying(false);
-	};
-
-	const togglePlay = isPlaying ? handleStop : handleStart;
-
 	let name;
 	let author;
 	let sound;
@@ -42,9 +23,15 @@ export default function AudioPlayer({id, tracks}) {
 		author = "author";
 	}
 
+	const [repeat, setRepeat] = useState(false);
+	function cycleExec() {
+		setRepeat(!repeat);
+		repeat ? audioRef.current.loop=true: audioRef.current.loop=false;
+		console.log(repeat);
+	}
 	return (
 		<SAudio.Bar>
-		<audio autoPlay ref={audioRef}>
+		<audio controls autoPlay ref={audioRef}>
 			<source src={sound} type="audio/mpeg" />
 		</audio>
 		<SAudio.BarContent>
@@ -57,24 +44,14 @@ export default function AudioPlayer({id, tracks}) {
 					<use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
 				  </SAudio.PlayerBtnPrevSvg>
 				</SAudio.PlayerBtnPrev>
-				{isPlaying ?
-					<SAudio.PlayerBtnPlay onClick={togglePlay}>
-						<SAudio.PlayerBtnPlayImg src="/img/icon/stop.svg" alt="stop_play">
-						</SAudio.PlayerBtnPlayImg>
-					</SAudio.PlayerBtnPlay> :
-					<SAudio.PlayerBtnPlay onClick={togglePlay}>
-						<SAudio.PlayerBtnPlaySvg alt="play">
-							<use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
-						</SAudio.PlayerBtnPlaySvg>
-					</SAudio.PlayerBtnPlay>
-			  	}
+				<AudioPlayerPlayButton audioRef={audioRef}/>
 				<SAudio.PlayerBtnNext>
 				  <SAudio.PlayerBtnNextSvg alt="next">
 					<use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
 				  </SAudio.PlayerBtnNextSvg>
 				</SAudio.PlayerBtnNext>
-				<SAudio.PlayerBtnRepeat>
-				  <SAudio.PlayerBtnRepeatSvg alt="repeat">
+				<SAudio.PlayerBtnRepeat $repeatBool={repeat} onClick={cycleExec}>
+				  <SAudio.PlayerBtnRepeatSvg repeat={repeat} alt="repeat">
 					<use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
 				  </SAudio.PlayerBtnRepeatSvg>
 				</SAudio.PlayerBtnRepeat>
@@ -86,25 +63,7 @@ export default function AudioPlayer({id, tracks}) {
 			  </SAudio.PlayerControls>
 				<SAudio.PlayerTrackPlay>
 				<SAudio.TrackPlayContain>
-					{isLoading ? (
-					<div>
-						<img src="/img/placeholders/track_3.png" alt="track 3" />
-					</div>) : (<>
-					  <SAudio.TrackPlayImage>
-						<SAudio.TrackPlaySvg alt="music">
-						  <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-						</SAudio.TrackPlaySvg>
-					  </SAudio.TrackPlayImage>
-					  <SAudio.TrackPlayAuthor>
-						<SAudio.TrackPlayAuthorLink href="http://"
-						  >{name}
-						</SAudio.TrackPlayAuthorLink
-						>
-					  </SAudio.TrackPlayAuthor>
-					  <SAudio.TrackPlayAlbum>
-						<SAudio.TrackPlayAlbumLink href="http://">{author}</SAudio.TrackPlayAlbumLink>
-					  </SAudio.TrackPlayAlbum>
-					  </>)}
+				<AudioPlayerInfo name={name} author={author}/>
 				</SAudio.TrackPlayContain>
 				<SAudio.TrackPlayLikeDis>
 					<SAudio.TrackPlayLike>
