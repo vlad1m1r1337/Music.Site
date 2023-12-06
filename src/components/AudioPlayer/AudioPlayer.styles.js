@@ -388,7 +388,12 @@ export const VolumeProgressLine = styled(Btn)`
   width: 109px;
 `
 export const Container = styled.div`
-  //display: flex;
-  //justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+`
+
+export const Time = styled.div`
+  align-self: end;
+  color: #696969;
 `
 

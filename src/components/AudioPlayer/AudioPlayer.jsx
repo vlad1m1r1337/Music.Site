@@ -31,11 +31,11 @@ export default function AudioPlayer({id, tracks}) {
 	return (
 		<>
 			<SAudio.Bar>
-				<audio  autoPlay ref={audioRef}>
+				<audio autoPlay ref={audioRef}>
 					<source src={sound} type="audio/mpeg" />
 				</audio>
 				<SAudio.Container>
-					<h1>time</h1>
+					<SAudio.Time>{`XX / ${tracks.duration_in_seconds}`}</SAudio.Time>
 					<SAudio.BarContent>
 						<ProgressBar></ProgressBar>
 						<SAudio.BarPlayerBlock>
