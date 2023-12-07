@@ -1,6 +1,6 @@
 import { useState } from "react";
-import * as S from "./ProgressBar.styles";
-export default function ProgressBar() {
+import * as S from "./AudioPlayerProgressBar.styles";
+export default function AudioPlayerProgressBar() {
     const [currentTime, setCurrentTime] = useState(0);
 
     return (

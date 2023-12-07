@@ -1,8 +1,9 @@
 import {useEffect, useRef, useState} from 'react';
 import * as SAudio from './AudioPlayer.styles'
-import ProgressBar from "../ProgressBar/ProgressBar";
+import AudioPlayerProgressBar from "../AudioPlayerProgressBar/AudioPlayerProgressBar";
 import AudioPlayerInfo from "../AudioPlayerInfo/AudioPlayerInfo";
 import AudioPlayerPlayButton from "../AudioPlayerPlayButton/AudioPlayerPlayButton";
+import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerBarVolumeBlock";
 
 export default function AudioPlayer({id, tracks}) {
 	const audioRef = useRef(null);
@@ -28,16 +29,21 @@ export default function AudioPlayer({id, tracks}) {
 		setRepeat(!repeat);
 		repeat ? audioRef.current.loop=true: audioRef.current.loop=false;
 	}
+
+	const [volume, setVolume] = useState(50);
+	useEffect(() => {
+		audioRef.current.volume = volume / 100;
+	}, [volume])
 	return (
 		<>
 			<SAudio.Bar>
-				<audio autoPlay ref={audioRef}>
+				<audio controls autoPlay ref={audioRef}>
 					<source src={sound} type="audio/mpeg" />
 				</audio>
 				<SAudio.Container>
 					<SAudio.Time>{`XX / ${tracks.duration_in_seconds}`}</SAudio.Time>
 					<SAudio.BarContent>
-						<ProgressBar></ProgressBar>
+						<AudioPlayerProgressBar></AudioPlayerProgressBar>
 						<SAudio.BarPlayerBlock>
 							<SAudio.BarPlayer>
 								<SAudio.PlayerControls>
@@ -83,21 +89,7 @@ export default function AudioPlayer({id, tracks}) {
 									</SAudio.TrackPlayLikeDis>
 								</SAudio.PlayerTrackPlay>
 							</SAudio.BarPlayer>
-							<SAudio.BarVolumeBlock>
-								<SAudio.VolumeContent>
-									<SAudio.VolumeImage>
-										<SAudio.VolumeSvg alt="volume">
-											<use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
-										</SAudio.VolumeSvg>
-									</SAudio.VolumeImage>
-									<SAudio.VolumeProgress>
-										<SAudio.VolumeProgressLine
-											type="range"
-											name="range"
-										/>
-									</SAudio.VolumeProgress>
-								</SAudio.VolumeContent>
-							</SAudio.BarVolumeBlock>
+							<AudioPlayerBarVolumeBlock volume={volume} setVolume={setVolume}/>
 						</SAudio.BarPlayerBlock>
 					</SAudio.BarContent>
 				</SAudio.Container>
