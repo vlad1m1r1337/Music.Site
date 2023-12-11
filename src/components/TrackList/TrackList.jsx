@@ -8,7 +8,6 @@ export default function TrackList({setId, id, tracks}) {
 		<SS.MainCenterBlock>
 			<SearchCenter/>
 			<RangeTracks />
-			{/*<button onClick={() => setId(!id)}>Some button</button>*/}
 			<CenterBlockContent tracks={tracks} setId={setId} objId={id}/>
 	  	</SS.MainCenterBlock>
 	);

@@ -1,5 +1,5 @@
 import * as SAudio from "../AudioPlayer/AudioPlayer.styles";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function AudioPlayerPlayButton({audioRef}) {
     const [isPlaying, setIsPlaying] = useState(true);
@@ -11,6 +11,13 @@ export default function AudioPlayerPlayButton({audioRef}) {
         audioRef.current.pause();
         setIsPlaying(false);
     };
+
+    useEffect(() => {
+        const audio = document.getElementById('audioId');
+        audio.addEventListener('play', function() {
+            setIsPlaying(true);
+        });
+    }, [])
 
     const togglePlay = isPlaying ? handleStop : handleStart;
 

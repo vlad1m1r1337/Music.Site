@@ -5,7 +5,7 @@ import AudioPlayerInfo from "../AudioPlayerInfo/AudioPlayerInfo";
 import AudioPlayerPlayButton from "../AudioPlayerPlayButton/AudioPlayerPlayButton";
 import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerBarVolumeBlock";
 
-export default function AudioPlayer({id, tracks}) {
+export default function AudioPlayer({tracks}) {
 	const audioRef = useRef(null);
 	let name;
 	let author;
@@ -24,7 +24,7 @@ export default function AudioPlayer({id, tracks}) {
 		author = "author";
 	}
 
-	const [repeat, setRepeat] = useState(false);
+	const [repeat, setRepeat] = useState(true);
 	function cycleExec() {
 		setRepeat(!repeat);
 		repeat ? audioRef.current.loop=true: audioRef.current.loop=false;
@@ -33,17 +33,30 @@ export default function AudioPlayer({id, tracks}) {
 	const [volume, setVolume] = useState(50);
 	useEffect(() => {
 		audioRef.current.volume = volume / 100;
-	}, [volume])
+	}, [volume]);
+
+	function toMin(dur) {
+		const seconds = (parseInt(dur % 60) < 10 ? "0" + parseInt(dur % 60) : parseInt(dur % 60));
+		return Math.floor(parseInt(dur / 60)) + ':' + seconds;
+	}
+
+	let [currentTime, setCurrentTime] = useState(0);
+
 	return (
 		<>
 			<SAudio.Bar>
-				<audio controls autoPlay ref={audioRef}>
+				<audio id="audioId" controls autoPlay ref={audioRef}>
 					<source src={sound} type="audio/mpeg" />
 				</audio>
 				<SAudio.Container>
-					<SAudio.Time>{`XX / ${tracks.duration_in_seconds}`}</SAudio.Time>
+					<SAudio.Time>{toMin(Number(currentTime))}</SAudio.Time>
 					<SAudio.BarContent>
-						<AudioPlayerProgressBar></AudioPlayerProgressBar>
+						<AudioPlayerProgressBar
+							audioRef={audioRef}
+							dur={Number(tracks.duration_in_seconds)}
+							currentTime={currentTime}
+							setCurrentTime={setCurrentTime}
+						></AudioPlayerProgressBar>
 						<SAudio.BarPlayerBlock>
 							<SAudio.BarPlayer>
 								<SAudio.PlayerControls>
