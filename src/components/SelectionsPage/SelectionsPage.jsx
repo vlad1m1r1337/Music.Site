@@ -4,9 +4,11 @@ import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import * as SS from "../TrackList/TrackList.styles";
 import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
-import CenterBlockContentCutted from "../CenterBlockContent/CenterBlockContentCutted";
 import {useParams} from "react-router-dom";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -32,6 +34,31 @@ export const  SelectionsPage = ({header, setAllowed}) => {
         }
         header = Header;
     }
+
+    const [id, setId] = useState(-1);
+
+    const [tracks, setTracks] = useState(null);
+
+    const apiURL = "https://skypro-music-api.skyeng.tech/catalog/selection/";
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(apiURL);
+                if (params.id) {
+                    setTracks((response.data)[params.id - 1].items);
+                }
+                else {
+                    setTracks((response.data)[0].items);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        fetchData()
+            .catch(() => console.error("error"));
+
+    }, []);
     return (
         <>
             <S.Wrapper>
@@ -41,11 +68,11 @@ export const  SelectionsPage = ({header, setAllowed}) => {
                         <SS.MainCenterBlock>
                             <SearchCenter/>
                             <StyledH>{header}</StyledH>
-                            <CenterBlockContentCutted/>
+                            {tracks && <CenterBlockContent tracks={tracks} setId={setId} objId={id}/>}
                         </SS.MainCenterBlock>
                         <SideBarAuth setAllowed={setAllowed}/>
                     </S.Main>
-                    <AudioPlayer />
+                    {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
                 </S.Container>
             </S.Wrapper>
         </>

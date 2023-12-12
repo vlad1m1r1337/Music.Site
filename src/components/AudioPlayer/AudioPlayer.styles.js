@@ -131,11 +131,13 @@ export const PlayerBtnRepeat = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-right: 24px;
-  &:hover svg {
-	fill: transparent;
-	stroke: #acacac;
-	cursor: pointer;
-  }
+  ${props => !props.repeatBool && `
+    &:hover svg {
+      fill: transparent;
+      stroke: #acacac;
+      cursor: pointer;
+    }
+  `}
   &:active svg {
 	fill: transparent;
 	stroke: #ffffff;
@@ -152,8 +154,8 @@ export const PlayerBtnRepeatSvg = styled.svg`
 	width: 18px;
 	height: 12px;
 	fill: transparent;
-	stroke: #696969;
-`
+    stroke: ${props => (props.$repeat ? '#696969' : '#ffffff')};
+  `
 
 export const PlayerBtnShuffle = styled.div`
 	padding: 5px;
@@ -385,3 +387,13 @@ export const Btn = styled.input`
 export const VolumeProgressLine = styled(Btn)`
   width: 109px;
 `
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const Time = styled.div`
+  align-self: end;
+  color: #696969;
+`
+
