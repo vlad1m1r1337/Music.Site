@@ -22,7 +22,8 @@ export const  MainPage = ({setAllowed}) => {
                 console.error('Error fetching data:', error);
             }
         }
-        fetchData();
+        fetchData()
+            .catch(() => console.error("error"));
     }, []);
 
     return (
@@ -31,10 +32,10 @@ export const  MainPage = ({setAllowed}) => {
                     <S.Container>
                         <S.Main>
                             <NavMenu/>
-                            <TrackList tracks={tracks} setId={setId} id={id}/>
+                            {tracks && <TrackList tracks={tracks} setId={setId} id={id}/>}
                             <SideBar setAllowed={setAllowed}/>
                         </S.Main>
-                        {(id >= 0) &&  <AudioPlayer tracks={tracks[id]}/>}
+                        {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
                     </S.Container>
                 </S.Wrapper>
         </>

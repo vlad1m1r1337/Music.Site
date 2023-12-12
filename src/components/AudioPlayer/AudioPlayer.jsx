@@ -42,10 +42,13 @@ export default function AudioPlayer({tracks}) {
 
 	let [currentTime, setCurrentTime] = useState(0);
 
+	function NotImplemented() {
+		alert("not implemented");
+	}
 	return (
 		<>
 			<SAudio.Bar>
-				<audio id="audioId" controls autoPlay ref={audioRef}>
+				<audio id="audioId" autoPlay ref={audioRef}>
 					<source src={sound} type="audio/mpeg" />
 				</audio>
 				<SAudio.Container>
@@ -60,13 +63,13 @@ export default function AudioPlayer({tracks}) {
 						<SAudio.BarPlayerBlock>
 							<SAudio.BarPlayer>
 								<SAudio.PlayerControls>
-									<SAudio.PlayerBtnPrev>
+									<SAudio.PlayerBtnPrev onClick={NotImplemented}>
 										<SAudio.PlayerBtnPrevSvg alt="prev">
 											<use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
 										</SAudio.PlayerBtnPrevSvg>
 									</SAudio.PlayerBtnPrev>
 									<AudioPlayerPlayButton audioRef={audioRef}/>
-									<SAudio.PlayerBtnNext>
+									<SAudio.PlayerBtnNext onClick={NotImplemented}>
 										<SAudio.PlayerBtnNextSvg alt="next">
 											<use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
 										</SAudio.PlayerBtnNextSvg>
@@ -76,7 +79,7 @@ export default function AudioPlayer({tracks}) {
 											<use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
 										</SAudio.PlayerBtnRepeatSvg>
 									</SAudio.PlayerBtnRepeat>
-									<SAudio.PlayerBtnShuffle>
+									<SAudio.PlayerBtnShuffle onClick={NotImplemented}>
 										<SAudio.PlayerBtnShuffleSvg alt="shuffle">
 											<use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
 										</SAudio.PlayerBtnShuffleSvg>

@@ -41,7 +41,6 @@ export const  NotFound = () => {
                         <NFS.Paragraph>Возможно, она была удалена или перенесена на другой адрес</NFS.Paragraph>
                         <NFS.Button onClick={handleButtonClick}>Вернуться на главную</NFS.Button>
                     </NFS.ErrorNumber>
-                    <AudioPlayer />
                 </S.Container>
             </S.Wrapper>
         </>

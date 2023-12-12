@@ -3,7 +3,6 @@ import * as S from "./AudioPlayerProgressBar.styles";
 export default function AudioPlayerProgressBar({audioRef, dur, currentTime, setCurrentTime}) {
     const handleTimeChange = (event) => {
         const newTime = parseFloat(event.target.value);
-        console.log(newTime);
         setCurrentTime(newTime);
         audioRef.current.currentTime = newTime;
     };
