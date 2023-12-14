@@ -9,13 +9,13 @@ export default function PlayList({setId, objId, id, trackId, track, track_add, e
 
 	const params = useParams();
 	let idCacl;
-	if (params.id == 1) {
+	if (params.id === '1') {
 		idCacl = 8;
 	}
-	else if (params.id == 2) {
+	else if (params.id === '2') {
 		idCacl = 18;
 	}
-	else if (params.id == 3) {
+	else if (params.id === '3') {
 		idCacl = 28;
 	}
 	else {

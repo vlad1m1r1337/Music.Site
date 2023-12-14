@@ -51,7 +51,6 @@ export default function AudioPlayer({tracks}) {
 
 	useEffect(() => {
 		audioRef.current.onloadedmetadata = () => {
-			console.log(audioRef.current.duration);
 			setLoadMetaData(true);
 		};
 	}, []);

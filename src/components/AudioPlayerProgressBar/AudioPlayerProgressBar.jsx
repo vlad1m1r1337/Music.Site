@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import * as S from "./AudioPlayerProgressBar.styles";
 export default function AudioPlayerProgressBar({audioRef, dur, currentTime, setCurrentTime}) {
     const handleTimeChange = (event) => {
@@ -8,7 +8,7 @@ export default function AudioPlayerProgressBar({audioRef, dur, currentTime, setC
     };
 
     useEffect(() => {
-        currentTime = audioRef.currentTime;
+        setCurrentTime(audioRef.currentTime);
     }, [audioRef]);
 
     const handleTimeUpdate = () => {
@@ -30,7 +30,7 @@ export default function AudioPlayerProgressBar({audioRef, dur, currentTime, setC
     return (
         <S.ProgressInput
             type="range"
-            value={currentTime}
+            value={currentTime || 0}
             step={0.01}
             min={0}
             max={!isNaN(dur) ? dur : 100}
