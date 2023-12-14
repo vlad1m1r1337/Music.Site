@@ -14,6 +14,7 @@ export default function AudioPlayer({tracks}) {
 	useEffect(() => {
 		audioRef.current.load();
 	}, [tracks])
+
 	if (tracks !== undefined) {
 		name = tracks.name;
 		author = tracks.author;
@@ -45,6 +46,15 @@ export default function AudioPlayer({tracks}) {
 	function NotImplemented() {
 		alert("not implemented");
 	}
+
+	const [loadMetaData, setLoadMetaData] = useState(false);
+
+	useEffect(() => {
+		audioRef.current.onloadedmetadata = () => {
+			console.log(audioRef.current.duration);
+			setLoadMetaData(true);
+		};
+	}, []);
 	return (
 		<>
 			<SAudio.Bar>
@@ -52,14 +62,14 @@ export default function AudioPlayer({tracks}) {
 					<source src={sound} type="audio/mpeg" />
 				</audio>
 				<SAudio.Container>
-					<SAudio.Time>{toMin(Number(currentTime))}</SAudio.Time>
+					{loadMetaData && !isNaN(audioRef.current.duration) && <SAudio.Time>{`${toMin(Number(currentTime))} / ${toMin(Number(audioRef.current.duration))}`}</SAudio.Time>}
 					<SAudio.BarContent>
-						<AudioPlayerProgressBar
+						{loadMetaData && <AudioPlayerProgressBar
 							audioRef={audioRef}
-							dur={Number(tracks.duration_in_seconds)}
+							dur={Number(audioRef.current.duration)}
 							currentTime={currentTime}
 							setCurrentTime={setCurrentTime}
-						></AudioPlayerProgressBar>
+						></AudioPlayerProgressBar>}
 						<SAudio.BarPlayerBlock>
 							<SAudio.BarPlayer>
 								<SAudio.PlayerControls>

@@ -33,7 +33,7 @@ export default function AudioPlayerProgressBar({audioRef, dur, currentTime, setC
             value={currentTime}
             step={0.01}
             min={0}
-            max={dur}
+            max={!isNaN(dur) ? dur : 100}
             onChange={handleTimeChange}
             $color="#B672FF"
         />

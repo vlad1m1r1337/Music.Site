@@ -4,13 +4,11 @@ import {useParams} from "react-router-dom";
 export default function PlayList({setId, objId, id, trackId, track, track_add, executor, album, time}) {
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 50);
+		setIsLoading(false);
 	}, []);
+
 	const params = useParams();
-	let idCacl
+	let idCacl;
 	if (params.id == 1) {
 		idCacl = 8;
 	}
@@ -23,6 +21,10 @@ export default function PlayList({setId, objId, id, trackId, track, track_add, e
 	else {
 		idCacl = 8
 	}
+
+	useEffect(() => {
+		setIsLoading(false);
+	}, []);
 	return (
 		<S.PlayListItem>
 					{isLoading ? 
