@@ -31,7 +31,7 @@ export const  MainPage = ({setAllowed}) => {
                 <S.Wrapper>
                     <S.Container>
                         <S.Main>
-                            <NavMenu/>
+                            <NavMenu setAllowed={setAllowed}/>
                             {tracks && <TrackList tracks={tracks} setId={setId} id={id}/>}
                             <SideBar setAllowed={setAllowed}/>
                         </S.Main>

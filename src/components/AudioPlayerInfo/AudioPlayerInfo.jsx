@@ -3,14 +3,10 @@ import {useEffect, useState} from "react";
 
 export default function AudioPlayerInfo({name, author}) {
     const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 5000);
-
+        setIsLoading(false);
     }, []);
-
     return (
        <>
            {isLoading ? (

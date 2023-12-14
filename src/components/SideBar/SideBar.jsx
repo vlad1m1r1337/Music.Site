@@ -1,22 +1,18 @@
 import { useEffect, useState } from 'react';
 import SideBarImages from '../SideBarImages/SideBarImages';
 import * as S from './SideBar.styles'
+import SideBarPreloader from "../SideBarPreloader/SideBarPreloader";
 
 export default function SideBar({setAllowed}) {
 	const [isLoading, setIsLoading] = useState(true);
-	
-	useEffect(() => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 5000);
-	}, []);
 
 	const signOut = () => {
 		localStorage.removeItem('user');
 		setAllowed(false);
 	}
-
+	useEffect(() => {
+		setIsLoading(false);
+	}, [])
 	return (
 		<S.MainSidebar>
 		<S.SidebarPersonal>
@@ -29,14 +25,7 @@ export default function SideBar({setAllowed}) {
 		</S.SidebarPersonal>
 		<S.SideBarBlock>
 		  <S.SideBarList>
-			{isLoading ? (<S.SideBarItem>
-			  <S.SideBarLink to='/'>
-				<S.SideBarImg
-				  src="/img/placeholders/big.png"
-				  alt="day's playlist"
-				/>
-			  </S.SideBarLink>
-			</S.SideBarItem>) : <SideBarImages />}
+			  {isLoading ? <SideBarPreloader/> : <SideBarImages/>}
 		  </S.SideBarList>
 		</S.SideBarBlock>
 	  </S.MainSidebar>
