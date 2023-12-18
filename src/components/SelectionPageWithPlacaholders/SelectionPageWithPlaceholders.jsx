@@ -16,12 +16,12 @@ const StyledH = styled.h1`
   line-height: 64px;
   margin-bottom: 37px;
 `
-export default function SelectionPageWithPlaceholders({header, setAllowed, tracks}) {
+export default function SelectionPageWithPlaceholders({header, setAllowed}) {
     return (
         <S.Wrapper>
             <S.Container>
                 <S.Main>
-                    <NavMenu/>
+                    <NavMenu setAllowed={setAllowed}/>
                     <SS.MainCenterBlock>
                         <SearchCenter/>
                         <StyledH>{header}</StyledH>

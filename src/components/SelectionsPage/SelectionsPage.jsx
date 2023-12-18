@@ -61,10 +61,10 @@ export const  SelectionsPage = ({header, setAllowed}) => {
             .then(() => {
                 setIsLoading(false)
             })
-    })
+    }, [])
     if  (isLoading) {
         return (
-          <SelectionPageWithPlaceholders header={header} setAllowed={setAllowed} tracks={tracks}/>
+          <SelectionPageWithPlaceholders header={header} setAllowed={setAllowed}/>
         )
     }
     return (
