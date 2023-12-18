@@ -5,13 +5,15 @@ import SideBar from "../../components/SideBar/SideBar";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import {useEffect, useState} from "react";
 import axios from "axios";
-
+import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 export const  MainPage = ({setAllowed}) => {
     const [id, setId] = useState(-1);
 
     const [tracks, setTracks] = useState(null);
 
     const apiURL = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
+
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,9 +25,14 @@ export const  MainPage = ({setAllowed}) => {
             }
         }
         fetchData()
-            .catch(() => console.error("error"));
+            .then(() => setIsLoading(false))
     }, []);
 
+    if (isLoading) {
+       return (
+           <MainPageWithPlaceholders setAllowed={setAllowed}/>
+       )
+    }
     return (
         <>
                 <S.Wrapper>

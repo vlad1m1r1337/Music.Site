@@ -9,6 +9,7 @@ import SideBarAuth from "../SideBarAuth/SideBarAuth";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
+import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -41,14 +42,15 @@ export const  SelectionsPage = ({header, setAllowed}) => {
 
     const apiURL = "https://skypro-music-api.skyeng.tech/catalog/selection/";
 
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(apiURL);
                 if (params.id) {
                     setTracks((response.data)[params.id - 1].items);
-                }
-                else {
+                } else {
                     setTracks((response.data)[0].items);
                 }
             } catch (error) {
@@ -56,11 +58,16 @@ export const  SelectionsPage = ({header, setAllowed}) => {
             }
         }
         fetchData()
-            .catch(() => console.error("error"));
-
-    }, []);
+            .then(() => {
+                setIsLoading(false)
+            })
+    })
+    if  (isLoading) {
+        return (
+          <SelectionPageWithPlaceholders header={header} setAllowed={setAllowed} tracks={tracks}/>
+        )
+    }
     return (
-        <>
             <S.Wrapper>
                 <S.Container>
                     <S.Main>
@@ -75,6 +82,5 @@ export const  SelectionsPage = ({header, setAllowed}) => {
                     {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
                 </S.Container>
             </S.Wrapper>
-        </>
     )
 }
