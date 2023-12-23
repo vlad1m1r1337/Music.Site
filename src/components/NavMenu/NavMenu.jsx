@@ -2,7 +2,7 @@ import NavMenuCatalog from '../MenuCatalog/NavMenuCatalog.jsx';
 import { useState } from 'react';
 import * as S from './NavMenu.styles'
 
-export default function NavMenu() {
+export default function NavMenu({setAllowed}) {
 	const [visible, setVisible] = useState(false);
 
 	const toggleVisibility = () => setVisible(!visible);
@@ -17,7 +17,7 @@ export default function NavMenu() {
 		  <S.BurgerLine></S.BurgerLine>
 		  <S.BurgerLine></S.BurgerLine>
 		</S.NavBurger>
-		{visible && (<NavMenuCatalog />)}
+		{visible && (<NavMenuCatalog setAllowed={setAllowed} />)}
 	  </S.MainNav>
 	);
   }

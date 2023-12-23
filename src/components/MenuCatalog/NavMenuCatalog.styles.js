@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const NavMenu = styled.div`
 	display: block;
@@ -18,7 +18,7 @@ export const LeftMenuItem = styled.li`
 	margin-bottom: 16px;
 `
 
-export const MenuLink = styled(NavLink)`
+export const MenuLink = styled(Link)`
 	color: #ffffff;
 	font-weight: 400;
 	font-size: 16px;

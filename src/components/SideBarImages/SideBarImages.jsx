@@ -1,5 +1,5 @@
 import * as S from './SideBarImages.styles'
-export default function sideBarImages() {
+export default function SideBarImages() {
 	return (
 		<>
 		<S.SidebarItem>
