@@ -1,7 +1,7 @@
 import {AppRoutes} from "./routes";
 import React, {useState} from "react";
 import {createGlobalStyle} from "styled-components";
-import {themes, ThemeContext, useThemeContext} from "./contexts/color_theme";
+import {themes, ThemeContext} from "./contexts/color_theme";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -53,7 +53,7 @@ export default function App() {
         setCurrentTheme(themes.dark);
 
     }
-    const {theme} = useThemeContext();
+    // const {theme} = useThemeContext();
 
     return (
     <>

@@ -35,7 +35,7 @@ export const SearchText = styled.input`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: {$prop => prop.$theme.font};
+  color: ${prop => prop.$theme.font};
   &:: placeholder {
     background-color: transparent;
     color: #ffffff;
@@ -54,7 +54,7 @@ export const SearchText = styled.input`
   }
   &:: -webkit-input-placeholder {
     background-color: transparent;
-    color: #ffffff;
+    color: ${prop => prop.$theme.placeholder};
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
