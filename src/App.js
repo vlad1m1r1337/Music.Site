@@ -1,7 +1,7 @@
 import {AppRoutes} from "./routes";
 import React, {useState} from "react";
 import {createGlobalStyle} from "styled-components";
-import {themes, ThemeContext} from "./contexts/color_theme";
+import {themes, ThemeContext, useThemeContext} from "./contexts/color_theme";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     font-family: "StratosSkyeng", sans-serif;
-    color: #ffffff;
+    color: ${prop => prop.$theme.font};
   }
   * {
     margin: 0;
@@ -51,12 +51,14 @@ export default function App() {
             return;
         }
         setCurrentTheme(themes.dark);
+
     }
+    const {theme} = useThemeContext();
 
     return (
     <>
         <ThemeContext.Provider value={{theme: currentTheme, toggleTheme }}>
-            <GlobalStyle/>
+            <GlobalStyle $theme={currentTheme}/>
             <AppRoutes/>
         </ThemeContext.Provider>
     </>

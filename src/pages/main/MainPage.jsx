@@ -6,7 +6,7 @@ import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
-import {themes, useThemeContext} from "../../contexts/color_theme";
+import { useThemeContext } from "../../contexts/color_theme";
 
 export const  MainPage = ({setAllowed}) => {
     const [id, setId] = useState(-1);
@@ -29,17 +29,18 @@ export const  MainPage = ({setAllowed}) => {
         fetchData()
             .then(() => setIsLoading(false))
     }, []);
+    const {theme} = useThemeContext();
 
     if (isLoading) {
        return (
-           <MainPageWithPlaceholders setAllowed={setAllowed}/>
+           // <MainPageWithPlaceholders setAllowed={setAllowed}/>
+           <h1>dasfs</h1>
        )
     }
-    console.log(themes);
     return (
         <>
                 <S.Wrapper>
-                    <S.Container $themes={themes}>
+                    <S.Container $theme={theme}>
                         <S.Main>
                             <NavMenu setAllowed={setAllowed}/>
                             {tracks && <TrackList tracks={tracks} setId={setId} id={id}/>}

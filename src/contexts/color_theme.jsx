@@ -3,9 +3,11 @@ import React, {useContext} from "react";
 export const themes = {
     light: {
         background:"#FFF",
+        font: "#000000",
     },
     dark: {
         background:"#181818",
+        font: "#ffffff",
     }
 }
 
