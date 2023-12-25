@@ -2,7 +2,6 @@ import * as S from "../../App.styles";
 import NavMenu from "../NavMenu/NavMenu";
 import * as SS from "../TrackList/TrackList.styles";
 import SearchCenter from "../SearchCenter/SearchCenter";
-import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
 import styled from "styled-components";
 import CenterBlockContentWithPlaceholders

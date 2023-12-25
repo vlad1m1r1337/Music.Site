@@ -1,6 +1,5 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
-import TrackPlaceholder from "../TrackPlaceholder/TrackPlaceholder";
 
 export default function CenterBlockContent({tracks, setId, objId, setIsLoading}) {
 	return (

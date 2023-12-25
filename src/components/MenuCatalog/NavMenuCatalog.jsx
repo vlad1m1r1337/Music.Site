@@ -17,6 +17,7 @@ export default function NavMenuCatalog({setAllowed}) {
 			<S.LeftMenuItem>
 			  <S.MenuLink onClick={signOut}>Выйти</S.MenuLink>
 			</S.LeftMenuItem>
+			<img src="/img/change_theme(black).png" alt="change_theme"/>
 		  </S.MenuList>
 		</S.NavMenu>
 	)

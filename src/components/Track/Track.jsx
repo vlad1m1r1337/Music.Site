@@ -1,6 +1,6 @@
 import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
-import TrackPlaceholder from "../TrackPlaceholder/TrackPlaceholder";
+
 export default function Track({setId, objId, id, track, track_add, executor, album, time}) {
 	const params = useParams();
 	let idCacl;

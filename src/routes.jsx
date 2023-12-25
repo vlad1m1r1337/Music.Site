@@ -17,6 +17,7 @@ export const AppRoutes = () => {
     const updateIsAllowed = () => {
         setAllowed(!isAllowed);
     }
+
     return (
        <>
             <Routes>

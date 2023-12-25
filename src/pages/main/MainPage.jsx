@@ -6,6 +6,8 @@ import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
+import {themes, useThemeContext} from "../../contexts/color_theme";
+
 export const  MainPage = ({setAllowed}) => {
     const [id, setId] = useState(-1);
 
@@ -33,10 +35,11 @@ export const  MainPage = ({setAllowed}) => {
            <MainPageWithPlaceholders setAllowed={setAllowed}/>
        )
     }
+    console.log(themes);
     return (
         <>
                 <S.Wrapper>
-                    <S.Container>
+                    <S.Container $themes={themes}>
                         <S.Main>
                             <NavMenu setAllowed={setAllowed}/>
                             {tracks && <TrackList tracks={tracks} setId={setId} id={id}/>}
