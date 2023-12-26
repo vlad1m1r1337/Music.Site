@@ -1,6 +1,7 @@
 import { useState , useRef} from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import * as S from "./SearchPopup.styles"
+import {useThemeContext} from "../../contexts/color_theme";
 
 export default function SearchPopup({ name, arr }) {
   const [isOpen, setOpen] = useState(false);
@@ -16,9 +17,10 @@ export default function SearchPopup({ name, arr }) {
 
   const scroll = arr.length > 3 ? 1 : 0;
 
+  const {theme} = useThemeContext();
   return (
       <div>
-        <S.BtnText onClick={() => setOpen(!isOpen)}>
+        <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>
           {name}
         </S.BtnText>
         <S.SearchPopupMenu $isOpen={isOpen} ref={menuRef}>

@@ -56,7 +56,7 @@ export const TrackTitleImage = styled.div`
 	width: 51px;
 	height: 51px;
 	padding: 16px;
-	background: #313131;
+	background: ${prop => prop.$theme.background2};
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -81,7 +81,7 @@ export const TrackTitleLink = styled.a`
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 24px;
-	color: #ffffff;
+	color: ${prop => prop.theme.font};
 `
 
 export const TrackTitleSpan = styled.span`
@@ -107,7 +107,7 @@ export const TrackAuthorLink = styled.a`
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 24px;
-	color: #ffffff;
+	color: ${prop => prop.theme.font};
 	text-align: left;
 `
 
@@ -120,7 +120,7 @@ export const TrackAlbumLink = styled.a`
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 24px;
-	color: #696969;
+	color: ${prop => prop.$theme.font2};
 `
 
 export const TrackTimeSvg = styled.svg`

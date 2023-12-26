@@ -5,7 +5,7 @@ export const FilterButton = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    border: 1px solid #ffffff;
+    border: 1px solid ${prop => prop.$font};
     border-radius: 60px;
     padding: 6px 20px;
     &: not(:last-child) {
