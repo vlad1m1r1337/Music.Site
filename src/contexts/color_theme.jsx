@@ -9,7 +9,11 @@ export const themes = {
         font2: "#B1B1B1",
         placeholder: "#000000",
         left_side_bar: "#F6F5F3",
-        progress_bar:"#D9D9D9",
+        progress_bar:"#ACACAC",
+        hover_icons: "#707070",
+        active_icons: "#AD61FF",
+        active_fill_icons: "#AD61FF",
+        volume_icon: "#D9D9D9"
     },
     dark: {
         theme:"black",
@@ -20,6 +24,10 @@ export const themes = {
         placeholder: "#ffffff",
         left_side_bar: "#1C1C1C",
         progress_bar:"#2E2E2E",
+        hover_icons: "#ACACAC",
+        active_icons: "#ffffff",
+        active_fill_icons: "#696969",
+        volume_icon: "#FFFFFF"
     }
 }
 

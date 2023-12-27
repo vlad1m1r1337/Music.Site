@@ -108,13 +108,13 @@ export default function AudioPlayer({tracks}) {
 										<AudioPlayerInfo name={name} author={author}/>
 									</SAudio.TrackPlayContain>
 									<SAudio.TrackPlayLikeDis>
-										<SAudio.TrackPlayLike>
-											<SAudio.TrackPlayLikeSvg className="track-play__like-svg" alt="like">
+										<SAudio.TrackPlayLike $theme={theme}>
+											<SAudio.TrackPlayLikeSvg $theme={theme} className="track-play__like-svg" alt="like">
 												<use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
 											</SAudio.TrackPlayLikeSvg>
 										</SAudio.TrackPlayLike>
-										<SAudio.TrackPlayDislike>
-											<SAudio.TrackPlayDislikeSvg className="track-play__dislike-svg" alt="dislike">
+										<SAudio.TrackPlayDislike $theme={theme}>
+											<SAudio.TrackPlayDislikeSvg $theme={theme} className="track-play__dislike-svg" alt="dislike">
 												<use
 													xlinkHref="/img/icon/sprite.svg#icon-dislike"
 												></use>

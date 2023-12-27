@@ -131,21 +131,19 @@ export const PlayerBtnRepeat = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-right: 24px;
-  ${props => !props.$repeatBool && `
-    &:hover svg {
-      fill: transparent;
-      stroke: #acacac;
-      cursor: pointer;
-    }
-  `}
+  &:hover svg {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
   &:active svg {
 	fill: transparent;
-	stroke: #ffffff;
+	stroke: ${prop => prop.$theme.placeholder};
 	cursor: pointer;
   }
   &:active {
 	fill: #696969;
-	stroke: #ffffff;
+	stroke: ${prop => prop.$theme.placeholder};
 	cursor: pointer;
   }
 `
@@ -154,14 +152,14 @@ export const PlayerBtnRepeatSvg = styled.svg`
 	width: 18px;
 	height: 12px;
 	fill: transparent;
-    stroke: ${props => (props.$repeat ? '#696969' : '#ffffff')};
+    stroke: ${prop => prop.$repeat ? prop.$theme.font2 : prop.$theme.active_icons};
   `
 
 export const PlayerBtnRepeatSvgWhite = styled.svg`
 	width: 18px;
 	height: 12px;
 	fill: transparent;
-    stroke: ${props => (props.$repeat ? '#B1B1B1' : '#000000`')};
+    stroke: ${prop => prop.$repeat ? prop.$theme.font2 : prop.$theme.active_icons};
   `
 
 export const PlayerBtnShuffle = styled.div`
@@ -180,7 +178,7 @@ export const PlayerBtnShuffle = styled.div`
 	align-items: center;
 	&:hover svg {
 	fill: transparent;
-	stroke: ${prop => prop.$theme.theme === "black" ? "#acacac" : "#707070"};
+	stroke: ${prop => prop.$theme.hover_icons};
 	cursor: pointer;
 	}
 	&:active svg {
@@ -199,7 +197,7 @@ export const PlayerBtnShuffleSvg = styled.svg`
   width: 19px;
   height: 12px;
   fill: transparent;
-  stroke: ${prop => prop.$theme.theme === "black" ? "#696969" : "#B1B1B1"};
+  stroke: ${prop => prop.$theme.font2};
 `
 
 export const PlayerTrackPlay = styled.div`
@@ -227,7 +225,7 @@ export const TrackPlayContain = styled.div`
 export const TrackPlayImage = styled.div`
   width: 51px;
   height: 51px;
-  background-color: #313131;
+  background-color: ${prop => prop.$theme.left_side_bar};
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -263,7 +261,7 @@ export const TrackPlayAuthorLink = styled.a`
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 24px;
-	color: #ffffff;
+	color: ${prop => prop.$theme.font};
 	white-space: nowrap;
 `
 
@@ -291,24 +289,24 @@ export const TrackPlayLikeDis = styled.div`
 export const BtnIcon = styled.div`
     &:hover svg {
       fill: transparent;
-      stroke: #acacac;
       cursor: pointer;
+      stroke: ${props => props.$theme.hover_icons};
     }
     &:active svg {
     fill: transparent;
-    stroke: #ffffff;
+    stroke: ${prop => prop.$theme.active_icons};
     }
     &:active {
     .track-play__like-svg {
-      fill: #696969;
-      stroke: #ffffff;
+      fill: ${prop => prop.$theme.active_fill_icons};
+      stroke: ${prop => prop.$theme.active_icons};
       cursor: pointer;
     }
     }
     &:active {
     .track-play__dislike-svg {
-      fill: #696969;
-      stroke: #ffffff;
+      fill: ${prop => prop.$theme.active_fill_icons};
+      stroke: black;
       cursor: pointer;
     }
     }
@@ -326,14 +324,14 @@ export const TrackPlayLikeSvg = styled.svg`
   width: 14px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke:${prop => prop.$theme.font2};
 `
 
 export const TrackPlayDislikeSvg = styled.svg`
   width: 14.34px;
   height: 13px;
   fill: transparent;
-  stroke: #696969;
+  stroke: ${prop => prop.$theme.font2};
 `
 
 export const TrackPlayAlbumLink = styled.a`
@@ -341,7 +339,7 @@ export const TrackPlayAlbumLink = styled.a`
 	font-weight: 400;
 	font-size: 13px;
 	line-height: 24px;
-	color: #ffffff;
+    color: ${prop => prop.$theme.font};
 `
 
 export const BarVolumeBlock = styled.div`
