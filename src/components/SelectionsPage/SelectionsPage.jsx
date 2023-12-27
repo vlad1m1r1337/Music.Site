@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
+import {useThemeContext} from "../../contexts/color_theme";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -61,7 +62,9 @@ export const  SelectionsPage = ({header, setAllowed}) => {
             .then(() => {
                 setIsLoading(false)
             })
-    }, [])
+    }, [params.id])
+    const {theme} = useThemeContext();
+
     if  (isLoading) {
         return (
           <SelectionPageWithPlaceholders header={header} setAllowed={setAllowed}/>
@@ -69,7 +72,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
     }
     return (
             <S.Wrapper>
-                <S.Container>
+                <S.Container $theme={theme}>
                     <S.Main>
                         <NavMenu/>
                         <SS.MainCenterBlock>

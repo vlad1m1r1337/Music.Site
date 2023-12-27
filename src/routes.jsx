@@ -28,7 +28,7 @@ export const AppRoutes = () => {
                     <Route path="/category/:id" element={<SelectionsPage setAllowed={updateIsAllowed}/>}/>
                     <Route path="/" element={<MainPage setAllowed={updateIsAllowed}/>} />
                 </Route>
-                <Route path="*" element={<NotFound/>}/>
+                <Route path="*" element={<NotFound setAllowed={setAllowed}/>}/>
             </Routes>
        </>
     )

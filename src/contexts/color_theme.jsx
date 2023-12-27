@@ -4,11 +4,12 @@ export const themes = {
     light: {
         theme:"light",
         background:"#FFFFFF",
-        background2: "#1C1C1C",
+        background2: "#F6F5F3",
         font: "#000000",
         font2: "#B1B1B1",
         placeholder: "#000000",
         left_side_bar: "#F6F5F3",
+        progress_bar:"#D9D9D9",
     },
     dark: {
         theme:"black",
@@ -18,6 +19,7 @@ export const themes = {
         font2: "#696969",
         placeholder: "#ffffff",
         left_side_bar: "#1C1C1C",
+        progress_bar:"#2E2E2E",
     }
 }
 

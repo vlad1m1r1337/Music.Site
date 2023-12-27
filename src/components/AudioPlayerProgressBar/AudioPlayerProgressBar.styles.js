@@ -5,7 +5,7 @@ export const ProgressInput = styled.input`
   --progress-color: #b672ff;
   --progress-color: ${(props) => props.$color ?? "#b672ff"};
 
-  --progress-bg-color: #2e2e2e;
+  --progress-bg-color: ${prop => prop.$theme.progress_bar};
 
   margin: 0;
   width: 100%;

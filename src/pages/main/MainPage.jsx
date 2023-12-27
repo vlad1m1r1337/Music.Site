@@ -33,8 +33,7 @@ export const  MainPage = ({setAllowed}) => {
 
     if (isLoading) {
        return (
-           // <MainPageWithPlaceholders setAllowed={setAllowed}/>
-           <h1>dasfs</h1>
+           <MainPageWithPlaceholders setAllowed={setAllowed}/>
        )
     }
     return (

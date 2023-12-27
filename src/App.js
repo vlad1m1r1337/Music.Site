@@ -53,8 +53,6 @@ export default function App() {
         setCurrentTheme(themes.dark);
 
     }
-    // const {theme} = useThemeContext();
-
     return (
     <>
         <ThemeContext.Provider value={{theme: currentTheme, toggleTheme }}>

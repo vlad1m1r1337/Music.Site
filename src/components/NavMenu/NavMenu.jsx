@@ -15,9 +15,9 @@ export default function NavMenu({setAllowed}) {
 			{theme.theme === "black" ? <S.LogoImage src="/img/logo.png" alt="logo"/> : <S.LogoImage src="/img/logo_black.png" alt="logo"/>}
 		</S.NavLogo>
 		<S.NavBurger onClick={toggleVisibility}>
-		  <S.BurgerLine></S.BurgerLine>
-		  <S.BurgerLine></S.BurgerLine>
-		  <S.BurgerLine></S.BurgerLine>
+		  <S.BurgerLine $theme={theme}></S.BurgerLine>
+		  <S.BurgerLine $theme={theme}></S.BurgerLine>
+		  <S.BurgerLine $theme={theme}></S.BurgerLine>
 		</S.NavBurger>
 		{visible && (<NavMenuCatalog setAllowed={setAllowed} />)}
 	  </S.MainNav>

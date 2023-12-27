@@ -12,7 +12,7 @@ export default function MainPageWithPlaceholders({setAllowed}) {
 
     return (
         <S.Wrapper>
-            <S.Container $back={theme}>
+            <S.Container $theme={theme}>
                 <S.Main>
                     <NavMenu setAllowed={setAllowed}/>
                     <SS.MainCenterBlock>

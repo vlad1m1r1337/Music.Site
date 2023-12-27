@@ -4,6 +4,15 @@ import AudioPlayerProgressBar from "../AudioPlayerProgressBar/AudioPlayerProgres
 import AudioPlayerInfo from "../AudioPlayerInfo/AudioPlayerInfo";
 import AudioPlayerPlayButton from "../AudioPlayerPlayButton/AudioPlayerPlayButton";
 import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerBarVolumeBlock";
+import {useThemeContext} from "../../contexts/color_theme";
+import {AudioPlayerButtonPrev} from "../AudioPlayerButtonPrev/AudioPlayerButtonPrev";
+import {AudioPlayerButtonPrevWhite} from "../AudioPlayerButtonPrevWhite/AudioPlayerButtonPrevWhite";
+import {AudioPlayerPlayButtonWhite} from "../AudioPlayerPlayButtonWhite/AudioPlayerPlayButtonWhite";
+import {AudioPlayerNextBlack} from "../AudioPlayerNextBlack/AudioPlayerNextBlack";
+import {AudioPlayerNextWhite} from "../AudioPlayerNextWhite/AudioPlayerNextWhite";
+import {AudioPlayerButtonRepeatBlack} from "../AudioPlayerButtonRepeatBlack/AudioPlayerButtonRepeatBlack";
+import {AudioPlayerButtonRepeatWhite} from "../AudioPlayerButtonRepeatWhite/AudioPlayerButtonRepeatWhite";
+
 
 export default function AudioPlayer({tracks}) {
 	const audioRef = useRef(null);
@@ -28,7 +37,7 @@ export default function AudioPlayer({tracks}) {
 	const [repeat, setRepeat] = useState(true);
 	function cycleExec() {
 		setRepeat(!repeat);
-		repeat ? audioRef.current.loop=true: audioRef.current.loop=false;
+		repeat ? audioRef.current.loop=true : audioRef.current.loop=false;
 	}
 
 	const [volume, setVolume] = useState(50);
@@ -54,10 +63,13 @@ export default function AudioPlayer({tracks}) {
 			setLoadMetaData(true);
 		};
 	}, []);
+
+	const {theme} = useThemeContext();
+	console.log(repeat);
 	return (
 		<>
-			<SAudio.Bar>
-				<audio id="audioId" autoPlay ref={audioRef}>
+			<SAudio.Bar $theme={theme}>
+				<audio id="audioId" muted autoPlay ref={audioRef}>
 					<source src={sound} type="audio/mpeg" />
 				</audio>
 				<SAudio.Container>
@@ -72,22 +84,21 @@ export default function AudioPlayer({tracks}) {
 						<SAudio.BarPlayerBlock>
 							<SAudio.BarPlayer>
 								<SAudio.PlayerControls>
-									<SAudio.PlayerBtnPrev onClick={NotImplemented}>
-										<SAudio.PlayerBtnPrevSvg alt="prev">
-											<use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
-										</SAudio.PlayerBtnPrevSvg>
-									</SAudio.PlayerBtnPrev>
-									<AudioPlayerPlayButton audioRef={audioRef}/>
-									<SAudio.PlayerBtnNext onClick={NotImplemented}>
-										<SAudio.PlayerBtnNextSvg alt="next">
-											<use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
-										</SAudio.PlayerBtnNextSvg>
-									</SAudio.PlayerBtnNext>
-									<SAudio.PlayerBtnRepeat $repeatBool={repeat} onClick={cycleExec}>
-										<SAudio.PlayerBtnRepeatSvg $repeat={Boolean(repeat)} alt="repeat">
-											<use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
-										</SAudio.PlayerBtnRepeatSvg>
-									</SAudio.PlayerBtnRepeat>
+									{theme.theme === "black" ? (
+										<>
+											<AudioPlayerButtonPrev NotImplemented={NotImplemented}/>
+											<AudioPlayerPlayButton audioRef={audioRef}/>
+											<AudioPlayerNextBlack NotImplemented={NotImplemented}/>
+											<AudioPlayerButtonRepeatBlack repeat={repeat} cycleExec={cycleExec}/>
+										</>
+											) : (
+										<>
+											<AudioPlayerButtonPrevWhite NotImplemented={NotImplemented}/>
+											<AudioPlayerPlayButtonWhite audioRef={audioRef}/>
+											<AudioPlayerNextWhite NotImplemented={NotImplemented}/>
+											<AudioPlayerButtonRepeatWhite repeat={repeat} cycleExec={cycleExec}/>
+										</>
+											)}
 									<SAudio.PlayerBtnShuffle onClick={NotImplemented}>
 										<SAudio.PlayerBtnShuffleSvg alt="shuffle">
 											<use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>

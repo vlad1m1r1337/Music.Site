@@ -5,7 +5,7 @@ export const Bar = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(28, 28, 28, 0.5);
+  background: ${prop => prop.background};
 `
 
 export const BarContent = styled.div`
@@ -131,7 +131,7 @@ export const PlayerBtnRepeat = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-right: 24px;
-  ${props => !props.repeatBool && `
+  ${props => !props.$repeatBool && `
     &:hover svg {
       fill: transparent;
       stroke: #acacac;
@@ -155,6 +155,13 @@ export const PlayerBtnRepeatSvg = styled.svg`
 	height: 12px;
 	fill: transparent;
     stroke: ${props => (props.$repeat ? '#696969' : '#ffffff')};
+  `
+
+export const PlayerBtnRepeatSvgWhite = styled.svg`
+	width: 18px;
+	height: 12px;
+	fill: transparent;
+    stroke: ${props => (props.$repeat ? '#B1B1B1' : '#000000`')};
   `
 
 export const PlayerBtnShuffle = styled.div`
