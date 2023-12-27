@@ -180,17 +180,17 @@ export const PlayerBtnShuffle = styled.div`
 	align-items: center;
 	&:hover svg {
 	fill: transparent;
-	stroke: #acacac;
+	stroke: ${prop => prop.$theme.theme === "black" ? "#acacac" : "#707070"};
 	cursor: pointer;
 	}
 	&:active svg {
 	fill: transparent;
-	stroke: #ffffff;
+	stroke: ${prop => prop.$theme.theme === "black" ? "#ffffff" : "#000000"};
 	cursor: pointer;
 	}
 	&:active {
 	fill: #696969;
-	stroke: #ffffff;
+	stroke: ${prop => prop.$theme.theme === "black" ? "#ffffff" : "#000000"};
 	cursor: pointer;
 	}
 `
@@ -199,7 +199,7 @@ export const PlayerBtnShuffleSvg = styled.svg`
   width: 19px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke: ${prop => prop.$theme.theme === "black" ? "#696969" : "#B1B1B1"};
 `
 
 export const PlayerTrackPlay = styled.div`

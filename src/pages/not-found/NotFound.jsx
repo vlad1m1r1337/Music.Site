@@ -1,6 +1,6 @@
 import * as S from "../../App.styles";
 import {MainCenterBlock} from "../../components/TrackList/TrackList.styles";
-import {SidebarPersonal, SidebarPersonalName, SideBarIcon, MainSidebar} from "../../components/SideBar/SideBar.styles"
+import {SidebarPersonal, MainSidebar} from "../../components/SideBar/SideBar.styles"
 import NavMenu from "../../components/NavMenu/NavMenu";
 import SearchCenter from "../../components/SearchCenter/SearchCenter";
 import {useNavigate} from "react-router-dom";

@@ -10,7 +10,7 @@ export default function AudioPlayerProgressBar({audioRef, dur, currentTime, setC
 
     useEffect(() => {
         setCurrentTime(audioRef.currentTime);
-    }, [audioRef]);
+    }, [audioRef,setCurrentTime]);
 
     const handleTimeUpdate = () => {
         setCurrentTime(audioRef.current.currentTime);
@@ -26,7 +26,7 @@ export default function AudioPlayerProgressBar({audioRef, dur, currentTime, setC
                 audio.removeEventListener('timeupdate', handleTimeUpdate);
             };
         }
-    }, []);
+    }, );
 
     const {theme} = useThemeContext();
 

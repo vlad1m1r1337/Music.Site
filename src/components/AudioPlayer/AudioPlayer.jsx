@@ -12,6 +12,7 @@ import {AudioPlayerNextBlack} from "../AudioPlayerNextBlack/AudioPlayerNextBlack
 import {AudioPlayerNextWhite} from "../AudioPlayerNextWhite/AudioPlayerNextWhite";
 import {AudioPlayerButtonRepeatBlack} from "../AudioPlayerButtonRepeatBlack/AudioPlayerButtonRepeatBlack";
 import {AudioPlayerButtonRepeatWhite} from "../AudioPlayerButtonRepeatWhite/AudioPlayerButtonRepeatWhite";
+import {AudioPlayerBtnShuffle} from "../AudioPlayerBtnShuffle/AudioPlayerBtnShuffle";
 
 
 export default function AudioPlayer({tracks}) {
@@ -65,7 +66,6 @@ export default function AudioPlayer({tracks}) {
 	}, []);
 
 	const {theme} = useThemeContext();
-	console.log(repeat);
 	return (
 		<>
 			<SAudio.Bar $theme={theme}>
@@ -90,6 +90,8 @@ export default function AudioPlayer({tracks}) {
 											<AudioPlayerPlayButton audioRef={audioRef}/>
 											<AudioPlayerNextBlack NotImplemented={NotImplemented}/>
 											<AudioPlayerButtonRepeatBlack repeat={repeat} cycleExec={cycleExec}/>
+											<AudioPlayerBtnShuffle NotImplemented={NotImplemented} $theme={theme}/>
+
 										</>
 											) : (
 										<>
@@ -97,13 +99,9 @@ export default function AudioPlayer({tracks}) {
 											<AudioPlayerPlayButtonWhite audioRef={audioRef}/>
 											<AudioPlayerNextWhite NotImplemented={NotImplemented}/>
 											<AudioPlayerButtonRepeatWhite repeat={repeat} cycleExec={cycleExec}/>
+											<AudioPlayerBtnShuffle NotImplemented={NotImplemented} $theme={theme}/>
 										</>
 											)}
-									<SAudio.PlayerBtnShuffle onClick={NotImplemented}>
-										<SAudio.PlayerBtnShuffleSvg alt="shuffle">
-											<use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
-										</SAudio.PlayerBtnShuffleSvg>
-									</SAudio.PlayerBtnShuffle>
 								</SAudio.PlayerControls>
 								<SAudio.PlayerTrackPlay>
 									<SAudio.TrackPlayContain>
