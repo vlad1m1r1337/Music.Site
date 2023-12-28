@@ -1,21 +1,24 @@
 import * as S from "../../App.styles";
 import {MainCenterBlock} from "../../components/TrackList/TrackList.styles";
-import {SidebarPersonal, SidebarPersonalName, SideBarIcon, MainSidebar} from "../../components/SideBar/SideBar.styles"
+import {SidebarPersonal, MainSidebar} from "../../components/SideBar/SideBar.styles"
 import NavMenu from "../../components/NavMenu/NavMenu";
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import SearchCenter from "../../components/SearchCenter/SearchCenter";
 import {useNavigate} from "react-router-dom";
 import * as NFS from "./NotFound.styles";
+import {useThemeContext} from "../../contexts/color_theme";
+import {SideBarIconBlack} from "../../components/SideBarIconBlack/SideBarIconBlack";
+import {SideBarIconWhite} from "../../components/SideBarIconWhite/SideBarIconWhite";
 
-export const  NotFound = () => {
+export const  NotFound = ({setAllowed}) => {
     const navigate = useNavigate();
     const handleButtonClick = () => {
         navigate('/');
     };
+    const {theme} = useThemeContext();
     return (
         <>
             <S.Wrapper>
-                <S.Container>
+                <S.Container $theme={theme}>
                     <S.Main>
                         <NavMenu/>
                         <MainCenterBlock>
@@ -23,12 +26,7 @@ export const  NotFound = () => {
                         </MainCenterBlock>
                         <MainSidebar>
                             <SidebarPersonal>
-                                <SidebarPersonalName>Sergey.Ivanov</SidebarPersonalName>
-                                <SideBarIcon>
-                                    <svg alt="logout">
-                                        <use xlinkHref="img/icon/sprite.svg#logout"></use>
-                                    </svg>
-                                </SideBarIcon>
+                                {theme.theme === "black" ? <SideBarIconBlack setAllowed={setAllowed}/> : <SideBarIconWhite setAllowed={setAllowed}/>}
                             </SidebarPersonal>
                         </MainSidebar>
                     </S.Main>

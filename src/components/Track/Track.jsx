@@ -1,6 +1,7 @@
 import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
-import TrackPlaceholder from "../TrackPlaceholder/TrackPlaceholder";
+import {useThemeContext} from "../../contexts/color_theme";
+
 export default function Track({setId, objId, id, track, track_add, executor, album, time}) {
 	const params = useParams();
 	let idCacl;
@@ -16,22 +17,23 @@ export default function Track({setId, objId, id, track, track_add, executor, alb
 	else {
 		idCacl = 8
 	}
+	const {theme} = useThemeContext();
 	return (
 		<S.PlayListItem>
 				<S.PlaylistTrack>
 					<S.TrackTitle>
-							<S.TrackTitleImage>
+							<S.TrackTitleImage $theme={theme}>
 									<S.TrackTitleSvg alt="music">
 										<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
 									</S.TrackTitleSvg>
 							</S.TrackTitleImage>
-							<S.TrackTitleLink onClick={() => setId(objId = id - idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
+							<S.TrackTitleLink $theme={theme} onClick={() => setId(objId = id - idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
 					</S.TrackTitle>
 					<S.TrackAuthor>
-						<S.TrackAuthorLink href="http://">{executor}</S.TrackAuthorLink>
+						<S.TrackAuthorLink $theme={theme}>{executor}</S.TrackAuthorLink>
 					</S.TrackAuthor>
 					<S.TrackAlbum>
-						<S.TrackAlbumLink href="http://">{album}</S.TrackAlbumLink>
+						<S.TrackAlbumLink $theme={theme}>{album}</S.TrackAlbumLink>
 					</S.TrackAlbum>
 					<S.TrackTimeSvg alt="time">
 						<use xlinkHref="img/icon/sprite.svg#icon-like"></use>

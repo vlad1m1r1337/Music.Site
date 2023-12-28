@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const ErrorNumber = styled.div`
-  position: relative;
+  position: fixed;
+  top:300px;
+  left: 40%;
+  right: 40%;
   margin-top: 285px;
   display: flex;
   flex-direction: column;

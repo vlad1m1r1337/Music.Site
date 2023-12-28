@@ -1,6 +1,7 @@
 import {AppRoutes} from "./routes";
-import React from "react";
+import React, {useState} from "react";
 import {createGlobalStyle} from "styled-components";
+import {themes, ThemeContext} from "./contexts/color_theme";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -17,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     font-family: "StratosSkyeng", sans-serif;
-    color: #ffffff;
+    color: ${prop => prop.$theme.font};
   }
   * {
     margin: 0;
@@ -42,10 +43,22 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export default function App() {
-  return (
+    const [currentTheme, setCurrentTheme] = useState(themes.dark);
+
+    const toggleTheme = () => {
+        if (currentTheme === themes.dark) {
+            setCurrentTheme(themes.light);
+            return;
+        }
+        setCurrentTheme(themes.dark);
+
+    }
+    return (
     <>
-        <GlobalStyle/>
-        <AppRoutes/>
+        <ThemeContext.Provider value={{theme: currentTheme, toggleTheme }}>
+            <GlobalStyle $theme={currentTheme}/>
+            <AppRoutes/>
+        </ThemeContext.Provider>
     </>
-  );
+    );
 };

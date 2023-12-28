@@ -6,6 +6,8 @@ import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
+import { useThemeContext } from "../../contexts/color_theme";
+
 export const  MainPage = ({setAllowed}) => {
     const [id, setId] = useState(-1);
 
@@ -27,6 +29,7 @@ export const  MainPage = ({setAllowed}) => {
         fetchData()
             .then(() => setIsLoading(false))
     }, []);
+    const {theme} = useThemeContext();
 
     if (isLoading) {
        return (
@@ -36,7 +39,7 @@ export const  MainPage = ({setAllowed}) => {
     return (
         <>
                 <S.Wrapper>
-                    <S.Container>
+                    <S.Container $theme={theme}>
                         <S.Main>
                             <NavMenu setAllowed={setAllowed}/>
                             {tracks && <TrackList tracks={tracks} setId={setId} id={id}/>}

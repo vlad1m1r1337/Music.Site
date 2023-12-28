@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MainNav = styled.nav`
 	width: 244px;
-	background-color: #181818;
+	background-color: ${prop => prop.$theme.left_side_bar};
 	padding: 20px 0 20px 36px;
 `
 
@@ -40,5 +40,5 @@ export const BurgerLine = styled.span`
 	display: inline-block;
 	width: 100%;
 	height: 1px;
-	background-color: #d3d3d3;
+	background-color: ${prop => prop.$theme.font};
 `

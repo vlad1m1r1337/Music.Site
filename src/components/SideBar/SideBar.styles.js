@@ -40,6 +40,14 @@ export const SideBarIcon = styled.div`
 	cursor: pointer;
 `
 
+export const SideBarIconWhite = styled.div`
+  width: 43px;
+  height: 43px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+`
+
 export const SideBarBlock = styled.div`
 	height: 100%;
 	padding: 240px 0 0 0;

@@ -2,11 +2,11 @@ import * as S from "../../App.styles";
 import NavMenu from "../NavMenu/NavMenu";
 import * as SS from "../TrackList/TrackList.styles";
 import SearchCenter from "../SearchCenter/SearchCenter";
-import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
 import styled from "styled-components";
 import CenterBlockContentWithPlaceholders
     from "../CenterBlockContentWithPlaceholders/CenterBlockContentWithPlaceholders";
+import {useThemeContext} from "../../contexts/color_theme";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -17,9 +17,10 @@ const StyledH = styled.h1`
   margin-bottom: 37px;
 `
 export default function SelectionPageWithPlaceholders({header, setAllowed}) {
+    const {theme} = useThemeContext();
     return (
         <S.Wrapper>
-            <S.Container>
+            <S.Container $theme={theme}>
                 <S.Main>
                     <NavMenu setAllowed={setAllowed}/>
                     <SS.MainCenterBlock>
