@@ -15,13 +15,13 @@ export const FilterButton = styled.div`
 
 export const BtnText = styled(FilterButton)`
     &: hover {
-      border-color: #d9b6ff;
-      color: #d9b6ff;
+      border-color: ${prop => prop.$theme.popup_color_hover};
+      color: ${prop => prop.$theme.popup_color_hover};
       cursor: pointer;
     }
     &: active {
-    border-color: #ad61ff;
-    color: #ad61ff;
+    border-color: ${prop => prop.$theme.popup_color_active};
+    color: ${prop => prop.$theme.popup_color_active};
     cursor: pointer;
     }
 

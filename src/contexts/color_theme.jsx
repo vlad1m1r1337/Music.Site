@@ -13,7 +13,9 @@ export const themes = {
         hover_icons: "#707070",
         active_icons: "#AD61FF",
         active_fill_icons: "#AD61FF",
-        volume_icon: "#D9D9D9"
+        volume_icon: "#D9D9D9",
+        popup_color_hover: "#580EA2",
+        popup_color_active: "#AD61FF",
     },
     dark: {
         theme:"black",
@@ -27,7 +29,9 @@ export const themes = {
         hover_icons: "#ACACAC",
         active_icons: "#ffffff",
         active_fill_icons: "#696969",
-        volume_icon: "#FFFFFF"
+        volume_icon: "#FFFFFF",
+        popup_color_hover: "#d9b6ff",
+        popup_color_active: "#ad61ff",
     }
 }
 

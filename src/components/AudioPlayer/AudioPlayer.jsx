@@ -69,7 +69,7 @@ export default function AudioPlayer({tracks}) {
 	return (
 		<>
 			<SAudio.Bar $theme={theme}>
-				<audio id="audioId" muted autoPlay ref={audioRef}>
+				<audio id="audioId" autoPlay ref={audioRef}>
 					<source src={sound} type="audio/mpeg" />
 				</audio>
 				<SAudio.Container>
