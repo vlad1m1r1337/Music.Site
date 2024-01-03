@@ -16,6 +16,7 @@ export const themes = {
         volume_icon: "#D9D9D9",
         popup_color_hover: "#580EA2",
         popup_color_active: "#AD61FF",
+        popup_scroll: "#181818",
     },
     dark: {
         theme:"black",
@@ -32,6 +33,7 @@ export const themes = {
         volume_icon: "#FFFFFF",
         popup_color_hover: "#d9b6ff",
         popup_color_active: "#ad61ff",
+        popup_scroll: "#FFFFFF",
     }
 }
 

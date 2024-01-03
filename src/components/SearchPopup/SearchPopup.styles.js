@@ -24,16 +24,15 @@ export const BtnText = styled(FilterButton)`
     color: ${prop => prop.$theme.popup_color_active};
     cursor: pointer;
     }
-
 `
 
 export const SearchPopupMenu = styled.nav`
   margin: 50px 0 0 0;
-  background-color: #313131;
-  border: 1px solid #313131;
+  background-color: ${prop => prop.$theme.background2};
+  border: 1px solid ${prop => prop.$theme.background2};
   border-radius: 12px;
   transition: 0.3s;
-  color: #ffffff;
+  color: ${prop => prop.$theme.font};
   opacity: 0;
   visibility: hidden;
   position: absolute;
@@ -49,7 +48,7 @@ export const PopMenuFind = styled.ul`
   height: ${props => (props.$scroll ? '133px' : '')};
   
   &::-webkit-scrollbar-thumb {
-  background-color: #f1f1f1;
+  background-color: ${props => props.$theme.popup_scroll};
   border-radius: 6px;
   margin-right: 5px;
   }

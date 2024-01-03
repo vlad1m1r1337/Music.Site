@@ -7,10 +7,9 @@ export default function SearchPopup({ name, arr }) {
   const [isOpen, setOpen] = useState(false);
   const menuRef = useRef(null);
   function waitForDelayAndRun() {
-    setTimeout(() => {
       if (isOpen) setTimeout(() => setOpen(false), 50);
-    }, 50);
   }
+
   useClickOutside(menuRef, () => {
     waitForDelayAndRun();
   });
@@ -23,8 +22,8 @@ export default function SearchPopup({ name, arr }) {
         <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>
           {name}
         </S.BtnText>
-        <S.SearchPopupMenu $isOpen={isOpen} ref={menuRef}>
-          <S.PopMenuFind $scroll={scroll}>
+        <S.SearchPopupMenu $theme={theme} $isOpen={isOpen} ref={menuRef}>
+          <S.PopMenuFind $theme={theme} $scroll={scroll}>
             {arr.map((item, index) => (
               <S.MenuItem key={index}>{item}</S.MenuItem>
             ))}
