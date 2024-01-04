@@ -2,20 +2,21 @@ import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 
-export default function Track({setId, objId, id, track, track_add, executor, album, time}) {
+export default function Track({setId, id, track, track_add, executor, album, time}) {
 	const params = useParams();
 	let idCacl;
-	if (params.id === '1') {
-		idCacl = 8;
-	}
-	else if (params.id === '2') {
-		idCacl = 18;
-	}
-	else if (params.id === '3') {
-		idCacl = 28;
-	}
-	else {
-		idCacl = 8
+	switch (params.id) {
+		case "1":
+			idCacl = 8;
+			break;
+		case "2":
+			idCacl = 18;
+			break;
+		case "3":
+			idCacl = 28;
+			break;
+		default:
+			idCacl = 8;
 	}
 	const {theme} = useThemeContext();
 	return (
@@ -27,7 +28,7 @@ export default function Track({setId, objId, id, track, track_add, executor, alb
 										<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
 									</S.TrackTitleSvg>
 							</S.TrackTitleImage>
-							<S.TrackTitleLink $theme={theme} onClick={() => setId(objId = id - idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
+							<S.TrackTitleLink $theme={theme} onClick={() => setId(id - idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
 					</S.TrackTitle>
 					<S.TrackAuthor>
 						<S.TrackAuthorLink $theme={theme}>{executor}</S.TrackAuthorLink>

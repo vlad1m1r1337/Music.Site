@@ -1,7 +1,7 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
 
-export default function CenterBlockContent({tracks, setId, objId, setIsLoading}) {
+export default function CenterBlockContent({tracks, setId}) {
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>
@@ -26,7 +26,7 @@ export default function CenterBlockContent({tracks, setId, objId, setIsLoading})
 						const seconds = dur_in_sec % 60 < 10 ? "0" + dur_in_sec % 60 : dur_in_sec % 60;
 						const time = minutes + ":" + seconds;
 						return (
-								<Track setId={setId} objId={objId} key={id} id={id} track={name} executor={author} album={album} time={time}/>
+								<Track setId={setId} key={id} id={id} track={name} executor={author} album={album} time={time}/>
 							)
 					})
 				}

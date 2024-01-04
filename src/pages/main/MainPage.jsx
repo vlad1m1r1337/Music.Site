@@ -42,7 +42,7 @@ export const  MainPage = ({setAllowed}) => {
                     <S.Container $theme={theme}>
                         <S.Main>
                             <NavMenu setAllowed={setAllowed}/>
-                            {tracks && <TrackList tracks={tracks} setId={setId} id={id}/>}
+                            {tracks && <TrackList tracks={tracks} setId={setId}/>}
                             <SideBar setAllowed={setAllowed}/>
                         </S.Main>
                         {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}

@@ -2,17 +2,9 @@ import {useEffect, useRef, useState} from 'react';
 import * as SAudio from './AudioPlayer.styles'
 import AudioPlayerProgressBar from "../AudioPlayerProgressBar/AudioPlayerProgressBar";
 import AudioPlayerInfo from "../AudioPlayerInfo/AudioPlayerInfo";
-import AudioPlayerPlayButton from "../AudioPlayerPlayButton/AudioPlayerPlayButton";
 import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerBarVolumeBlock";
 import {useThemeContext} from "../../contexts/color_theme";
-import {AudioPlayerButtonPrev} from "../AudioPlayerButtonPrev/AudioPlayerButtonPrev";
-import {AudioPlayerButtonPrevWhite} from "../AudioPlayerButtonPrevWhite/AudioPlayerButtonPrevWhite";
-import {AudioPlayerPlayButtonWhite} from "../AudioPlayerPlayButtonWhite/AudioPlayerPlayButtonWhite";
-import {AudioPlayerNextBlack} from "../AudioPlayerNextBlack/AudioPlayerNextBlack";
-import {AudioPlayerNextWhite} from "../AudioPlayerNextWhite/AudioPlayerNextWhite";
-import {AudioPlayerButtonRepeatBlack} from "../AudioPlayerButtonRepeatBlack/AudioPlayerButtonRepeatBlack";
-import {AudioPlayerButtonRepeatWhite} from "../AudioPlayerButtonRepeatWhite/AudioPlayerButtonRepeatWhite";
-import {AudioPlayerBtnShuffle} from "../AudioPlayerBtnShuffle/AudioPlayerBtnShuffle";
+import {AudioPlayerActionButtons} from "../AudioPlayerActionButtons/AudioPlayerActionButtons";
 
 
 export default function AudioPlayer({tracks}) {
@@ -53,10 +45,6 @@ export default function AudioPlayer({tracks}) {
 
 	let [currentTime, setCurrentTime] = useState(0);
 
-	function NotImplemented() {
-		alert("not implemented");
-	}
-
 	const [loadMetaData, setLoadMetaData] = useState(false);
 
 	useEffect(() => {
@@ -83,26 +71,7 @@ export default function AudioPlayer({tracks}) {
 						></AudioPlayerProgressBar>}
 						<SAudio.BarPlayerBlock>
 							<SAudio.BarPlayer>
-								<SAudio.PlayerControls>
-									{theme.theme === "black" ? (
-										<>
-											<AudioPlayerButtonPrev NotImplemented={NotImplemented}/>
-											<AudioPlayerPlayButton audioRef={audioRef}/>
-											<AudioPlayerNextBlack NotImplemented={NotImplemented}/>
-											<AudioPlayerButtonRepeatBlack repeat={repeat} cycleExec={cycleExec}/>
-											<AudioPlayerBtnShuffle NotImplemented={NotImplemented} $theme={theme}/>
-
-										</>
-											) : (
-										<>
-											<AudioPlayerButtonPrevWhite NotImplemented={NotImplemented}/>
-											<AudioPlayerPlayButtonWhite audioRef={audioRef}/>
-											<AudioPlayerNextWhite NotImplemented={NotImplemented}/>
-											<AudioPlayerButtonRepeatWhite repeat={repeat} cycleExec={cycleExec}/>
-											<AudioPlayerBtnShuffle NotImplemented={NotImplemented} $theme={theme}/>
-										</>
-											)}
-								</SAudio.PlayerControls>
+									<AudioPlayerActionButtons audioRef={audioRef} repeat={repeat} cycleExec={cycleExec}/>
 								<SAudio.PlayerTrackPlay>
 									<SAudio.TrackPlayContain>
 										<AudioPlayerInfo name={name} author={author}/>

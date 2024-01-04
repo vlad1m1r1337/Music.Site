@@ -2,6 +2,7 @@ import {AppRoutes} from "./routes";
 import React, {useState} from "react";
 import {createGlobalStyle} from "styled-components";
 import {themes, ThemeContext} from "./contexts/color_theme";
+import {useDispatch, useSelector} from "react-redux";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -51,8 +52,12 @@ export default function App() {
             return;
         }
         setCurrentTheme(themes.dark);
-
     }
+
+    const dispatch = useDispatch();
+    const trackState = useSelector(state => state.trackIdState);
+
+    console.log(trackState);
     return (
     <>
         <ThemeContext.Provider value={{theme: currentTheme, toggleTheme }}>

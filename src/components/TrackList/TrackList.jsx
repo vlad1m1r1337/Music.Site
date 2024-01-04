@@ -3,12 +3,12 @@ import RangeTracks from "../RangeTracks/RangeTracks.jsx";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent.jsx";
 import * as SS from "./TrackList.styles";
 
-export default function TrackList({setId, id, tracks}) {
+export default function TrackList({setId, tracks}) {
 	return (
 		<SS.MainCenterBlock>
 			<SearchCenter/>
 			<RangeTracks />
-			<CenterBlockContent tracks={tracks} setId={setId} objId={id}/>
+			<CenterBlockContent tracks={tracks} setId={setId}/>
 	  	</SS.MainCenterBlock>
 	);
   }
