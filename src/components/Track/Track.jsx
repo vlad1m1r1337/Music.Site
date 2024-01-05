@@ -1,8 +1,10 @@
 import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
+import {useDispatch} from "react-redux";
+import {chose} from "../../store";
 
-export default function Track({setId, objId, id, track, track_add, executor, album, time}) {
+export default function Track({id, track, track_add, executor, album, time}) {
 	const params = useParams();
 	let idCacl;
 	if (params.id === '1') {
@@ -18,6 +20,12 @@ export default function Track({setId, objId, id, track, track_add, executor, alb
 		idCacl = 8
 	}
 	const {theme} = useThemeContext();
+	const dispatch = useDispatch();
+
+	const handleClick = (id, idCalc) => {
+		dispatch(chose({ id: id - idCalc }));
+		console.log('Dispatch complete');
+	};
 	return (
 		<S.PlayListItem>
 				<S.PlaylistTrack>
@@ -27,7 +35,7 @@ export default function Track({setId, objId, id, track, track_add, executor, alb
 										<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
 									</S.TrackTitleSvg>
 							</S.TrackTitleImage>
-							<S.TrackTitleLink $theme={theme} onClick={() => setId(objId = id - idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
+							<S.TrackTitleLink $theme={theme} onClick={() => handleClick(id, idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
 					</S.TrackTitle>
 					<S.TrackAuthor>
 						<S.TrackAuthorLink $theme={theme}>{executor}</S.TrackAuthorLink>

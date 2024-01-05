@@ -7,10 +7,9 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
+import {useSelector} from "react-redux";
 
 export const  MainPage = ({setAllowed}) => {
-    const [id, setId] = useState(-1);
-
     const [tracks, setTracks] = useState(null);
 
     const apiURL = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
@@ -31,6 +30,9 @@ export const  MainPage = ({setAllowed}) => {
     }, []);
     const {theme} = useThemeContext();
 
+    const id = useSelector(state => state.value);
+    console.log(id)
+
     if (isLoading) {
        return (
            <MainPageWithPlaceholders setAllowed={setAllowed}/>
@@ -42,7 +44,7 @@ export const  MainPage = ({setAllowed}) => {
                     <S.Container $theme={theme}>
                         <S.Main>
                             <NavMenu setAllowed={setAllowed}/>
-                            {tracks && <TrackList tracks={tracks} setId={setId} id={id}/>}
+                            {tracks && <TrackList tracks={tracks}/>}
                             <SideBar setAllowed={setAllowed}/>
                         </S.Main>
                         {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
