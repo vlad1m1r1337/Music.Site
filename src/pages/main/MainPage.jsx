@@ -8,8 +8,15 @@ import axios from "axios";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
+import {set_def} from "../../store";
+import {useDispatch} from "react-redux";
 
 export const  MainPage = ({setAllowed}) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(set_def());
+    }, [dispatch]);
     const [tracks, setTracks] = useState(null);
 
     const apiURL = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
@@ -31,7 +38,7 @@ export const  MainPage = ({setAllowed}) => {
     const {theme} = useThemeContext();
 
     const id = useSelector(state => state.value);
-    console.log(id)
+    console.log("start main");
 
     if (isLoading) {
        return (

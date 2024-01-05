@@ -225,7 +225,7 @@ export const TrackPlayContain = styled.div`
 export const TrackPlayImage = styled.div`
   width: 51px;
   height: 51px;
-  background-color: ${prop => prop.$theme.left_side_bar};
+  background-color: ${prop => prop.$theme.background2};
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

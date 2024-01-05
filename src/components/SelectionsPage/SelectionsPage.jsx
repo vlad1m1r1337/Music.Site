@@ -11,6 +11,9 @@ import axios from "axios";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
+import {useSelector} from "react-redux";
+import {set_def} from "../../store";
+import {useDispatch} from "react-redux";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -22,6 +25,15 @@ const StyledH = styled.h1`
 `
 
 export const  SelectionsPage = ({header, setAllowed}) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        // Dispatch set_def action with an initial value of -1
+        dispatch(set_def());
+    }, [dispatch]);
+
+    const {theme} = useThemeContext();
+
     let Header;
     const params = useParams();
     if  (header === undefined) {
@@ -36,8 +48,6 @@ export const  SelectionsPage = ({header, setAllowed}) => {
         }
         header = Header;
     }
-
-    const [id, setId] = useState(-1);
 
     const [tracks, setTracks] = useState(null);
 
@@ -63,7 +73,10 @@ export const  SelectionsPage = ({header, setAllowed}) => {
                 setIsLoading(false)
             })
     }, [params.id])
-    const {theme} = useThemeContext();
+
+    const id = useSelector(state => state.value);
+    console.log("start select");
+    console.log(id)
 
     if  (isLoading) {
         return (
@@ -78,7 +91,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
                         <SS.MainCenterBlock>
                             <SearchCenter/>
                             <StyledH>{header}</StyledH>
-                            {tracks && <CenterBlockContent tracks={tracks} setId={setId} objId={id}/>}
+                            {tracks && <CenterBlockContent tracks={tracks}/>}
                         </SS.MainCenterBlock>
                         <SideBarAuth setAllowed={setAllowed}/>
                     </S.Main>

@@ -24,7 +24,6 @@ export default function Track({id, track, track_add, executor, album, time}) {
 
 	const handleClick = (id, idCalc) => {
 		dispatch(chose({ id: id - idCalc }));
-		console.log('Dispatch complete');
 	};
 	return (
 		<S.PlayListItem>

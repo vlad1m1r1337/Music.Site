@@ -14,6 +14,9 @@ export const idSlice = createSlice({
         },
         chose: (state, action) => {
             state.value = action.payload.id
+        },
+        set_def: state => {
+            state.value = -1;
         }
     }
 })
@@ -22,4 +25,4 @@ export const store = configureStore({
     reducer: idSlice.reducer
 })
 
-export const { increment, decrement, chose } = idSlice.actions;
+export const { increment, decrement, chose , set_def} = idSlice.actions;
