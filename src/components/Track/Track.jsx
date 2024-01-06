@@ -6,6 +6,12 @@ import {chose} from "../../store";
 
 export default function Track({id, track, track_add, executor, album, time}) {
 	const params = useParams();
+	const {theme} = useThemeContext();
+	const dispatch = useDispatch();
+
+	const cur_id = useSelector(state => state.id);
+	const isPlaying = useSelector(state => state.is_playing);
+
 	let idCacl;
 	if (params.id === '1') {
 		idCacl = 8;
@@ -19,15 +25,12 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	else {
 		idCacl = 8
 	}
-	const {theme} = useThemeContext();
-	const dispatch = useDispatch();
 
 	const handleClick = (id, idCalc) => {
 		dispatch(chose({ id: id - idCalc }));
 	};
 
-	const cur_id = useSelector(state => state.value);
-	console.log(cur_id)
+	console.log(isPlaying);
 	return (
 		<S.PlayListItem>
 				<S.PlaylistTrack>
@@ -36,7 +39,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 							<S.TrackTitleSvg alt="music">
 								<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
 							</S.TrackTitleSvg>
-							{id - idCacl === cur_id && <S.BlueVioletDot src="/img/blueviolet_dot.svg" alt="blueviolet_dot"/>}
+							{id - idCacl === cur_id && <S.BlueVioletDot $isPlaying={isPlaying} src="/img/blueviolet_dot.svg" alt="blueviolet_dot"/>}
 						</S.TrackTitleImage>
 						<S.TrackTitleLink $theme={theme} onClick={() => handleClick(id, idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
 					</S.TrackTitle>

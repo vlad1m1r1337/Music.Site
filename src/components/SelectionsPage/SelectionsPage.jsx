@@ -34,7 +34,8 @@ export const  SelectionsPage = ({header, setAllowed}) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const id = useSelector(state => state.value);
+    const id = useSelector(state => state.id);
+
 
     useEffect(() => {
         dispatch(set_def());
@@ -75,6 +76,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
           <SelectionPageWithPlaceholders header={header} setAllowed={setAllowed}/>
         )
     }
+    console.log("id", id);
     return (
             <S.Wrapper>
                 <S.Container $theme={theme}>

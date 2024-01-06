@@ -8,7 +8,17 @@ import {AudioPlayerActiveButtons} from "../AudioPlayerActiveButtons/AudioPlayerA
 
 
 export default function AudioPlayer({tracks}) {
+
 	const audioRef = useRef(null);
+
+	const {theme} = useThemeContext();
+
+	const [repeat, setRepeat] = useState(true);
+
+	const [loadMetaData, setLoadMetaData] = useState(false);
+
+	let [currentTime, setCurrentTime] = useState(0);
+
 	let name;
 	let author;
 	let sound;
@@ -26,8 +36,6 @@ export default function AudioPlayer({tracks}) {
 		name = "name";
 		author = "author";
 	}
-
-	const [repeat, setRepeat] = useState(true);
 	function cycleExec() {
 		setRepeat(!repeat);
 		repeat ? audioRef.current.loop=true : audioRef.current.loop=false;
@@ -43,13 +51,9 @@ export default function AudioPlayer({tracks}) {
 		return Math.floor(parseInt(dur / 60)) + ':' + seconds;
 	}
 
-	let [currentTime, setCurrentTime] = useState(0);
-
 	function NotImplemented() {
 		alert("not implemented");
 	}
-
-	const [loadMetaData, setLoadMetaData] = useState(false);
 
 	useEffect(() => {
 		audioRef.current.onloadedmetadata = () => {
@@ -57,7 +61,7 @@ export default function AudioPlayer({tracks}) {
 		};
 	}, []);
 
-	const {theme} = useThemeContext();
+
 	return (
 		<>
 			<SAudio.Bar $theme={theme}>

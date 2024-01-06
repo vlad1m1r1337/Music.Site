@@ -21,7 +21,7 @@ export const  MainPage = ({setAllowed}) => {
 
     const {theme} = useThemeContext();
 
-    const id = useSelector(state => state.value);
+    const id = useSelector(state => state.id);
 
     useEffect(() => {
         dispatch(set_def());
