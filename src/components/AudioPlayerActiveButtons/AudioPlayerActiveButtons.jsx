@@ -34,6 +34,7 @@ export const AudioPlayerActiveButtons = ({audioRef, NotImplemented, repeat, cycl
     const prevTrack = () => {
         dispatch(decrement())
     }
+
     return (
         <PlayerControls>
             {theme.theme === "black" ? (
