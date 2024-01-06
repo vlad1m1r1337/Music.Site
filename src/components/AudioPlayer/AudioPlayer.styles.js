@@ -54,17 +54,6 @@ export const BarPlayer = styled.div`
   justify-content: flex-start;
 `
 
-export const PlayerControls = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  padding: 0 27px 0 31px;
-`
-
 export const PlayerBtnPrev = styled.div`
   padding: 5px;
   display: -webkit-box;

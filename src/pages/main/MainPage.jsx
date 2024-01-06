@@ -8,43 +8,42 @@ import axios from "axios";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_def} from "../../store";
+import {set_def, set_amount_id_tracks} from "../../store";
 import {useDispatch} from "react-redux";
+import {fetchMainData} from "../../fetchData/fetchMainData";
 
 export const  MainPage = ({setAllowed}) => {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(set_def());
-    }, [dispatch]);
     const [tracks, setTracks] = useState(null);
-
-    const apiURL = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
 
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(apiURL);
-                setTracks(response.data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-        fetchData()
-            .then(() => setIsLoading(false))
+        dispatch(set_def());
+    }, [dispatch]);
+
+    const idTracksCounter = (tracks) => {
+        let id = -1;
+        tracks.forEach(tracks => id++);
+        return id;
+    }
+
+    useEffect(() => {
+        fetchMainData(setIsLoading, setTracks)
     }, []);
+
     const {theme} = useThemeContext();
 
     const id = useSelector(state => state.value);
-    console.log("start main");
 
     if (isLoading) {
        return (
            <MainPageWithPlaceholders setAllowed={setAllowed}/>
        )
     }
+    console.log(idTracksCounter(tracks));
+    console.log(tracks)
     return (
         <>
                 <S.Wrapper>

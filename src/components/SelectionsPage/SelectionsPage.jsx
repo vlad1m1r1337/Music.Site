@@ -12,8 +12,9 @@ import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_def} from "../../store";
+import {set_amount_id_tracks, set_def} from "../../store";
 import {useDispatch} from "react-redux";
+import {fetchSelectionsData} from "../../fetchData/fetchSelectionsData";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -27,16 +28,23 @@ const StyledH = styled.h1`
 export const  SelectionsPage = ({header, setAllowed}) => {
     const dispatch = useDispatch();
 
+    const {theme} = useThemeContext();
+
+    const [tracks, setTracks] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        // Dispatch set_def action with an initial value of -1
         dispatch(set_def());
     }, [dispatch]);
 
-    const {theme} = useThemeContext();
+    const idTracksCounter = (tracks) => {
+        return tracks.length - 1;
+    }
 
-    let Header;
     const params = useParams();
     if  (header === undefined) {
+        let Header;
         if (params.id === '1') {
             Header = "Плейлист дня";
         }
@@ -49,34 +57,17 @@ export const  SelectionsPage = ({header, setAllowed}) => {
         header = Header;
     }
 
-    const [tracks, setTracks] = useState(null);
-
-    const apiURL = "https://skypro-music-api.skyeng.tech/catalog/selection/";
-
-    const [isLoading, setIsLoading] = useState(true);
-
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(apiURL);
-                if (params.id) {
-                    setTracks((response.data)[params.id - 1].items);
-                } else {
-                    setTracks((response.data)[0].items);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-        fetchData()
-            .then(() => {
-                setIsLoading(false)
-            })
-    }, [params.id])
+            fetchSelectionsData(setTracks, setIsLoading, params);
+    }, [params.id]);
 
     const id = useSelector(state => state.value);
-    console.log("start select");
-    console.log(id)
+
+    useEffect(() => {
+        if (!isLoading) {
+            dispatch(set_amount_id_tracks({tracks: tracks}));
+        }
+    }, [isLoading]);
 
     if  (isLoading) {
         return (
