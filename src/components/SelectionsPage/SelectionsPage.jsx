@@ -34,6 +34,8 @@ export const  SelectionsPage = ({header, setAllowed}) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
+    const id = useSelector(state => state.value);
+
     useEffect(() => {
         dispatch(set_def());
     }, [dispatch]);
@@ -61,7 +63,6 @@ export const  SelectionsPage = ({header, setAllowed}) => {
             fetchSelectionsData(setTracks, setIsLoading, params);
     }, [params.id]);
 
-    const id = useSelector(state => state.value);
 
     useEffect(() => {
         if (!isLoading) {

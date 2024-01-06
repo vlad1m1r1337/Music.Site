@@ -19,31 +19,29 @@ export const  MainPage = ({setAllowed}) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
+    const {theme} = useThemeContext();
+
+    const id = useSelector(state => state.value);
+
     useEffect(() => {
         dispatch(set_def());
     }, [dispatch]);
-
-    const idTracksCounter = (tracks) => {
-        let id = -1;
-        tracks.forEach(tracks => id++);
-        return id;
-    }
 
     useEffect(() => {
         fetchMainData(setIsLoading, setTracks)
     }, []);
 
-    const {theme} = useThemeContext();
-
-    const id = useSelector(state => state.value);
+    useEffect(() => {
+        if (!isLoading) {
+            dispatch(set_amount_id_tracks({tracks: tracks}));
+        }
+    }, [isLoading]);
 
     if (isLoading) {
        return (
            <MainPageWithPlaceholders setAllowed={setAllowed}/>
        )
     }
-    console.log(idTracksCounter(tracks));
-    console.log(tracks)
     return (
         <>
                 <S.Wrapper>

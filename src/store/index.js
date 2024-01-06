@@ -9,8 +9,6 @@ export const idSlice = createSlice({
     reducers: {
         increment: state => {
             state.value = (state.value + 1) % state.amount_id_tracks
-            console.log(state.value)
-            console.log("amount", state.amount_id_tracks)
         },
         decrement: state => {
             state.value - 1 < 0 ? state.value = state.amount_id_tracks : state.value = (state.value - 1) % state.amount_id_tracks
