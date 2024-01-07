@@ -6,6 +6,8 @@ export const idSlice = createSlice({
         id: -1,
         amount_id_tracks: -1,
         is_playing: true,
+        shuffle_arr: ['null'],
+        shuffle_flag: 1 // флаг, показывающий к какой кнопке(вперёд, назад) относится массив shuffle_arr
     },
     reducers: {
         increment: state => {
@@ -29,11 +31,37 @@ export const idSlice = createSlice({
         set_is_playing: (state, action) => {
             state.is_playing = action.payload.bool
         },
-        shuffle_handler: state => {
-            console.log("some")
-            state.id = Math.floor(Math.random() * (state.amount_id_tracks + 1));
-            console.log(state.id);
-        }
+        set_shuffle_first: (state, action) => {
+            state.shuffle_arr.splice(0, state.shuffle_arr.length);
+            state.shuffle_arr[0] = action.payload.flag;
+
+        },
+        set_def_shuffle_arr: state => {
+            state.shuffle_arr[0] = 'null';
+            state.shuffle_flag = 1;
+        },
+        shuffle_next: state => {
+            if (state.shuffle_flag < 1) {
+                state.id = state.shuffle_arr[state.shuffle_arr.length - 2];
+                state.shuffle_arr.pop();
+            }
+            else {
+                state.id = Math.floor(Math.random() * (state.amount_id_tracks + 1));
+                state.shuffle_arr.push(state.id);
+            }
+            state.shuffle_flag++;
+        },
+        shuffle_prev: state => {
+            if (state.shuffle_flag > 1) {
+                state.id = state.shuffle_arr[state.shuffle_arr.length - 2];
+                state.shuffle_arr.pop();
+            }
+            else {
+                state.id = Math.floor(Math.random() * (state.amount_id_tracks + 1));
+                state.shuffle_arr.push(state.id);
+            }
+            state.shuffle_flag--;
+        },
     }
 })
 
@@ -41,4 +69,4 @@ export const store = configureStore({
     reducer: idSlice.reducer
 })
 
-export const {shuffle_handler, set_is_playing_def, increment, decrement, chose , set_def, set_amount_id_tracks, set_is_playing} = idSlice.actions;
+export const {set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, set_is_playing_def, increment, decrement, chose , set_def, set_amount_id_tracks, set_is_playing} = idSlice.actions;

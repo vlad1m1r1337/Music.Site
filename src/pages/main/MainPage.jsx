@@ -8,7 +8,7 @@ import axios from "axios";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_def, set_amount_id_tracks} from "../../store";
+import {set_def, set_amount_id_tracks, set_def_shuffle_arr} from "../../store";
 import {useDispatch} from "react-redux";
 import {fetchMainData} from "../../fetchData/fetchMainData";
 
@@ -34,6 +34,7 @@ export const  MainPage = ({setAllowed}) => {
     useEffect(() => {
         if (!isLoading) {
             dispatch(set_amount_id_tracks({tracks: tracks}));
+            dispatch(set_def_shuffle_arr());
         }
     }, [isLoading]);
 

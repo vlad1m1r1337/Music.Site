@@ -11,7 +11,7 @@ import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_amount_id_tracks, set_def} from "../../store";
+import {set_amount_id_tracks, set_def, set_def_shuffle_arr} from "../../store";
 import {useDispatch} from "react-redux";
 import {fetchSelectionsData} from "../../fetchData/fetchSelectionsData";
 
@@ -63,6 +63,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
     useEffect(() => {
         if (!isLoading) {
             dispatch(set_amount_id_tracks({tracks: tracks}));
+            dispatch(set_def_shuffle_arr());
         }
     }, [isLoading]);
 

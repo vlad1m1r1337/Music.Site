@@ -9,10 +9,10 @@ import {AudioPlayerNextWhite} from "../AudioPlayerNextWhite/AudioPlayerNextWhite
 import {AudioPlayerButtonRepeatWhite} from "../AudioPlayerButtonRepeatWhite/AudioPlayerButtonRepeatWhite";
 import styled from "styled-components";
 import {useThemeContext} from "../../contexts/color_theme";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {increment} from "../../store";
 import {decrement} from "../../store";
-import {shuffle_handler} from "../../store";
+import {shuffle_next, shuffle_prev, push_first_shuffle_id} from "../../store";
 import {useState} from "react";
 
 export const PlayerControls = styled.div`
@@ -35,19 +35,24 @@ export const AudioPlayerActiveButtons = ({audioRef}) => {
 
     const dispatch = useDispatch();
 
+    const firstElShuffleArr = useSelector(state => state.shuffle_arr);
     const nextTrack = () => {
+        if (firstElShuffleArr === null) {
+            dispatch(push_first_shuffle_id());
+        }
         if (shuffle) {
-            dispatch(shuffle_handler())
+            dispatch(shuffle_next())
         }
         else {
             dispatch(increment())
         }
-        // shuffle ? dispatch(shuffle_handler()) : dispatch(increment());
     }
     const prevTrack = () => {
+        if (firstElShuffleArr === null) {
+            dispatch(push_first_shuffle_id());
+        }
         if (shuffle) {
-            console.log("some_prev")
-            dispatch(shuffle_handler())
+            dispatch(shuffle_prev())
         }
         else {
             dispatch(decrement())

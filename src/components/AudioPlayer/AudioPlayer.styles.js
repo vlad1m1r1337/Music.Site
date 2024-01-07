@@ -295,7 +295,7 @@ export const BtnIcon = styled.div`
     &:active {
     .track-play__dislike-svg {
       fill: ${prop => prop.$theme.active_fill_icons};
-      stroke: black;
+      stroke: white;
       cursor: pointer;
     }
     }
