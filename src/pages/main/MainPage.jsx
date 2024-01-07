@@ -4,7 +4,6 @@ import TrackList from "../../components/TrackList/TrackList";
 import SideBar from "../../components/SideBar/SideBar";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
@@ -36,7 +35,7 @@ export const  MainPage = ({setAllowed}) => {
             dispatch(set_amount_id_tracks({tracks: tracks}));
             dispatch(set_def_shuffle_arr());
         }
-    }, [isLoading]);
+    }, [isLoading, dispatch, tracks]);
 
     if (isLoading) {
        return (

@@ -57,7 +57,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
 
     useEffect(() => {
             fetchSelectionsData(setTracks, setIsLoading, params);
-    }, [params.id]);
+    }, [params]);
 
 
     useEffect(() => {
@@ -65,7 +65,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
             dispatch(set_amount_id_tracks({tracks: tracks}));
             dispatch(set_def_shuffle_arr());
         }
-    }, [isLoading]);
+    }, [isLoading, dispatch, tracks]);
 
     if  (isLoading) {
         return (

@@ -36,9 +36,9 @@ export default function Track({id, track, track_add, executor, album, time}) {
 				<S.PlaylistTrack>
 					<S.TrackTitle>
 						<S.TrackTitleImage $theme={theme}>
-							<S.TrackTitleSvg alt="music">
+							{ id - idCacl !== cur_id && <S.TrackTitleSvg alt="music">
 								<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-							</S.TrackTitleSvg>
+							</S.TrackTitleSvg>}
 							{id - idCacl === cur_id && <S.BlueVioletDot $isPlaying={isPlaying} src="/img/blueviolet_dot.svg" alt="blueviolet_dot"/>}
 						</S.TrackTitleImage>
 						<S.TrackTitleLink $theme={theme} onClick={() => handleClick(id, idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
