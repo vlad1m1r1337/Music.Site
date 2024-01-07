@@ -156,4 +156,5 @@ export const BlueVioletDot = styled.img`
         }
     }
     animation: ${prop => prop.$isPlaying ? "pulse 1.8s ease-in-out infinite alternate" : "none"};
+    position: absolute;
 `

@@ -15,6 +15,8 @@ export default function AudioPlayer({tracks}) {
 
 	const [loadMetaData, setLoadMetaData] = useState(false);
 
+	const [volume, setVolume] = useState(50);
+
 	let [currentTime, setCurrentTime] = useState(0);
 
 	let name;
@@ -35,7 +37,6 @@ export default function AudioPlayer({tracks}) {
 		author = "author";
 	}
 
-	const [volume, setVolume] = useState(1);
 	useEffect(() => {
 		audioRef.current.volume = volume / 100;
 	}, [volume]);
