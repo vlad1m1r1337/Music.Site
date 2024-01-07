@@ -17,16 +17,20 @@ const useAudioControls = ({ audioRef }) => {
     };
 
     useEffect(() => {
+        const handleStart = () => {
+            audioRef.current.play();
+            dispatch(set_is_playing({ bool: true }));
+        };
+
         const audio = document.getElementById('audioId');
         audio.addEventListener('play', function() {
             dispatch(set_is_playing({ bool: true }));
         });
 
-        // Cleanup the event listener on component unmount
         return () => {
             audio.removeEventListener('play', handleStart);
         };
-    }, [dispatch]);
+    }, [dispatch, audioRef]);
 
     const togglePlay = isPlaying ? handleStop : handleStart;
 
