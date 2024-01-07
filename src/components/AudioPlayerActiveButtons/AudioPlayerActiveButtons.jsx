@@ -12,6 +12,8 @@ import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch} from "react-redux";
 import {increment} from "../../store";
 import {decrement} from "../../store";
+import {shuffle_handler} from "../../store";
+import {useState} from "react";
 
 export const PlayerControls = styled.div`
   display: -webkit-box;
@@ -24,35 +26,55 @@ export const PlayerControls = styled.div`
   padding: 0 27px 0 31px;
 `
 
-export const AudioPlayerActiveButtons = ({audioRef, NotImplemented, repeat, cycleExec}) => {
+export const AudioPlayerActiveButtons = ({audioRef}) => {
+    const [repeat, setRepeat] = useState(true);
 
     const {theme} = useThemeContext();
+
+    const [shuffle, setShuffle] = useState(false)
+
     const dispatch = useDispatch();
+
     const nextTrack = () => {
-        dispatch(increment())
+        if (shuffle) {
+            dispatch(shuffle_handler())
+        }
+        else {
+            dispatch(increment())
+        }
+        // shuffle ? dispatch(shuffle_handler()) : dispatch(increment());
     }
     const prevTrack = () => {
-        dispatch(decrement())
+        if (shuffle) {
+            console.log("some_prev")
+            dispatch(shuffle_handler())
+        }
+        else {
+            dispatch(decrement())
+        }
     }
-
+    function cycleExec() {
+        setRepeat(!repeat);
+        repeat ? audioRef.current.loop=true : audioRef.current.loop=false;
+    }
     return (
         <PlayerControls>
             {theme.theme === "black" ? (
                 <>
-                    <AudioPlayerButtonPrev NotImplemented={prevTrack}/>
+                    <AudioPlayerButtonPrev prevTrack={prevTrack}/>
                     <AudioPlayerPlayButton audioRef={audioRef}/>
-                    <AudioPlayerNextBlack NotImplemented={nextTrack}/>
+                    <AudioPlayerNextBlack nextTrack={nextTrack}/>
                     <AudioPlayerButtonRepeatBlack repeat={repeat} cycleExec={cycleExec}/>
-                    <AudioPlayerBtnShuffle NotImplemented={NotImplemented} $theme={theme}/>
+                    <AudioPlayerBtnShuffle $theme={theme} setShuffle={setShuffle} shuffle={shuffle}/>
 
                 </>
             ) : (
                 <>
-                    <AudioPlayerButtonPrevWhite NotImplemented={prevTrack}/>
+                    <AudioPlayerButtonPrevWhite prevTrack={prevTrack}/>
                     <AudioPlayerPlayButtonWhite audioRef={audioRef}/>
-                    <AudioPlayerNextWhite NotImplemented={nextTrack}/>
+                    <AudioPlayerNextWhite nextTrack={nextTrack}/>
                     <AudioPlayerButtonRepeatWhite repeat={repeat} cycleExec={cycleExec}/>
-                    <AudioPlayerBtnShuffle NotImplemented={NotImplemented} $theme={theme}/>
+                    <AudioPlayerBtnShuffle $theme={theme} setShuffle={setShuffle} shuffle={shuffle}/>
                 </>
             )}
         </PlayerControls>

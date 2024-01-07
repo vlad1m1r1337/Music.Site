@@ -7,7 +7,6 @@ import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
@@ -41,10 +40,6 @@ export const  SelectionsPage = ({header, setAllowed}) => {
         dispatch(set_def());
     }, [dispatch]);
 
-    const idTracksCounter = (tracks) => {
-        return tracks.length - 1;
-    }
-
     const params = useParams();
     if  (header === undefined) {
         let Header;
@@ -76,7 +71,6 @@ export const  SelectionsPage = ({header, setAllowed}) => {
           <SelectionPageWithPlaceholders header={header} setAllowed={setAllowed}/>
         )
     }
-    console.log("id", id);
     return (
             <S.Wrapper>
                 <S.Container $theme={theme}>

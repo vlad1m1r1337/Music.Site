@@ -13,8 +13,6 @@ export default function AudioPlayer({tracks}) {
 
 	const {theme} = useThemeContext();
 
-	const [repeat, setRepeat] = useState(true);
-
 	const [loadMetaData, setLoadMetaData] = useState(false);
 
 	let [currentTime, setCurrentTime] = useState(0);
@@ -36,12 +34,8 @@ export default function AudioPlayer({tracks}) {
 		name = "name";
 		author = "author";
 	}
-	function cycleExec() {
-		setRepeat(!repeat);
-		repeat ? audioRef.current.loop=true : audioRef.current.loop=false;
-	}
 
-	const [volume, setVolume] = useState(50);
+	const [volume, setVolume] = useState(1);
 	useEffect(() => {
 		audioRef.current.volume = volume / 100;
 	}, [volume]);
@@ -49,10 +43,6 @@ export default function AudioPlayer({tracks}) {
 	function toMin(dur) {
 		const seconds = (parseInt(dur % 60) < 10 ? "0" + parseInt(dur % 60) : parseInt(dur % 60));
 		return Math.floor(parseInt(dur / 60)) + ':' + seconds;
-	}
-
-	function NotImplemented() {
-		alert("not implemented");
 	}
 
 	useEffect(() => {
@@ -79,7 +69,7 @@ export default function AudioPlayer({tracks}) {
 						></AudioPlayerProgressBar>}
 						<SAudio.BarPlayerBlock>
 							<SAudio.BarPlayer>
-								<AudioPlayerActiveButtons audioRef={audioRef} NotImplemented={NotImplemented} repeat={repeat} cycleExec={cycleExec}/>
+								<AudioPlayerActiveButtons audioRef={audioRef}/>
 								<SAudio.PlayerTrackPlay>
 									<SAudio.TrackPlayContain>
 										<AudioPlayerInfo name={name} author={author}/>

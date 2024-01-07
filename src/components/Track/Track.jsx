@@ -30,7 +30,6 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		dispatch(chose({ id: id - idCalc }));
 	};
 
-	console.log(isPlaying);
 	return (
 		<S.PlayListItem>
 				<S.PlaylistTrack>

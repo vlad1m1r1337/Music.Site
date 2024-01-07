@@ -186,7 +186,7 @@ export const PlayerBtnShuffleSvg = styled.svg`
   width: 19px;
   height: 12px;
   fill: transparent;
-  stroke: ${prop => prop.$theme.font2};
+  stroke: ${prop => prop.$shuffle ? prop.$theme.active_icons : prop.$theme.font2};
 `
 
 export const PlayerTrackPlay = styled.div`
