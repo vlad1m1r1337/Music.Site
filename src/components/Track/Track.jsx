@@ -1,9 +1,17 @@
 import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
+import {useDispatch, useSelector} from "react-redux";
+import {chose, set_shuffle_first} from "../../store";
 
-export default function Track({setId, objId, id, track, track_add, executor, album, time}) {
+export default function Track({id, track, track_add, executor, album, time}) {
 	const params = useParams();
+	const {theme} = useThemeContext();
+	const dispatch = useDispatch();
+
+	const cur_id = useSelector(state => state.id);
+	const isPlaying = useSelector(state => state.is_playing);
+
 	let idCacl;
 	if (params.id === '1') {
 		idCacl = 8;
@@ -17,17 +25,23 @@ export default function Track({setId, objId, id, track, track_add, executor, alb
 	else {
 		idCacl = 8
 	}
-	const {theme} = useThemeContext();
+
+	const handleClick = (id, idCalc) => {
+		dispatch(chose({ id: id - idCalc }));
+		dispatch(set_shuffle_first({flag: id - idCalc}));
+	};
+
 	return (
 		<S.PlayListItem>
 				<S.PlaylistTrack>
 					<S.TrackTitle>
-							<S.TrackTitleImage $theme={theme}>
-									<S.TrackTitleSvg alt="music">
-										<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-									</S.TrackTitleSvg>
-							</S.TrackTitleImage>
-							<S.TrackTitleLink $theme={theme} onClick={() => setId(objId = id - idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
+						<S.TrackTitleImage $theme={theme}>
+							{ id - idCacl !== cur_id && <S.TrackTitleSvg alt="music">
+								<use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+							</S.TrackTitleSvg>}
+							{id - idCacl === cur_id && <S.BlueVioletDot $isPlaying={isPlaying} src="/img/blueviolet_dot.svg" alt="blueviolet_dot"/>}
+						</S.TrackTitleImage>
+						<S.TrackTitleLink $theme={theme} onClick={() => handleClick(id, idCacl)}>{track}<S.TrackTitleSpan>{track_add}</S.TrackTitleSpan></S.TrackTitleLink>
 					</S.TrackTitle>
 					<S.TrackAuthor>
 						<S.TrackAuthorLink $theme={theme}>{executor}</S.TrackAuthorLink>

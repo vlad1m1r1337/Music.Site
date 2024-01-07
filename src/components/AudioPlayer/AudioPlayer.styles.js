@@ -54,17 +54,6 @@ export const BarPlayer = styled.div`
   justify-content: flex-start;
 `
 
-export const PlayerControls = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  padding: 0 27px 0 31px;
-`
-
 export const PlayerBtnPrev = styled.div`
   padding: 5px;
   display: -webkit-box;
@@ -197,7 +186,7 @@ export const PlayerBtnShuffleSvg = styled.svg`
   width: 19px;
   height: 12px;
   fill: transparent;
-  stroke: ${prop => prop.$theme.font2};
+  stroke: ${prop => prop.$shuffle ? prop.$theme.active_icons : prop.$theme.font2};
 `
 
 export const PlayerTrackPlay = styled.div`
@@ -225,7 +214,7 @@ export const TrackPlayContain = styled.div`
 export const TrackPlayImage = styled.div`
   width: 51px;
   height: 51px;
-  background-color: ${prop => prop.$theme.left_side_bar};
+  background-color: ${prop => prop.$theme.background2};
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -306,7 +295,7 @@ export const BtnIcon = styled.div`
     &:active {
     .track-play__dislike-svg {
       fill: ${prop => prop.$theme.active_fill_icons};
-      stroke: black;
+      stroke: white;
       cursor: pointer;
     }
     }

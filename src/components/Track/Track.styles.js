@@ -139,3 +139,22 @@ export const TrackTimeText = styled.span`
 	text-align: right;
 	color: #696969;
 `
+
+export const BlueVioletDot = styled.img`
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.4);
+            opacity: 0.7;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    animation: ${prop => prop.$isPlaying ? "pulse 1.8s ease-in-out infinite alternate" : "none"};
+    position: absolute;
+`
