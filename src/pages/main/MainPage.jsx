@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_def, set_amount_id_tracks, set_def_shuffle_arr} from "../../store";
+import {set_def, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchMainData} from "../../fetchData/fetchMainData";
 

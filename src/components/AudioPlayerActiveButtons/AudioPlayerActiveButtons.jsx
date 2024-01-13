@@ -10,9 +10,9 @@ import {AudioPlayerButtonRepeatWhite} from "../AudioPlayerButtonRepeatWhite/Audi
 import styled from "styled-components";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
-import {increment} from "../../store";
-import {decrement} from "../../store";
-import {shuffle_next, shuffle_prev, push_first_shuffle_id} from "../../store";
+import {increment} from "../../store/idSlice";
+import {decrement} from "../../store/idSlice";
+import {shuffle_next, shuffle_prev, push_first_shuffle_id} from "../../store/idSlice";
 import {useState} from "react";
 
 export const PlayerControls = styled.div`

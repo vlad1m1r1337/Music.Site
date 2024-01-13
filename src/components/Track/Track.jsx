@@ -2,7 +2,7 @@ import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
-import {chose, set_shuffle_first} from "../../store";
+import {chose, set_shuffle_first} from "../../store/idSlice";
 
 export default function Track({id, track, track_add, executor, album, time}) {
 	const params = useParams();

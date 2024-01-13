@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { set_is_playing } from '../store';
+import { set_is_playing } from '../store/idSlice';
 
 const useAudioControls = ({ audioRef }) => {
     const isPlaying = useSelector(state => state.is_playing);
