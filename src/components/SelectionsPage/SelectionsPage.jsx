@@ -7,10 +7,13 @@ import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
+import {useSelector} from "react-redux";
+import {set_amount_id_tracks, set_def, set_def_shuffle_arr} from "../../store";
+import {useDispatch} from "react-redux";
+import {fetchSelectionsData} from "../../fetchData/fetchSelectionsData";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -22,9 +25,24 @@ const StyledH = styled.h1`
 `
 
 export const  SelectionsPage = ({header, setAllowed}) => {
-    let Header;
+    const dispatch = useDispatch();
+
+    const {theme} = useThemeContext();
+
+    const [tracks, setTracks] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const id = useSelector(state => state.id);
+
+
+    useEffect(() => {
+        dispatch(set_def());
+    }, [dispatch]);
+
     const params = useParams();
     if  (header === undefined) {
+        let Header;
         if (params.id === '1') {
             Header = "Плейлист дня";
         }
@@ -37,33 +55,17 @@ export const  SelectionsPage = ({header, setAllowed}) => {
         header = Header;
     }
 
-    const [id, setId] = useState(-1);
+    useEffect(() => {
+            fetchSelectionsData(setTracks, setIsLoading, params);
+    }, [params]);
 
-    const [tracks, setTracks] = useState(null);
-
-    const apiURL = "https://skypro-music-api.skyeng.tech/catalog/selection/";
-
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(apiURL);
-                if (params.id) {
-                    setTracks((response.data)[params.id - 1].items);
-                } else {
-                    setTracks((response.data)[0].items);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+        if (!isLoading) {
+            dispatch(set_amount_id_tracks({tracks: tracks}));
+            dispatch(set_def_shuffle_arr());
         }
-        fetchData()
-            .then(() => {
-                setIsLoading(false)
-            })
-    }, [params.id])
-    const {theme} = useThemeContext();
+    }, [isLoading, dispatch, tracks]);
 
     if  (isLoading) {
         return (
@@ -78,7 +80,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
                         <SS.MainCenterBlock>
                             <SearchCenter/>
                             <StyledH>{header}</StyledH>
-                            {tracks && <CenterBlockContent tracks={tracks} setId={setId} objId={id}/>}
+                            {tracks && <CenterBlockContent tracks={tracks}/>}
                         </SS.MainCenterBlock>
                         <SideBarAuth setAllowed={setAllowed}/>
                     </S.Main>
