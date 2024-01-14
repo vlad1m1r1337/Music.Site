@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const idSlice = createSlice({
     name: 'id',
@@ -65,8 +65,5 @@ export const idSlice = createSlice({
     }
 })
 
-export const store = configureStore({
-    reducer: idSlice.reducer
-})
-
 export const {set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, set_is_playing_def, increment, decrement, chose , set_def, set_amount_id_tracks, set_is_playing} = idSlice.actions;
+export const idReducer = idSlice.reducer;

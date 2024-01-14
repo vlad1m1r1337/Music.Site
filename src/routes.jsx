@@ -10,7 +10,6 @@ import {ProtectedRoute} from "./components/protected-route";
 export const AppRoutes = () => {
     const checkKey = () => {
         const storedValue = localStorage.getItem('user');
-
         return storedValue !== null && storedValue;
     }
     const [isAllowed, setAllowed] = useState(checkKey);
