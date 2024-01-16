@@ -35,7 +35,7 @@ export const AudioPlayerActiveButtons = ({audioRef}) => {
 
     const dispatch = useDispatch();
 
-    const firstElShuffleArr = useSelector(state => state.shuffle_arr);
+    const firstElShuffleArr = useSelector(state => state.ids.shuffle_arr);
     const nextTrack = () => {
         if (firstElShuffleArr === null) {
             dispatch(push_first_shuffle_id());

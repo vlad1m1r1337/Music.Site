@@ -9,8 +9,8 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
 
-	const cur_id = useSelector(state => state.id);
-	const isPlaying = useSelector(state => state.is_playing);
+	const cur_id = useSelector(state => state.ids.id);
+	const isPlaying = useSelector(state => state.ids.is_playing);
 
 	let idCacl;
 	if (params.id === '1') {

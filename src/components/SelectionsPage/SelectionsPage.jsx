@@ -33,7 +33,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const id = useSelector(state => state.id);
+    const id = useSelector(state => state.ids.id);
 
 
     useEffect(() => {

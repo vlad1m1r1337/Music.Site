@@ -20,7 +20,12 @@ export const  MainPage = ({setAllowed}) => {
 
     const {theme} = useThemeContext();
 
-    const id = useSelector(state => state.id);
+    const id = useSelector(state => state.ids.id);
+
+    // const id = useSelector(state => {
+    //     console.log(state);
+    //     return state.todos.id;
+    // });
 
     useEffect(() => {
         dispatch(set_def());
@@ -36,6 +41,9 @@ export const  MainPage = ({setAllowed}) => {
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
+    // useEffect(() => {
+    //     console.log(id);
+    // }, []);
 
     if (isLoading) {
        return (

@@ -1,10 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {idReducer} from "./idSlice";
+import {authReducer} from "./authSlice";
 
-const rootReducer = {
-    id: idReducer,
-}
-
-export const store = configureStore({
-        reducer: rootReducer,
-})
+export default configureStore({
+    reducer: {
+        ids: idReducer,
+        extra: authReducer,
+    },
+});
