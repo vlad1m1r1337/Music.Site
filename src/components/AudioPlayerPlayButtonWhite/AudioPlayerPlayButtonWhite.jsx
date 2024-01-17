@@ -1,7 +1,4 @@
-import {useEffect, useState} from "react";
 import * as SAudio from "../AudioPlayer/AudioPlayer.styles";
-import {useDispatch, useSelector} from "react-redux";
-import {set_is_playing} from "../../store";
 import useAudioControls from "../../utils/useAudioControls";
 
 export function AudioPlayerPlayButtonWhite({audioRef}) {

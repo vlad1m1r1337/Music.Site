@@ -4,6 +4,8 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState: {
         isAllowed: false,
+        access: null,
+        refresh: null,
     },
     reducers: {
         allow: state => {
