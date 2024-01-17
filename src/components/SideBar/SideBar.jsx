@@ -6,7 +6,7 @@ import {useThemeContext} from "../../contexts/color_theme";
 import {SideBarIconBlack} from "../SideBarIconBlack/SideBarIconBlack";
 import {SideBarIconWhite} from "../SideBarIconWhite/SideBarIconWhite";
 
-export default function SideBar({setAllowed}) {
+export default function SideBar() {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ export default function SideBar({setAllowed}) {
 		<S.MainSidebar>
 		<S.SidebarPersonal>
 		  {/*<S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>*/}
-		{theme.theme === "black" ? <SideBarIconBlack setAllowed={setAllowed}/> : <SideBarIconWhite setAllowed={setAllowed}/>}
+		{theme.theme === "black" ? <SideBarIconBlack/> : <SideBarIconWhite/>}
 		</S.SidebarPersonal>
 		<S.SideBarBlock>
 		  <S.SideBarList>

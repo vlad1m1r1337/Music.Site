@@ -24,7 +24,7 @@ const StyledH = styled.h1`
   margin-bottom: 37px;
 `
 
-export const  SelectionsPage = ({header, setAllowed}) => {
+export const  SelectionsPage = ({header}) => {
     const dispatch = useDispatch();
 
     const {theme} = useThemeContext();
@@ -69,7 +69,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
 
     if  (isLoading) {
         return (
-          <SelectionPageWithPlaceholders header={header} setAllowed={setAllowed}/>
+          <SelectionPageWithPlaceholders header={header}/>
         )
     }
     return (
@@ -82,7 +82,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
                             <StyledH>{header}</StyledH>
                             {tracks && <CenterBlockContent tracks={tracks}/>}
                         </SS.MainCenterBlock>
-                        <SideBarAuth setAllowed={setAllowed}/>
+                        <SideBarAuth/>
                     </S.Main>
                     {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
                 </S.Container>

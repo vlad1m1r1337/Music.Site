@@ -47,7 +47,7 @@ export const  MainPage = ({setAllowed}) => {
 
     if (isLoading) {
        return (
-           <MainPageWithPlaceholders setAllowed={setAllowed}/>
+           <MainPageWithPlaceholders/>
        )
     }
     return (
@@ -55,9 +55,9 @@ export const  MainPage = ({setAllowed}) => {
                 <S.Wrapper>
                     <S.Container $theme={theme}>
                         <S.Main>
-                            <NavMenu setAllowed={setAllowed}/>
+                            <NavMenu/>
                             {tracks && <TrackList tracks={tracks}/>}
-                            <SideBar setAllowed={setAllowed}/>
+                            <SideBar/>
                         </S.Main>
                         {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
                     </S.Container>

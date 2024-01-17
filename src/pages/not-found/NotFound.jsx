@@ -9,7 +9,7 @@ import {useThemeContext} from "../../contexts/color_theme";
 import {SideBarIconBlack} from "../../components/SideBarIconBlack/SideBarIconBlack";
 import {SideBarIconWhite} from "../../components/SideBarIconWhite/SideBarIconWhite";
 
-export const  NotFound = ({setAllowed}) => {
+export const  NotFound = () => {
     const navigate = useNavigate();
     const handleButtonClick = () => {
         navigate('/');
@@ -26,7 +26,7 @@ export const  NotFound = ({setAllowed}) => {
                         </MainCenterBlock>
                         <MainSidebar>
                             <SidebarPersonal>
-                                {theme.theme === "black" ? <SideBarIconBlack setAllowed={setAllowed}/> : <SideBarIconWhite setAllowed={setAllowed}/>}
+                                {theme.theme === "black" ? <SideBarIconBlack/> : <SideBarIconWhite/>}
                             </SidebarPersonal>
                         </MainSidebar>
                     </S.Main>

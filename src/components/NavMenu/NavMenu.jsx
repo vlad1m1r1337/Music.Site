@@ -3,7 +3,7 @@ import { useState } from 'react';
 import * as S from './NavMenu.styles'
 import {useThemeContext} from "../../contexts/color_theme";
 
-export default function NavMenu({setAllowed}) {
+export default function NavMenu() {
 	const [visible, setVisible] = useState(false);
 
 	const toggleVisibility = () => setVisible(!visible);
@@ -19,7 +19,7 @@ export default function NavMenu({setAllowed}) {
 		  <S.BurgerLine $theme={theme}></S.BurgerLine>
 		  <S.BurgerLine $theme={theme}></S.BurgerLine>
 		</S.NavBurger>
-		{visible && (<NavMenuCatalog setAllowed={setAllowed} />)}
+		{visible && (<NavMenuCatalog/>)}
 	  </S.MainNav>
 	);
   }
