@@ -11,7 +11,7 @@ import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_amount_id_tracks, set_def, set_def_shuffle_arr} from "../../store";
+import {set_amount_id_tracks, set_def, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchSelectionsData} from "../../fetchData/fetchSelectionsData";
 
@@ -33,7 +33,7 @@ export const  SelectionsPage = ({header, setAllowed}) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const id = useSelector(state => state.id);
+    const id = useSelector(state => state.ids.id);
 
 
     useEffect(() => {

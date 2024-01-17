@@ -2,15 +2,15 @@ import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
-import {chose, set_shuffle_first} from "../../store";
+import {chose, set_shuffle_first} from "../../store/idSlice";
 
 export default function Track({id, track, track_add, executor, album, time}) {
 	const params = useParams();
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
 
-	const cur_id = useSelector(state => state.id);
-	const isPlaying = useSelector(state => state.is_playing);
+	const cur_id = useSelector(state => state.ids.id);
+	const isPlaying = useSelector(state => state.ids.is_playing);
 
 	let idCacl;
 	if (params.id === '1') {

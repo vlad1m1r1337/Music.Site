@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_def, set_amount_id_tracks, set_def_shuffle_arr} from "../../store";
+import {set_def, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchMainData} from "../../fetchData/fetchMainData";
 
@@ -20,7 +20,12 @@ export const  MainPage = ({setAllowed}) => {
 
     const {theme} = useThemeContext();
 
-    const id = useSelector(state => state.id);
+    const id = useSelector(state => state.ids.id);
+
+    // const id = useSelector(state => {
+    //     console.log(state);
+    //     return state.todos.id;
+    // });
 
     useEffect(() => {
         dispatch(set_def());
@@ -36,6 +41,9 @@ export const  MainPage = ({setAllowed}) => {
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
+    // useEffect(() => {
+    //     console.log(id);
+    // }, []);
 
     if (isLoading) {
        return (
