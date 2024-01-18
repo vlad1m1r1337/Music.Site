@@ -2,7 +2,7 @@ import {createGlobalStyle} from "styled-components";
 import * as S from "./Login.styles";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {set_allow} from "../../store/authSlice";
+import {login} from "../../store/authSlice";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -11,53 +11,50 @@ body {
 `
 
 export const Login = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const inputValidator = () => {
-        const InputMail = document.getElementById("input_mail");
-        const InputPassword = document.getElementById("input_password");
-        return !(!InputMail.value.length || !InputPassword.value.length);
-    }
-    const handleSignInClick = () => {
-        if (!inputValidator())
-            return ;
-        dispatch(set_allow({ allowed: true }));
-        navigate("/", { replace: true });
-    }
+    // const inputValidator = () => {
+    //     const InputMail = document.getElementById("input_mail");
+    //     const InputPassword = document.getElementById("input_password");
+    //     return !(!InputMail.value.length || !InputPassword.value.length);
+    // }
+    // const handleSignInClick = () => {
+    //     if (!inputValidator())
+    //         return ;
+    //     dispatch(set_allow({ allowed: true }));
+    //     navigate("/", { replace: true });
+    // }
     const handleRegistryClick = () => {
         navigate("/registr", { replace: true });
     }
-    const login = () => {
-        const InputMail = document.getElementById("input_mail");
-        const InputPassword = document.getElementById("input_password");
-        fetch("https://skypro-music-api.skyeng.tech/user/login/", {
-            method: "POST",
-            body: JSON.stringify({
-                email: InputMail.value,
-                password: InputPassword.value,
-            }),
-            headers: {
-                "content-type": "application/json",
-            },
-        })
-            .then((res) => {
-                if (!res.ok) {
-                    // Check for HTTP errors and handle them
-                    throw new Error(`HTTP error! Status: ${res.status}`);
-                }
-                return res.json();
-            })
-            .then((res) => {
-                console.log('someshit');
-                console.log(res);
-                dispatch(set_allow({ allowed: true }));
-                navigate("/", { replace: true });
-            })
-            .catch((error) => {
-                // Handle other errors, like network issues
-                console.log('An error occurred:', error);
-            });
-    }
+    // const login = () => {
+    //     const InputMail = document.getElementById("input_mail");
+    //     const InputPassword = document.getElementById("input_password");
+    //     fetch("https://skypro-music-api.skyeng.tech/user/login/", {
+    //         method: "POST",
+    //         body: JSON.stringify({
+    //             email: InputMail.value,
+    //             password: InputPassword.value,
+    //         }),
+    //         headers: {
+    //             "content-type": "application/json",
+    //         },
+    //     })
+    //         .then((res) => {
+    //             if (!res.ok) {
+    //                 throw new Error(`HTTP error! Status: ${res.status}`);
+    //             }
+    //             return res.json();
+    //         })
+    //         .then((res) => {
+    //             console.log('someshit');
+    //             console.log(res);
+    //             dispatch(set_allow({ allowed: true }));
+    //             navigate("/", { replace: true });
+    //         })
+    //         .catch((error) => {
+    //             console.log('An error occurred:', error);
+    //         });
+    // }
     // const getToken = () => {
     //     const InputMail = document.getElementById("input_mail");
     //     const InputPassword = document.getElementById("input_password");
@@ -127,6 +124,8 @@ export const Login = () => {
     //         .then((response) => response.json())
     //         .then((json) => console.log("RES", json));
     // }
+    const navigate = useNavigate();
+
     return (
     <>
         <GlobalStyle/>
@@ -136,7 +135,7 @@ export const Login = () => {
                 <S.Input id="input_mail" placeholder="Почта" type="text"/>
                 <S.Input id="input_password" placeholder="Пароль" type="password"/>
             </S.DivInput>
-            <S.ButtonPurpl onClick={login}>Войти</S.ButtonPurpl>
+            <S.ButtonPurpl onClick={() => dispatch(login(null, { extra: {navigate} }))}>Войти</S.ButtonPurpl>
             <S.ButtonWhite onClick={handleRegistryClick}>Зарегестрироваться</S.ButtonWhite>
             {/*<button onClick={getToken}>Get Token</button>*/}
             {/*<button onClick={printToken}>Print Token</button>*/}
