@@ -80,7 +80,7 @@ export const  SelectionsPage = ({header}) => {
                         <SS.MainCenterBlock>
                             <SearchCenter/>
                             <StyledH>{header}</StyledH>
-                            {tracks && <CenterBlockContent tracks={tracks}/>}
+                            <CenterBlockContent tracks={tracks}/>
                         </SS.MainCenterBlock>
                         <SideBarAuth/>
                     </S.Main>

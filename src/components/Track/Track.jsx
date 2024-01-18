@@ -50,7 +50,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 						<S.TrackAlbumLink $theme={theme}>{album}</S.TrackAlbumLink>
 					</S.TrackAlbum>
 					<S.TrackTimeSvg alt="time">
-						<use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+						<use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
 					</S.TrackTimeSvg>
 					<S.TrackTimeText>{time}</S.TrackTimeText>
 				</S.PlaylistTrack>

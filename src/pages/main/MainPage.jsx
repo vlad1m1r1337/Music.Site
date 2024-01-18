@@ -22,11 +22,6 @@ export const  MainPage = ({setAllowed}) => {
 
     const id = useSelector(state => state.ids.id);
 
-    // const id = useSelector(state => {
-    //     console.log(state);
-    //     return state.todos.id;
-    // });
-
     useEffect(() => {
         dispatch(set_def());
     }, [dispatch]);
@@ -41,9 +36,6 @@ export const  MainPage = ({setAllowed}) => {
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
-    // useEffect(() => {
-    //     console.log(id);
-    // }, []);
 
     if (isLoading) {
        return (
@@ -56,7 +48,7 @@ export const  MainPage = ({setAllowed}) => {
                     <S.Container $theme={theme}>
                         <S.Main>
                             <NavMenu/>
-                            {tracks && <TrackList tracks={tracks}/>}
+                            <TrackList tracks={tracks}/>
                             <SideBar/>
                         </S.Main>
                         {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
