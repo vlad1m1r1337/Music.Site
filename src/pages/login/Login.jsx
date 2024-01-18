@@ -1,8 +1,8 @@
 import {createGlobalStyle} from "styled-components";
 import * as S from "./Login.styles";
-import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {login} from "../../store/authSlice";
+import {useNavigate} from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -124,8 +124,8 @@ export const Login = () => {
     //         .then((response) => response.json())
     //         .then((json) => console.log("RES", json));
     // }
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     return (
     <>
         <GlobalStyle/>
@@ -135,7 +135,10 @@ export const Login = () => {
                 <S.Input id="input_mail" placeholder="Почта" type="text"/>
                 <S.Input id="input_password" placeholder="Пароль" type="password"/>
             </S.DivInput>
-            <S.ButtonPurpl onClick={() => dispatch(login(null, { extra: {navigate} }))}>Войти</S.ButtonPurpl>
+            <S.ButtonPurpl onClick={() =>
+                dispatch(login())
+                    .unwrap()
+                    .then(() => navigate("/"))}>Войти</S.ButtonPurpl>
             <S.ButtonWhite onClick={handleRegistryClick}>Зарегестрироваться</S.ButtonWhite>
             {/*<button onClick={getToken}>Get Token</button>*/}
             {/*<button onClick={printToken}>Print Token</button>*/}

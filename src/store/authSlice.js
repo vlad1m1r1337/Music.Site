@@ -1,13 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {useNavigate} from "react-router-dom";
 
 export const login = createAsyncThunk(
     'auth/login',
-    async function(_, {extra, rejectWithValue, dispatch}) {
-        console.log("1");
-        console.log('extra', extra);return ;
-        const navigate = extra.navigate;
-        console.log("2");
+    async function(_, {rejectWithValue, dispatch}) {
         const InputMail = document.getElementById("input_mail");
         const InputPassword = document.getElementById("input_password");
         try {
@@ -22,11 +17,15 @@ export const login = createAsyncThunk(
                 },
             });
             if (!response.ok) {
+                const data  = await response.json();
+                console.log("data", data);
                 throw new Error('Server Error!');
             }
-            console.log("succes");
+            const data  = await response.json();
+            console.log(data);
             dispatch(set_allow({ allowed: true }));
-            navigate("/", { replace: true });
+            dispatch(set_login({login: InputMail.value}));
+            dispatch(set_password({password: InputPassword.value}));
         }
         catch(error) {
             return rejectWithValue(error.message);
@@ -40,6 +39,8 @@ export const authSlice = createSlice({
         isAllowed: false,
         access: null,
         refresh: null,
+        login: null,
+        password: null,
     },
     reducers: {
         allow: state => {
@@ -50,21 +51,19 @@ export const authSlice = createSlice({
         },
         set_allow: (state, action) => {
             state.isAllowed = action.payload.allowed;
+        },
+        set_login: (state, action) => {
+            state.login = action.payload.login;
+        },
+        set_password: (state, action) => {
+            state.password = action.payload.password;
         }
     },
     extraReducers: (builder) => {
-        // builder
-        //     .addCase(login.pending, (state) => {
-        //         // handle pending state if needed
-        //     })
-        //     .addCase(login.fulfilled, (state, action) => {
-        //         // handle fulfilled state if needed
-        //     })
-        //     .addCase(login.rejected, (state, action) => {
-        //         // handle rejected state if needed
-        //     });
+        builder
+            .addCase(login.rejected, (state) => console.log("error occured"))
     },
 })
 
-export const {allow, prohibit, set_allow} = authSlice.actions;
+export const {set_login, set_password, allow, prohibit, set_allow} = authSlice.actions;
 export const authReducer = authSlice.reducer;
