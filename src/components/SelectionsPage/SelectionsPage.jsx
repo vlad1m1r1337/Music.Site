@@ -36,9 +36,9 @@ export const  SelectionsPage = ({header}) => {
     const id = useSelector(state => state.ids.id);
 
 
-    useEffect(() => {
-        dispatch(set_def());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(set_def());
+    // }, [dispatch]);
 
     const params = useParams();
     if  (header === undefined) {

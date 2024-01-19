@@ -23,10 +23,6 @@ export const  MainPage = ({setAllowed}) => {
     const id = useSelector(state => state.ids.id);
 
     useEffect(() => {
-        dispatch(set_def());
-    }, [dispatch]);
-
-    useEffect(() => {
         fetchMainData(setIsLoading, setTracks)
     }, []);
 

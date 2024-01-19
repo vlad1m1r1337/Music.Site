@@ -12,7 +12,6 @@ export const Div = styled.div`
 `
 
 export const Input = styled.input`
-    //caret-color: transparent; 
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;

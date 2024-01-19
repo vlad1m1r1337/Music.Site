@@ -68,7 +68,7 @@ export default function AudioPlayer({tracks}) {
 							currentTime={currentTime}
 							setCurrentTime={setCurrentTime}
 						></AudioPlayerProgressBar>}
-						<SAudio.BarPlayerBlock>
+						<SAudio.BarPlayerBlock $theme={theme}>
 							<SAudio.BarPlayer>
 								<AudioPlayerActiveButtons audioRef={audioRef}/>
 								<SAudio.PlayerTrackPlay>
