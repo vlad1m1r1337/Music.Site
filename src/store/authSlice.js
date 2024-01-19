@@ -12,7 +12,7 @@ export const fetchSelectionTracks = createAsyncThunk(
             }
             const data = await response.json();
             console.log(data);
-            return {data: data, params: params};
+            return {data:data, params: params};
         }
         catch (error) {
             return rejectWithValue(error.message);
@@ -102,14 +102,12 @@ export const authSlice = createSlice({
                 state.loading = false;
             })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
-                console.log(action.payload);
-                // return ;
-                // if (p.id) {
-                //     state.tracks = data[p.id - 1].items;
-                // }
-                // else {
-                //     state.tracks = data[0].items;
-                // }
+                if (action.payload.params.id) {
+                    state.tracks = action.payload.data[action.payload.params.id - 1].items;
+                } else {
+                    state.tracks = action.payload.data[0].items;
+                }
+                state.loading = false;
             })
     },
 })
