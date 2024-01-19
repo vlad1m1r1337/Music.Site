@@ -1,6 +1,26 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {useParams} from "react-router-dom";
 
-export const fetchTracks = createAsyncThunk(
+export const fetchSelectionTracks = createAsyncThunk(
+    'auth/fetchSelectionTracks',
+    async function(params, {rejectWithValue, dispatch}) {
+        try {
+            const apiURL = "https://skypro-music-api.skyeng.tech/catalog/selection/";
+            const response = await fetch(apiURL);
+            if (!response.ok) {
+                throw new Error('Server Error!');
+            }
+            const data = await response.json();
+            console.log(data);
+            return {data: data, params: params};
+        }
+        catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
+
+export const fetchMainTracks = createAsyncThunk(
     'auth/fetchTracks',
     async function(_, {rejectWithValue, dispatch}) {
         try {
@@ -10,6 +30,7 @@ export const fetchTracks = createAsyncThunk(
                 throw new Error('Server Error!');
             }
             const data = await response.json();
+            console.log(data);
             return data;
         }
         catch (error) {
@@ -76,9 +97,19 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(login.rejected, (state) => console.log("error occured"))
-            .addCase(fetchTracks.fulfilled, (state, action) => {
+            .addCase(fetchMainTracks.fulfilled, (state, action) => {
                 state.tracks = action.payload;
                 state.loading = false;
+            })
+            .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
+                console.log(action.payload);
+                // return ;
+                // if (p.id) {
+                //     state.tracks = data[p.id - 1].items;
+                // }
+                // else {
+                //     state.tracks = data[0].items;
+                // }
             })
     },
 })

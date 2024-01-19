@@ -9,7 +9,7 @@ import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
 import {set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
-import {fetchTracks, setIsLoading} from "../../store/authSlice";
+import {fetchMainTracks, setIsLoading} from "../../store/authSlice";
 
 export const  MainPage = () => {
     const {theme} = useThemeContext();
@@ -24,7 +24,7 @@ export const  MainPage = () => {
     const id = useSelector(state => state.ids.id);
 
     useEffect(() => {
-        dispatch(fetchTracks());
+        dispatch(fetchMainTracks());
     }, [dispatch]);
 
     isLoading = useSelector(state => state.auth.loading);
@@ -34,6 +34,7 @@ export const  MainPage = () => {
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
+
     if (isLoading) {
        return (
            <MainPageWithPlaceholders/>
@@ -49,10 +50,6 @@ export const  MainPage = () => {
                         <TrackList tracks={tracks}/>
                         <SideBar/>
                     </S.Main>
-                </S.Container>
-            </S.Wrapper>
-            <S.Wrapper>
-                <S.Container $theme={theme}>
                     {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
                 </S.Container>
             </S.Wrapper>

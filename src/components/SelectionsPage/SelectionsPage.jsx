@@ -6,14 +6,14 @@ import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
 import {set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
-import {fetchSelectionsData} from "../../fetchData/fetchSelectionsData";
+import {fetchSelectionTracks, setIsLoading} from "../../store/authSlice";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -25,20 +25,15 @@ const StyledH = styled.h1`
 `
 
 export const  SelectionsPage = ({header}) => {
-    const dispatch = useDispatch();
-
     const {theme} = useThemeContext();
-
-    const [tracks, setTracks] = useState(null);
-
-    const [isLoading, setIsLoading] = useState(true);
-
+    const dispatch = useDispatch();
+    let isLoading = useSelector(state => state.auth.loading);
+    const tracks = useSelector(state => state.auth.tracks);
     const id = useSelector(state => state.ids.id);
 
-
-    // useEffect(() => {
-    //     dispatch(set_def());
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(setIsLoading({loading: true}));
+    }, [dispatch]);
 
     const params = useParams();
     if  (header === undefined) {
@@ -54,10 +49,10 @@ export const  SelectionsPage = ({header}) => {
         }
         header = Header;
     }
-
+    const param = useParams();
     useEffect(() => {
-            fetchSelectionsData(setTracks, setIsLoading, params);
-    }, [params]);
+        dispatch(fetchSelectionTracks(param));
+    }, [dispatch]);
 
 
     useEffect(() => {
