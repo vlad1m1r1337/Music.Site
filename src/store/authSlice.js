@@ -1,5 +1,23 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
+export const fetchTracks = createAsyncThunk(
+    'auth/fetchTracks',
+    async function(_, {rejectWithValue, dispatch}) {
+        try {
+            const apiURL = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
+            const response = await fetch(apiURL);
+            if (!response.ok) {
+                throw new Error('Server Error!');
+            }
+            const data = await response.json();
+            return data;
+        }
+        catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
+
 export const login = createAsyncThunk(
     'auth/login',
     async function(_, {rejectWithValue, dispatch}) {
@@ -17,12 +35,9 @@ export const login = createAsyncThunk(
                 },
             });
             if (!response.ok) {
-                const data  = await response.json();
-                console.log("data", data);
                 throw new Error('Server Error!');
             }
             const data  = await response.json();
-            console.log(data);
             dispatch(set_allow({ allowed: true }));
             dispatch(set_login({login: InputMail.value}));
             dispatch(set_password({password: InputPassword.value}));
@@ -41,13 +56,12 @@ export const authSlice = createSlice({
         refresh: null,
         login: null,
         password: null,
+        tracks: null,
+        loading: true,
     },
     reducers: {
-        allow: state => {
-            state.isAllowed = true
-        },
-        prohibit: state => {
-            state.isAllowed = false
+        setIsLoading: (state, action) => {
+          state.loading = action.payload.loading;
         },
         set_allow: (state, action) => {
             state.isAllowed = action.payload.allowed;
@@ -62,8 +76,12 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(login.rejected, (state) => console.log("error occured"))
+            .addCase(fetchTracks.fulfilled, (state, action) => {
+                state.tracks = action.payload;
+                state.loading = false;
+            })
     },
 })
 
-export const {set_login, set_password, allow, prohibit, set_allow} = authSlice.actions;
+export const {setIsLoading, set_login, set_password, set_allow} = authSlice.actions;
 export const authReducer = authSlice.reducer;
