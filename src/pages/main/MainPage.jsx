@@ -34,7 +34,7 @@ export const  MainPage = () => {
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
-    console.log("main tracks", tracks);
+    // console.log("main tracks", tracks);
     if (isLoading) {
        return (
            <MainPageWithPlaceholders/>

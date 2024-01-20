@@ -11,13 +11,13 @@ export const idSlice = createSlice({
     },
     reducers: {
         increment: state => {
-            state.id = (state.id + 1) % state.amount_id_tracks
+            state.id = (state.id + 1) % state.amount_id_tracks;
         },
         decrement: state => {
-            state.id - 1 < 0 ? state.id = state.amount_id_tracks : state.id = (state.id - 1) % state.amount_id_tracks
+            state.id - 1 < 0 ? state.id = state.amount_id_tracks : state.id = (state.id - 1) % state.amount_id_tracks;
         },
         chose: (state, action) => {
-            state.id = action.payload.id
+            state.id = action.payload.id;
         },
         set_def: state => {
             state.id = -1;
@@ -26,10 +26,10 @@ export const idSlice = createSlice({
             state.amount_id_tracks = action.payload.tracks.length - 1;
         },
         set_is_playing_def: (state) => {
-            state.is_playing = true
+            state.is_playing = true;
         },
         set_is_playing: (state, action) => {
-            state.is_playing = action.payload.bool
+            state.is_playing = action.payload.bool;
         },
         set_shuffle_first: (state, action) => {
             state.shuffle_arr.splice(0, state.shuffle_arr.length);

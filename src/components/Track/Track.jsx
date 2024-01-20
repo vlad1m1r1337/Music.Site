@@ -28,10 +28,9 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	// }
 	const id_track = useSelector(state => state.ids.id);
 	const tr = useSelector(state => state.auth.tracks);
-	// const tracks = useSelector(state => state.auth.tracks);
 
 	const handleClick = (id) => {
-		dispatch(chose({ id: id}));
+		dispatch(chose({ id: id }));
 		console.log("needed track", tr.find((el, index, array) => el.id === id));
 		dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
 		dispatch(set_shuffle_first({flag: id }));
