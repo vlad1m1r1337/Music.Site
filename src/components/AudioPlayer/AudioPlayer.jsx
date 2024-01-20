@@ -5,10 +5,10 @@ import AudioPlayerInfo from "../AudioPlayerInfo/AudioPlayerInfo";
 import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerBarVolumeBlock";
 import {useThemeContext} from "../../contexts/color_theme";
 import {AudioPlayerActiveButtons} from "../AudioPlayerActiveButtons/AudioPlayerActiveButtons";
+import {useSelector} from "react-redux";
 
 
-export default function AudioPlayer({tracks}) {
-
+export default function AudioPlayer() {
 	const audioRef = useRef(null);
 
 	const {theme} = useThemeContext();
@@ -18,6 +18,9 @@ export default function AudioPlayer({tracks}) {
 	const [volume, setVolume] = useState(50);
 
 	let [currentTime, setCurrentTime] = useState(0);
+
+	const id = useSelector(state => state.ids.id);
+	const tracks = useSelector(state => state.auth.tracks[id]);
 
 	let name;
 	let author;
@@ -37,7 +40,7 @@ export default function AudioPlayer({tracks}) {
 		author = "author";
 	}
 
-	useEffect(() => {
+	useEffect(() => 	{
 		audioRef.current.volume = volume / 100;
 	}, [volume]);
 
@@ -51,7 +54,6 @@ export default function AudioPlayer({tracks}) {
 			setLoadMetaData(true);
 		};
 	}, []);
-
 
 	return (
 		<>

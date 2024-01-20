@@ -54,33 +54,33 @@ export const  SelectionsPage = ({header}) => {
         dispatch(fetchSelectionTracks(param));
     }, [dispatch]);
 
-
     useEffect(() => {
         if (!isLoading) {
             dispatch(set_amount_id_tracks({tracks: tracks}));
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
-
     if  (isLoading) {
         return (
           <SelectionPageWithPlaceholders header={header}/>
         )
     }
     return (
-            <S.Wrapper>
-                <S.Container $theme={theme}>
-                    <S.Main>
-                        <NavMenu/>
-                        <SS.MainCenterBlock>
-                            <SearchCenter/>
-                            <StyledH>{header}</StyledH>
-                            <CenterBlockContent tracks={tracks}/>
-                        </SS.MainCenterBlock>
-                        <SideBarAuth/>
-                    </S.Main>
-                    {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
-                </S.Container>
-            </S.Wrapper>
+            <>
+                <S.Wrapper>
+                    <S.Container $theme={theme}>
+                        <S.Main>
+                            <NavMenu/>
+                            <SS.MainCenterBlock>
+                                <SearchCenter/>
+                                <StyledH>{header}</StyledH>
+                                <CenterBlockContent tracks={tracks}/>
+                            </SS.MainCenterBlock>
+                            <SideBarAuth/>
+                        </S.Main>
+                        {/*{1 && (id >= 0) && <AudioPlayer/>}*/}
+                    </S.Container>
+                </S.Wrapper>
+            </>
     )
 }

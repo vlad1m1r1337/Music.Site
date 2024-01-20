@@ -11,7 +11,6 @@ export const fetchSelectionTracks = createAsyncThunk(
                 throw new Error('Server Error!');
             }
             const data = await response.json();
-            console.log(data);
             return {data:data, params: params};
         }
         catch (error) {
@@ -30,7 +29,6 @@ export const fetchMainTracks = createAsyncThunk(
                 throw new Error('Server Error!');
             }
             const data = await response.json();
-            console.log(data);
             return data;
         }
         catch (error) {

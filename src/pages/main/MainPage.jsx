@@ -16,12 +16,12 @@ export const  MainPage = () => {
     const dispatch = useDispatch();
     let isLoading = useSelector(state => state.auth.loading);
     const tracks = useSelector(state => state.auth.tracks);
+    const id = useSelector(state => state.ids.id);
 
     useEffect(() => {
         dispatch(setIsLoading({loading: true}));
     }, [dispatch]);
 
-    const id = useSelector(state => state.ids.id);
 
     useEffect(() => {
         dispatch(fetchMainTracks());
@@ -49,7 +49,7 @@ export const  MainPage = () => {
                         <TrackList tracks={tracks}/>
                         <SideBar/>
                     </S.Main>
-                    {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
+                    {/*{tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}*/}
                 </S.Container>
             </S.Wrapper>
         </>
