@@ -40,20 +40,21 @@ export const idSlice = createSlice({
             state.shuffle_arr[0] = 'null';
             state.shuffle_flag = 1;
         },
-        shuffle_next: state => {
+        shuffle_next: (state, action) => {
             if (state.shuffle_flag < 1) {
                 state.id = state.shuffle_arr[state.shuffle_arr.length - 2];
                 state.shuffle_arr.pop();
             }
             else {
-                state.id = Math.floor(Math.random() * (state.amount_id_tracks + 1));
+                console.log("my_id", action.payload.first_id);
+                state.id = Math.floor(Math.random() * (state.amount_id_tracks + 1)) + action.payload.first_id;
                 state.shuffle_arr.push(state.id);
             }
             state.shuffle_flag++;
         },
-        shuffle_prev: state => {
+        shuffle_prev: (state, action) => {
             if (state.shuffle_flag > 1) {
-                state.id = state.shuffle_arr[state.shuffle_arr.length - 2];
+                state.id = state.shuffle_arr[state.shuffle_arr.length - 2] + action.payload.first_id;
                 state.shuffle_arr.pop();
             }
             else {

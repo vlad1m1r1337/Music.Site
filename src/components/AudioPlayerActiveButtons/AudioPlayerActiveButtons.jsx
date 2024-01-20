@@ -43,13 +43,14 @@ export const AudioPlayerActiveButtons = ({audioRef}) => {
 
     useEffect(() => {
         dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
+        console.log(id);
     }, [id]);
     const nextTrack = () => {
         if (firstElShuffleArr === null) {
             dispatch(push_first_shuffle_id());
         }
         if (shuffle) {
-            dispatch(shuffle_next());
+            dispatch(shuffle_next({first_id: tr[0].id}));
         }
         else {
             dispatch(increment());
@@ -60,7 +61,7 @@ export const AudioPlayerActiveButtons = ({audioRef}) => {
             dispatch(push_first_shuffle_id());
         }
         if (shuffle) {
-            dispatch(shuffle_prev());
+            dispatch(shuffle_prev({first_id: tr[0].id}));
         }
         else {
             dispatch(decrement());
