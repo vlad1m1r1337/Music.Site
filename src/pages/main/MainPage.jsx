@@ -40,7 +40,6 @@ export const  MainPage = () => {
            <MainPageWithPlaceholders/>
        )
     }
-    console.log("id", id, "tracks", tracks);
     return (
         <>
             <S.Wrapper>
