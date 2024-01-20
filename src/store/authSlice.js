@@ -76,6 +76,7 @@ export const authSlice = createSlice({
         login: null,
         password: null,
         tracks: null,
+        track: null,
         loading: true,
     },
     reducers: {
@@ -90,6 +91,9 @@ export const authSlice = createSlice({
         },
         set_password: (state, action) => {
             state.password = action.payload.password;
+        },
+        set_track: (state, action) => {
+            state.track = action.payload.track;
         }
     },
     extraReducers: (builder) => {
@@ -110,5 +114,5 @@ export const authSlice = createSlice({
     },
 })
 
-export const {setIsLoading, set_login, set_password, set_allow} = authSlice.actions;
+export const {set_track, setIsLoading, set_login, set_password, set_allow} = authSlice.actions;
 export const authReducer = authSlice.reducer;

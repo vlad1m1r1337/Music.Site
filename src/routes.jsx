@@ -12,7 +12,6 @@ import {useSelector} from "react-redux";
 export const AppRoutes = () => {
     const tracks = useSelector(state => state.auth.tracks);
     const id = useSelector(state => state.ids.id);
-    console.log("id", id);
     return (
        <>
             <Routes>
@@ -25,7 +24,7 @@ export const AppRoutes = () => {
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
-           {1 && (id >= 0) && <AudioPlayer/>}
+           {(id >= 0) && <AudioPlayer/>}
        </>
     )
 }

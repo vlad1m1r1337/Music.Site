@@ -19,8 +19,8 @@ export default function AudioPlayer() {
 
 	let [currentTime, setCurrentTime] = useState(0);
 
-	const id = useSelector(state => state.ids.id);
-	const tracks = useSelector(state => state.auth.tracks[id]);
+	// const id = useSelector(state => state.ids.id);
+	const tracks = useSelector(state => state.auth.track);
 
 	let name;
 	let author;

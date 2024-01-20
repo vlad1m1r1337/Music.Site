@@ -34,7 +34,7 @@ export const  MainPage = () => {
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
-
+    console.log("main tracks", tracks);
     if (isLoading) {
        return (
            <MainPageWithPlaceholders/>
@@ -49,7 +49,7 @@ export const  MainPage = () => {
                         <TrackList tracks={tracks}/>
                         <SideBar/>
                     </S.Main>
-                    {/*{tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}*/}
+                    {/*{(id >= 0) && <AudioPlayer tracks={tracks[id]}/>}*/}
                 </S.Container>
             </S.Wrapper>
         </>
