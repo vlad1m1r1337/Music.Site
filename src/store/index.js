@@ -1,10 +1,8 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {idReducer} from "./idSlice";
-import {authReducer} from "./authSlice";
+import {Reducer} from "./idSlice";
 
 export default configureStore({
     reducer: {
-        ids: idReducer,
-        auth: authReducer,
+        main: Reducer,
     },
 });

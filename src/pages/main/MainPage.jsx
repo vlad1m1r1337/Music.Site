@@ -9,32 +9,30 @@ import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
 import {set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
-import {fetchMainTracks, setIsLoading} from "../../store/authSlice";
+import {fetchMainTracks, setIsLoading} from "../../store/idSlice"
 
 export const  MainPage = () => {
     const {theme} = useThemeContext();
     const dispatch = useDispatch();
-    let isLoading = useSelector(state => state.auth.loading);
-    const tracks = useSelector(state => state.auth.tracks);
-    const id = useSelector(state => state.ids.id);
+    let isLoading = useSelector(state => state.main.loading);
+    const tracks = useSelector(state => state.main.tracks);
+    const id = useSelector(state => state.main.id);
 
     useEffect(() => {
         dispatch(setIsLoading({loading: true}));
     }, [dispatch]);
 
-
     useEffect(() => {
         dispatch(fetchMainTracks());
     }, [dispatch]);
 
-    isLoading = useSelector(state => state.auth.loading);
+    isLoading = useSelector(state => state.main.loading);
     useEffect(() => {
         if (!isLoading) {
             dispatch(set_amount_id_tracks({tracks: tracks}));
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
-    // console.log("main tracks", tracks);
     if (isLoading) {
        return (
            <MainPageWithPlaceholders/>

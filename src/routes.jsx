@@ -10,8 +10,8 @@ import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
 import {useSelector} from "react-redux";
 
 export const AppRoutes = () => {
-    const tracks = useSelector(state => state.auth.tracks);
-    const id = useSelector(state => state.ids.id);
+    const tracks = useSelector(state => state.main.tracks);
+    const id = useSelector(state => state.main.id);
     return (
        <>
             <Routes>

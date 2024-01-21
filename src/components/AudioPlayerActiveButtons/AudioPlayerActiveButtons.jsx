@@ -14,7 +14,7 @@ import {increment} from "../../store/idSlice";
 import {decrement} from "../../store/idSlice";
 import {shuffle_next, shuffle_prev, push_first_shuffle_id} from "../../store/idSlice";
 import {useEffect, useState} from "react";
-import {set_track} from "../../store/authSlice";
+import {set_track} from "../../store/idSlice";
 
 export const PlayerControls = styled.div`
   display: -webkit-box;
@@ -36,10 +36,10 @@ export const AudioPlayerActiveButtons = ({audioRef}) => {
 
     const [shuffle, setShuffle] = useState(false)
 
-    const firstElShuffleArr = useSelector(state => state.ids.shuffle_arr);
+    const firstElShuffleArr = useSelector(state => state.main.shuffle_arr);
 
-    const tr = useSelector(state => state.auth.tracks);
-    const id = useSelector(state => state.ids.id);
+    const tr = useSelector(state => state.main.tracks);
+    const id = useSelector(state => state.main.id);
 
     useEffect(() => {
         dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));

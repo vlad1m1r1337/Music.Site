@@ -1,6 +1,6 @@
 import * as S from "../SideBar/SideBar.styles";
 import {useDispatch} from "react-redux";
-import {set_allow} from "../../store/authSlice";
+import {set_allow} from "../../store/idSlice";
 
 export function SideBarIconWhite() {
     const dispatch = useDispatch();

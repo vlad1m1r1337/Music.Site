@@ -1,9 +1,8 @@
 import {createGlobalStyle} from "styled-components";
 import * as S from "./Login.styles";
 import {useDispatch} from "react-redux";
-import {login} from "../../store/authSlice";
 import {useNavigate} from "react-router-dom";
-
+import {login} from "../../store/idSlice";
 const GlobalStyle = createGlobalStyle`
 body {
   background-color: #000000D9;

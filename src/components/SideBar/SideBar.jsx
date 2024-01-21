@@ -13,7 +13,7 @@ export default function SideBar() {
 	useEffect(() => {
 		setIsLoading(false);
 	}, [])
-	const login = useSelector(state => state.auth.login);
+	const login = useSelector(state => state.main.login);
 	const {theme} = useThemeContext();
 
 	return (

@@ -13,7 +13,7 @@ import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
 import {set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
-import {fetchSelectionTracks, setIsLoading} from "../../store/authSlice";
+import {fetchSelectionTracks, setIsLoading} from "../../store/idSlice";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -27,9 +27,9 @@ const StyledH = styled.h1`
 export const  SelectionsPage = ({header}) => {
     const {theme} = useThemeContext();
     const dispatch = useDispatch();
-    let isLoading = useSelector(state => state.auth.loading);
-    const tracks = useSelector(state => state.auth.tracks);
-    const id = useSelector(state => state.ids.id);
+    let isLoading = useSelector(state => state.main.loading);
+    const tracks = useSelector(state => state.main.tracks);
+    const id = useSelector(state => state.main.id);
 
     useEffect(() => {
         dispatch(setIsLoading({loading: true}));

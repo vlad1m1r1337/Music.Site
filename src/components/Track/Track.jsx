@@ -3,15 +3,15 @@ import {useParams} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
 import {chose, set_shuffle_first} from "../../store/idSlice";
-import {set_track} from "../../store/authSlice";
+import {set_track} from "../../store/idSlice";
 
 export default function Track({id, track, track_add, executor, album, time}) {
 	const params = useParams();
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
 
-	const cur_id = useSelector(state => state.ids.id);
-	const isPlaying = useSelector(state => state.ids.is_playing);
+	const cur_id = useSelector(state => state.main.id);
+	const isPlaying = useSelector(state => state.main.is_playing);
 
 	// let idCacl;
 	// if (params.id === '1') {
@@ -26,8 +26,8 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	// else {
 	// 	idCacl = 8
 	// }
-	const id_track = useSelector(state => state.ids.id);
-	const tr = useSelector(state => state.auth.tracks);
+	const id_track = useSelector(state => state.main.id);
+	const tr = useSelector(state => state.main.tracks);
 
 	const handleClick = (id) => {
 		dispatch(chose({ id: id }));

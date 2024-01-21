@@ -1,5 +1,5 @@
 import * as S from "../SideBar/SideBar.styles";
-import {set_allow} from "../../store/authSlice";
+import {set_allow} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 
 export function SideBarIconBlack() {

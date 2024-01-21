@@ -1,7 +1,7 @@
 import * as S from './NavMenuCatalog.styles'
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch} from "react-redux";
-import {set_allow} from "../../store/authSlice";
+import {set_allow} from "../../store/idSlice";
 
 export default function NavMenuCatalog() {
 	const dispatch = useDispatch();
