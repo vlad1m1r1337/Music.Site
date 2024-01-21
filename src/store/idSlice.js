@@ -87,7 +87,6 @@ export const Slice = createSlice({
     reducers: {
         increment: state => {
             const tr = JSON.parse(JSON.stringify(state.tracks));
-            console.log(tr);
             if (tr.find((el, index, array) => el.id === state.id + 1)) {
                 state.id = (state.id + 1);
             }
@@ -97,7 +96,6 @@ export const Slice = createSlice({
         },
         decrement: state => {
             const tr = JSON.parse(JSON.stringify(state.tracks));
-            console.log(tr);
             if (tr.find((el, index, array) => el.id === state.id - 1)) {
                 state.id = (state.id - 1);
             }
@@ -109,15 +107,18 @@ export const Slice = createSlice({
             state.id = action.payload.id;
         },
         set_amount_id_tracks: function (state, action) {
-            state.amount_id_tracks = action.payload.tracks.length - 1;
+            state.amount_id_tracks = state.tracks[state.tracks.length - 1].id;
         },
         set_is_playing: (state, action) => {
             state.is_playing = action.payload.bool;
         },
+        set_shuffle_def: (state, action) => {
+            state.shuffle_arr.splice(0, state.shuffle_arr.length);
+            state.shuffle_arr[0] =  action.payload.id;
+        },
         set_shuffle_first: (state, action) => {
             state.shuffle_arr.splice(0, state.shuffle_arr.length);
             state.shuffle_arr[0] = action.payload.flag;
-
         },
         set_def_shuffle_arr: state => {
             state.shuffle_arr[0] = 'null';
@@ -129,19 +130,18 @@ export const Slice = createSlice({
                 state.shuffle_arr.pop();
             }
             else {
-                console.log("my_id", action.payload.first_id);
-                state.id = Math.floor(Math.random() * (state.amount_id_tracks + 1)) + action.payload.first_id;
+                state.id = Math.floor(Math.random() * (state.amount_id_tracks - action.payload.first_id + 1)) + action.payload.first_id;
                 state.shuffle_arr.push(state.id);
             }
             state.shuffle_flag++;
         },
         shuffle_prev: (state, action) => {
             if (state.shuffle_flag > 1) {
-                state.id = state.shuffle_arr[state.shuffle_arr.length - 2] + action.payload.first_id;
+                state.id = state.shuffle_arr[state.shuffle_arr.length - 2];
                 state.shuffle_arr.pop();
             }
             else {
-                state.id = Math.floor(Math.random() * (state.amount_id_tracks + 1));
+                state.id = Math.floor(Math.random() * (state.amount_id_tracks - action.payload.first_id + 1)) + action.payload.first_id;
                 state.shuffle_arr.push(state.id);
             }
             state.shuffle_flag--;
@@ -151,6 +151,12 @@ export const Slice = createSlice({
         },
         set_allow: (state, action) => {
             state.isAllowed = action.payload.allowed;
+            if (!action.payload.allowed) {
+                state.id = -1;
+                // state.tracks = null;
+                state.track = null;
+                // state.shuffle_arr = null;
+            }
         },
         set_login: (state, action) => {
             state.login = action.payload.login;
@@ -180,5 +186,5 @@ export const Slice = createSlice({
     },
 })
 
-export const {set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+export const {set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;

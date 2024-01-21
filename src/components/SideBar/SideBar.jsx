@@ -19,7 +19,7 @@ export default function SideBar() {
 	return (
 		<S.MainSidebar>
 		<S.SidebarPersonal>
-		<S.SidebarPersonalName>{login}</S.SidebarPersonalName>
+		<S.SidebarPersonalName $theme={theme}>{login}</S.SidebarPersonalName>
 			{theme.theme === "black" ? <SideBarIconBlack/> : <SideBarIconWhite/>}
 		</S.SidebarPersonal>
 		<S.SideBarBlock>

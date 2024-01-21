@@ -2,7 +2,7 @@ import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
-import {chose, set_shuffle_first} from "../../store/idSlice";
+import {chose, set_shuffle_def, set_shuffle_first} from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
 
 export default function Track({id, track, track_add, executor, album, time}) {
@@ -31,6 +31,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 
 	const handleClick = (id) => {
 		dispatch(chose({ id: id }));
+		dispatch(set_shuffle_def({ id: id }));
 		console.log("needed track", tr.find((el, index, array) => el.id === id));
 		dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
 		dispatch(set_shuffle_first({flag: id }));
