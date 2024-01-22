@@ -17,6 +17,7 @@ export const  MainPage = () => {
     let isLoading = useSelector(state => state.main.loading);
     const tracks = useSelector(state => state.main.tracks);
     const id = useSelector(state => state.main.id);
+    const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
 
     useEffect(() => {
         dispatch(setIsLoading({loading: true}));
@@ -29,6 +30,7 @@ export const  MainPage = () => {
     isLoading = useSelector(state => state.main.loading);
     useEffect(() => {
         if (!isLoading) {
+            if (amount_id_tracks !== -1) return ;
             dispatch(set_amount_id_tracks({tracks: tracks}));
             dispatch(set_def_shuffle_arr());
         }

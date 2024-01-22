@@ -8,7 +8,7 @@ export default function TrackList({tracks}) {
 		<SS.MainCenterBlock>
 			<SearchCenter/>
 			<RangeTracks />
-			<CenterBlockContent tracks={tracks}/>
+			<CenterBlockContent/>
 	  	</SS.MainCenterBlock>
 	);
   }

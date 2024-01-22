@@ -2,7 +2,7 @@ import * as S from './Track.styles'
 import {useParams} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
-import {chose, set_shuffle_def, set_shuffle_first} from "../../store/idSlice";
+import {chose, copy_tracks, set_amount_id_tracks, set_shuffle_def, set_shuffle_first} from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
 
 export default function Track({id, track, track_add, executor, album, time}) {
@@ -13,28 +13,17 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	const cur_id = useSelector(state => state.main.id);
 	const isPlaying = useSelector(state => state.main.is_playing);
 
-	// let idCacl;
-	// if (params.id === '1') {
-	// 	idCacl = 8;
-	// }
-	// else if (params.id === '2') {
-	// 	idCacl = 18;
-	// }
-	// else if (params.id === '3') {
-	// 	idCacl = 28;
-	// }
-	// else {
-	// 	idCacl = 8
-	// }
 	const id_track = useSelector(state => state.main.id);
 	const tr = useSelector(state => state.main.tracks);
 
 	const handleClick = (id) => {
+		dispatch(set_amount_id_tracks());
+		dispatch(copy_tracks());
 		dispatch(chose({ id: id }));
 		dispatch(set_shuffle_def({ id: id }));
 		console.log("needed track", tr.find((el, index, array) => el.id === id));
 		dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
-		dispatch(set_shuffle_first({flag: id }));
+		dispatch(set_shuffle_first({ flag: id }));
 	};
 
 	return (

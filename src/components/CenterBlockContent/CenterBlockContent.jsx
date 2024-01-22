@@ -1,7 +1,9 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
+import {useSelector} from "react-redux";
 
-export default function CenterBlockContent({tracks}) {
+export default function CenterBlockContent() {
+	const tracks = useSelector(state => state.main.tracks_page);
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>

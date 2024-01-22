@@ -81,6 +81,7 @@ export const Slice = createSlice({
         login: null,
         password: null,
         tracks: null,
+        tracks_page: null,
         track: null,
         loading: true,
     },
@@ -166,25 +167,38 @@ export const Slice = createSlice({
         },
         set_track: (state, action) => {
             state.track = action.payload.track;
+        },
+        copy_tracks: state => {
+            state.tracks = JSON.parse(JSON.stringify(state.tracks_page));
         }
     },
     extraReducers: (builder) => {
         builder
             .addCase(login.rejected, (state) => console.log("error occured"))
             .addCase(fetchMainTracks.fulfilled, (state, action) => {
-                state.tracks = action.payload;
+                if (state.tracks_page === null && state.tracks === null) {
+                    state.tracks = action.payload;
+                }
+                state.tracks_page = action.payload;
                 state.loading = false;
             })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
+                if (state.tracks_page === null && state.tracks === null) {
+                    if (action.payload.params.id) {
+                        state.tracks = action.payload.data[action.payload.params.id - 1].items;
+                    } else {
+                        state.tracks = action.payload.data[0].items;
+                    }
+                }
                 if (action.payload.params.id) {
-                    state.tracks = action.payload.data[action.payload.params.id - 1].items;
+                    state.tracks_page = action.payload.data[action.payload.params.id - 1].items;
                 } else {
-                    state.tracks = action.payload.data[0].items;
+                    state.tracks_page = action.payload.data[0].items;
                 }
                 state.loading = false;
             })
     },
 })
 
-export const {set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+export const {copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;
