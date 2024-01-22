@@ -4,8 +4,10 @@ import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
 import {chose, copy_tracks, set_amount_id_tracks, set_shuffle_def, set_shuffle_first} from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
+import {useState} from "react";
 
 export default function Track({id, track, track_add, executor, album, time}) {
+	const [like, setLike] = useState(false);
 	const params = useParams();
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
@@ -43,7 +45,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 					<S.TrackAlbum>
 						<S.TrackAlbumLink $theme={theme}>{album}</S.TrackAlbumLink>
 					</S.TrackAlbum>
-					<S.TrackTimeSvg alt="time">
+					<S.TrackTimeSvg $like={like} onClick={() => setLike(!like)} alt="time">
 						<use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
 					</S.TrackTimeSvg>
 					<S.TrackTimeText>{time}</S.TrackTimeText>

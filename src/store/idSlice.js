@@ -228,7 +228,8 @@ export const Slice = createSlice({
             })
             .addCase(getToken.fulfilled, (state, action) => {
                 console.log("access", action.payload.access, "\n", "refresh", action.payload.refresh);
-                // console.log("obj", action.payload.access);
+                state.access = action.payload.access;
+                state.refresh = action.payload.refresh;
             })
     },
 })
