@@ -53,7 +53,6 @@ export const  SelectionsPage = ({header}) => {
     }
     const param = useParams();
     useEffect(() => {
-        // console.log("playing track", tracks[id]);
         dispatch(fetchSelectionTracks(param));
     }, [dispatch]);
 
@@ -64,7 +63,6 @@ export const  SelectionsPage = ({header}) => {
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks]);
-    console.log("selection tracks", tracks);
     if  (isLoading) {
         return (
           <SelectionPageWithPlaceholders header={header}/>

@@ -1,7 +1,36 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createActionCreatorInvariantMiddleware, createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+
+export const getToken = createAsyncThunk(
+    'main/getToken',
+    async function(_, {rejectWithValue}) {
+            const InputMail = document.getElementById("input_mail");
+            const InputPassword = document.getElementById("input_password");
+
+            return fetch("https://skypro-music-api.skyeng.tech/user/token/", {
+                method: "POST",
+                body: JSON.stringify({
+                    email: "test@test.test",
+                    password: "test@test.test",
+                }),
+                headers: {
+                    "content-type": "application/json",
+                },
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((json) => {
+                    return {  access: json.access, refresh: json.refresh};
+                    // return json;
+                });
+    }
+)
 
 export const fetchSelectionTracks = createAsyncThunk(
-    'auth/fetchSelectionTracks',
+    'main/fetchSelectionTracks',
     async function(params, {rejectWithValue, dispatch}) {
         try {
             const apiURL = "https://skypro-music-api.skyeng.tech/catalog/selection/";
@@ -19,7 +48,7 @@ export const fetchSelectionTracks = createAsyncThunk(
 )
 
 export const fetchMainTracks = createAsyncThunk(
-    'auth/fetchTracks',
+    'main/fetchTracks',
     async function(_, {rejectWithValue, dispatch}) {
         try {
             const apiURL = "https://skypro-music-api.skyeng.tech/catalog/track/all/";
@@ -37,7 +66,7 @@ export const fetchMainTracks = createAsyncThunk(
 )
 
 export const login = createAsyncThunk(
-    'auth/login',
+    'main/login',
     async function(_, {rejectWithValue, dispatch}) {
         const InputMail = document.getElementById("input_mail");
         const InputPassword = document.getElementById("input_password");
@@ -196,6 +225,10 @@ export const Slice = createSlice({
                     state.tracks_page = action.payload.data[0].items;
                 }
                 state.loading = false;
+            })
+            .addCase(getToken.fulfilled, (state, action) => {
+                console.log("access", action.payload.access, "\n", "refresh", action.payload.refresh);
+                // console.log("obj", action.payload.access);
             })
     },
 })

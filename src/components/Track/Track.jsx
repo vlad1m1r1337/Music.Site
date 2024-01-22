@@ -21,7 +21,6 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		dispatch(copy_tracks());
 		dispatch(chose({ id: id }));
 		dispatch(set_shuffle_def({ id: id }));
-		console.log("needed track", tr.find((el, index, array) => el.id === id));
 		dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
 		dispatch(set_shuffle_first({ flag: id }));
 	};

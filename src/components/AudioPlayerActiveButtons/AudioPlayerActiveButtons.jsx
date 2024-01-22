@@ -43,7 +43,6 @@ export const AudioPlayerActiveButtons = ({audioRef}) => {
 
     useEffect(() => {
         dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
-        console.log(id);
     }, [id]);
     const nextTrack = () => {
         if (firstElShuffleArr === null) {
