@@ -1,4 +1,29 @@
-import {createActionCreatorInvariantMiddleware, createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+
+export const fetchFavorite = createAsyncThunk(
+    'main/fetchFavorite',
+    async function(accessToken, {rejectWithValue}) {
+        try {
+            // console.log(accessToken);
+            const favoirteUrl = 'https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/'
+            const response = await fetch(favoirteUrl, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${accessToken.accessToken}`,
+                },
+            })
+            if (!response.ok) {
+                throw new Error('Server Error!');
+            }
+            const data = await response.json();
+            console.log(data);
+            return data;
+        }
+        catch(error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
 
 export const getToken = createAsyncThunk(
     'main/getToken',
@@ -117,8 +142,13 @@ export const Slice = createSlice({
     reducers: {
         increment: state => {
             const tr = JSON.parse(JSON.stringify(state.tracks));
-            if (tr.find((el, index, array) => el.id === state.id + 1)) {
-                state.id = (state.id + 1);
+            const foundIndex = tr.findIndex((el) => el.id === state.id);
+
+            if (foundIndex !== -1) {
+                console.log(foundIndex);
+            }
+            if (tr[foundIndex + 1]) {
+                state.id = tr[foundIndex + 1].id;
             }
             else {
                 state.id = tr[0].id;
@@ -126,8 +156,13 @@ export const Slice = createSlice({
         },
         decrement: state => {
             const tr = JSON.parse(JSON.stringify(state.tracks));
-            if (tr.find((el, index, array) => el.id === state.id - 1)) {
-                state.id = (state.id - 1);
+            const foundIndex = tr.findIndex((el) => el.id === state.id);
+
+            if (foundIndex !== -1) {
+                console.log(foundIndex);
+            }
+            if (tr[foundIndex - 1]) {
+                state.id = tr[foundIndex - 1].id;
             }
             else {
                 state.id = tr[tr.length - 1].id;
@@ -227,9 +262,15 @@ export const Slice = createSlice({
                 state.loading = false;
             })
             .addCase(getToken.fulfilled, (state, action) => {
-                console.log("access", action.payload.access, "\n", "refresh", action.payload.refresh);
                 state.access = action.payload.access;
                 state.refresh = action.payload.refresh;
+            })
+            .addCase(fetchFavorite.fulfilled, (state, action) => {
+                // if (state.tracks_page === null && state.tracks === null) {
+                //     state.tracks = action.payload;
+                // }
+                state.tracks_page = action.payload;
+                state.loading = false;
             })
     },
 })

@@ -11,7 +11,7 @@ import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
+import {fetchFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchSelectionTracks, setIsLoading} from "../../store/idSlice";
 
@@ -52,8 +52,16 @@ export const  SelectionsPage = ({header}) => {
         header = Header;
     }
     const param = useParams();
+    const accessToken = useSelector(state => state.main.access);
     useEffect(() => {
-        dispatch(fetchSelectionTracks(param));
+        if (header !== "Мои треки") {
+            dispatch(fetchSelectionTracks(param));
+        }
+        else {
+            console.log("puts");
+            dispatch(fetchFavorite({accessToken}))
+        }
+
     }, [dispatch]);
 
     useEffect(() => {

@@ -27,7 +27,6 @@ export const AppRoutes = () => {
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
-           {/*{(id >= 0) && <AudioPlayer/>}*/}
        </>
     )
 }

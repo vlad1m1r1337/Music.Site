@@ -88,18 +88,18 @@ export const Login = () => {
     //     }
     // };
     //
-    // const getAllTracks = async () => {
-    //     const accessToken = await getToken();
-    //
-    //     fetch("https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/", {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization: `Bearer ${accessToken}`,
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((json) => console.log(json));
-    // }
+    const getAllTracks = async () => {
+        const accessToken = await getToken();
+
+        fetch("https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        })
+            .then((response) => response.json())
+            // .then((json) => console.log(json));
+    }
     //
     // const addTrackToFavorite = async () => {
     //     const accessToken = await getToken();
