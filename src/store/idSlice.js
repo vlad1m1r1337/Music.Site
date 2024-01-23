@@ -1,5 +1,19 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
+export const addFavoriteTrack = createAsyncThunk(
+    'main/addFavoriteTrack',
+    async function(_, {rejectWithValue}) {
+
+    }
+)
+
+export const removeFavoriteTrack = createAsyncThunk(
+    'main/removeFavoriteTrack',
+    async function(_, {rejectWithValue}) {
+
+    }
+)
+
 export const fetchFavorite = createAsyncThunk(
     'main/fetchFavorite',
     async function(accessToken, {rejectWithValue}) {
