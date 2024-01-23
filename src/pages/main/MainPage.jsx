@@ -49,7 +49,7 @@ export const  MainPage = () => {
                         <TrackList tracks={tracks}/>
                         <SideBar/>
                     </S.Main>
-                    {/*{(id >= 0) && <AudioPlayer tracks={tracks[id]}/>}*/}
+                    {/*{(id >= 0) && <AudioPlayer/>}*/}
                 </S.Container>
             </S.Wrapper>
         </>

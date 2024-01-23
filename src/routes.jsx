@@ -8,6 +8,7 @@ import {SelectionsPage} from "./components/SelectionsPage/SelectionsPage";
 import {ProtectedRoute} from "./components/protected-route";
 import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
 import {useSelector} from "react-redux";
+import {Audio} from "./Audio";
 
 export const AppRoutes = () => {
     const tracks = useSelector(state => state.main.tracks);
@@ -18,13 +19,15 @@ export const AppRoutes = () => {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/registr" element={<Registration/>}/>
                 <Route element={<ProtectedRoute/>}>
-                    <Route path="/favorites" element={<SelectionsPage header={"Мои треки"}/>} />
-                    <Route path="/category/:id" element={<SelectionsPage/>}/>
-                    <Route path="/" element={<MainPage/>} />
+                   <Route element={(id >= 0) && <Audio/>}>
+                       <Route path="/favorites" element={<SelectionsPage header={"Мои треки"}/>} />
+                       <Route path="/category/:id" element={<SelectionsPage/>}/>
+                       <Route path="/" element={<MainPage/>} />
+                   </Route>
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
-           {(id >= 0) && <AudioPlayer/>}
+           {/*{(id >= 0) && <AudioPlayer/>}*/}
        </>
     )
 }
