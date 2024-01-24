@@ -14,7 +14,6 @@ export const addFavoriteTrack = createAsyncThunk(
             if (!response.ok) {
                 throw new Error('Server Error!');
             }
-            const data = await response.json();
         }
         catch(error) {
             return rejectWithValue(error.message);
@@ -36,8 +35,6 @@ export const removeFavoriteTrack = createAsyncThunk(
             if (!response.ok) {
                 throw new Error('Server Error!');
             }
-            const data = await response.json();
-            console.log(data);
         }
         catch(error) {
             return rejectWithValue(error.message);
@@ -94,9 +91,6 @@ export const fetchFavorite = createAsyncThunk(
 export const getToken = createAsyncThunk(
     'main/getToken',
     async function(_, {rejectWithValue}) {
-            const InputMail = document.getElementById("input_mail");
-            const InputPassword = document.getElementById("input_password");
-
             return fetch("https://skypro-music-api.skyeng.tech/user/token/", {
                 method: "POST",
                 body: JSON.stringify({
@@ -115,7 +109,6 @@ export const getToken = createAsyncThunk(
                 })
                 .then((json) => {
                     return {  access: json.access, refresh: json.refresh};
-                    // return json;
                 });
     }
 )
@@ -175,7 +168,6 @@ export const login = createAsyncThunk(
             if (!response.ok) {
                 throw new Error('Server Error!');
             }
-            const data  = await response.json();
             dispatch(set_allow({ allowed: true }));
             dispatch(set_login({login: InputMail.value}));
             dispatch(set_password({password: InputPassword.value}));
@@ -211,9 +203,6 @@ export const Slice = createSlice({
             const tr = JSON.parse(JSON.stringify(state.tracks));
             const foundIndex = tr.findIndex((el) => el.id === state.id);
 
-            if (foundIndex !== -1) {
-                console.log(foundIndex);
-            }
             if (tr[foundIndex + 1]) {
                 state.id = tr[foundIndex + 1].id;
             }
@@ -225,9 +214,6 @@ export const Slice = createSlice({
             const tr = JSON.parse(JSON.stringify(state.tracks));
             const foundIndex = tr.findIndex((el) => el.id === state.id);
 
-            if (foundIndex !== -1) {
-                console.log(foundIndex);
-            }
             if (tr[foundIndex - 1]) {
                 state.id = tr[foundIndex - 1].id;
             }
@@ -256,27 +242,17 @@ export const Slice = createSlice({
             state.shuffle_arr[0] = 'null';
             state.shuffle_flag = 1;
         },
-        shuffle_next: (state, action) => {
-            if (state.shuffle_flag < 1) {
-                state.id = state.shuffle_arr[state.shuffle_arr.length - 2];
-                state.shuffle_arr.pop();
-            }
-            else {
-                state.id = Math.floor(Math.random() * (state.amount_id_tracks - action.payload.first_id + 1)) + action.payload.first_id;
-                state.shuffle_arr.push(state.id);
-            }
-            state.shuffle_flag++;
+        shuffle_next: (state) => {
+            const temp = JSON.parse(JSON.stringify(state.tracks));
+            console.log(temp);
+            const random_id = Math.floor(Math.random() * (temp.length));
+            state.id = temp[random_id].id;
         },
-        shuffle_prev: (state, action) => {
-            if (state.shuffle_flag > 1) {
-                state.id = state.shuffle_arr[state.shuffle_arr.length - 2];
-                state.shuffle_arr.pop();
-            }
-            else {
-                state.id = Math.floor(Math.random() * (state.amount_id_tracks - action.payload.first_id + 1)) + action.payload.first_id;
-                state.shuffle_arr.push(state.id);
-            }
-            state.shuffle_flag--;
+        shuffle_prev: (state) => {
+            const temp = JSON.parse(JSON.stringify(state.tracks));
+            console.log(temp);
+            const random_id = Math.floor(Math.random() * (temp.length));
+            state.id = temp[random_id].id;
         },
         setIsLoading: (state, action) => {
             state.loading = action.payload.loading;
@@ -285,9 +261,7 @@ export const Slice = createSlice({
             state.isAllowed = action.payload.allowed;
             if (!action.payload.allowed) {
                 state.id = -1;
-                // state.tracks = null;
                 state.track = null;
-                // state.shuffle_arr = null;
             }
         },
         set_login: (state, action) => {
@@ -333,15 +307,11 @@ export const Slice = createSlice({
                 state.refresh = action.payload.refresh;
             })
             .addCase(fetchFavorite.fulfilled, (state, action) => {
-                // if (state.tracks_page === null && state.tracks === null) {
-                //     state.tracks = action.payload;
-                // }
                 state.tracks_page = action.payload;
                 state.loading = false;
             })
             .addCase(getFavorite.fulfilled, (state, action) => {
                 state.track_favoites = action.payload;
-                console.log("track favorites", state.track_favoites);
             })
     },
 })

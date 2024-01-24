@@ -2,7 +2,6 @@ import * as S from "../../App.styles";
 import NavMenu from "../../components/NavMenu/NavMenu";
 import TrackList from "../../components/TrackList/TrackList";
 import SideBar from "../../components/SideBar/SideBar";
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import {useEffect} from "react";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
@@ -16,7 +15,6 @@ export const  MainPage = () => {
     const dispatch = useDispatch();
     let isLoading = useSelector(state => state.main.loading);
     const tracks = useSelector(state => state.main.tracks);
-    const id = useSelector(state => state.main.id);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
     const accessToken = useSelector(state => state.main.access);
 
@@ -24,7 +22,7 @@ export const  MainPage = () => {
         dispatch(setIsLoading({loading: true}));
         dispatch(fetchMainTracks());
         dispatch(getFavorite({accessToken}));
-    }, [dispatch]);
+    }, [dispatch, accessToken]);
 
     isLoading = useSelector(state => state.main.loading);
     useEffect(() => {
@@ -33,7 +31,7 @@ export const  MainPage = () => {
             dispatch(set_amount_id_tracks({tracks: tracks}));
             dispatch(set_def_shuffle_arr());
         }
-    }, [isLoading, dispatch, tracks]);
+    }, [isLoading, dispatch, tracks, amount_id_tracks]);
     if (isLoading) {
        return (
            <MainPageWithPlaceholders/>

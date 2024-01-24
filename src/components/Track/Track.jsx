@@ -1,5 +1,5 @@
 import * as S from './Track.styles'
-import {useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -15,15 +15,12 @@ import {useEffect, useState} from "react";
 
 export default function Track({id, track, track_add, executor, album, time}) {
 	const [like, setLike] = useState(false);
-
-	const params = useParams();
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
 
 	const cur_id = useSelector(state => state.main.id);
 	const isPlaying = useSelector(state => state.main.is_playing);
 
-	const id_track = useSelector(state => state.main.id);
 	const tr = useSelector(state => state.main.tracks);
 	const access = useSelector(state => state.main.access);
 
@@ -35,17 +32,29 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
 		dispatch(set_shuffle_first({ flag: id }));
 	};
-	const favoriteAction = () => {
+	const navigate = useNavigate();
+	const favoriteAction = async () => {
 		setLike(!like);
 		if (!like) {
-			console.log("addFavoriteTrack");
-			dispatch(addFavoriteTrack({ access: access, id: id }));
+			try {
+				await dispatch(addFavoriteTrack({ access: access, id: id })).unwrap();
+			}
+			catch(error) {
+				navigate("/login", { replace: true });
+				return ;
+			}
 		}
-		else  {
-			console.log("removeFavoriteTrack");
-			dispatch(removeFavoriteTrack({ access: access, id: id }))
+		else {
+			try {
+				await dispatch(removeFavoriteTrack({ access: access, id: id })).unwrap();
+			}
+			catch (error) {
+				navigate("/login", { replace: true });
+				return ;
+			}
 		}
-		// (!like) ? dispatch(addFavoriteTrack({ access: access, id: id })) : dispatch(removeFavoriteTrack({ access: access, id: id }));
+
+		(!like) ? dispatch(addFavoriteTrack({ access: access, id: id, navigate: navigate })).unwrap().catch(() => navigate("/")) : dispatch(removeFavoriteTrack({ access: access, id: id, navigate: navigate })).unwrap().catch(() => navigate("/"));
 	}
 	const track_favoites = useSelector(state => state.main.track_favoites);
 
@@ -53,7 +62,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		if ( track_favoites && track_favoites.find((el, index, array) => el.id === id)) {
 			setLike(true);
 		}
-	}, [track_favoites]);
+	}, [track_favoites, id]);
 
 	return (
 		<S.PlayListItem>

@@ -1,6 +1,5 @@
 import * as S from "../../App.styles";
 import NavMenu from "../NavMenu/NavMenu";
-import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import * as SS from "../TrackList/TrackList.styles";
 import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
@@ -11,7 +10,7 @@ import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {fetchFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
+import {fetchFavorite, getFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchSelectionTracks, setIsLoading} from "../../store/idSlice";
 
@@ -29,7 +28,6 @@ export const  SelectionsPage = ({header}) => {
     const dispatch = useDispatch();
     let isLoading = useSelector(state => state.main.loading);
     const tracks = useSelector(state => state.main.tracks);
-    const id = useSelector(state => state.main.id);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
 
 
@@ -61,7 +59,7 @@ export const  SelectionsPage = ({header}) => {
             dispatch(fetchFavorite({accessToken}));
         }
 
-    }, [dispatch]);
+    }, [dispatch, accessToken, header, param]);
 
     useEffect(() => {
         if (!isLoading) {
@@ -69,7 +67,12 @@ export const  SelectionsPage = ({header}) => {
             dispatch(set_amount_id_tracks({tracks: tracks}));
             dispatch(set_def_shuffle_arr());
         }
-    }, [isLoading, dispatch, tracks]);
+    }, [isLoading, dispatch, tracks, amount_id_tracks]);
+
+    useEffect(() => {
+        dispatch(getFavorite({accessToken}));
+    }, [dispatch, accessToken]);
+
     if  (isLoading) {
         return (
           <SelectionPageWithPlaceholders header={header}/>
@@ -88,7 +91,6 @@ export const  SelectionsPage = ({header}) => {
                             </SS.MainCenterBlock>
                             <SideBarAuth/>
                         </S.Main>
-                        {/*{(id >= 0) && <AudioPlayer/>}*/}
                     </S.Container>
                 </S.Wrapper>
             </>
