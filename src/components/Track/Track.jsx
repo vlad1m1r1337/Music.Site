@@ -24,6 +24,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 
 	const id_track = useSelector(state => state.main.id);
 	const tr = useSelector(state => state.main.tracks);
+	const access = useSelector(state => state.main.access);
 
 	const handleClick = (id) => {
 		dispatch(set_amount_id_tracks());
@@ -35,7 +36,15 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	};
 	const favoriteAction = () => {
 		setLike(!like);
-		like ? dispatch(addFavoriteTrack()) : dispatch(removeFavoriteTrack());
+		if (!like) {
+			console.log("dispatch(addFavoriteTrack({ access: access, id: id }));")
+			dispatch(addFavoriteTrack({ access, id }));
+		}
+		else  {
+			console.log("dispatch(removeFavoriteTrack({ access: access, id: id }))")
+			dispatch(removeFavoriteTrack({ access: access, id: id }))
+		}
+		// (!like) ? dispatch(addFavoriteTrack({ access: access, id: id })) : dispatch(removeFavoriteTrack({ access: access, id: id }));
 	}
 	return (
 		<S.PlayListItem>

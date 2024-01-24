@@ -2,15 +2,49 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 export const addFavoriteTrack = createAsyncThunk(
     'main/addFavoriteTrack',
-    async function(_, {rejectWithValue}) {
-
+    async function({access, id}, {rejectWithValue}) {
+        try {
+            console.log(access, id);
+            const url = `https://skypro-music-api.skyeng.tech/catalog/track/${id}/favorite/`;
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${access}`,
+                },
+            })
+            if (!response.ok) {
+                throw new Error('Server Error!');
+            }
+            const data = await response.json();
+            console.log(data);
+        }
+        catch(error) {
+            console.log("error");
+            return rejectWithValue(error.message);
+        }
     }
 )
 
 export const removeFavoriteTrack = createAsyncThunk(
     'main/removeFavoriteTrack',
-    async function(_, {rejectWithValue}) {
-
+    async function(access, id, {rejectWithValue}) {
+        try {
+            const url = `https://skypro-music-api.skyeng.tech/catalog/track/${id}/favorite/`;
+            const response = await fetch(url, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${access}`,
+                },
+            })
+            if (!response.ok) {
+                throw new Error('Server Error!');
+            }
+            const data = await response.json();
+            console.log(data);
+        }
+        catch(error) {
+            return rejectWithValue(error.message);
+        }
     }
 )
 
@@ -18,7 +52,6 @@ export const fetchFavorite = createAsyncThunk(
     'main/fetchFavorite',
     async function(accessToken, {rejectWithValue}) {
         try {
-            // console.log(accessToken);
             const favoirteUrl = 'https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/'
             const response = await fetch(favoirteUrl, {
                 method: "GET",
@@ -96,6 +129,7 @@ export const fetchMainTracks = createAsyncThunk(
                 throw new Error('Server Error!');
             }
             const data = await response.json();
+            console.log(data);
             return data;
         }
         catch (error) {
