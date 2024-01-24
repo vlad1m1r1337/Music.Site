@@ -7,7 +7,7 @@ import {useEffect} from "react";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
+import {getFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchMainTracks, setIsLoading} from "../../store/idSlice"
 
@@ -18,13 +18,12 @@ export const  MainPage = () => {
     const tracks = useSelector(state => state.main.tracks);
     const id = useSelector(state => state.main.id);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
+    const accessToken = useSelector(state => state.main.access);
 
     useEffect(() => {
         dispatch(setIsLoading({loading: true}));
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(fetchMainTracks());
+        dispatch(getFavorite({accessToken}));
     }, [dispatch]);
 
     isLoading = useSelector(state => state.main.loading);
@@ -49,7 +48,6 @@ export const  MainPage = () => {
                         <TrackList tracks={tracks}/>
                         <SideBar/>
                     </S.Main>
-                    {/*{(id >= 0) && <AudioPlayer/>}*/}
                 </S.Container>
             </S.Wrapper>
         </>

@@ -58,8 +58,7 @@ export const  SelectionsPage = ({header}) => {
             dispatch(fetchSelectionTracks(param));
         }
         else {
-            console.log("puts");
-            dispatch(fetchFavorite({accessToken}))
+            dispatch(fetchFavorite({accessToken}));
         }
 
     }, [dispatch]);

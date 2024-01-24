@@ -11,10 +11,11 @@ import {
 	set_shuffle_first
 } from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function Track({id, track, track_add, executor, album, time}) {
 	const [like, setLike] = useState(false);
+
 	const params = useParams();
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
@@ -37,15 +38,23 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	const favoriteAction = () => {
 		setLike(!like);
 		if (!like) {
-			console.log("dispatch(addFavoriteTrack({ access: access, id: id }));")
-			dispatch(addFavoriteTrack({ access, id }));
+			console.log("addFavoriteTrack");
+			dispatch(addFavoriteTrack({ access: access, id: id }));
 		}
 		else  {
-			console.log("dispatch(removeFavoriteTrack({ access: access, id: id }))")
+			console.log("removeFavoriteTrack");
 			dispatch(removeFavoriteTrack({ access: access, id: id }))
 		}
 		// (!like) ? dispatch(addFavoriteTrack({ access: access, id: id })) : dispatch(removeFavoriteTrack({ access: access, id: id }));
 	}
+	const track_favoites = useSelector(state => state.main.track_favoites);
+
+	useEffect(() => {
+		if ( track_favoites && track_favoites.find((el, index, array) => el.id === id)) {
+			setLike(true);
+		}
+	}, [track_favoites]);
+
 	return (
 		<S.PlayListItem>
 				<S.PlaylistTrack>

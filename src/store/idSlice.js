@@ -4,7 +4,6 @@ export const addFavoriteTrack = createAsyncThunk(
     'main/addFavoriteTrack',
     async function({access, id}, {rejectWithValue}) {
         try {
-            console.log(access, id);
             const url = `https://skypro-music-api.skyeng.tech/catalog/track/${id}/favorite/`;
             const response = await fetch(url, {
                 method: "POST",
@@ -16,10 +15,8 @@ export const addFavoriteTrack = createAsyncThunk(
                 throw new Error('Server Error!');
             }
             const data = await response.json();
-            console.log(data);
         }
         catch(error) {
-            console.log("error");
             return rejectWithValue(error.message);
         }
     }
@@ -27,7 +24,7 @@ export const addFavoriteTrack = createAsyncThunk(
 
 export const removeFavoriteTrack = createAsyncThunk(
     'main/removeFavoriteTrack',
-    async function(access, id, {rejectWithValue}) {
+    async function({access, id}, {rejectWithValue}) {
         try {
             const url = `https://skypro-music-api.skyeng.tech/catalog/track/${id}/favorite/`;
             const response = await fetch(url, {
@@ -41,6 +38,29 @@ export const removeFavoriteTrack = createAsyncThunk(
             }
             const data = await response.json();
             console.log(data);
+        }
+        catch(error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
+
+export const getFavorite = createAsyncThunk(
+    'main/getFavorite',
+    async function(accessToken, {rejectWithValue}) {
+        try {
+            const favoriteUrl = 'https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/'
+            const response = await fetch(favoriteUrl, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${accessToken.accessToken}`,
+                },
+            })
+            if (!response.ok) {
+                throw new Error('Server Error!');
+            }
+            const data = await response.json();
+            return data;
         }
         catch(error) {
             return rejectWithValue(error.message);
@@ -63,7 +83,6 @@ export const fetchFavorite = createAsyncThunk(
                 throw new Error('Server Error!');
             }
             const data = await response.json();
-            console.log(data);
             return data;
         }
         catch(error) {
@@ -129,7 +148,6 @@ export const fetchMainTracks = createAsyncThunk(
                 throw new Error('Server Error!');
             }
             const data = await response.json();
-            console.log(data);
             return data;
         }
         catch (error) {
@@ -185,6 +203,7 @@ export const Slice = createSlice({
         tracks: null,
         tracks_page: null,
         track: null,
+        track_favoites: null,
         loading: true,
     },
     reducers: {
@@ -319,6 +338,10 @@ export const Slice = createSlice({
                 // }
                 state.tracks_page = action.payload;
                 state.loading = false;
+            })
+            .addCase(getFavorite.fulfilled, (state, action) => {
+                state.track_favoites = action.payload;
+                console.log("track favorites", state.track_favoites);
             })
     },
 })
