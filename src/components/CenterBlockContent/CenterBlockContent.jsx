@@ -1,7 +1,9 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
+import {useSelector} from "react-redux";
 
-export default function CenterBlockContent({tracks}) {
+export default function CenterBlockContent() {
+	const tracks = useSelector(state => state.main.tracks_page);
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>
@@ -10,7 +12,7 @@ export default function CenterBlockContent({tracks}) {
 				<S.Col03>АЛЬБОМ</S.Col03>
 				<S.Col04>
 					<S.PlayListTitleSvg alt="time">
-						<use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
+						<use xlinkHref="/img/icon/sprite.svg#icon-watch"></use>
 					</S.PlayListTitleSvg>
 				</S.Col04>
 			</S.ContentTitle>

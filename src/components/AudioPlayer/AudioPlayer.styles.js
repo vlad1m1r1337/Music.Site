@@ -25,6 +25,7 @@ export const BarPlayerProgress = styled.div`
 `
 
 export const BarPlayerBlock = styled.div`
+  background-color: ${prop => prop.$theme.background};
   height: 73px;
   display: -webkit-box;
   display: -ms-flexbox;

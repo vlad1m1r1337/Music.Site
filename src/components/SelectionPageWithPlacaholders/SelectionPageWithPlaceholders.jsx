@@ -16,19 +16,19 @@ const StyledH = styled.h1`
   line-height: 64px;
   margin-bottom: 37px;
 `
-export default function SelectionPageWithPlaceholders({header, setAllowed}) {
+export default function SelectionPageWithPlaceholders({header}) {
     const {theme} = useThemeContext();
     return (
         <S.Wrapper>
             <S.Container $theme={theme}>
                 <S.Main>
-                    <NavMenu setAllowed={setAllowed}/>
+                    <NavMenu/>
                     <SS.MainCenterBlock>
                         <SearchCenter/>
                         <StyledH>{header}</StyledH>
                         <CenterBlockContentWithPlaceholders amount={10}/>
                     </SS.MainCenterBlock>
-                    <SideBarAuth setAllowed={setAllowed}/>
+                    <SideBarAuth/>
                 </S.Main>
             </S.Container>
         </S.Wrapper>

@@ -5,19 +5,22 @@ import AudioPlayerInfo from "../AudioPlayerInfo/AudioPlayerInfo";
 import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerBarVolumeBlock";
 import {useThemeContext} from "../../contexts/color_theme";
 import {AudioPlayerActiveButtons} from "../AudioPlayerActiveButtons/AudioPlayerActiveButtons";
+import {useSelector} from "react-redux";
 
 
-export default function AudioPlayer({tracks}) {
-
+export default function AudioPlayer() {
 	const audioRef = useRef(null);
 
 	const {theme} = useThemeContext();
 
 	const [loadMetaData, setLoadMetaData] = useState(false);
 
-	const [volume, setVolume] = useState(50);
+	const [volume, setVolume] = useState(1);
 
 	let [currentTime, setCurrentTime] = useState(0);
+
+	// const id = useSelector(state => state.main.id);
+	const tracks = useSelector(state => state.main.track);
 
 	let name;
 	let author;
@@ -37,7 +40,7 @@ export default function AudioPlayer({tracks}) {
 		author = "author";
 	}
 
-	useEffect(() => {
+	useEffect(() => 	{
 		audioRef.current.volume = volume / 100;
 	}, [volume]);
 
@@ -51,7 +54,6 @@ export default function AudioPlayer({tracks}) {
 			setLoadMetaData(true);
 		};
 	}, []);
-
 
 	return (
 		<>
@@ -68,7 +70,7 @@ export default function AudioPlayer({tracks}) {
 							currentTime={currentTime}
 							setCurrentTime={setCurrentTime}
 						></AudioPlayerProgressBar>}
-						<SAudio.BarPlayerBlock>
+						<SAudio.BarPlayerBlock $theme={theme}>
 							<SAudio.BarPlayer>
 								<AudioPlayerActiveButtons audioRef={audioRef}/>
 								<SAudio.PlayerTrackPlay>

@@ -1,10 +1,13 @@
 import * as S from './NavMenuCatalog.styles'
 import {useThemeContext} from "../../contexts/color_theme";
+import {useDispatch} from "react-redux";
+import {set_allow} from "../../store/idSlice";
 
-export default function NavMenuCatalog({setAllowed}) {
+export default function NavMenuCatalog() {
+	const dispatch = useDispatch();
 	const signOut = () => {
 		localStorage.removeItem('user');
-		setAllowed(false);
+		dispatch(set_allow({allowed: false}));
 	}
 	const {toggleTheme} = useThemeContext();
 

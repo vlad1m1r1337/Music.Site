@@ -12,8 +12,9 @@ import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
 import {increment} from "../../store/idSlice";
 import {decrement} from "../../store/idSlice";
-import {shuffle_next, shuffle_prev, push_first_shuffle_id} from "../../store/idSlice";
-import {useState} from "react";
+import {shuffle_next, shuffle_prev} from "../../store/idSlice";
+import {useEffect, useState} from "react";
+import {set_track} from "../../store/idSlice";
 
 export const PlayerControls = styled.div`
   display: -webkit-box;
@@ -27,35 +28,34 @@ export const PlayerControls = styled.div`
 `
 
 export const AudioPlayerActiveButtons = ({audioRef}) => {
+    const dispatch = useDispatch();
+
     const [repeat, setRepeat] = useState(true);
 
     const {theme} = useThemeContext();
 
     const [shuffle, setShuffle] = useState(false)
 
-    const dispatch = useDispatch();
+    const tr = useSelector(state => state.main.tracks);
+    const id = useSelector(state => state.main.id);
 
-    const firstElShuffleArr = useSelector(state => state.ids.shuffle_arr);
+    useEffect(() => {
+        dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
+    }, [id, dispatch, tr]);
     const nextTrack = () => {
-        if (firstElShuffleArr === null) {
-            dispatch(push_first_shuffle_id());
-        }
         if (shuffle) {
-            dispatch(shuffle_next())
+            dispatch(shuffle_next());
         }
         else {
-            dispatch(increment())
+            dispatch(increment());
         }
     }
     const prevTrack = () => {
-        if (firstElShuffleArr === null) {
-            dispatch(push_first_shuffle_id());
-        }
         if (shuffle) {
-            dispatch(shuffle_prev())
+            dispatch(shuffle_prev());
         }
         else {
-            dispatch(decrement())
+            dispatch(decrement());
         }
     }
     function cycleExec() {

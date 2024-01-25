@@ -1,19 +1,18 @@
 import * as S from "../../App.styles";
 import NavMenu from "../NavMenu/NavMenu";
-import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import * as SS from "../TrackList/TrackList.styles";
 import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {set_amount_id_tracks, set_def, set_def_shuffle_arr} from "../../store/idSlice";
+import {fetchFavorite, getFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
-import {fetchSelectionsData} from "../../fetchData/fetchSelectionsData";
+import {fetchSelectionTracks, setIsLoading} from "../../store/idSlice";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -24,20 +23,16 @@ const StyledH = styled.h1`
   margin-bottom: 37px;
 `
 
-export const  SelectionsPage = ({header, setAllowed}) => {
-    const dispatch = useDispatch();
-
+export const  SelectionsPage = ({header}) => {
     const {theme} = useThemeContext();
-
-    const [tracks, setTracks] = useState(null);
-
-    const [isLoading, setIsLoading] = useState(true);
-
-    const id = useSelector(state => state.ids.id);
+    const dispatch = useDispatch();
+    let isLoading = useSelector(state => state.main.loading);
+    const tracks = useSelector(state => state.main.tracks);
+    const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
 
 
     useEffect(() => {
-        dispatch(set_def());
+        dispatch(setIsLoading({loading: true}));
     }, [dispatch]);
 
     const params = useParams();
@@ -54,38 +49,50 @@ export const  SelectionsPage = ({header, setAllowed}) => {
         }
         header = Header;
     }
-
+    const param = useParams();
+    const accessToken = useSelector(state => state.main.access);
     useEffect(() => {
-            fetchSelectionsData(setTracks, setIsLoading, params);
-    }, [params]);
+        if (header !== "Мои треки") {
+            dispatch(fetchSelectionTracks(param));
+        }
+        else {
+            dispatch(fetchFavorite({accessToken}));
+        }
 
+    }, [dispatch, accessToken, header, param]);
 
     useEffect(() => {
         if (!isLoading) {
+            if (amount_id_tracks !== -1) return ;
             dispatch(set_amount_id_tracks({tracks: tracks}));
             dispatch(set_def_shuffle_arr());
         }
-    }, [isLoading, dispatch, tracks]);
+    }, [isLoading, dispatch, tracks, amount_id_tracks]);
+
+    useEffect(() => {
+        dispatch(getFavorite({accessToken}));
+    }, [dispatch, accessToken]);
 
     if  (isLoading) {
         return (
-          <SelectionPageWithPlaceholders header={header} setAllowed={setAllowed}/>
+          <SelectionPageWithPlaceholders header={header}/>
         )
     }
     return (
-            <S.Wrapper>
-                <S.Container $theme={theme}>
-                    <S.Main>
-                        <NavMenu/>
-                        <SS.MainCenterBlock>
-                            <SearchCenter/>
-                            <StyledH>{header}</StyledH>
-                            {tracks && <CenterBlockContent tracks={tracks}/>}
-                        </SS.MainCenterBlock>
-                        <SideBarAuth setAllowed={setAllowed}/>
-                    </S.Main>
-                    {tracks && (id >= 0) && <AudioPlayer tracks={tracks[id]}/>}
-                </S.Container>
-            </S.Wrapper>
+            <>
+                <S.Wrapper>
+                    <S.Container $theme={theme}>
+                        <S.Main>
+                            <NavMenu/>
+                            <SS.MainCenterBlock>
+                                <SearchCenter/>
+                                <StyledH>{header}</StyledH>
+                                <CenterBlockContent tracks={tracks}/>
+                            </SS.MainCenterBlock>
+                            <SideBarAuth/>
+                        </S.Main>
+                    </S.Container>
+                </S.Wrapper>
+            </>
     )
 }

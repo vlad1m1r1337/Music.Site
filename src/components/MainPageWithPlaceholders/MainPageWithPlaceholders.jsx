@@ -7,20 +7,20 @@ import * as SS from "../TrackList/TrackList.styles";
 import CenterBlockContentWithPlaceholders from "../CenterBlockContentWithPlaceholders/CenterBlockContentWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 
-export default function MainPageWithPlaceholders({setAllowed}) {
+export default function MainPageWithPlaceholders() {
     const {theme} = useThemeContext();
 
     return (
         <S.Wrapper>
             <S.Container $theme={theme}>
                 <S.Main>
-                    <NavMenu setAllowed={setAllowed}/>
+                    <NavMenu/>
                     <SS.MainCenterBlock>
                         <SearchCenter/>
                         <RangeTracks />
                         <CenterBlockContentWithPlaceholders amount={29}/>
                     </SS.MainCenterBlock>
-                    <SideBar setAllowed={setAllowed}/>
+                    <SideBar/>
                 </S.Main>
             </S.Container>
         </S.Wrapper>
