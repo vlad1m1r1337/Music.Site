@@ -126,7 +126,7 @@ export const TrackAlbumLink = styled.a`
 export const TrackTimeSvg = styled.svg`
 	width: 14px;
 	height: 12px;
-	margin-right: 17px;
+    margin-right: 4px;
     fill: ${prop => prop.$like ? 'blueviolet' : 'transparent'};
     stroke: ${prop => prop.$like ? 'blueviolet' : '#696969'};
 `
@@ -157,4 +157,12 @@ export const BlueVioletDot = styled.img`
     }
     animation: ${prop => prop.$isPlaying ? "pulse 1.8s ease-in-out infinite alternate" : "none"};
     position: absolute;
+`
+
+export const TrackTimeDiv = styled.div`
+    display: flex;
+    margin-left: -2px;
+    margin-top: -2px;
+    padding: 4px;
+}
 `

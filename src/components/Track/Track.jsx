@@ -12,6 +12,7 @@ import {
 } from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
 import {useEffect, useState} from "react";
+import {TrackTimeDiv, TrackTimeSvg} from "./Track.styles";
 
 export default function Track({id, track, track_add, executor, album, time}) {
 	const [like, setLike] = useState(false);
@@ -37,7 +38,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		setLike(!like);
 		if (!like) {
 			try {
-				await dispatch(addFavoriteTrack({ access: access, id: id })).unwrap();
+				await dispatch(addFavoriteTrack({ access: access, id: id }));
 			}
 			catch(error) {
 				navigate("/login", { replace: true });
@@ -46,7 +47,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		}
 		else {
 			try {
-				await dispatch(removeFavoriteTrack({ access: access, id: id })).unwrap();
+				await dispatch(removeFavoriteTrack({ access: access, id: id }));
 			}
 			catch (error) {
 				navigate("/login", { replace: true });
@@ -82,9 +83,11 @@ export default function Track({id, track, track_add, executor, album, time}) {
 					<S.TrackAlbum>
 						<S.TrackAlbumLink $theme={theme}>{album}</S.TrackAlbumLink>
 					</S.TrackAlbum>
-					<S.TrackTimeSvg $like={like} onClick={favoriteAction} alt="time">
-						<use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-					</S.TrackTimeSvg>
+					<TrackTimeDiv onClick={favoriteAction}>
+						<S.TrackTimeSvg $like={like} alt="time">
+							<use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
+						</S.TrackTimeSvg>
+					</TrackTimeDiv>
 					<S.TrackTimeText>{time}</S.TrackTimeText>
 				</S.PlaylistTrack>
 		</S.PlayListItem>
