@@ -67,7 +67,7 @@ export const AudioPlayerActiveButtons = ({audioRef}) => {
             {theme.theme === "black" ? (
                 <>
                     <AudioPlayerButtonPrev prevTrack={prevTrack}/>
-                    <AudioPlayerPlayButton audioRef={audioRef}/>
+                    <AudioPlayerPlayButton audioRef={audioRef}/>git
                     <AudioPlayerNextBlack nextTrack={nextTrack}/>
                     <AudioPlayerButtonRepeatBlack repeat={repeat} cycleExec={cycleExec}/>
                     <AudioPlayerBtnShuffle $theme={theme} setShuffle={setShuffle} shuffle={shuffle}/>
