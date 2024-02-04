@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AudioPlayerNextWhite/> should render successfully and match snapshot 1`] = `
+<div>
+  <div
+    class="sc-jsEeA-d kDKjQU"
+  >
+    <svg
+      alt="next"
+      class="sc-kFCrIq iLjXHm"
+    >
+      <use
+        xlink:href="/img/icon/sprite.svg#icon-next-white"
+      />
+    </svg>
+  </div>
+</div>
+`;
