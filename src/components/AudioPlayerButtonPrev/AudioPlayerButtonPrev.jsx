@@ -6,6 +6,7 @@ export function AudioPlayerButtonPrev({prevTrack}) {
             <SAudio.PlayerBtnPrevSvg alt="prev">
                 <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
             </SAudio.PlayerBtnPrevSvg>
+            {/*<button type="button">lol_omg</button>*/}
         </SAudio.PlayerBtnPrev>
     )
 }
