@@ -65,6 +65,14 @@ export const ButtonPurpl = styled.button`
 
 
 export const DivInput = styled.div`
-  display: flex;
-  flex-direction: column;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+`
+
+export const ParagraphErrorLog = styled.p`
+    color: red;
+    font-size: 1rem;
+    position: absolute;
+    top: 520px;
 `

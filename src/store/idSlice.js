@@ -173,6 +173,7 @@ export const login = createAsyncThunk(
             dispatch(set_password({password: InputPassword.value}));
         }
         catch(error) {
+            console.log("123")
             return rejectWithValue(error.message);
         }
     }

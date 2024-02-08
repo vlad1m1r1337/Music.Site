@@ -3,6 +3,7 @@ import * as S from "./Login.styles";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {getToken, login} from "../../store/idSlice";
+import {ParagraphErrorLog} from "./Login.styles";
 const GlobalStyle = createGlobalStyle`
 body {
   background-color: #000000D9;
@@ -20,7 +21,8 @@ export const Login = () => {
         dispatch(getToken());
         dispatch(login())
             .unwrap()
-            .then(() => navigate("/"));
+            .then(() => navigate("/"))
+            .catch(() => console.log("error"));
     }
     return (
     <>
@@ -31,10 +33,7 @@ export const Login = () => {
                 <S.Input id="input_mail" placeholder="Почта" type="text"/>
                 <S.Input id="input_password" placeholder="Пароль" type="password"/>
             </S.DivInput>
-            <h1 style={{
-                color: "red",
-                fontSize: "1rem"
-            }}>Неверный логин или пароль</h1>
+            {/*<S.ParagraphErrorLog>Неверный логин или пароль</S.ParagraphErrorLog>*/}
             <S.ButtonPurpl onClick={logIn}>Войти</S.ButtonPurpl>
             <S.ButtonWhite onClick={handleRegistryClick}>Зарегистрироваться</S.ButtonWhite>
         </S.Div>
