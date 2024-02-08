@@ -31,8 +31,12 @@ export const Login = () => {
                 <S.Input id="input_mail" placeholder="Почта" type="text"/>
                 <S.Input id="input_password" placeholder="Пароль" type="password"/>
             </S.DivInput>
+            <h1 style={{
+                color: "red",
+                fontSize: "1rem"
+            }}>Неверный логин или пароль</h1>
             <S.ButtonPurpl onClick={logIn}>Войти</S.ButtonPurpl>
-            <S.ButtonWhite onClick={handleRegistryClick}>Зарегестрироваться</S.ButtonWhite>
+            <S.ButtonWhite onClick={handleRegistryClick}>Зарегистрироваться</S.ButtonWhite>
         </S.Div>
     </>
     )

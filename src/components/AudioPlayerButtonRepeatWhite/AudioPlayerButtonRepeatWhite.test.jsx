@@ -1,5 +1,6 @@
 import {AudioPlayerButtonRepeatWhite} from "./AudioPlayerButtonRepeatWhite";
 import {render} from "@testing-library/react";
+import '@testing-library/jest-dom/extend-expect';
 import {Provider} from "react-redux";
 import store from "../../store";
 
