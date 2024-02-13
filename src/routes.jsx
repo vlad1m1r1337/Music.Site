@@ -6,12 +6,10 @@ import {Registration} from "./pages/registration/Registration";
 import {NotFound} from "./pages/not-found/NotFound";
 import {SelectionsPage} from "./components/SelectionsPage/SelectionsPage";
 import {ProtectedRoute} from "./components/protected-route";
-import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
 import {useSelector} from "react-redux";
 import {Audio} from "./Audio";
 
 export const AppRoutes = () => {
-    const tracks = useSelector(state => state.main.tracks);
     const id = useSelector(state => state.main.id);
     return (
        <>

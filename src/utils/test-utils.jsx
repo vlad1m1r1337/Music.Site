@@ -7,7 +7,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 const AllProviders = ({ children }) => {
-    const [currentTheme, setCurrentTheme] = useState(themes.light);
+    const [currentTheme, setCurrentTheme] = useState(themes.dark);
 
     const toggleTheme = () => {
         if (currentTheme === themes.dark) {

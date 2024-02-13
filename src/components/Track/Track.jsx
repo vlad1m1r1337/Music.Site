@@ -12,7 +12,7 @@ import {
 } from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
 import {useEffect, useState} from "react";
-import {TrackTimeDiv, TrackTimeSvg} from "./Track.styles";
+import {TrackTimeDiv} from "./Track.styles";
 
 export default function Track({id, track, track_add, executor, album, time}) {
 	const [like, setLike] = useState(false);
