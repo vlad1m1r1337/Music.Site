@@ -23,7 +23,7 @@ describe('fetchMainTracks', () => {
         const dispatch = jest.fn();
         const thunk = fetchMainTracks();
 
-        await thunk(dispatch, () => ({}));
+        await thunk(dispatch);
         const {calls} = dispatch.mock;
         expect(calls.length).toBe(2);
 
