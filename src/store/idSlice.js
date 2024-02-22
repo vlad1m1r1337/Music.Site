@@ -325,6 +325,7 @@ export const Slice = createSlice({
         builder
             .addCase(login.rejected, state => {
                 state.auth_error[0] = true;
+                state.loading = false;
             })
             .addCase(registration.rejected, state => {
                 state.auth_error[0] = true;
@@ -364,6 +365,8 @@ export const Slice = createSlice({
             })
     },
 })
+
+
 
 export const {set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;
