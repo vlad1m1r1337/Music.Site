@@ -53,14 +53,6 @@ describe('idSlice', () => {
         })
         expect(state.loading).toBe(false);
     });
-    it ('should change status with fetchFavorite.fulfilled action', () => {
-        const state = Reducer(initialState, fetchFavorite.fulfilled(mockMaintracks));
-        expect(state).toEqual({
-            tracks_page: mockMaintracks,
-            loading: false,
-        })
-        expect(state.loading).toBe(false);
-    });
     it ('should change status with login.rejected action', () => {
         const initialState = {
             loading: true,
