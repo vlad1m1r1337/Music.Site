@@ -68,3 +68,9 @@ export const ContentPlayList = styled.div`
 	flex-direction: column;
 	overflow-y: auto;
 `
+
+export const NoTracksInPlaylist = styled.p`
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;    
+`

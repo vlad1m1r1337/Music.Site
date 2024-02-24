@@ -1,9 +1,12 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
 import {useSelector} from "react-redux";
+import {NoTracksInPlaylist} from "./CenterBlockContent.styles";
 
 export default function CenterBlockContent() {
 	const tracks = useSelector(state => state.main.tracks_page);
+
+
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>
@@ -32,6 +35,7 @@ export default function CenterBlockContent() {
 							)
 					})
 				}
+				{!tracks.length && <S.NoTracksInPlaylist>В данном плейлисте нет треков</S.NoTracksInPlaylist>}
 			</S.ContentPlayList>
 			</S.CenterBlockContent>
 	)

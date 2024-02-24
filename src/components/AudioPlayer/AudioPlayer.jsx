@@ -6,10 +6,13 @@ import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerB
 import {useThemeContext} from "../../contexts/color_theme";
 import {AudioPlayerActiveButtons} from "../AudioPlayerActiveButtons/AudioPlayerActiveButtons";
 import {useSelector} from "react-redux";
+import {addFavoriteTrack, removeFavoriteTrack} from "../../store/idSlice";
+import {useDispatch} from "react-redux";
 
 
 export default function AudioPlayer() {
 	const audioRef = useRef(null);
+	const dispatch = useDispatch();
 
 	const {theme} = useThemeContext();
 
@@ -21,6 +24,10 @@ export default function AudioPlayer() {
 
 	// const id = useSelector(state => state.main.id);
 	const tracks = useSelector(state => state.main.track);
+
+	const access = useSelector(state => state.main.access);
+
+	const id = useSelector(state => state.main.id);
 
 	let name;
 	let author;
@@ -54,7 +61,14 @@ export default function AudioPlayer() {
 			setLoadMetaData(true);
 		};
 	}, []);
-
+	 async function setLike() {
+		console.log('like');
+		await dispatch(addFavoriteTrack({ access: access, id: id }));
+	}
+	async function setDislike() {
+		console.log('dislike');
+		await dispatch(removeFavoriteTrack({ access: access, id: id }));
+	}
 	return (
 		<>
 			<SAudio.Bar $theme={theme}>
@@ -78,12 +92,12 @@ export default function AudioPlayer() {
 										<AudioPlayerInfo name={name} author={author}/>
 									</SAudio.TrackPlayContain>
 									<SAudio.TrackPlayLikeDis>
-										<SAudio.TrackPlayLike $theme={theme}>
+										<SAudio.TrackPlayLike onClick={setLike} $theme={theme}>
 											<SAudio.TrackPlayLikeSvg $theme={theme} className="track-play__like-svg" alt="like">
 												<use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
 											</SAudio.TrackPlayLikeSvg>
 										</SAudio.TrackPlayLike>
-										<SAudio.TrackPlayDislike $theme={theme}>
+										<SAudio.TrackPlayDislike onClick={setDislike} $theme={theme}>
 											<SAudio.TrackPlayDislikeSvg $theme={theme} className="track-play__dislike-svg" alt="dislike">
 												<use
 													xlinkHref="/img/icon/sprite.svg#icon-dislike"

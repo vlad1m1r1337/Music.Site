@@ -319,7 +319,9 @@ export const Slice = createSlice({
         },
         copy_tracks: state => {
             state.tracks = JSON.parse(JSON.stringify(state.tracks_page));
-        }
+        },
+        // add_track_to_favorite: (state, action) => {
+        // }
     },
     extraReducers: (builder) => {
         builder

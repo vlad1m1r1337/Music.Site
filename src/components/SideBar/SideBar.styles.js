@@ -90,3 +90,8 @@ export const SideBarImg = styled.img`
 	width: 100%;
 	height: auto;
 `
+
+export const SideBarSvg = styled.svg`
+width: 100%;
+height: 100%;
+`
