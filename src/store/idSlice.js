@@ -166,13 +166,50 @@ export const login = createAsyncThunk(
                 },
             });
             if (!response.ok) {
-                throw new Error('Server Error!');
+                throw new Error('Неверный логин или пароль');
             }
             dispatch(set_allow({ allowed: true }));
             dispatch(set_login({login: InputMail.value}));
             dispatch(set_password({password: InputPassword.value}));
         }
         catch(error) {
+            dispatch(set_text_auth_error({error: error.message}));
+            return rejectWithValue(error.message);
+        }
+    }
+)
+
+export const registration = createAsyncThunk(
+    'main/registration',
+    async function(_, {rejectWithValue, dispatch}) {
+        const InputMail = document.getElementById("input_mail");
+        const InputPassword = document.getElementById("input_password");
+        const InputPasswordRepeat = document.getElementById("input_password_repeat");
+        const url = "https://skypro-music-api.skyeng.tech/user/signup/";
+        try {
+            if (InputPassword.value && InputPassword.value !== InputPasswordRepeat.value) {
+                throw new Error("Пароли не совпадают");
+            }
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify({
+                    email: InputMail.value,
+                    password: InputPassword.value,
+                    username:  InputMail.value,
+                }),
+                headers: {
+                    "content-type": "application/json",
+                },
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                dispatch(set_text_auth_error({error: data.password[0]}));
+                throw new Error('Some error');
+            }
+            console.log("Answer", response.json());
+        }
+        catch(error) {
+            console.log(error);
             return rejectWithValue(error.message);
         }
     }
@@ -197,8 +234,15 @@ export const Slice = createSlice({
         track: null,
         track_favoites: null,
         loading: true,
+        auth_error: [false, null],
     },
     reducers: {
+        set_auth_error: (state, action) => {
+          state.auth_error[0] = action.payload.error;
+        },
+        set_text_auth_error: (state, action) => {
+          state.auth_error[1] = action.payload.error;
+        },
         increment: state => {
             const tr = JSON.parse(JSON.stringify(state.tracks));
             const foundIndex = tr.findIndex((el) => el.id === state.id);
@@ -279,7 +323,13 @@ export const Slice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(login.rejected, (state) => console.log("error occured"))
+            .addCase(login.rejected, state => {
+                state.auth_error[0] = true;
+                state.loading = false;
+            })
+            .addCase(registration.rejected, state => {
+                state.auth_error[0] = true;
+            })
             .addCase(fetchMainTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
                     state.tracks = action.payload;
@@ -316,5 +366,7 @@ export const Slice = createSlice({
     },
 })
 
-export const {copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+
+
+export const {set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;

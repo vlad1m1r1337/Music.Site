@@ -22,5 +22,12 @@ export const MenuLink = styled(Link)`
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 24px;
-	color: ${prop => prop.$theme.font};
+    color: ${prop => (prop.$theme.font)};
+`
+
+
+
+export const FButton = styled.button`
+  color: red;
+  font-size: 1rem;
 `

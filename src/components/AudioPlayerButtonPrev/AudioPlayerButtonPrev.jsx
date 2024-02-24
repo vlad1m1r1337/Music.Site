@@ -1,4 +1,9 @@
 import * as SAudio from "../AudioPlayer/AudioPlayer.styles";
+// import styled from "styled-components";
+//
+// const MyButton = styled.button`
+//   font-size: 10rem;
+// `
 
 export function AudioPlayerButtonPrev({prevTrack}) {
     return (

@@ -1,4 +1,9 @@
-import styled, {createGlobalStyle} from "styled-components";
+import {createGlobalStyle} from "styled-components"
+import * as S from "./Registration.styles"
+import {useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {registration, set_auth_error, set_text_auth_error} from "../../store/idSlice";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -6,72 +11,38 @@ body {
 }
 `
 
-const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 321px auto 0 auto;
-  width: 366px;
-  height: 439px;
-  background-color: #FFFFFF;
-  border-radius: 12px;
-`
-
-const StyledInput = styled.input`
-    //caret-color: transparent; 
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 24px;
-    border: none;
-    border-bottom: 2px solid #D0CECE;
-    width: 279px;
-    &:focus {
-    outline: none;
-    }
-`
-
-
-const StyledImg = styled.img`
-margin: 43px 0 23px 0;
-`
-
-const StyledButtonPurple = styled.button`
-  width: 278px;
-  height: 52px;
-  border-radius: 6px;
-  color: white;
-  background-color: #580EA2;
-  border: 1px solid #D0CECE;
-  transition: 0.2s;
-  &:hover {
-    background-color: #3F007D;
-  }
-  &:active {
-    background-color: #271A58;
-  }
-  margin-top: 60px;
-`
-
-
-const StyledDivInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 38px;
-`
-
 export const Registration = () => {
+    const auth_error = useSelector(state => state.main.auth_error);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const reg = () => {
+        dispatch(registration())
+            .unwrap()
+            .then(() => {
+                navigate("/login");
+                dispatch(set_auth_error(false));
+            })
+            .catch((error) => {
+                console.log(error);
+                if (error === 'Cannot read properties of undefined (reading \'0\')') {
+                    error = "Такой пользователь уже зарегистрирован";
+                }
+                dispatch(set_text_auth_error({error: error}))
+            })
+    }
     return (
         <>
             <GlobalStyle/>
-            <StyledDiv>
-                <StyledImg src="/img/SkyPro_logo.png" alt="SkyPro"/>
-                <StyledDivInput>
-                    <StyledInput placeholder="Почта" type="text"/>
-                    <StyledInput placeholder="Пароль" type="text"/>
-                    <StyledInput placeholder="Повторите пароль" type="text"/>
-                </StyledDivInput>
-                <StyledButtonPurple>Зарегистрироваться</StyledButtonPurple>
-            </StyledDiv>
+            <S.StyledDiv>
+                <S.StyledImg src="/img/SkyPro_logo.png" alt="SkyPro"/>
+                <S.StyledDivInput>
+                    <S.StyledInput data-testid={"input_mail"} id="input_mail" placeholder="Почта" type="text"/>
+                    <S.StyledInput data-testid={"input_password"} id="input_password" placeholder="Пароль" type="password"/>
+                    <S.StyledInput id="input_password_repeat" placeholder="Повторите пароль" type="password"/>
+                </S.StyledDivInput>
+                {(auth_error[0]) && <S.ParagraphErrorLog>{auth_error[1]}</S.ParagraphErrorLog>}
+                <S.StyledButtonPurple onClick={reg}>Зарегистрироваться</S.StyledButtonPurple>
+            </S.StyledDiv>
         </>
     )
 }

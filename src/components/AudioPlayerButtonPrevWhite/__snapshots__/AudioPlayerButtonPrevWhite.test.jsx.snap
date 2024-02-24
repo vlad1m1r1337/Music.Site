@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AudioPlayerButtonPrevWhite/> should render successfully and match snapshot 1`] = `
+<div>
+  <div
+    class="sc-jTQDJr ibNDsK"
+  >
+    <svg
+      alt="prev"
+      class="sc-gLLuHO jggMTD"
+    >
+      <use
+        xlink:href="/img/icon/sprite.svg#icon-prev-white"
+      />
+    </svg>
+  </div>
+</div>
+`;

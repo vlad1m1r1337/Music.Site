@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AudioPlayerButtonRepeatBlack/> should render successfully and match snapshot 1`] = `
+<div>
+  <div
+    class="sc-irLvoH bIWXlW"
+  >
+    <svg
+      alt="repeat"
+      class="sc-csKJRI bqxRDF"
+    >
+      <use
+        xlink:href="/img/icon/sprite.svg#icon-repeat"
+      />
+    </svg>
+  </div>
+</div>
+`;
