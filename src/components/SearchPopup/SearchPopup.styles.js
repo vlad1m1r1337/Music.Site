@@ -56,14 +56,3 @@ export const PopMenuFind = styled.ul`
   width: 12px; /* Ширина скроллбара */
   }
 `
-
-export const MenuItem = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 0;
-  margin-bottom: 16px;
-  &: hover {
-    color: #B672FF;
-    text-decoration: underline;
-`

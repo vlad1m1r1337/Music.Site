@@ -235,6 +235,10 @@ export const Slice = createSlice({
         track_favorites: null,
         loading: true,
         auth_error: [false, null],
+
+        all_authors: [null],
+        all_release_dates: [null],
+        all_genres: [null],
     },
     reducers: {
         set_auth_error: (state, action) => {
@@ -335,6 +339,14 @@ export const Slice = createSlice({
             if (remove_id !== -1) {
                 state.track_favorites.splice(remove_id, 1);
             }
+        },
+        find_all_authors: state => {
+            state.tracks_page.forEach((element) => {
+                if (!state.all_authors || !state.all_authors.includes(element.author)) {
+                    state.all_authors.push(element.author);
+                }
+            });
+            console.log(state.all_authors);
         }
     },
     extraReducers: (builder) => {
@@ -352,6 +364,7 @@ export const Slice = createSlice({
                 }
                 state.tracks_page = action.payload;
                 state.loading = false;
+                console.log(state.tracks_page);
             })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
@@ -384,5 +397,5 @@ export const Slice = createSlice({
 
 
 
-export const {remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+export const {find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;

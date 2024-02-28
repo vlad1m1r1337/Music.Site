@@ -1,34 +1,49 @@
-import { useState , useRef} from "react";
+import {useState, useRef, useEffect} from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import * as S from "./SearchPopup.styles"
 import {useThemeContext} from "../../contexts/color_theme";
+import {useDispatch, useSelector} from "react-redux";
+import {find_all_authors} from "../../store/idSlice";
+import {SearchPopupElement} from "../SearchPopupElement/SearchPopupElement";
 
-export default function SearchPopup({ name, arr }) {
-  const [isOpen, setOpen] = useState(false);
-  const menuRef = useRef(null);
-  function waitForDelayAndRun() {
-      if (isOpen) setTimeout(() => setOpen(false), 50);
-  }
+export default function SearchPopup({ name }) {
+    const dispatch = useDispatch();
+    const [isOpen, setOpen] = useState(false);
+    const menuRef = useRef(null);
+    const all_authors = useSelector(state => state.main.all_authors);
+    const tracks_page = useSelector(state => state.main.tracks_page);
+    const {theme} = useThemeContext();
 
-  useClickOutside(menuRef, () => {
-    waitForDelayAndRun();
-  });
+    useEffect(() => {
+        if (tracks_page) {
+            dispatch(find_all_authors());
+        }
+    }, []);
+    function waitForDelayAndRun() {
+    if (isOpen) setTimeout(() => setOpen(false), 50);
+    }
 
-  const scroll = arr.length > 3 ? 1 : 0;
+    useClickOutside(menuRef, () => {
+        waitForDelayAndRun();
+    });
 
-  const {theme} = useThemeContext();
-  return (
+    let scroll = 0;
+    if (all_authors) {
+        scroll = all_authors.length > 3 ? 1 : 0;
+    }
+
+    return (
       <div>
         <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>
           {name}
         </S.BtnText>
         <S.SearchPopupMenu $theme={theme} $isOpen={isOpen} ref={menuRef}>
           <S.PopMenuFind $theme={theme} $scroll={scroll}>
-            {arr.map((item, index) => (
-              <S.MenuItem key={index}>{item}</S.MenuItem>
+            {all_authors && all_authors.map((item, index) => (
+                <SearchPopupElement key={index} item={item} />
             ))}
           </S.PopMenuFind>
         </S.SearchPopupMenu>
       </div>
-  );
+    );
 }
