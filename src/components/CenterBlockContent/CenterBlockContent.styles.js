@@ -67,6 +67,10 @@ export const ContentPlayList = styled.div`
 	-ms-flex-direction: column;
 	flex-direction: column;
 	overflow-y: auto;
+    height: 1200px;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `
 
 export const NoTracksInPlaylist = styled.p`

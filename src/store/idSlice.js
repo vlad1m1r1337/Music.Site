@@ -232,7 +232,7 @@ export const Slice = createSlice({
         tracks: null,
         tracks_page: null,
         track: null,
-        track_favoites: null,
+        track_favorites: null,
         loading: true,
         auth_error: [false, null],
     },
@@ -320,8 +320,22 @@ export const Slice = createSlice({
         copy_tracks: state => {
             state.tracks = JSON.parse(JSON.stringify(state.tracks_page));
         },
-        // add_track_to_favorite: (state, action) => {
-        // }
+        add_track_to_favorite: state => {
+            const found = state.tracks_page.find((element) => element.id === state.id);
+            state.track_favorites.push(found);
+        },
+        remove_track_from_favorite: state => {
+            let remove_id = -1;
+            for (let i = 0; i < state.track_favorites.length; i++) {
+                if (state.track_favorites[i].id === state.id) {
+                    remove_id = i;
+                }
+            }
+            console.log(remove_id);
+            if (remove_id !== -1) {
+                state.track_favorites.splice(remove_id, 1);
+            }
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -363,12 +377,12 @@ export const Slice = createSlice({
                 state.loading = false;
             })
             .addCase(getFavorite.fulfilled, (state, action) => {
-                state.track_favoites = action.payload;
+                state.track_favorites = action.payload;
             })
     },
 })
 
 
 
-export const {set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+export const {remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;

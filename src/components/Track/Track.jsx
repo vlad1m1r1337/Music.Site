@@ -57,13 +57,16 @@ export default function Track({id, track, track_add, executor, album, time}) {
 
 		(!like) ? dispatch(addFavoriteTrack({ access: access, id: id, navigate: navigate })).unwrap().catch(() => navigate("/")) : dispatch(removeFavoriteTrack({ access: access, id: id, navigate: navigate })).unwrap().catch(() => navigate("/"));
 	}
-	const track_favoites = useSelector(state => state.main.track_favoites);
+	const track_favorites = useSelector(state => state.main.track_favorites);
 
 	useEffect(() => {
-		if ( track_favoites && track_favoites.find((el, index, array) => el.id === id)) {
+		if ( track_favorites && track_favorites.find((el, index, array) => el.id === id)) {
 			setLike(true);
 		}
-	}, [track_favoites, id]);
+		else {
+			setLike(false);
+		}
+	}, [track_favorites, id]);
 
 	return (
 		<S.PlayListItem>

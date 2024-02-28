@@ -6,7 +6,7 @@ import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerB
 import {useThemeContext} from "../../contexts/color_theme";
 import {AudioPlayerActiveButtons} from "../AudioPlayerActiveButtons/AudioPlayerActiveButtons";
 import {useSelector} from "react-redux";
-import {addFavoriteTrack, removeFavoriteTrack} from "../../store/idSlice";
+import {remove_track_from_favorite, add_track_to_favorite, addFavoriteTrack, removeFavoriteTrack} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 
 
@@ -63,10 +63,12 @@ export default function AudioPlayer() {
 	}, []);
 	 async function setLike() {
 		console.log('like');
+		dispatch(add_track_to_favorite());
 		await dispatch(addFavoriteTrack({ access: access, id: id }));
 	}
 	async function setDislike() {
 		console.log('dislike');
+		dispatch(remove_track_from_favorite());
 		await dispatch(removeFavoriteTrack({ access: access, id: id }));
 	}
 	return (
