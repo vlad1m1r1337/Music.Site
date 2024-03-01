@@ -236,9 +236,12 @@ export const Slice = createSlice({
         loading: true,
         auth_error: [false, null],
 
-        all_authors: [null],
-        all_release_dates: [null],
-        all_genres: [null],
+        all_authors: [],
+        // all_release_dates: [],
+        // all_genres: [],
+        //
+        filtred_tracks: [null],
+        filtred_flag: false
     },
     reducers: {
         set_auth_error: (state, action) => {
@@ -272,7 +275,7 @@ export const Slice = createSlice({
         chose: (state, action) => {
             state.id = action.payload.id;
         },
-        set_amount_id_tracks: function (state, action) {
+        set_amount_id_tracks: function (state) {
             state.amount_id_tracks = state.tracks[state.tracks.length - 1].id;
         },
         set_is_playing: (state, action) => {
@@ -292,13 +295,11 @@ export const Slice = createSlice({
         },
         shuffle_next: (state) => {
             const temp = JSON.parse(JSON.stringify(state.tracks));
-            console.log(temp);
             const random_id = Math.floor(Math.random() * (temp.length));
             state.id = temp[random_id].id;
         },
         shuffle_prev: (state) => {
             const temp = JSON.parse(JSON.stringify(state.tracks));
-            console.log(temp);
             const random_id = Math.floor(Math.random() * (temp.length));
             state.id = temp[random_id].id;
         },
@@ -346,7 +347,26 @@ export const Slice = createSlice({
                     state.all_authors.push(element.author);
                 }
             });
-            console.log(state.all_authors);
+        },
+        filter_search: (state, action) => {
+            if (state.tracks_page) {
+                state.filtred_tracks = state.tracks_page.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
+            }
+        },
+        filter_by_attr: (state, action) => {
+          if (state.tracks) {
+              if (!action.payload.filtred_flag) {
+                state.filtred_tracks.splice(0, state.filtred_tracks.length);
+              }
+              state.tracks_page.forEach((el) => {
+                  if (el.author === action.payload.author) {
+                      state.filtred_tracks.push(el);
+                  }
+              })
+          }
+        },
+        change_filtr_flag: (state, action) => {
+            state.filtred_flag = action.payload.flag;
         }
     },
     extraReducers: (builder) => {
@@ -364,7 +384,6 @@ export const Slice = createSlice({
                 }
                 state.tracks_page = action.payload;
                 state.loading = false;
-                console.log(state.tracks_page);
             })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
@@ -396,6 +415,5 @@ export const Slice = createSlice({
 })
 
 
-
-export const {find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+export const {filter_by_attr, change_filtr_flag, filter_search, find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;

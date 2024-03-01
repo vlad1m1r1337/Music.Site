@@ -25,9 +25,6 @@ export const MenuLink = styled(Link)`
     color: ${prop => (prop.$theme.font)};
 `
 
-
-
-export const FButton = styled.button`
-  color: red;
-  font-size: 1rem;
+export const ChangeThemeImg = styled.img`
+    cursor: pointer;
 `

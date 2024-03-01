@@ -29,37 +29,22 @@ export const  SelectionsPage = ({header}) => {
     let isLoading = useSelector(state => state.main.loading);
     const tracks = useSelector(state => state.main.tracks);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
+    const id = useSelector(state => state.main.id);
+    const param = useParams();
+    const accessToken = useSelector(state => state.main.access);
 
 
     useEffect(() => {
         dispatch(setIsLoading({loading: true}));
-    }, [dispatch]);
-
-    const params = useParams();
-    if  (header === undefined) {
-        let Header;
-        if (params.id === '1') {
-            Header = "Плейлист дня";
-        }
-        else if(params.id === '2') {
-            Header = "100 танцевальных хитов";
-        }
-        else if(params.id === '3') {
-            Header = "Инди заряд";
-        }
-        header = Header;
-    }
-    const param = useParams();
-    const accessToken = useSelector(state => state.main.access);
-    useEffect(() => {
+        dispatch(getFavorite({accessToken}));
         if (header !== "Мои треки") {
-            dispatch(fetchSelectionTracks(param));
+            dispatch(fetchSelectionTracks({param}));
         }
         else {
             dispatch(fetchFavorite({accessToken}));
         }
-
     }, [dispatch, accessToken, header, param]);
+
 
     useEffect(() => {
         if (!isLoading) {
@@ -69,9 +54,6 @@ export const  SelectionsPage = ({header}) => {
         }
     }, [isLoading, dispatch, tracks, amount_id_tracks]);
 
-    useEffect(() => {
-        dispatch(getFavorite({accessToken}));
-    }, [dispatch, accessToken]);
 
     if  (isLoading) {
         return (

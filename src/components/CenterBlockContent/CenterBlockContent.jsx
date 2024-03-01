@@ -1,11 +1,15 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
 import {useSelector} from "react-redux";
-import {NoTracksInPlaylist} from "./CenterBlockContent.styles";
 
 export default function CenterBlockContent() {
-	const tracks = useSelector(state => state.main.tracks_page);
+	let tracks = useSelector(state => state.main.tracks_page);
+	const filtred_tracks = useSelector(state => state.main.filtred_tracks);
+	const filtred_flag = useSelector(state => state.main.filtred_flag);
 
+	if (filtred_flag) {
+		tracks = filtred_tracks;
+	}
 
 	return (
 		<S.CenterBlockContent>

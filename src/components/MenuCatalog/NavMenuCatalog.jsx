@@ -26,8 +26,8 @@ export default function NavMenuCatalog() {
 			  <S.MenuLink $theme={theme} onClick={signOut}>Выйти</S.MenuLink>
 			</S.LeftMenuItem>
 			  { theme.theme === "black" ?
-				  <img onClick={toggleTheme} src="/img/change_theme(black).svg" alt="change_theme_black"/> :
-				  <img onClick={toggleTheme} src="/img/change_theme(white).svg" alt="change_theme_white"/>
+				  <S.ChangeThemeImg onClick={toggleTheme} src="/img/change_theme(black).svg" alt="change_theme_black"/> :
+				  <S.ChangeThemeImg onClick={toggleTheme} src="/img/change_theme(white).svg" alt="change_theme_white"/>
 			  }
 		  </S.MenuList>
 		</S.NavMenu>

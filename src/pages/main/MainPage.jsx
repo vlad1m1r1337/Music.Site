@@ -17,6 +17,9 @@ export const  MainPage = () => {
     const tracks = useSelector(state => state.main.tracks);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
     const accessToken = useSelector(state => state.main.access);
+    const id = useSelector(state => state.main.id);
+
+    isLoading = useSelector(state => state.main.loading);
 
     useEffect(() => {
         dispatch(setIsLoading({loading: true}));
@@ -24,7 +27,6 @@ export const  MainPage = () => {
         dispatch(getFavorite({accessToken}));
     }, [dispatch, accessToken]);
 
-    isLoading = useSelector(state => state.main.loading);
     useEffect(() => {
         if (!isLoading) {
             if (amount_id_tracks !== -1) return ;
@@ -32,6 +34,7 @@ export const  MainPage = () => {
             dispatch(set_def_shuffle_arr());
         }
     }, [isLoading, dispatch, tracks, amount_id_tracks]);
+
     if (isLoading) {
        return (
            <MainPageWithPlaceholders/>
@@ -43,7 +46,7 @@ export const  MainPage = () => {
                 <S.Container $theme={theme}>
                     <S.Main>
                         <NavMenu/>
-                        <TrackList tracks={tracks}/>
+                        <TrackList/>
                         <SideBar/>
                     </S.Main>
                 </S.Container>

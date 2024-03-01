@@ -3,7 +3,7 @@ import RangeTracks from "../RangeTracks/RangeTracks.jsx";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent.jsx";
 import * as SS from "./TrackList.styles";
 
-export default function TrackList({tracks}) {
+export default function TrackList() {
 	return (
 		<SS.MainCenterBlock>
 			<SearchCenter/>

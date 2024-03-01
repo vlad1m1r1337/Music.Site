@@ -18,9 +18,9 @@ export default function SearchPopup({ name }) {
         if (tracks_page) {
             dispatch(find_all_authors());
         }
-    }, []);
+    }, );
     function waitForDelayAndRun() {
-    if (isOpen) setTimeout(() => setOpen(false), 50);
+        if (isOpen) setTimeout(() => setOpen(false), 100);
     }
 
     useClickOutside(menuRef, () => {
