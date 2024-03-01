@@ -62,7 +62,6 @@ export default function AudioPlayer() {
 		};
 	}, []);
 	 async function setLike() {
-		console.log('like');
 		dispatch(add_track_to_favorite());
 		await dispatch(addFavoriteTrack({ access: access, id: id }));
 	}

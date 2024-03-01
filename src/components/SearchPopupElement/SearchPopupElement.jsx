@@ -1,10 +1,11 @@
 import * as S from './SearchPopupElement.styles'
 import {useEffect, useState} from "react";
-import {change_filtr_flag, filter_by_attr} from "../../store/idSlice";
+import {change_filtr_flag, filter_by_attr_author, filter_by_attr_release_date, filter_by_attr_genre} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {useSelector} from "react-redux";
+import {PopupFilter} from "../../services/constants";
 
-export const SearchPopupElement = ({item}) => {
+export const SearchPopupElement = ({item, name}) => {
     const [filter, setFilter] = useState(false);
     const dispatch = useDispatch();
     const filtred_flag = useSelector(state => state.main.filtred_flag);
@@ -19,7 +20,15 @@ export const SearchPopupElement = ({item}) => {
     }, [filter]);
     const filterItem = () => {
         setFilter(!filter);
-        dispatch(filter_by_attr({author: item, filtred_flag: filtred_flag}));
+        if (name === PopupFilter[0]) {
+            dispatch(filter_by_attr_author({author: item, filtred_flag: filtred_flag}));
+        }
+        if (name === PopupFilter[1]) {
+            dispatch(filter_by_attr_release_date({release_date: item, filtred_flag: filtred_flag}));
+        }
+        if (name === PopupFilter[2]) {
+            dispatch(filter_by_attr_genre({genre: item, filtred_flag: filtred_flag}));
+        }
     }
 
     return (

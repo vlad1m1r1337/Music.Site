@@ -13,3 +13,5 @@ export const mockMaintracks = [
         track_file: "https://skypro-music-api.skyeng.tech/media/music_files/Winniethemoog_-_Action_Sport_Breakbeat.mp3",
     }
 ]
+
+export const PopupFilter = ['исполнителю', 'году выпуска', 'жанру'];

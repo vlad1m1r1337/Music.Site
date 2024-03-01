@@ -8,6 +8,7 @@ export const CenterBlockContent = styled.div`
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
 	flex-direction: column;
+    //min-height: 0;
 `
 export const ContentTitle = styled.div`
 	display: -webkit-box;
@@ -67,7 +68,7 @@ export const ContentPlayList = styled.div`
 	-ms-flex-direction: column;
 	flex-direction: column;
 	overflow-y: auto;
-    height: 1200px;
+    height: 500px;
     &::-webkit-scrollbar {
         display: none;
     }

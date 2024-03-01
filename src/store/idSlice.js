@@ -237,8 +237,8 @@ export const Slice = createSlice({
         auth_error: [false, null],
 
         all_authors: [],
-        // all_release_dates: [],
-        // all_genres: [],
+        all_release_dates: [],
+        all_genres: [],
         //
         filtred_tracks: [null],
         filtred_flag: false
@@ -336,7 +336,6 @@ export const Slice = createSlice({
                     remove_id = i;
                 }
             }
-            console.log(remove_id);
             if (remove_id !== -1) {
                 state.track_favorites.splice(remove_id, 1);
             }
@@ -347,23 +346,65 @@ export const Slice = createSlice({
                     state.all_authors.push(element.author);
                 }
             });
+            state.all_authors.sort();
+        },
+        find_all_release_dates: state => {
+            state.tracks_page.forEach((element) => {
+                if (!state.all_release_dates || !state.all_release_dates.includes(element.release_date)) {
+                    state.all_release_dates.push(element.release_date);
+                }
+            });
+            const temp = state.all_release_dates.filter(item => item !== null);
+            // state.release_date.sort();
+        },
+        find_all_genres: state => {
+            state.tracks_page.forEach((element) => {
+                if (!state.all_genres || !state.all_genres.includes(element.genre)) {
+                    state.all_genres.push(element.genre);
+                }
+            });
+            state.all_genres.sort();
         },
         filter_search: (state, action) => {
             if (state.tracks_page) {
                 state.filtred_tracks = state.tracks_page.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
             }
         },
-        filter_by_attr: (state, action) => {
+        filter_by_attr_author: (state, action) => {
           if (state.tracks) {
               if (!action.payload.filtred_flag) {
                 state.filtred_tracks.splice(0, state.filtred_tracks.length);
               }
               state.tracks_page.forEach((el) => {
-                  if (el.author === action.payload.author) {
+                  if (el.author === action.payload.author && state.filtred_tracks.find(item => item.id === el.id) === undefined) {
                       state.filtred_tracks.push(el);
                   }
               })
           }
+        },
+        filter_by_attr_release_date: (state, action) => {
+            if (state.tracks) {
+                if (!action.payload.filtred_flag) {
+                    state.filtred_tracks.splice(0, state.filtred_tracks.length);
+                }
+                state.tracks_page.forEach((el) => {
+                    if (el.release_date === action.payload.release_date && state.filtred_tracks.find(item => item.id === el.id) === undefined) {
+                        state.filtred_tracks.push(el);
+                    }
+                })
+            }
+        },
+        filter_by_attr_genre: (state, action) => {
+            if (state.tracks) {
+                if (!action.payload.filtred_flag) {
+                    state.filtred_tracks.splice(0, state.filtred_tracks.length);
+                }
+                state.tracks_page.forEach((el) => {
+                    if (el.genre === action.payload.genre && state.filtred_tracks.find(item => item.id === el.id) === undefined) {
+                        state.filtred_tracks.push(el);
+                    }
+                })
+            }
         },
         change_filtr_flag: (state, action) => {
             state.filtred_flag = action.payload.flag;
@@ -415,5 +456,5 @@ export const Slice = createSlice({
 })
 
 
-export const {filter_by_attr, change_filtr_flag, filter_search, find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+export const {filter_by_attr_genre, filter_by_attr_release_date, find_all_genres, find_all_release_dates, filter_by_attr_author, change_filtr_flag, filter_search, find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;

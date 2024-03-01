@@ -36,6 +36,9 @@ export const  SelectionsPage = ({header}) => {
 
     useEffect(() => {
         dispatch(setIsLoading({loading: true}));
+    }, [dispatch]);
+
+    useEffect(() => {
         dispatch(getFavorite({accessToken}));
         if (header !== "Мои треки") {
             dispatch(fetchSelectionTracks({param}));
@@ -45,7 +48,6 @@ export const  SelectionsPage = ({header}) => {
         }
     }, [dispatch, accessToken, header, param]);
 
-
     useEffect(() => {
         if (!isLoading) {
             if (amount_id_tracks !== -1) return ;
@@ -54,6 +56,19 @@ export const  SelectionsPage = ({header}) => {
         }
     }, [isLoading, dispatch, tracks, amount_id_tracks]);
 
+    if  (header === undefined) {
+        let Header;
+        if (param.id === '1') {
+            Header = "Плейлист дня";
+        }
+        else if(param.id === '2') {
+            Header = "100 танцевальных хитов";
+        }
+        else if(param.id === '3') {
+            Header = "Инди заряд";
+        }
+        header = Header;
+    }
 
     if  (isLoading) {
         return (
