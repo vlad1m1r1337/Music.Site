@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {PopupFilter} from "../services/constants";
 
 export const addFavoriteTrack = createAsyncThunk(
     'main/addFavoriteTrack',
@@ -238,6 +239,10 @@ export const Slice = createSlice({
         all_authors: [],
         all_release_dates: [],
         all_genres: [],
+
+        popup_author_counter: 0,
+        popup_release_dates: 0,
+        popup_genres: 0,
         //
         filtred_tracks: [null],
         filtred_flag: false
@@ -407,6 +412,32 @@ export const Slice = createSlice({
         },
         change_filtr_flag: (state, action) => {
             state.filtred_flag = action.payload.flag;
+        },
+        change_popup_counter: (state, action) => {
+            if (action.payload.name === PopupFilter[0]) {
+                if (action.payload.filter) {
+                    state.popup_author_counter--;
+                }
+                else {
+                    state.popup_author_counter++;
+                }
+            }
+            if (action.payload.name === PopupFilter[1]) {
+                if (action.payload.filter) {
+                    state.popup_release_dates--;
+                }
+                else {
+                    state.popup_release_dates++;
+                }
+            }
+            if (action.payload.name === PopupFilter[2]) {
+                if (action.payload.filter) {
+                    state.popup_genres--;
+                }
+                else {
+                    state.popup_genres++;
+                }
+            }
         }
     },
     extraReducers: (builder) => {
@@ -455,5 +486,5 @@ export const Slice = createSlice({
 })
 
 
-export const {filter_by_attr_genre, filter_by_attr_release_date, find_all_genres, find_all_release_dates, filter_by_attr_author, change_filtr_flag, filter_search, find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+export const {change_popup_counter, filter_by_attr_genre, filter_by_attr_release_date, find_all_genres, find_all_release_dates, filter_by_attr_author, change_filtr_flag, filter_search, find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;
