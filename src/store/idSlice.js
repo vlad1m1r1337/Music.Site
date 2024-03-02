@@ -209,7 +209,6 @@ export const registration = createAsyncThunk(
             console.log("Answer", response.json());
         }
         catch(error) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }
@@ -428,14 +427,14 @@ export const Slice = createSlice({
             })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
-                    if (action.payload.params.id) {
-                        state.tracks = action.payload.data[action.payload.params.id - 1].items;
+                    if (action.payload.params.param.id) {
+                        state.tracks = action.payload.data[action.payload.params.param.id - 1].items;
                     } else {
                         state.tracks = action.payload.data[0].items;
                     }
                 }
-                if (action.payload.params.id) {
-                    state.tracks_page = action.payload.data[action.payload.params.id - 1].items;
+                if (action.payload.params.param.id) {
+                    state.tracks_page = action.payload.data[action.payload.params.param.id - 1].items;
                 } else {
                     state.tracks_page = action.payload.data[0].items;
                 }

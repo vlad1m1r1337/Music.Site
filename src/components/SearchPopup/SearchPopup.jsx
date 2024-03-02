@@ -51,7 +51,6 @@ export default function SearchPopup({ name }) {
     if (arr) {
         scroll = arr.length > 3 ? 1 : 0;
     }
-    // console.log("arr", arr);
     return (
       <div>
         <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>

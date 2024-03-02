@@ -18,7 +18,7 @@ export default function AudioPlayer() {
 
 	const [loadMetaData, setLoadMetaData] = useState(false);
 
-	const [volume, setVolume] = useState(0);
+	const [volume, setVolume] = useState(50);
 
 	let [currentTime, setCurrentTime] = useState(0);
 

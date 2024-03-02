@@ -23,7 +23,6 @@ export const Registration = () => {
                 dispatch(set_auth_error(false));
             })
             .catch((error) => {
-                console.log(error);
                 if (error === 'Cannot read properties of undefined (reading \'0\')') {
                     error = "Такой пользователь уже зарегистрирован";
                 }
