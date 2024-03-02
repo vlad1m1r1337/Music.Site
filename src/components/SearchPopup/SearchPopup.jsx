@@ -61,14 +61,12 @@ export default function SearchPopup({ name }) {
     switch (PopupFilter.indexOf(name)) {
         case 0:
             popup_counter = popup_author_counter;
-            console.log("author", popup_counter);
             break;
         case 1:
             popup_counter = popup_release_date_counter;
             break;
         case 2:
             popup_counter = popup_genre_counter;
-            console.log(popup_counter, popup_genre_counter);
             break;
     }
 

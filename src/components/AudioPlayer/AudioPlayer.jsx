@@ -66,7 +66,6 @@ export default function AudioPlayer() {
 		await dispatch(addFavoriteTrack({ access: access, id: id }));
 	}
 	async function setDislike() {
-		console.log('dislike');
 		dispatch(remove_track_from_favorite());
 		await dispatch(removeFavoriteTrack({ access: access, id: id }));
 	}

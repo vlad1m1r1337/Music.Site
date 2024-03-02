@@ -207,7 +207,6 @@ export const registration = createAsyncThunk(
                 dispatch(set_text_auth_error({error: data.password[0]}));
                 throw new Error('Some error');
             }
-            console.log("Answer", response.json());
         }
         catch(error) {
             return rejectWithValue(error.message);
