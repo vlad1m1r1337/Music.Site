@@ -17,8 +17,10 @@ export const StyledInput = styled.input`
     font-weight: 400;
     line-height: 24px;
     border: none;
-    border-bottom: 2px solid #D0CECE;
+  //border-bottom: 2px solid #D0CECE;
+    border-bottom: 2px solid ${prop => prop.$error ? "red" : "#D0CECE"};
     width: 279px;
+    display: inline;
     &:focus {
     outline: none;
     }
@@ -53,10 +55,25 @@ export const StyledDivInput = styled.div`
   gap: 38px;
 `
 
-export const ParagraphErrorLog = styled.p`
-    color: red;
-    font-size: 1rem;
-    position: absolute;
-    top: 577px;
-    width: 364px;
+export const ParagraphErrorLogEmail = styled.p`
+    color: #a94442;
+    font-size: 1.5rem;
+`
+
+export const ParagraphErrorLogPassword = styled.p`
+  color: #a94442;
+  font-size: 1.5rem;
+  
+`
+
+export const DivErrorLogs = styled.div`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #BF7877;
+  border-radius: 10px;
+  width: 50%;
+  transition: 3s;
 `

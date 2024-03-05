@@ -166,6 +166,8 @@ export const login = createAsyncThunk(
                 },
             });
             if (!response.ok) {
+                const data = await response.json();
+                set_email_password_error(data, dispatch);
                 throw new Error('Неверный логин или пароль');
             }
             dispatch(set_allow({ allowed: true }));
@@ -216,7 +218,6 @@ export const registration = createAsyncThunk(
             });
             if (!response.ok) {
                 const data = await response.json();
-                console.log("response data", data);
                 set_email_password_error(data, dispatch);
                 throw new Error('Some error');
             }
