@@ -173,11 +173,24 @@ export const login = createAsyncThunk(
             dispatch(set_password({password: InputPassword.value}));
         }
         catch(error) {
-            dispatch(set_text_auth_error({error: error.message}));
             return rejectWithValue(error.message);
         }
     }
 )
+
+const set_email_password_error = (data, dispatch) => {
+    const email_key = "email";
+    const password_key = "password";
+    console.log("set_email_password_error");
+    if (email_key in data) {
+        console.log("email");
+        dispatch(set_auth_email_error({error_exist: true, error_text: data.email}));
+    }
+    if (password_key in data) {
+        console.log("password");
+        dispatch(set_auth_password_error({error_exist: true, error_text: data.password}));
+    }
+}
 
 export const registration = createAsyncThunk(
     'main/registration',
@@ -203,10 +216,10 @@ export const registration = createAsyncThunk(
             });
             if (!response.ok) {
                 const data = await response.json();
-                dispatch(set_text_auth_error({error: data.password[0]}));
+                console.log("response data", data);
+                set_email_password_error(data, dispatch);
                 throw new Error('Some error');
             }
-            console.log("Answer", response.json());
         }
         catch(error) {
             console.log(error);
@@ -234,22 +247,17 @@ export const Slice = createSlice({
         track: null,
         track_favorites: null,
         loading: true,
-        auth_error: [false, null],
+        auth_email_error: [false, null],
+        auth_password_error: [false, null],
 
         all_authors: [],
         all_release_dates: [],
         all_genres: [],
-        //
+
         filtred_tracks: [null],
         filtred_flag: false
     },
     reducers: {
-        set_auth_error: (state, action) => {
-          state.auth_error[0] = action.payload.error;
-        },
-        set_text_auth_error: (state, action) => {
-          state.auth_error[1] = action.payload.error;
-        },
         increment: state => {
             const tr = JSON.parse(JSON.stringify(state.tracks));
             const foundIndex = tr.findIndex((el) => el.id === state.id);
@@ -354,8 +362,6 @@ export const Slice = createSlice({
                     state.all_release_dates.push(element.release_date);
                 }
             });
-            const temp = state.all_release_dates.filter(item => item !== null);
-            // state.release_date.sort();
         },
         find_all_genres: state => {
             state.tracks_page.forEach((element) => {
@@ -408,6 +414,19 @@ export const Slice = createSlice({
         },
         change_filtr_flag: (state, action) => {
             state.filtred_flag = action.payload.flag;
+        },
+        set_auth_email_error: (state, action) => {
+            console.log("set_auth_email_error");
+            state.auth_email_error[0] = action.payload.error_exist;
+            state.auth_email_error[1] = action.payload.error_text;
+        },
+        set_auth_password_error: (state, action) => {
+            state.auth_password_error[0] = action.payload.error_exist;
+            state.auth_password_error[1] = action.payload.error_text;
+        },
+        reset_to_zero_auth_errors: state => {
+            state.auth_password_error[0] = false;
+            state.auth_email_error[0] = false;
         }
     },
     extraReducers: (builder) => {
@@ -417,7 +436,7 @@ export const Slice = createSlice({
                 state.loading = false;
             })
             .addCase(registration.rejected, state => {
-                state.auth_error[0] = true;
+                // state.auth_error[0] = true;
             })
             .addCase(fetchMainTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
@@ -456,5 +475,35 @@ export const Slice = createSlice({
 })
 
 
-export const {filter_by_attr_genre, filter_by_attr_release_date, find_all_genres, find_all_release_dates, filter_by_attr_author, change_filtr_flag, filter_search, find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
+export const {
+    reset_to_zero_auth_errors,
+    set_auth_password_error,
+    set_auth_email_error,
+    filter_by_attr_genre,
+    filter_by_attr_release_date,
+    find_all_genres,
+    find_all_release_dates,
+    filter_by_attr_author,
+    change_filtr_flag,
+    filter_search,
+    find_all_authors,
+    remove_track_from_favorite,
+    add_track_to_favorite,
+    copy_tracks,
+    set_shuffle_def,
+    set_track,
+    set_password,
+    set_login,
+    set_allow,
+    setIsLoading,
+    set_def_shuffle_arr,
+    set_shuffle_first,
+    push_first_shuffle_id,
+    shuffle_next,
+    shuffle_prev,
+    increment,
+    decrement,
+    chose ,
+    set_amount_id_tracks,
+    set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;

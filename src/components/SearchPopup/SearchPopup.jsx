@@ -13,7 +13,6 @@ export default function SearchPopup({ name }) {
     const menuRef = useRef(null);
     const tracks_page = useSelector(state => state.main.tracks_page);
     const {theme} = useThemeContext();
-    let flag = -1;
 
     const all_authors = useSelector(state => state.main.all_authors);
     const all_release_dates = useSelector(state => state.main.all_release_dates);
@@ -35,6 +34,8 @@ export default function SearchPopup({ name }) {
                     setArr(all_genres);
                     dispatch(find_all_genres());
                     break;
+                default:
+                    break;
             }
         }
     }, [dispatch, tracks_page, name, all_authors, all_release_dates, all_genres]);
@@ -51,7 +52,6 @@ export default function SearchPopup({ name }) {
     if (arr) {
         scroll = arr.length > 3 ? 1 : 0;
     }
-    // console.log("arr", arr);
     return (
       <div>
         <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>

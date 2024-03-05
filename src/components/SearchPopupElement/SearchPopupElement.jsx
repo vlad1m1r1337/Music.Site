@@ -17,7 +17,7 @@ export const SearchPopupElement = ({item, name}) => {
         else {
             dispatch(change_filtr_flag({flag: false}));
         }
-    }, [filter]);
+    }, [dispatch, filter]);
     const filterItem = () => {
         setFilter(!filter);
         if (name === PopupFilter[0]) {

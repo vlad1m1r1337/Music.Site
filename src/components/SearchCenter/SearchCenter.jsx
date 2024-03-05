@@ -15,7 +15,7 @@ export default function SearchCenter() {
 		if (inputValue !== '') {
 			dispatch(change_filtr_flag({flag: true}));
 		}
-	}, [inputValue]);
+	}, [dispatch, inputValue]);
 
 	const handleInputChange = (event) => {
 		setInputValue(event.target.value);

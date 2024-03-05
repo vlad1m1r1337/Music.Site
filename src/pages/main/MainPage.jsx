@@ -17,7 +17,6 @@ export const  MainPage = () => {
     const tracks = useSelector(state => state.main.tracks);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
     const accessToken = useSelector(state => state.main.access);
-    const id = useSelector(state => state.main.id);
 
     isLoading = useSelector(state => state.main.loading);
 

@@ -29,7 +29,6 @@ export const  SelectionsPage = ({header}) => {
     let isLoading = useSelector(state => state.main.loading);
     const tracks = useSelector(state => state.main.tracks);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
-    const id = useSelector(state => state.main.id);
     const param = useParams();
     const accessToken = useSelector(state => state.main.access);
 
