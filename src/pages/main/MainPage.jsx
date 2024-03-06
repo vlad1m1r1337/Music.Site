@@ -17,11 +17,14 @@ export const  MainPage = () => {
     const tracks = useSelector(state => state.main.tracks);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
     const accessToken = useSelector(state => state.main.access);
-
-    isLoading = useSelector(state => state.main.loading);
+    const id = useSelector(state => state.main.id);
+    const loading = useSelector(state => state.main.loading);
 
     useEffect(() => {
-        dispatch(setIsLoading({loading: true}));
+        if (!loading) {
+            return;
+        }
+        console.log("update")
         dispatch(fetchMainTracks());
         dispatch(getFavorite({accessToken}));
     }, [dispatch, accessToken]);
@@ -35,9 +38,9 @@ export const  MainPage = () => {
     }, [isLoading, dispatch, tracks, amount_id_tracks]);
 
     if (isLoading) {
-       return (
+        return (
            <MainPageWithPlaceholders/>
-       )
+        )
     }
     return (
         <>

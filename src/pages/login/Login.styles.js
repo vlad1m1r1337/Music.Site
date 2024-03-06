@@ -16,10 +16,11 @@ export const Input = styled.input`
     font-weight: 400;
     line-height: 24px;
     border: none;
-    border-bottom: 2px solid #D0CECE;
-    width: 279px;
+  border-bottom: 2px solid ${prop => prop.$error ? "red" : "#D0CECE"};
+
+  width: 279px;
     &:focus {
-    outline: none; /* Remove outline on focus */
+    outline: none;
     }
     &:last-child {
     margin: 38px 0 60px 0;

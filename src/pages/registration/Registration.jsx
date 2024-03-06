@@ -3,8 +3,7 @@ import * as S from "./Registration.styles"
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {registration, reset_to_zero_auth_errors} from "../../store/idSlice";
-import {DivErrorLogs, ParagraphErrorLog, ParagraphErrorLogEmail} from "./Registration.styles";
-import {useEffect} from "react";
+import {LoginPasswordLogs} from "../../components/LoginPasswordLogs/LoginPasswordLogs";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -35,12 +34,7 @@ export const Registration = () => {
     return (
         <>
             <GlobalStyle/>
-            <S.DivErrorLogs>
-                {auth_email_error[0] && <S.ParagraphErrorLogEmail>{auth_email_error[1]}</S.ParagraphErrorLogEmail>}
-            </S.DivErrorLogs>
-            <S.DivErrorLogs>
-                {auth_password_error[0] && <S.ParagraphErrorLogPassword>{auth_password_error[1]}</S.ParagraphErrorLogPassword>}
-            </S.DivErrorLogs>
+            <LoginPasswordLogs/>
             <S.StyledDiv>
                 <S.StyledImg src="/img/SkyPro_logo.png" alt="SkyPro"/>
                 <S.StyledDivInput>

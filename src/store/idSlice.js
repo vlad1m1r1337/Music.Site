@@ -149,6 +149,24 @@ export const fetchMainTracks = createAsyncThunk(
     }
 )
 
+// function set_email_password_login_error() {
+//
+// }
+const set_email_password_login_error = (data, dispatch) => {
+    const email_key = "email";
+    const password_key = "password";
+    const detail = "detail";
+    if (email_key in data) {
+        dispatch(set_auth_email_error({error_exist: true, error_text: data.email}));
+    }
+    if (password_key in data) {
+        dispatch(set_auth_password_error({error_exist: true, error_text: data.password}));
+    }
+    if (detail in data) {
+        dispatch(set_login_detail_error({error_exist: true, error_text: data.detail}))
+    }
+}
+
 export const login = createAsyncThunk(
     'main/login',
     async function(_, {rejectWithValue, dispatch}) {
@@ -167,8 +185,8 @@ export const login = createAsyncThunk(
             });
             if (!response.ok) {
                 const data = await response.json();
-                set_email_password_error(data, dispatch);
-                throw new Error('Неверный логин или пароль');
+                set_email_password_login_error(data, dispatch);
+                throw new Error('Error');
             }
             dispatch(set_allow({ allowed: true }));
             dispatch(set_login({login: InputMail.value}));
@@ -183,7 +201,6 @@ export const login = createAsyncThunk(
 const set_email_password_error = (data, dispatch) => {
     const email_key = "email";
     const password_key = "password";
-    console.log("set_email_password_error");
     if (email_key in data) {
         console.log("email");
         dispatch(set_auth_email_error({error_exist: true, error_text: data.email}));
@@ -219,7 +236,7 @@ export const registration = createAsyncThunk(
             if (!response.ok) {
                 const data = await response.json();
                 set_email_password_error(data, dispatch);
-                throw new Error('Some error');
+                throw new Error('Error');
             }
         }
         catch(error) {
@@ -250,13 +267,16 @@ export const Slice = createSlice({
         loading: true,
         auth_email_error: [false, null],
         auth_password_error: [false, null],
+        login_detail_error: [false, null],
 
         all_authors: [],
         all_release_dates: [],
         all_genres: [],
 
         filtred_tracks: [null],
-        filtred_flag: false
+        filtred_flag: false,
+
+        rerender_flag: true,
     },
     reducers: {
         increment: state => {
@@ -417,7 +437,6 @@ export const Slice = createSlice({
             state.filtred_flag = action.payload.flag;
         },
         set_auth_email_error: (state, action) => {
-            console.log("set_auth_email_error");
             state.auth_email_error[0] = action.payload.error_exist;
             state.auth_email_error[1] = action.payload.error_text;
         },
@@ -425,9 +444,14 @@ export const Slice = createSlice({
             state.auth_password_error[0] = action.payload.error_exist;
             state.auth_password_error[1] = action.payload.error_text;
         },
+        set_login_detail_error: (state, action) => {
+            state.login_detail_error[0] = action.payload.error_exist;
+            state.login_detail_error[1] = action.payload.error_text;
+        },
         reset_to_zero_auth_errors: state => {
             state.auth_password_error[0] = false;
             state.auth_email_error[0] = false;
+            state.login_detail_error[0] = false;
         }
     },
     extraReducers: (builder) => {
@@ -439,12 +463,18 @@ export const Slice = createSlice({
             .addCase(registration.rejected, state => {
                 // state.auth_error[0] = true;
             })
+            .addCase(fetchMainTracks.pending, state => {
+                state.loading = true;
+            })
             .addCase(fetchMainTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
                     state.tracks = action.payload;
                 }
                 state.tracks_page = action.payload;
                 state.loading = false;
+            })
+            .addCase(fetchSelectionTracks.pending, state => {
+                state.loading = true;
             })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
@@ -477,6 +507,7 @@ export const Slice = createSlice({
 
 
 export const {
+    set_login_detail_error,
     reset_to_zero_auth_errors,
     set_auth_password_error,
     set_auth_email_error,
