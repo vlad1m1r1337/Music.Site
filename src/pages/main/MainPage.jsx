@@ -19,14 +19,10 @@ export const  MainPage = () => {
     const accessToken = useSelector(state => state.main.access);
     const id = useSelector(state => state.main.id);
     const loading = useSelector(state => state.main.loading);
-    const [rerender, setRerender] = useState(-1)
+
     useEffect(() => {
-        if (rerender === id || rerender === 1) {
-            console.log("useEffect1")
-            dispatch(fetchMainTracks());
-            dispatch(getFavorite({accessToken}));
-            setRerender(1);
-        }
+        dispatch(fetchMainTracks());
+        dispatch(getFavorite({accessToken}));
     }, [dispatch, accessToken]);
 
     useEffect(() => {

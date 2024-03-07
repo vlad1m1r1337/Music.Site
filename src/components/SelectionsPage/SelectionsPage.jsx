@@ -33,13 +33,10 @@ export const  SelectionsPage = ({header}) => {
     const accessToken = useSelector(state => state.main.access);
 
     const id = useSelector(state => state.main.id);
-    const [rerender, setRerender] = useState(-1)
 
 
     useEffect(() => {
-        if (rerender === id || rerender === 1) {
             dispatch(setIsLoading({loading: true}));
-        }
     }, [dispatch]);
 
     useEffect(() => {
