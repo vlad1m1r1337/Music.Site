@@ -21,9 +21,6 @@ export const  MainPage = () => {
     const loading = useSelector(state => state.main.loading);
 
     useEffect(() => {
-        if (!loading) {
-            return;
-        }
         console.log("update")
         dispatch(fetchMainTracks());
         dispatch(getFavorite({accessToken}));

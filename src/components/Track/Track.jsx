@@ -60,7 +60,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	const track_favorites = useSelector(state => state.main.track_favorites);
 
 	useEffect(() => {
-		if ( track_favorites && track_favorites.find((el, index, array) => el.id === id)) {
+		if ( track_favorites && track_favorites.find(el => el.id === id)) {
 			setLike(true);
 		}
 		else {
