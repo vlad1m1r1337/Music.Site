@@ -2,14 +2,14 @@ import * as S from "../../App.styles";
 import NavMenu from "../../components/NavMenu/NavMenu";
 import TrackList from "../../components/TrackList/TrackList";
 import SideBar from "../../components/SideBar/SideBar";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
 import {getFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchMainTracks, setIsLoading} from "../../store/idSlice"
-
+import {set_rerender} from "../../store/rerender";
 export const  MainPage = () => {
     const {theme} = useThemeContext();
     const dispatch = useDispatch();
@@ -17,11 +17,18 @@ export const  MainPage = () => {
     const tracks = useSelector(state => state.main.tracks);
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
     const accessToken = useSelector(state => state.main.access);
-
-    isLoading = useSelector(state => state.main.loading);
+    const rerender = useSelector(state => state.rerender.rerender);
+    const id = useSelector(state => state.main.id);
 
     useEffect(() => {
+        if (id !== -1 && rerender) {
+            dispatch(set_rerender({rerender: false}));
+            return ;
+        }
         dispatch(setIsLoading({loading: true}));
+    }, []);
+
+    useEffect(() => {
         dispatch(fetchMainTracks());
         dispatch(getFavorite({accessToken}));
     }, [dispatch, accessToken]);
@@ -35,9 +42,9 @@ export const  MainPage = () => {
     }, [isLoading, dispatch, tracks, amount_id_tracks]);
 
     if (isLoading) {
-       return (
+        return (
            <MainPageWithPlaceholders/>
-       )
+        )
     }
     return (
         <>

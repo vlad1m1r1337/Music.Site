@@ -1,4 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {PopupFilter} from "../services/constants";
+import {set_rerender} from "./rerender";
 
 export const addFavoriteTrack = createAsyncThunk(
     'main/addFavoriteTrack',
@@ -149,6 +151,21 @@ export const fetchMainTracks = createAsyncThunk(
     }
 )
 
+const set_email_password_login_error = (data, dispatch) => {
+    const email_key = "email";
+    const password_key = "password";
+    const detail = "detail";
+    if (email_key in data) {
+        dispatch(set_auth_email_error({error_exist: true, error_text: data.email}));
+    }
+    if (password_key in data) {
+        dispatch(set_auth_password_error({error_exist: true, error_text: data.password}));
+    }
+    if (detail in data) {
+        dispatch(set_login_detail_error({error_exist: true, error_text: data.detail}))
+    }
+}
+
 export const login = createAsyncThunk(
     'main/login',
     async function(_, {rejectWithValue, dispatch}) {
@@ -167,12 +184,13 @@ export const login = createAsyncThunk(
             });
             if (!response.ok) {
                 const data = await response.json();
-                set_email_password_error(data, dispatch);
-                throw new Error('Неверный логин или пароль');
+                set_email_password_login_error(data, dispatch);
+                throw new Error('Error');
             }
             dispatch(set_allow({ allowed: true }));
             dispatch(set_login({login: InputMail.value}));
             dispatch(set_password({password: InputPassword.value}));
+            dispatch(set_rerender({rerender: true}));
         }
         catch(error) {
             return rejectWithValue(error.message);
@@ -183,7 +201,6 @@ export const login = createAsyncThunk(
 const set_email_password_error = (data, dispatch) => {
     const email_key = "email";
     const password_key = "password";
-    console.log("set_email_password_error");
     if (email_key in data) {
         console.log("email");
         dispatch(set_auth_email_error({error_exist: true, error_text: data.email}));
@@ -219,11 +236,10 @@ export const registration = createAsyncThunk(
             if (!response.ok) {
                 const data = await response.json();
                 set_email_password_error(data, dispatch);
-                throw new Error('Some error');
+                throw new Error('Error');
             }
         }
         catch(error) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }
@@ -236,7 +252,7 @@ export const Slice = createSlice({
         amount_id_tracks: -1,
         is_playing: true,
         shuffle_arr: ['null'],
-        shuffle_flag: 1, // флаг, показывающий к какой кнопке(вперёд, назад) относится массив shuffle_arr
+        shuffle_flag: 1,
 
         isAllowed: false,
         access: null,
@@ -250,13 +266,21 @@ export const Slice = createSlice({
         loading: true,
         auth_email_error: [false, null],
         auth_password_error: [false, null],
+        login_detail_error: [false, null],
 
         all_authors: [],
         all_release_dates: [],
         all_genres: [],
 
+
+        popup_author_counter: 0,
+        popup_release_dates: 0,
+        popup_genres: 0,
+
         filtred_tracks: [null],
-        filtred_flag: false
+        filtred_flag: false,
+
+        rerender_flag: true,
     },
     reducers: {
         increment: state => {
@@ -335,6 +359,7 @@ export const Slice = createSlice({
             state.tracks = JSON.parse(JSON.stringify(state.tracks_page));
         },
         add_track_to_favorite: state => {
+            if (state.track_favorites.find((el) => el.id === state.id)) {return;}
             const found = state.tracks_page.find((element) => element.id === state.id);
             state.track_favorites.push(found);
         },
@@ -417,7 +442,6 @@ export const Slice = createSlice({
             state.filtred_flag = action.payload.flag;
         },
         set_auth_email_error: (state, action) => {
-            console.log("set_auth_email_error");
             state.auth_email_error[0] = action.payload.error_exist;
             state.auth_email_error[1] = action.payload.error_text;
         },
@@ -425,9 +449,40 @@ export const Slice = createSlice({
             state.auth_password_error[0] = action.payload.error_exist;
             state.auth_password_error[1] = action.payload.error_text;
         },
+        set_login_detail_error: (state, action) => {
+            state.login_detail_error[0] = action.payload.error_exist;
+            state.login_detail_error[1] = action.payload.error_text;
+        },
         reset_to_zero_auth_errors: state => {
             state.auth_password_error[0] = false;
             state.auth_email_error[0] = false;
+            state.login_detail_error[0] = false;
+        },
+        change_popup_counter: (state, action) => {
+            if (action.payload.name === PopupFilter[0]) {
+                if (action.payload.filter) {
+                    state.popup_author_counter--;
+                }
+                else {
+                    state.popup_author_counter++;
+                }
+            }
+            if (action.payload.name === PopupFilter[1]) {
+                if (action.payload.filter) {
+                    state.popup_release_dates--;
+                }
+                else {
+                    state.popup_release_dates++;
+                }
+            }
+            if (action.payload.name === PopupFilter[2]) {
+                if (action.payload.filter) {
+                    state.popup_genres--;
+                }
+                else {
+                    state.popup_genres++;
+                }
+            }
         }
     },
     extraReducers: (builder) => {
@@ -439,6 +494,9 @@ export const Slice = createSlice({
             .addCase(registration.rejected, state => {
                 // state.auth_error[0] = true;
             })
+            // .addCase(fetchMainTracks.pending, state => {
+            //     state.loading = true;
+            // })
             .addCase(fetchMainTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
                     state.tracks = action.payload;
@@ -447,15 +505,16 @@ export const Slice = createSlice({
                 state.loading = false;
             })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
+                console.log(action.payload.params.param);
                 if (state.tracks_page === null && state.tracks === null) {
-                    if (action.payload.params.id) {
-                        state.tracks = action.payload.data[action.payload.params.id - 1].items;
+                    if (action.payload.params.param.id) {
+                        state.tracks = action.payload.data[action.payload.params.param.id - 1].items;
                     } else {
                         state.tracks = action.payload.data[0].items;
                     }
                 }
-                if (action.payload.params.id) {
-                    state.tracks_page = action.payload.data[action.payload.params.id - 1].items;
+                if (action.payload.params.param.id) {
+                    state.tracks_page = action.payload.data[action.payload.params.param.id - 1].items;
                 } else {
                     state.tracks_page = action.payload.data[0].items;
                 }
@@ -477,6 +536,8 @@ export const Slice = createSlice({
 
 
 export const {
+    change_popup_counter,
+    set_login_detail_error,
     reset_to_zero_auth_errors,
     set_auth_password_error,
     set_auth_email_error,

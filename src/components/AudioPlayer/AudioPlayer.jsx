@@ -6,27 +6,19 @@ import AudioPlayerBarVolumeBlock from "../AudioPlayerBarVolumeBlock/AudioPlayerB
 import {useThemeContext} from "../../contexts/color_theme";
 import {AudioPlayerActiveButtons} from "../AudioPlayerActiveButtons/AudioPlayerActiveButtons";
 import {useSelector} from "react-redux";
-import {remove_track_from_favorite, add_track_to_favorite, addFavoriteTrack, removeFavoriteTrack} from "../../store/idSlice";
+import {remove_track_from_favorite, add_track_to_favorite, addFavoriteTrack, removeFavoriteTrack, increment} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 
 
 export default function AudioPlayer() {
 	const audioRef = useRef(null);
 	const dispatch = useDispatch();
-
 	const {theme} = useThemeContext();
-
 	const [loadMetaData, setLoadMetaData] = useState(false);
-
-	const [volume, setVolume] = useState(0);
-
+	const [volume, setVolume] = useState(50);
 	let [currentTime, setCurrentTime] = useState(0);
-
-	// const id = useSelector(state => state.main.id);
 	const tracks = useSelector(state => state.main.track);
-
 	const access = useSelector(state => state.main.access);
-
 	const id = useSelector(state => state.main.id);
 
 	let name;
@@ -37,7 +29,7 @@ export default function AudioPlayer() {
 		audioRef.current.load();
 	}, [tracks])
 
-	if (tracks !== undefined) {
+	if (tracks !== undefined && tracks) {
 		name = tracks.name;
 		author = tracks.author;
 		sound = tracks.track_file;
@@ -66,10 +58,17 @@ export default function AudioPlayer() {
 		await dispatch(addFavoriteTrack({ access: access, id: id }));
 	}
 	async function setDislike() {
-		console.log('dislike');
 		dispatch(remove_track_from_favorite());
 		await dispatch(removeFavoriteTrack({ access: access, id: id }));
 	}
+
+	useEffect(() => {
+		if (audioRef.current) {
+			if (audioRef.current.duration === currentTime) {
+				dispatch(increment());
+			}
+		}
+	}, [currentTime]);
 	return (
 		<>
 			<SAudio.Bar $theme={theme}>
