@@ -1,6 +1,10 @@
 import * as S from './SearchPopupElement.styles'
 import {useEffect, useState} from "react";
-import {change_filtr_flag, filter_by_attr_author, filter_by_attr_release_date, filter_by_attr_genre} from "../../store/idSlice";
+import {change_filtr_flag,
+        filter_by_attr_author,
+        filter_by_attr_release_date,
+        filter_by_attr_genre,
+        change_popup_counter} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {useSelector} from "react-redux";
 import {PopupFilter} from "../../services/constants";
@@ -21,6 +25,7 @@ export const SearchPopupElement = ({item, name}) => {
 
     const filterItem = () => {
         setFilter(!filter);
+        dispatch(change_popup_counter({name: name, filter: filter}));
         if (name === PopupFilter[0]) {
             dispatch(filter_by_attr_author({author: item, filtred_flag: filtred_flag}));
         }
@@ -31,7 +36,6 @@ export const SearchPopupElement = ({item, name}) => {
             dispatch(filter_by_attr_genre({genre: item, filtred_flag: filtred_flag}));
         }
     }
-
     return (
        <S.MenuItem $filter={filter} onClick={() => filterItem()} >{item}</S.MenuItem>
     )

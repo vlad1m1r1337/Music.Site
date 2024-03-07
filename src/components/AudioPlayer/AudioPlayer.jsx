@@ -18,7 +18,7 @@ export default function AudioPlayer() {
 
 	const [loadMetaData, setLoadMetaData] = useState(false);
 
-	const [volume, setVolume] = useState(0);
+	const [volume, setVolume] = useState(50);
 
 	let [currentTime, setCurrentTime] = useState(0);
 
@@ -66,7 +66,6 @@ export default function AudioPlayer() {
 		await dispatch(addFavoriteTrack({ access: access, id: id }));
 	}
 	async function setDislike() {
-		console.log('dislike');
 		dispatch(remove_track_from_favorite());
 		await dispatch(removeFavoriteTrack({ access: access, id: id }));
 	}

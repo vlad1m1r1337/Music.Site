@@ -8,18 +8,18 @@ export const FilterButton = styled.div`
     border: 1px solid ${prop => prop.$font};
     border-radius: 60px;
     padding: 6px 20px;
-    &: not(:last-child) {
+    &:not(:last-child) {
     margin-right: 10px;
     }
 `
 
 export const BtnText = styled(FilterButton)`
-    &: hover {
+    &:hover {
       border-color: ${prop => prop.$theme.popup_color_hover};
       color: ${prop => prop.$theme.popup_color_hover};
       cursor: pointer;
     }
-    &: active {
+    &:active {
     border-color: ${prop => prop.$theme.popup_color_active};
     color: ${prop => prop.$theme.popup_color_active};
     cursor: pointer;
@@ -55,4 +55,22 @@ export const PopMenuFind = styled.ul`
   &::-webkit-scrollbar {
   width: 12px; /* Ширина скроллбара */
   }
+`
+
+export const PopupCounterParagraph = styled.p`
+  color: white;
+  background-color: rgb(173, 97, 255);
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 13px;
 `

@@ -11,6 +11,8 @@ export default function CenterBlockContent() {
 		tracks = filtred_tracks;
 	}
 
+	console.log("tracks", tracks);
+
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>

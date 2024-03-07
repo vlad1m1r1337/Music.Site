@@ -12,6 +12,7 @@ body {
 `
 
 export const Registration = () => {
+    const auth_error = useSelector(state => state.main.auth_error);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
