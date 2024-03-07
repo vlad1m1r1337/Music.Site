@@ -504,19 +504,20 @@ export const Slice = createSlice({
                 state.tracks_page = action.payload;
                 state.loading = false;
             })
-            .addCase(fetchSelectionTracks.pending, state => {
-                state.loading = true;
-            })
+            // .addCase(fetchSelectionTracks.pending, state => {
+            //     state.loading = true;
+            // })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
+                console.log(action.payload.params.param);
                 if (state.tracks_page === null && state.tracks === null) {
-                    if (action.payload.params.id) {
-                        state.tracks = action.payload.data[action.payload.params.id - 1].items;
+                    if (action.payload.params.param.id) {
+                        state.tracks = action.payload.data[action.payload.params.param.id - 1].items;
                     } else {
                         state.tracks = action.payload.data[0].items;
                     }
                 }
-                if (action.payload.params.id) {
-                    state.tracks_page = action.payload.data[action.payload.params.id - 1].items;
+                if (action.payload.params.param.id) {
+                    state.tracks_page = action.payload.data[action.payload.params.param.id - 1].items;
                 } else {
                     state.tracks_page = action.payload.data[0].items;
                 }
