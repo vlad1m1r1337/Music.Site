@@ -5,7 +5,7 @@ import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
@@ -33,10 +33,13 @@ export const  SelectionsPage = ({header}) => {
     const accessToken = useSelector(state => state.main.access);
 
     const id = useSelector(state => state.main.id);
+    const [rerender, setRerender] = useState(-1)
+
 
     useEffect(() => {
-        console.log("useEffect load");
-        dispatch(setIsLoading({loading: true}));
+        if (rerender === id || rerender === 1) {
+            dispatch(setIsLoading({loading: true}));
+        }
     }, [dispatch]);
 
     useEffect(() => {

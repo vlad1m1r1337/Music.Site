@@ -2,7 +2,7 @@ import * as S from "../../App.styles";
 import NavMenu from "../../components/NavMenu/NavMenu";
 import TrackList from "../../components/TrackList/TrackList";
 import SideBar from "../../components/SideBar/SideBar";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import MainPageWithPlaceholders from "../../components/MainPageWithPlaceholders/MainPageWithPlaceholders";
 import { useThemeContext } from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
@@ -19,10 +19,14 @@ export const  MainPage = () => {
     const accessToken = useSelector(state => state.main.access);
     const id = useSelector(state => state.main.id);
     const loading = useSelector(state => state.main.loading);
-
+    const [rerender, setRerender] = useState(-1)
     useEffect(() => {
-        dispatch(fetchMainTracks());
-        dispatch(getFavorite({accessToken}));
+        if (rerender === id || rerender === 1) {
+            console.log("useEffect1")
+            dispatch(fetchMainTracks());
+            dispatch(getFavorite({accessToken}));
+            setRerender(1);
+        }
     }, [dispatch, accessToken]);
 
     useEffect(() => {
