@@ -13,20 +13,12 @@ import {useDispatch} from "react-redux";
 export default function AudioPlayer() {
 	const audioRef = useRef(null);
 	const dispatch = useDispatch();
-
 	const {theme} = useThemeContext();
-
 	const [loadMetaData, setLoadMetaData] = useState(false);
-
 	const [volume, setVolume] = useState(50);
-
 	let [currentTime, setCurrentTime] = useState(0);
-
-	// const id = useSelector(state => state.main.id);
 	const tracks = useSelector(state => state.main.track);
-
 	const access = useSelector(state => state.main.access);
-
 	const id = useSelector(state => state.main.id);
 
 	let name;
@@ -37,7 +29,7 @@ export default function AudioPlayer() {
 		audioRef.current.load();
 	}, [tracks])
 
-	if (tracks !== undefined) {
+	if (tracks !== undefined && tracks) {
 		name = tracks.name;
 		author = tracks.author;
 		sound = tracks.track_file;

@@ -538,6 +538,7 @@ export const Slice = createSlice({
 
 
 export const {
+    change_popup_counter,
     set_login_detail_error,
     reset_to_zero_auth_errors,
     set_auth_password_error,
@@ -569,5 +570,4 @@ export const {
     chose ,
     set_amount_id_tracks,
     set_is_playing} = Slice.actions;
-export const {change_popup_counter, filter_by_attr_genre, filter_by_attr_release_date, find_all_genres, find_all_release_dates, filter_by_attr_author, change_filtr_flag, filter_search, find_all_authors, remove_track_from_favorite, add_track_to_favorite, set_text_auth_error, set_auth_error, copy_tracks, set_shuffle_def, set_track, set_password, set_login, set_allow, setIsLoading, set_def_shuffle_arr, set_shuffle_first, push_first_shuffle_id, shuffle_next, shuffle_prev, increment, decrement, chose , set_amount_id_tracks, set_is_playing} = Slice.actions;
 export const Reducer = Slice.reducer;

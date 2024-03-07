@@ -35,6 +35,7 @@ export const  SelectionsPage = ({header}) => {
     const id = useSelector(state => state.main.id);
 
     useEffect(() => {
+        console.log("useEffect");
         dispatch(getFavorite({accessToken}));
         if (header !== "Мои треки") {
             dispatch(fetchSelectionTracks({param}));

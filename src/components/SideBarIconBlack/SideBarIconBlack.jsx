@@ -9,8 +9,8 @@ export function SideBarIconBlack() {
     }
     return (
         <S.SideBarIcon>
-            <S.SideBarSvg onClick={signOut} >
-                <use xlinkHref="./img/icon/sprite.svg#logout"></use>
+            <S.SideBarSvg onClick={signOut} alt={"logout"}>
+                <use xlinkHref="/img/icon/sprite.svg#logout"></use>
             </S.SideBarSvg>
         </S.SideBarIcon>
     )

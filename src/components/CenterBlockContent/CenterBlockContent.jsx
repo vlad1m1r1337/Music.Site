@@ -10,9 +10,6 @@ export default function CenterBlockContent() {
 	if (filtred_flag) {
 		tracks = filtred_tracks;
 	}
-
-	console.log("tracks", tracks);
-
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>
