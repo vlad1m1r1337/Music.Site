@@ -359,6 +359,7 @@ export const Slice = createSlice({
             state.tracks = JSON.parse(JSON.stringify(state.tracks_page));
         },
         add_track_to_favorite: state => {
+            if (state.track_favorites.find((el) => el.id === state.id)) {return;}
             const found = state.tracks_page.find((element) => element.id === state.id);
             state.track_favorites.push(found);
         },
