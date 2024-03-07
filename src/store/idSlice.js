@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {PopupFilter} from "../services/constants";
+import {set_rerender} from "./rerender";
 
 export const addFavoriteTrack = createAsyncThunk(
     'main/addFavoriteTrack',
@@ -150,9 +151,6 @@ export const fetchMainTracks = createAsyncThunk(
     }
 )
 
-// function set_email_password_login_error() {
-//
-// }
 const set_email_password_login_error = (data, dispatch) => {
     const email_key = "email";
     const password_key = "password";
@@ -192,6 +190,7 @@ export const login = createAsyncThunk(
             dispatch(set_allow({ allowed: true }));
             dispatch(set_login({login: InputMail.value}));
             dispatch(set_password({password: InputPassword.value}));
+            dispatch(set_rerender({rerender: true}));
         }
         catch(error) {
             return rejectWithValue(error.message);
@@ -253,7 +252,7 @@ export const Slice = createSlice({
         amount_id_tracks: -1,
         is_playing: true,
         shuffle_arr: ['null'],
-        shuffle_flag: 1, // флаг, показывающий к какой кнопке(вперёд, назад) относится массив shuffle_arr
+        shuffle_flag: 1,
 
         isAllowed: false,
         access: null,
@@ -277,7 +276,7 @@ export const Slice = createSlice({
         popup_author_counter: 0,
         popup_release_dates: 0,
         popup_genres: 0,
-        //
+
         filtred_tracks: [null],
         filtred_flag: false,
 
@@ -494,9 +493,9 @@ export const Slice = createSlice({
             .addCase(registration.rejected, state => {
                 // state.auth_error[0] = true;
             })
-            .addCase(fetchMainTracks.pending, state => {
-                state.loading = true;
-            })
+            // .addCase(fetchMainTracks.pending, state => {
+            //     state.loading = true;
+            // })
             .addCase(fetchMainTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
                     state.tracks = action.payload;
@@ -504,9 +503,6 @@ export const Slice = createSlice({
                 state.tracks_page = action.payload;
                 state.loading = false;
             })
-            // .addCase(fetchSelectionTracks.pending, state => {
-            //     state.loading = true;
-            // })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
                 console.log(action.payload.params.param);
                 if (state.tracks_page === null && state.tracks === null) {

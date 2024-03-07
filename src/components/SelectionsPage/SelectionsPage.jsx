@@ -13,6 +13,7 @@ import {useSelector} from "react-redux";
 import {fetchFavorite, getFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchSelectionTracks, setIsLoading} from "../../store/idSlice";
+import {set_rerender} from "../../store/rerender";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -31,13 +32,16 @@ export const  SelectionsPage = ({header}) => {
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
     const param = useParams();
     const accessToken = useSelector(state => state.main.access);
-
+    const rerender = useSelector(state => state.rerender.rerender);
     const id = useSelector(state => state.main.id);
 
-
     useEffect(() => {
-            dispatch(setIsLoading({loading: true}));
-    }, [dispatch]);
+        if (id !== -1 && rerender) {
+            dispatch(set_rerender({rerender: false}));
+            return ;
+        }
+        dispatch(setIsLoading({loading: true}));
+    }, []);
 
     useEffect(() => {
         dispatch(getFavorite({accessToken}));
