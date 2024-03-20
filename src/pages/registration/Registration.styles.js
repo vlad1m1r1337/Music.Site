@@ -25,6 +25,20 @@ export const StyledInput = styled.input`
     }
 `
 
+export const StyledInputRepeat = styled.input`
+    //caret-color: transparent; 
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    border: none;
+    border-bottom: 2px solid ${prop => prop.$error === "Пароли не совпадают" ? "red" : "#D0CECE"};
+    width: 279px;
+    display: inline;
+    &:focus {
+    outline: none;
+    }
+`
+
 
 export const StyledImg = styled.img`
 margin: 43px 0 23px 0;

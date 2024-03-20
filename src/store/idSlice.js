@@ -202,11 +202,9 @@ const set_email_password_error = (data, dispatch) => {
     const email_key = "email";
     const password_key = "password";
     if (email_key in data) {
-        console.log("email");
         dispatch(set_auth_email_error({error_exist: true, error_text: data.email}));
     }
     if (password_key in data) {
-        console.log("password");
         dispatch(set_auth_password_error({error_exist: true, error_text: data.password}));
     }
 }
@@ -219,7 +217,9 @@ export const registration = createAsyncThunk(
         const InputPasswordRepeat = document.getElementById("input_password_repeat");
         const url = "https://skypro-music-api.skyeng.tech/user/signup/";
         try {
+            console.log("InputPassword", InputPassword.value, "InputPasswordRepeat", InputPasswordRepeat.value);
             if (InputPassword.value && InputPassword.value !== InputPasswordRepeat.value) {
+                set_email_password_error({password: "Пароли не совпадают"}, dispatch);
                 throw new Error("Пароли не совпадают");
             }
             const response = await fetch(url, {
@@ -455,6 +455,7 @@ export const Slice = createSlice({
         },
         reset_to_zero_auth_errors: state => {
             state.auth_password_error[0] = false;
+            state.auth_password_error[1] = null;
             state.auth_email_error[0] = false;
             state.login_detail_error[0] = false;
         },

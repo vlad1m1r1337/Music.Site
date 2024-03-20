@@ -48,7 +48,7 @@ export const Registration = () => {
                                    id="input_password"
                                    placeholder="Пароль"
                                    type="password"/>
-                    <S.StyledInput id="input_password_repeat" placeholder="Повторите пароль" type="password"/>
+                    <S.StyledInputRepeat $error={auth_password_error[1]} id="input_password_repeat" placeholder="Повторите пароль" type="password"/>
                 </S.StyledDivInput>
                 <S.StyledButtonPurple onClick={reg}>Зарегистрироваться</S.StyledButtonPurple>
             </S.StyledDiv>
