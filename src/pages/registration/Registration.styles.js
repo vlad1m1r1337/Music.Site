@@ -5,8 +5,8 @@ export const StyledDiv = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 321px auto 0 auto;
-  width: 366px;
-  height: 439px;
+  min-width: 366px;
+  min-height: 439px;
   background-color: #FFFFFF;
   border-radius: 12px;
 `
@@ -45,21 +45,21 @@ margin: 43px 0 23px 0;
 `
 
 export const StyledButtonPurple = styled.button`
-  width: 278px;
-  height: 52px;
-  border-radius: 6px;
-  color: white;
-  background-color: #580EA2;
-  border: 1px solid #D0CECE;
-  transition: 0.2s;
-  &:hover {
+    width: 278px;
+    height: 52px;
+    border-radius: 6px;
+    color: white;
+    background-color: #580EA2;
+    border: 1px solid #D0CECE;
+    transition: 0.2s;
+    &:hover {
     background-color: #3F007D;
     cursor: pointer;
-  }
-  &:active {
+    }
+    &:active {
     background-color: #271A58;
-  }
-  margin-top: 60px;
+    }
+    margin: 60px 0 60px 0;
 `
 
 
@@ -68,3 +68,8 @@ export const StyledDivInput = styled.div`
   flex-direction: column;
   gap: 38px;
 `
+
+export const RegistrationWrapper = styled.div`
+    display: flex;
+`
+

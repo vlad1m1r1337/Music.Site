@@ -5,8 +5,8 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 321px auto 0 auto;
-  width: 366px;
-  height: 439px;
+  min-width: 366px;
+  min-height: 439px;
   background-color: #FFFFFF;
   border-radius: 12px;
 `
@@ -71,6 +71,7 @@ export const DivInput = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
 `
 
 export const ParagraphErrorLog = styled.p`
@@ -78,4 +79,8 @@ export const ParagraphErrorLog = styled.p`
     font-size: 1rem;
     position: absolute;
     top: 520px;
+`
+
+export const LoginWrapper = styled.div`
+    display: flex;
 `
