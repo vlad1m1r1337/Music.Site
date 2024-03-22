@@ -2,9 +2,36 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {PopupFilter} from "../services/constants";
 import {set_rerender} from "./rerender";
 
+export const refreshToken = createAsyncThunk(
+    "main/refreshToken",
+    async function (refresh, {rejectWithValue}) {
+        console.log("refreshToken")
+        try {
+            const response = await fetch("https://skypro-music-api.skyeng.tech/user/token/refresh/", {
+                method: "POST",
+                body: JSON.stringify({
+                    refresh: refresh,
+                }),
+                headers: {
+                    "content-type": "application/json",
+                },
+            });
+            if (!response.ok) {
+                console.log(response);
+                throw new Error('Server Error!');
+            }
+            const data = await response.json();
+            console.log("data", data);
+            return data;
+        }
+        catch(error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
 export const addFavoriteTrack = createAsyncThunk(
     'main/addFavoriteTrack',
-    async function({access, id}, {rejectWithValue}) {
+    async function({access, id}, {rejectWithValue, dispatch, getState}) {
         try {
             const url = `https://skypro-music-api.skyeng.tech/catalog/track/${id}/favorite/`;
             const response = await fetch(url, {
@@ -13,7 +40,13 @@ export const addFavoriteTrack = createAsyncThunk(
                     Authorization: `Bearer ${access}`,
                 },
             })
-            if (!response.ok) {
+             if (!response.ok) {
+                if (response.status === 401) {
+                    const refresh = getState().main.refresh;
+                    dispatch(refreshToken(refresh));
+                    const newAccess = getState().main.access;
+                    return await dispatch(addFavoriteTrack({ access: newAccess, id: id }));
+                }
                 throw new Error('Server Error!');
             }
         }
@@ -25,7 +58,7 @@ export const addFavoriteTrack = createAsyncThunk(
 
 export const removeFavoriteTrack = createAsyncThunk(
     'main/removeFavoriteTrack',
-    async function({access, id}, {rejectWithValue}) {
+    async function({access, id}, {rejectWithValue, dispatch, getState}) {
         try {
             const url = `https://skypro-music-api.skyeng.tech/catalog/track/${id}/favorite/`;
             const response = await fetch(url, {
@@ -35,6 +68,12 @@ export const removeFavoriteTrack = createAsyncThunk(
                 },
             })
             if (!response.ok) {
+                if (response.status === 401) {
+                    const refresh = getState().main.refresh;
+                    dispatch(refreshToken(refresh));
+                    const newAccess = getState().main.access;
+                    return await dispatch(removeFavoriteTrack({ access: newAccess, id: id }));
+                }
                 throw new Error('Server Error!');
             }
         }
@@ -46,7 +85,7 @@ export const removeFavoriteTrack = createAsyncThunk(
 
 export const getFavorite = createAsyncThunk(
     'main/getFavorite',
-    async function(accessToken, {rejectWithValue}) {
+    async function(accessToken, {rejectWithValue, dispatch, getState}) {
         try {
             const favoriteUrl = 'https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/'
             const response = await fetch(favoriteUrl, {
@@ -56,6 +95,12 @@ export const getFavorite = createAsyncThunk(
                 },
             })
             if (!response.ok) {
+                if (response.status === 401) {
+                    const refresh = getState().main.refresh;
+                    dispatch(refreshToken(refresh));
+                    const newAccess = getState().main.access;
+                    return await dispatch(getFavorite({ accessToken: newAccess}));
+                }
                 throw new Error('Server Error!');
             }
             const data = await response.json();
@@ -69,7 +114,7 @@ export const getFavorite = createAsyncThunk(
 
 export const fetchFavorite = createAsyncThunk(
     'main/fetchFavorite',
-    async function(accessToken, {rejectWithValue}) {
+    async function(accessToken, {rejectWithValue, dispatch, getState}) {
         try {
             const favoirteUrl = 'https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/'
             const response = await fetch(favoirteUrl, {
@@ -79,6 +124,12 @@ export const fetchFavorite = createAsyncThunk(
                 },
             })
             if (!response.ok) {
+                if (response.status === 401) {
+                    const refresh = getState().main.refresh;
+                    dispatch(refreshToken(refresh));
+                    const newAccess = getState().main.access;
+                    return await dispatch(fetchFavorite({ accessToken: newAccess}));
+                }
                 throw new Error('Server Error!');
             }
             const data = await response.json();
@@ -528,6 +579,10 @@ export const Slice = createSlice({
             })
             .addCase(getFavorite.fulfilled, (state, action) => {
                 state.track_favorites = action.payload;
+            })
+            .addCase(refreshToken.fulfilled, (state, action) => {
+                console.log("access_fulfilled", action.payload.access);
+                state.access = action.payload.access;
             })
     },
 })
