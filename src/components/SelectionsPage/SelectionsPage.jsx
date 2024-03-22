@@ -42,7 +42,7 @@ export const  SelectionsPage = ({header}) => {
             return ;
         }
         dispatch(setIsLoading({loading: true}));
-    }, [dispatch, id, rerender]);
+    }, []);
 
     useEffect(() => {
         dispatch(getFavorite({accessToken}));

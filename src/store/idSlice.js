@@ -554,7 +554,6 @@ export const Slice = createSlice({
                 state.loading = false;
             })
             .addCase(fetchSelectionTracks.fulfilled, (state, action) => {
-                console.log(action.payload.params.param);
                 if (state.tracks_page === null && state.tracks === null) {
                     if (action.payload.params.param.id) {
                         state.tracks = action.payload.data[action.payload.params.param.id - 1].items;

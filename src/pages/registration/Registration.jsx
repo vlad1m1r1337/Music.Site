@@ -5,7 +5,6 @@ import {useNavigate} from "react-router-dom";
 import {registration, reset_to_zero_auth_errors} from "../../store/idSlice";
 import {LoginLogs} from "../../components/LoginLogs/LoginLogs";
 import {PasswordLogs} from "../../components/PasswordLogs/PasswordLogs";
-import {RegistrationWrapper} from "./Registration.styles";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -14,7 +13,6 @@ body {
 `
 
 export const Registration = () => {
-    const auth_error = useSelector(state => state.main.auth_error);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
