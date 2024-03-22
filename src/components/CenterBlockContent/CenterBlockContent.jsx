@@ -2,7 +2,7 @@ import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
 import {useSelector} from "react-redux";
 
-export default function CenterBlockContent() {
+export default function CenterBlockContent({header}) {
 	let tracks = useSelector(state => state.main.tracks_page);
 	const filtred_tracks = useSelector(state => state.main.filtred_tracks);
 	const filtred_flag = useSelector(state => state.main.filtred_flag);
@@ -34,7 +34,7 @@ export default function CenterBlockContent() {
 						const seconds = dur_in_sec % 60 < 10 ? "0" + dur_in_sec % 60 : dur_in_sec % 60;
 						const time = minutes + ":" + seconds;
 						return (
-								<Track key={id} id={id} track={name} executor={author} album={album} time={time}/>
+								<Track key={id} id={id} track={name} executor={author} album={album} time={time} header={header}/>
 							)
 					})
 				}

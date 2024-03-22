@@ -42,6 +42,7 @@ export const ButtonWhite = styled.button`
   transition: 0.2s;
   &:hover {
     background-color: #D9D9D9;
+    cursor: pointer;
   }
   &:active {
     background-color: #D0CECE;
@@ -58,6 +59,7 @@ export const ButtonPurpl = styled.button`
   transition: 0.2s;
   &:hover {
     background-color: #3F007D;
+    cursor: pointer;
   }
   &:active {
     background-color: #271A58;

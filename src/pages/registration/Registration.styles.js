@@ -54,6 +54,7 @@ export const StyledButtonPurple = styled.button`
   transition: 0.2s;
   &:hover {
     background-color: #3F007D;
+    cursor: pointer;
   }
   &:active {
     background-color: #271A58;

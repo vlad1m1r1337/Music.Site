@@ -495,9 +495,6 @@ export const Slice = createSlice({
             .addCase(registration.rejected, state => {
                 // state.auth_error[0] = true;
             })
-            // .addCase(fetchMainTracks.pending, state => {
-            //     state.loading = true;
-            // })
             .addCase(fetchMainTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
                     state.tracks = action.payload;

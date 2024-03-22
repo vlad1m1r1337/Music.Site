@@ -5,7 +5,7 @@ import SearchCenter from "../SearchCenter/SearchCenter";
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import SideBarAuth from "../SideBarAuth/SideBarAuth";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
@@ -14,6 +14,7 @@ import {fetchFavorite, getFavorite, set_amount_id_tracks, set_def_shuffle_arr} f
 import {useDispatch} from "react-redux";
 import {fetchSelectionTracks, setIsLoading} from "../../store/idSlice";
 import {set_rerender} from "../../store/rerender";
+import {MyTracks} from "../../services/constants";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -41,11 +42,11 @@ export const  SelectionsPage = ({header}) => {
             return ;
         }
         dispatch(setIsLoading({loading: true}));
-    }, []);
+    }, [dispatch, id, rerender]);
 
     useEffect(() => {
         dispatch(getFavorite({accessToken}));
-        if (header !== "Мои треки") {
+        if (header !== MyTracks) {
             dispatch(fetchSelectionTracks({param}));
         }
         else {
@@ -89,7 +90,7 @@ export const  SelectionsPage = ({header}) => {
                             <SS.MainCenterBlock>
                                 <SearchCenter/>
                                 <StyledH>{header}</StyledH>
-                                <CenterBlockContent tracks={tracks}/>
+                                <CenterBlockContent header={header} tracks={tracks}/>
                             </SS.MainCenterBlock>
                             <SideBarAuth/>
                         </S.Main>

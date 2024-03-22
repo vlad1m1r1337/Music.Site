@@ -8,13 +8,15 @@ import {
 	copy_tracks, removeFavoriteTrack,
 	set_amount_id_tracks,
 	set_shuffle_def,
-	set_shuffle_first
+	set_shuffle_first,
+	fetchFavorite,
 } from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
 import {useEffect, useState} from "react";
 import {TrackTimeDiv} from "./Track.styles";
+import {MyTracks} from "../../services/constants";
 
-export default function Track({id, track, track_add, executor, album, time}) {
+export default function Track({id, track, track_add, executor, album, time, header}) {
 	const [like, setLike] = useState(false);
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
@@ -48,6 +50,9 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		else {
 			try {
 				await dispatch(removeFavoriteTrack({ access: access, id: id }));
+				if (header === MyTracks) {
+					dispatch(fetchFavorite({accessToken: access}));
+				}
 			}
 			catch (error) {
 				navigate("/login", { replace: true });
