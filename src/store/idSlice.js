@@ -414,6 +414,26 @@ export const Slice = createSlice({
             const found = state.tracks_page.find((element) => element.id === state.id);
             state.track_favorites.push(found);
         },
+        add_track_to_favorite_by_id: (state, action) => {
+            if (state.track_favorites.find((el) => el.id === action.payload.id)) {return;}
+            const found = state.tracks_page.find((element) => element.id === action.payload.id);
+            state.track_favorites.push(found);
+        },
+        remove_track_from_favorite_by_id: (state, action) => {
+            const id = state.tracks_page.find(el => {
+              if(el.id === action.payload.id) {
+                  return el.id;
+              }
+              return undefined;
+            })
+            const deleted_index = state.track_favorites.findIndex((el, index) => {
+                if (el.id === id) {
+                    return index;
+                }
+                return undefined;
+            });
+            state.track_favorites.splice(deleted_index, 1);
+        },
         remove_track_from_favorite: state => {
             let remove_id = -1;
             for (let i = 0; i < state.track_favorites.length; i++) {
@@ -588,6 +608,8 @@ export const Slice = createSlice({
 
 
 export const {
+    remove_track_from_favorite_by_id,
+    add_track_to_favorite_by_id,
     change_popup_counter,
     set_login_detail_error,
     reset_to_zero_auth_errors,

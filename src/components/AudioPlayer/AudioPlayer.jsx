@@ -18,16 +18,32 @@ export default function AudioPlayer() {
 	const [volume, setVolume] = useState(50);
 	let [currentTime, setCurrentTime] = useState(0);
 	const tracks = useSelector(state => state.main.track);
+	const track_favorites = useSelector(state => state.main.track_favorites);
 	const access = useSelector(state => state.main.access);
 	const id = useSelector(state => state.main.id);
-
+	const [AudioLike, setAudioLike] = useState(false);
 	let name;
 	let author;
 	let sound;
 
 	useEffect(() => {
+		const founded = track_favorites.find(el => el.id === id);
+		if (founded) {
+			setAudioLike(true);
+		} else  {
+			setAudioLike(false);
+		}
+
+	}, [track_favorites, id]);
+
+	useEffect(() => {
 		audioRef.current.load();
+
 	}, [tracks])
+
+	useEffect(() => 	{
+		audioRef.current.volume = volume / 100;
+	}, [volume]);
 
 	if (tracks !== undefined && tracks) {
 		name = tracks.name;
@@ -39,9 +55,6 @@ export default function AudioPlayer() {
 		author = "author";
 	}
 
-	useEffect(() => 	{
-		audioRef.current.volume = volume / 100;
-	}, [volume]);
 
 	function toMin(dur) {
 		const seconds = (parseInt(dur % 60) < 10 ? "0" + parseInt(dur % 60) : parseInt(dur % 60));
@@ -54,12 +67,14 @@ export default function AudioPlayer() {
 		};
 	}, []);
 	 async function setLike() {
-		dispatch(add_track_to_favorite());
-		await dispatch(addFavoriteTrack({ access: access, id: id }));
-	}
-	async function setDislike() {
-		dispatch(remove_track_from_favorite());
-		await dispatch(removeFavoriteTrack({ access: access, id: id }));
+		 if (AudioLike) {
+			 dispatch(remove_track_from_favorite());
+			 await dispatch(removeFavoriteTrack({ access: access, id: id }));
+		 }
+		 else {
+			 dispatch(add_track_to_favorite());
+			 await dispatch(addFavoriteTrack({ access: access, id: id }));
+		 }
 	}
 
 	useEffect(() => {
@@ -68,7 +83,7 @@ export default function AudioPlayer() {
 				dispatch(increment());
 			}
 		}
-	}, [currentTime]);
+	}, [dispatch, currentTime]);
 	return (
 		<>
 			<SAudio.Bar $theme={theme}>
@@ -94,16 +109,9 @@ export default function AudioPlayer() {
 									<SAudio.TrackPlayLikeDis>
 										<SAudio.TrackPlayLike onClick={setLike} $theme={theme}>
 											<SAudio.TrackPlayLikeSvg $theme={theme} className="track-play__like-svg" alt="like">
-												<use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
+												{AudioLike ? <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use> : <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>}
 											</SAudio.TrackPlayLikeSvg>
 										</SAudio.TrackPlayLike>
-										<SAudio.TrackPlayDislike onClick={setDislike} $theme={theme}>
-											<SAudio.TrackPlayDislikeSvg $theme={theme} className="track-play__dislike-svg" alt="dislike">
-												<use
-													xlinkHref="/img/icon/sprite.svg#icon-dislike"
-												></use>
-											</SAudio.TrackPlayDislikeSvg>
-										</SAudio.TrackPlayDislike>
 									</SAudio.TrackPlayLikeDis>
 								</SAudio.PlayerTrackPlay>
 							</SAudio.BarPlayer>

@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
 import {
+	remove_track_from_favorite_by_id,
+	add_track_to_favorite_by_id,
 	addFavoriteTrack,
 	chose,
 	copy_tracks, removeFavoriteTrack,
@@ -41,6 +43,7 @@ export default function Track({id, track, track_add, executor, album, time, head
 		if (!like) {
 			try {
 				await dispatch(addFavoriteTrack({ access: access, id: id }));
+				dispatch(add_track_to_favorite_by_id({ id: id }));
 			}
 			catch(error) {
 				navigate("/login", { replace: true });
@@ -50,6 +53,9 @@ export default function Track({id, track, track_add, executor, album, time, head
 		else {
 			try {
 				await dispatch(removeFavoriteTrack({ access: access, id: id }));
+				console.log("1");
+				dispatch(remove_track_from_favorite_by_id({ id: id }));
+				console.log("2");
 				if (header === MyTracks) {
 					dispatch(fetchFavorite({accessToken: access}));
 				}
