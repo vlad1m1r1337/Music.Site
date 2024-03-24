@@ -23,8 +23,7 @@ export default function CenterBlockContent({header}) {
 				</S.Col04>
 			</S.ContentTitle>
 			<S.ContentPlayList>
-				{tracks &&
-					tracks.map((track) => {
+				{tracks?.map((track) => {
 						const id = track.id;
 						const name = track.name;
 						const author = track.author;

@@ -28,7 +28,6 @@ export const Login = () => {
         dispatch(login())
             .unwrap()
             .then(() => {
-                localStorage.setItem("key", "value");
                 navigate("/");
                 dispatch(reset_to_zero_auth_errors());
             })

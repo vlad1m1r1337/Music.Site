@@ -6,6 +6,7 @@ export function SideBarIconBlack() {
     const dispatch = useDispatch();
     const signOut = () => {
         dispatch(set_allow({allowed: false}));
+        localStorage.clear();
     }
     return (
         <S.SideBarIcon>

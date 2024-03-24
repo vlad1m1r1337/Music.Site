@@ -10,6 +10,7 @@ import {getFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../stor
 import {useDispatch} from "react-redux";
 import {fetchMainTracks, setIsLoading} from "../../store/idSlice"
 import {set_rerender} from "../../store/rerender";
+
 export const  MainPage = () => {
     const {theme} = useThemeContext();
     const dispatch = useDispatch();

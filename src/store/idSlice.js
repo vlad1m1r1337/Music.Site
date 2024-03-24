@@ -7,7 +7,6 @@ export const refreshToken = createAsyncThunk(
     "main/refreshToken",
     async function (refresh, {rejectWithValue}) {
         try {
-            console.log("refreshToken");
             const response = await fetch("https://skypro-music-api.skyeng.tech/user/token/refresh/", {
                 method: "POST",
                 body: JSON.stringify({
@@ -95,12 +94,12 @@ export const getFavorite = createAsyncThunk(
                 },
             })
             if (!response.ok) {
-                if (response.status === 401) {
-                    const refresh = getState().main.refresh;
-                    dispatch(refreshToken(refresh));
-                    const newAccess = getState().main.access;
-                    return await dispatch(getFavorite({ accessToken: newAccess}));
-                }
+                // if (response.status === 401) {
+                //     const refresh = getState().main.refresh;
+                //     dispatch(refreshToken(refresh));
+                //     const newAccess = getState().main.access;
+                //     return await dispatch(getFavorite({ accessToken: newAccess}));
+                // }
                 throw new Error('Server Error!');
             }
             const data = await response.json();
@@ -360,9 +359,13 @@ export const Slice = createSlice({
             }
         },
         chose: (state, action) => {
+            console.log("id inside redux", action.payload.id);
             state.id = action.payload.id;
         },
         set_amount_id_tracks: function (state) {
+            if (!state.tracks) {
+                return;
+            }
             state.amount_id_tracks = state.tracks[state.tracks.length - 1].id;
         },
         set_is_playing: (state, action) => {
@@ -610,14 +613,14 @@ export const Slice = createSlice({
                 state.access = action.payload.access;
                 state.refresh = action.payload.refresh;
                 if(localStorage.getItem("auth") !== null) {
-                    localStorage.setItem("auth", JSON.stringify(action.payload));
-                }
-                else {
                     const prev_obj = JSON.parse(localStorage.getItem("auth"));
                     localStorage.setItem("auth", JSON.stringify({
                         ...prev_obj,
                         ...action.payload,
                     }));
+                }
+                else {
+                    localStorage.setItem("auth", JSON.stringify(action.payload));
                 }
             })
             .addCase(fetchFavorite.fulfilled, (state, action) => {
