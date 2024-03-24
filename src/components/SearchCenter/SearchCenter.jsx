@@ -7,7 +7,6 @@ import {change_filtr_flag, filter_search} from "../../store/idSlice";
 export default function SearchCenter() {
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
-
 	const [inputValue, setInputValue] = useState('');
 
 	useEffect(() => {

@@ -475,7 +475,11 @@ export const Slice = createSlice({
             state.all_genres.sort();
         },
         filter_search: (state, action) => {
-            if (state.tracks_page) {
+            console.log("filtred_flag", state.filtred_flag);
+            if (state.filtred_flag) {
+                state.filtred_tracks = state.filtred_tracks.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
+            }
+            else if (state.tracks_page) {
                 state.filtred_tracks = state.tracks_page.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
             }
         },
