@@ -1,12 +1,13 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {PopupFilter} from "../services/constants";
 import {set_rerender} from "./rerender";
+// import { setItem } from 'localStorage'; // Adjust the import path based on the library you're using
 
 export const refreshToken = createAsyncThunk(
     "main/refreshToken",
     async function (refresh, {rejectWithValue}) {
-        console.log("refreshToken")
         try {
+            console.log("refreshToken");
             const response = await fetch("https://skypro-music-api.skyeng.tech/user/token/refresh/", {
                 method: "POST",
                 body: JSON.stringify({
@@ -21,7 +22,6 @@ export const refreshToken = createAsyncThunk(
                 throw new Error('Server Error!');
             }
             const data = await response.json();
-            console.log("data", data);
             return data;
         }
         catch(error) {
@@ -242,6 +242,8 @@ export const login = createAsyncThunk(
             dispatch(set_login({login: InputMail.value}));
             dispatch(set_password({password: InputPassword.value}));
             dispatch(set_rerender({rerender: true}));
+            const data = await response.json();
+            return data;
         }
         catch(error) {
             return rejectWithValue(error.message);
@@ -310,6 +312,7 @@ export const Slice = createSlice({
         refresh: null,
         login: null,
         password: null,
+
         tracks: null,
         tracks_page: null,
         track: null,
@@ -555,7 +558,13 @@ export const Slice = createSlice({
                     state.popup_genres++;
                 }
             }
-        }
+        },
+        fill_redux_by_storage: state  => {
+            const storage = JSON.parse(localStorage.getItem("auth"));
+            state.access = storage.access;
+            state.refresh = storage.refresh;
+            state.login = storage.email;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -563,8 +572,17 @@ export const Slice = createSlice({
                 state.auth_error[0] = true;
                 state.loading = false;
             })
-            .addCase(registration.rejected, state => {
-                // state.auth_error[0] = true;
+            .addCase(login.fulfilled, (state, action) => {
+                if (localStorage.getItem("auth") === null) {
+                    localStorage.setItem("auth", JSON.stringify(action.payload));
+                }
+                else {
+                    const prev_obj = JSON.parse(localStorage.getItem("auth"));
+                    localStorage.setItem("auth", JSON.stringify({
+                        ...prev_obj,
+                        ...action.payload,
+                    }));
+                }
             })
             .addCase(fetchMainTracks.fulfilled, (state, action) => {
                 if (state.tracks_page === null && state.tracks === null) {
@@ -591,6 +609,16 @@ export const Slice = createSlice({
             .addCase(getToken.fulfilled, (state, action) => {
                 state.access = action.payload.access;
                 state.refresh = action.payload.refresh;
+                if(localStorage.getItem("auth") !== null) {
+                    localStorage.setItem("auth", JSON.stringify(action.payload));
+                }
+                else {
+                    const prev_obj = JSON.parse(localStorage.getItem("auth"));
+                    localStorage.setItem("auth", JSON.stringify({
+                        ...prev_obj,
+                        ...action.payload,
+                    }));
+                }
             })
             .addCase(fetchFavorite.fulfilled, (state, action) => {
                 state.tracks_page = action.payload;
@@ -600,14 +628,19 @@ export const Slice = createSlice({
                 state.track_favorites = action.payload;
             })
             .addCase(refreshToken.fulfilled, (state, action) => {
-                console.log("access_fulfilled", action.payload.access);
                 state.access = action.payload.access;
+                const prev_obj = JSON.parse(localStorage.getItem("auth"));
+                localStorage.setItem("auth", JSON.stringify({
+                    ...prev_obj,
+                    "access": state.access
+                }));
             })
-    },
+    }
 })
 
 
 export const {
+    fill_redux_by_storage,
     remove_track_from_favorite_by_id,
     add_track_to_favorite_by_id,
     change_popup_counter,
