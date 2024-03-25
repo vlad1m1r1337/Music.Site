@@ -14,7 +14,6 @@ export default function SearchPopup({ name }) {
     const menuRef = useRef(null);
     const tracks_page = useSelector(state => state.main.tracks_page);
     const {theme} = useThemeContext();
-    let flag = -1;
 
     const all_authors = useSelector(state => state.main.all_authors);
     const all_release_dates = useSelector(state => state.main.all_release_dates);

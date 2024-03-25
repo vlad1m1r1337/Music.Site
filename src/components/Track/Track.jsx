@@ -53,7 +53,6 @@ export default function Track({id, track, track_add, executor, album, time, head
 		else {
 			try {
 				await dispatch(removeFavoriteTrack({ access: access, id: id }));
-				// dispatch(remove_track_from_favorite_by_id({ id: id }));
 				if (header === MyTracks) {
 					dispatch(fetchFavorite({accessToken: access}));
 				}
