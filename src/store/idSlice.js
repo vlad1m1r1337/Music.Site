@@ -325,10 +325,6 @@ export const Slice = createSlice({
         all_release_dates: [],
         all_genres: [],
 
-        popup_author_counter: 0,
-        popup_release_dates: 0,
-        popup_genres: 0,
-
         rerender_flag: true,
     },
     reducers: {
@@ -536,31 +532,6 @@ export const Slice = createSlice({
             state.auth_email_error[0] = false;
             state.login_detail_error[0] = false;
         },
-        change_popup_counter: (state, action) => {
-            switch (action.payload.name) {
-                case (PopupFilter[0]):
-                    if (action.payload.filter) {
-                        state.popup_author_counter--;
-                    } else {
-                        state.popup_author_counter++;
-                    }
-                    break;
-                case (PopupFilter[1]):
-                    if (action.payload.filter) {
-                        state.popup_release_dates--;
-                    } else {
-                        state.popup_release_dates++;
-                    }
-                    break;
-                case (PopupFilter[2]):
-                    if (action.payload.filter) {
-                        state.popup_genres--;
-                    } else {
-                        state.popup_genres++;
-                    }
-                    break;
-            }
-        },
         fill_redux_by_storage: state  => {
             const storage = JSON.parse(localStorage.getItem("auth"));
             state.access = storage.access;
@@ -645,7 +616,6 @@ export const {
     fill_redux_by_storage,
     remove_track_from_favorite_by_id,
     add_track_to_favorite_by_id,
-    change_popup_counter,
     set_login_detail_error,
     reset_to_zero_auth_errors,
     set_auth_password_error,
