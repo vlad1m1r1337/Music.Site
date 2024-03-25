@@ -14,5 +14,5 @@ export const mockMaintracks = [
     }
 ]
 
-export const PopupFilter = ['исполнителю', 'году выпуска', 'жанру'];
+export const PopupFilter = ['исполнителю', 'жанру'];
 export const MyTracks = 'Мои треки';

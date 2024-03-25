@@ -11,8 +11,8 @@ export default function RangeTracks() {
             <S.FilterTitle>Искать по:</S.FilterTitle>
             <SearchPopup name={PopupFilter[0]} />
             <SearchPopup name={PopupFilter[1]} />
-            <p>Сортировка: </p>
-            <SearchPopup name={"По умолчанию"} />
+           {/* <p>Сортировка: </p>*/}
+           {/* <SearchPopup name={"По умолчанию"} />*/}
         </S.CenterBlockFilter>
     </>
   );

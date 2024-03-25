@@ -29,10 +29,6 @@ export default function SearchPopup({ name }) {
                     dispatch(find_all_authors());
                     break;
                 case 1:
-                    setArr(all_release_dates);
-                    dispatch(find_all_release_dates());
-                    break;
-                case 2:
                     setArr(all_genres);
                     dispatch(find_all_genres());
                     break;
@@ -55,7 +51,7 @@ export default function SearchPopup({ name }) {
         scroll = arr.length > 3 ? 1 : 0;
     }
 
-
+    console.log("counter", counter);
 
     return (
       <div style={{position: "relative"}}>
@@ -65,7 +61,7 @@ export default function SearchPopup({ name }) {
         <S.SearchPopupMenu $theme={theme} $isOpen={isOpen} ref={menuRef}>
             <S.PopMenuFind $theme={theme} $scroll={scroll}>
                 {arr && arr.map((item, index) => (
-                    <SearchPopupElement setCounter={setCounter} key={index} item={item} name={name}/>
+                    <SearchPopupElement setCounter={setCounter} key={index} item={item} attr={name}/>
                 ))}
             </S.PopMenuFind>
         </S.SearchPopupMenu>

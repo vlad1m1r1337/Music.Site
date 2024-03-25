@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 
 export default function CenterBlockContent({header}) {
 	let tracks = useSelector(state => state.main.tracks_page);
+	const filter_obj = useSelector(state => state.main.filter_obj);
 
 	return (
 		<S.CenterBlockContent>
@@ -27,6 +28,10 @@ export default function CenterBlockContent({header}) {
 						const minutes = Math.floor(dur_in_sec / 60);
 						const seconds = dur_in_sec % 60 < 10 ? "0" + dur_in_sec % 60 : dur_in_sec % 60;
 						const time = minutes + ":" + seconds;
+
+						const filter = filter_obj.arr?.find(el => el.id === id);
+						if (!filter?.filter) {return ;}
+
 						return (
 								<Track key={id} id={id} track={name} executor={author} album={album} time={time} header={header}/>
 							)

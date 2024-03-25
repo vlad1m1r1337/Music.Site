@@ -1,12 +1,28 @@
 import * as S from './SearchPopupElement.styles'
 import {useEffect, useState} from "react";
-import {change_filtr_flag} from "../../store/idSlice";
+import {change_filtr_flag, filter_by_attr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {useSelector} from "react-redux";
+import {PopupFilter} from "../../services/constants";
 
-export const SearchPopupElement = ({item, name, setCounter}) => {
+export const SearchPopupElement = ({item, setCounter, attr}) => {
     const [filter, setFilter] = useState(false);
     const dispatch = useDispatch();
+
+    const manage_filter = (filter) => {
+        let correct_attr;
+        switch (attr) {
+            case PopupFilter[0]:
+                correct_attr = "author";
+                break;
+            case PopupFilter[1]:
+                correct_attr = "genre";
+                break;
+            default:
+                break;
+        }
+        dispatch(filter_by_attr({item: item, attr: correct_attr, filter: filter}));
+    }
 
     useEffect(() => {
         if (filter) {
@@ -18,14 +34,14 @@ export const SearchPopupElement = ({item, name, setCounter}) => {
     }, [dispatch, filter]);
 
     const filterItem = () => {
+        setFilter(!filter);
         if (filter) {
             setCounter((prev) => prev - 1);
         }
         else {
             setCounter((prev) => prev + 1);
         }
-
-        setFilter(!filter);
+        manage_filter(!filter);
     }
 
     return (

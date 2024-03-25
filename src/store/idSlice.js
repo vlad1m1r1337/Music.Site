@@ -324,6 +324,7 @@ export const Slice = createSlice({
         all_authors: [],
         all_release_dates: [],
         all_genres: [],
+        filter_obj: [],
 
         rerender_flag: true,
     },
@@ -467,48 +468,11 @@ export const Slice = createSlice({
             state.all_genres.sort();
         },
         filter_search: (state, action) => {
-            console.log("filtred_flag", state.filtred_flag);
             if (state.filtred_flag) {
                 state.filtred_tracks = state.filtred_tracks.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
             }
             else if (state.tracks_page) {
                 state.filtred_tracks = state.tracks_page.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
-            }
-        },
-        filter_by_attr_author: (state, action) => {
-          if (state.tracks) {
-              if (!action.payload.filtred_flag) {
-                state.filtred_tracks.splice(0, state.filtred_tracks.length);
-              }
-              state.tracks_page.forEach((el) => {
-                  if (el.author === action.payload.author && state.filtred_tracks.find(item => item.id === el.id) === undefined) {
-                      state.filtred_tracks.push(el);
-                  }
-              })
-          }
-        },
-        filter_by_attr_release_date: (state, action) => {
-            if (state.tracks) {
-                if (!action.payload.filtred_flag) {
-                    state.filtred_tracks.splice(0, state.filtred_tracks.length);
-                }
-                state.tracks_page.forEach((el) => {
-                    if (el.release_date === action.payload.release_date && state.filtred_tracks.find(item => item.id === el.id) === undefined) {
-                        state.filtred_tracks.push(el);
-                    }
-                })
-            }
-        },
-        filter_by_attr_genre: (state, action) => {
-            if (state.tracks) {
-                if (!action.payload.filtred_flag) {
-                    state.filtred_tracks.splice(0, state.filtred_tracks.length);
-                }
-                state.tracks_page.forEach((el) => {
-                    if (el.genre === action.payload.genre && state.filtred_tracks.find(item => item.id === el.id) === undefined) {
-                        state.filtred_tracks.push(el);
-                    }
-                })
             }
         },
         change_filtr_flag: (state, action) => {
@@ -538,6 +502,67 @@ export const Slice = createSlice({
             state.refresh = storage.refresh;
             state.login = storage.email;
         },
+        create_filter_obj: state => {
+            const arr  = state.tracks_page?.map((element) => ({
+                ...element,
+                filter: true,
+            }));
+            state.filter_obj = {
+                "case": "all",
+                arr,
+            }
+        },
+        filter_by_attr: (state, action) => {
+            //if all are true
+            if (!state.filter_obj.arr.find(el => el.filter === false)) {
+                //filter is on
+                if (action.payload.filter) {
+                    console.log("1");
+                    for (let i = 0; i < state.filter_obj.arr.length; i++) {
+                        if (state.filter_obj.arr[i][action.payload.attr] !== action.payload.item) {
+                            state.filter_obj.arr[i].filter = false;
+                        }
+                    }
+                }
+                else {
+                    console.log("2");
+                    for (let i = 0; i < state.filter_obj.arr.length; i++) {
+                        if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && state.filter_obj.arr[i].filter) {
+                            state.filter_obj.arr[i].filter = false;
+                        }
+                    }
+                    if (state.filter_obj.arr.filter(el => el.filter === true).length === 0) {
+                        for (let i = 0; i < state.filter_obj.arr.length; i++) {
+                            state.filter_obj.arr[i].filter = true;
+                        }
+                    }
+                }
+            }
+            // if there are some false
+            else {
+                console.log("3");
+                if (action.payload.filter) {
+                    for (let i = 0; i < state.filter_obj.arr.length; i++) {
+                        if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && !state.filter_obj.arr[i].filter) {
+                            state.filter_obj.arr[i].filter = true;
+                        }
+                    }
+                }
+                else {
+                    console.log("4")
+                    for (let i = 0; i < state.filter_obj.arr.length; i++) {
+                        if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && state.filter_obj.arr[i].filter) {
+                            state.filter_obj.arr[i].filter = false;
+                        }
+                    }
+                    if (state.filter_obj.arr.filter(el => el.filter === true).length === 0) {
+                        for (let i = 0; i < state.filter_obj.arr.length; i++) {
+                            state.filter_obj.arr[i].filter = true;
+                        }
+                    }
+                }
+            }
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -613,6 +638,8 @@ export const Slice = createSlice({
 
 
 export const {
+    filter_by_attr,
+    create_filter_obj,
     fill_redux_by_storage,
     remove_track_from_favorite_by_id,
     add_track_to_favorite_by_id,

@@ -28,7 +28,8 @@ export default function Track({id, track, track_add, executor, album, time, head
 
 	const tr = useSelector(state => state.main.tracks);
 	const access = useSelector(state => state.main.access);
-	const redux_id = useSelector(state => state.main.id);
+
+
 	const handleClick = (id) => {
 		dispatch(set_amount_id_tracks());
 		dispatch(copy_tracks());
@@ -75,6 +76,7 @@ export default function Track({id, track, track_add, executor, album, time, head
 			setLike(false);
 		}
 	}, [track_favorites, id]);
+
 
 	return (
 		<S.PlayListItem>
