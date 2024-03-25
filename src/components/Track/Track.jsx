@@ -30,7 +30,6 @@ export default function Track({id, track, track_add, executor, album, time, head
 	const access = useSelector(state => state.main.access);
 	const redux_id = useSelector(state => state.main.id);
 	const handleClick = (id) => {
-		console.log("id", id, "track", track);
 		dispatch(set_amount_id_tracks());
 		dispatch(copy_tracks());
 		dispatch(chose({ id: id }));
@@ -54,7 +53,7 @@ export default function Track({id, track, track_add, executor, album, time, head
 		else {
 			try {
 				await dispatch(removeFavoriteTrack({ access: access, id: id }));
-				dispatch(remove_track_from_favorite_by_id({ id: id }));
+				// dispatch(remove_track_from_favorite_by_id({ id: id }));
 				if (header === MyTracks) {
 					dispatch(fetchFavorite({accessToken: access}));
 				}

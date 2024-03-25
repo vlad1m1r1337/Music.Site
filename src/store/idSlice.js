@@ -325,13 +325,9 @@ export const Slice = createSlice({
         all_release_dates: [],
         all_genres: [],
 
-
         popup_author_counter: 0,
         popup_release_dates: 0,
         popup_genres: 0,
-
-        filtred_tracks: [null],
-        filtred_flag: false,
 
         rerender_flag: true,
     },
@@ -541,29 +537,28 @@ export const Slice = createSlice({
             state.login_detail_error[0] = false;
         },
         change_popup_counter: (state, action) => {
-            if (action.payload.name === PopupFilter[0]) {
-                if (action.payload.filter) {
-                    state.popup_author_counter--;
-                }
-                else {
-                    state.popup_author_counter++;
-                }
-            }
-            if (action.payload.name === PopupFilter[1]) {
-                if (action.payload.filter) {
-                    state.popup_release_dates--;
-                }
-                else {
-                    state.popup_release_dates++;
-                }
-            }
-            if (action.payload.name === PopupFilter[2]) {
-                if (action.payload.filter) {
-                    state.popup_genres--;
-                }
-                else {
-                    state.popup_genres++;
-                }
+            switch (action.payload.name) {
+                case (PopupFilter[0]):
+                    if (action.payload.filter) {
+                        state.popup_author_counter--;
+                    } else {
+                        state.popup_author_counter++;
+                    }
+                    break;
+                case (PopupFilter[1]):
+                    if (action.payload.filter) {
+                        state.popup_release_dates--;
+                    } else {
+                        state.popup_release_dates++;
+                    }
+                    break;
+                case (PopupFilter[2]):
+                    if (action.payload.filter) {
+                        state.popup_genres--;
+                    } else {
+                        state.popup_genres++;
+                    }
+                    break;
             }
         },
         fill_redux_by_storage: state  => {
@@ -655,11 +650,8 @@ export const {
     reset_to_zero_auth_errors,
     set_auth_password_error,
     set_auth_email_error,
-    filter_by_attr_genre,
-    filter_by_attr_release_date,
     find_all_genres,
     find_all_release_dates,
-    filter_by_attr_author,
     change_filtr_flag,
     filter_search,
     find_all_authors,
