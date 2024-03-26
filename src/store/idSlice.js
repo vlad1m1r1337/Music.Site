@@ -352,7 +352,6 @@ export const Slice = createSlice({
             }
         },
         chose: (state, action) => {
-            console.log("id inside redux", action.payload.id);
             state.id = action.payload.id;
         },
         set_amount_id_tracks: function (state) {
@@ -504,7 +503,6 @@ export const Slice = createSlice({
         },
         create_filter_obj: state => {
             // if (state.filter_obj.entries(state.filter_obj).length !== 0) {return ;}
-            console.log("ent", Object.keys(state.filter_obj).length);
             if (state.filter_obj.arr) {return ;}
             const arr  = state.tracks_page?.map((element) => ({
                 ...element,
@@ -537,7 +535,6 @@ export const Slice = createSlice({
             if (!state.filter_obj.arr.find(el => el.filter === false)) {
                 //filter is on
                 if (action.payload.filter) {
-                    console.log("1");
                     for (let i = 0; i < state.filter_obj.arr.length; i++) {
                         if (state.filter_obj.arr[i][action.payload.attr] !== action.payload.item) {
                             state.filter_obj.arr[i].filter = false;
@@ -560,7 +557,6 @@ export const Slice = createSlice({
             }
             // if there are some false
             else {
-                console.log("3");
                 if (action.payload.filter) {
                     for (let i = 0; i < state.filter_obj.arr.length; i++) {
                         if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && !state.filter_obj.arr[i].filter) {
@@ -569,7 +565,6 @@ export const Slice = createSlice({
                     }
                 }
                 else {
-                    console.log("4")
                     for (let i = 0; i < state.filter_obj.arr.length; i++) {
                         if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && state.filter_obj.arr[i].filter) {
                             state.filter_obj.arr[i].filter = false;
