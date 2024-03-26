@@ -5,15 +5,13 @@ import {useClickOutside} from "../../hooks/useClickOutside";
 import * as S from "../SearchPopup/SearchPopup.styles";
 import SearchTimePopupElement from "../SearchTimePopupElement/SearchTimePopupElement";
 
-export default function SearchTimePopup({ name }) {
+export default function SearchTimePopup({ name, filter, setFilter }) {
     const dispatch = useDispatch();
     const [isOpen, setOpen] = useState(false);
     const menuRef = useRef(null);
     const tracks_page = useSelector(state => state.main.tracks_page);
     const {theme} = useThemeContext();
     const [counter, setCounter] = useState(0)
-
-    const [filter, setFilter] = useState(0);
 
     function waitForDelayAndRun() {
         if (isOpen) setTimeout(() => setOpen(false), 100);
@@ -22,9 +20,7 @@ export default function SearchTimePopup({ name }) {
     useClickOutside(menuRef, () => {
         waitForDelayAndRun();
     });
-
-    let scroll = 0;
-
+    console.log("name", name);
     return (
         <div style={{position: "relative"}}>
             <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>

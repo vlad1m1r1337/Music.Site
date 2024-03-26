@@ -3,10 +3,27 @@ import * as S from './RangeTracks.styles'
 import {PopupFilter} from "../../services/constants";
 import SearchTimePopup from "../SearchTimePopup/SearchTimePopup";
 import {SortP} from "./RangeTracks.styles";
+import {useEffect, useState} from "react";
 
 export default function RangeTracks() {
+    const [filter, setFilter] = useState(1);
+    const [name, setName] = useState()
 
-  return (
+    useEffect(() => {
+        console.log("filter", filter);
+        switch (filter) {
+            case 1:
+                setName("По умолчанию");
+                break;
+            case 2:
+                setName("Сначала старые");
+                break;
+            case 3:
+                setName("Сначала новые");
+                break;
+        }
+    }, [filter]);
+    return (
     <>
         <S.CenterBlockH2>Треки</S.CenterBlockH2>
             <S.CenterBlockFilter>
@@ -17,9 +34,9 @@ export default function RangeTracks() {
                 </S.FiltersDiv>
                 <S.FiltersDiv>
                     <S.SortP>Сортировка: </S.SortP>
-                    <SearchTimePopup name={"По умолчанию"}/>
+                    <SearchTimePopup name={name} filter={filter} setFilter={setFilter}/>
                 </S.FiltersDiv>
             </S.CenterBlockFilter>
     </>
-  );
+    );
 }

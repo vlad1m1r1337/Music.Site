@@ -30,7 +30,7 @@ export default function CenterBlockContent({header}) {
 						const time = minutes + ":" + seconds;
 
 						const filter = filter_obj.arr?.find(el => el.id === id);
-						if (!filter?.filter) {return ;}
+						if (!filter?.filter || !filter?.filter_search) {return ;}
 
 						return (
 								<Track key={id} id={id} track={name} executor={author} album={album} time={time} header={header}/>

@@ -1,6 +1,6 @@
 import * as S from './SearchPopupElement.styles'
 import {useEffect, useState} from "react";
-import {change_filtr_flag, filter_by_attr} from "../../store/idSlice";
+import {filter_by_attr} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {useSelector} from "react-redux";
 import {PopupFilter} from "../../services/constants";
@@ -23,15 +23,6 @@ export const SearchPopupElement = ({item, setCounter, attr}) => {
         }
         dispatch(filter_by_attr({item: item, attr: correct_attr, filter: filter}));
     }
-
-    useEffect(() => {
-        if (filter) {
-            dispatch(change_filtr_flag({flag: true}));
-        }
-        else {
-            dispatch(change_filtr_flag({flag: false}));
-        }
-    }, [dispatch, filter]);
 
     const filterItem = () => {
         setFilter(!filter);

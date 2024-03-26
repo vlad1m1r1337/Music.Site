@@ -467,15 +467,18 @@ export const Slice = createSlice({
             state.all_genres.sort();
         },
         filter_search: (state, action) => {
-            if (state.filtred_flag) {
-                state.filtred_tracks = state.filtred_tracks.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
+            // if (state.filtred_flag) {
+            //     state.filtred_tracks = state.filtred_tracks.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
+            // }
+            // else if (state.tracks_page) {
+            //     state.filtred_tracks = state.tracks_page.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
+            // }
+            if (!state.filter_obj.arr) {return ;}
+            for (let i = 0; i <  state.filter_obj.arr.length; i++) {
+                if (state.filter_obj.arr[i].filter) {
+                    state.filter_obj.arr[i].filter_search = state.filter_obj.arr[i].name.toLowerCase().includes(action.payload.inputValue.toLowerCase());
+                }
             }
-            else if (state.tracks_page) {
-                state.filtred_tracks = state.tracks_page.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
-            }
-        },
-        change_filtr_flag: (state, action) => {
-            state.filtred_flag = action.payload.flag;
         },
         set_auth_email_error: (state, action) => {
             state.auth_email_error[0] = action.payload.error_exist;
@@ -507,6 +510,7 @@ export const Slice = createSlice({
             const arr  = state.tracks_page?.map((element) => ({
                 ...element,
                 filter: true,
+                filter_search: true,
             }));
             state.filter_obj = {
                 "case": "all",
@@ -667,7 +671,6 @@ export const {
     set_auth_email_error,
     find_all_genres,
     find_all_release_dates,
-    change_filtr_flag,
     filter_search,
     find_all_authors,
     remove_track_from_favorite,
