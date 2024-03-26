@@ -7,10 +7,9 @@ import {useEffect, useState} from "react";
 
 export default function RangeTracks() {
     const [filter, setFilter] = useState(1);
-    const [name, setName] = useState()
+    const [name, setName] = useState("По умолчанию")
 
     useEffect(() => {
-        console.log("filter", filter);
         switch (filter) {
             case 1:
                 setName("По умолчанию");

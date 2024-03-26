@@ -8,7 +8,6 @@ export const ProtectedRoute = ({ redirectPath = "/login"}) => {
     const dispatch = useDispatch();
     const allowed = useSelector(state => state.main.isAllowed);
     if (!allowed && localStorage.getItem("auth")) {
-        console.log("ProtectedRoute")
         dispatch(fill_redux_by_storage());
         dispatch(set_allow({allowed: true}));
         dispatch(set_rerender({rerender: true}));

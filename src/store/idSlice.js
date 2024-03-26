@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {PopupFilter} from "../services/constants";
 import {set_rerender} from "./rerender";
-// import { setItem } from 'localStorage'; // Adjust the import path based on the library you're using
 
 export const refreshToken = createAsyncThunk(
     "main/refreshToken",
@@ -17,7 +16,6 @@ export const refreshToken = createAsyncThunk(
                 },
             });
             if (!response.ok) {
-                console.log(response);
                 throw new Error('Server Error!');
             }
             const data = await response.json();
@@ -42,14 +40,15 @@ export const addFavoriteTrack = createAsyncThunk(
              if (!response.ok) {
                 if (response.status === 401) {
                     const refresh = getState().main.refresh;
-                    dispatch(refreshToken(refresh));
+                    await dispatch(refreshToken(refresh));
                     const newAccess = getState().main.access;
-                    return await dispatch(addFavoriteTrack({ access: newAccess, id: id }));
+                    return dispatch(addFavoriteTrack({ access: newAccess, id: id }));
                 }
                 throw new Error('Server Error!');
             }
         }
         catch(error) {
+            console.log("error", error);
             return rejectWithValue(error.message);
         }
     }
@@ -69,7 +68,7 @@ export const removeFavoriteTrack = createAsyncThunk(
             if (!response.ok) {
                 if (response.status === 401) {
                     const refresh = getState().main.refresh;
-                    dispatch(refreshToken(refresh));
+                    await dispatch(refreshToken(refresh));
                     const newAccess = getState().main.access;
                     return await dispatch(removeFavoriteTrack({ access: newAccess, id: id }));
                 }
@@ -94,12 +93,12 @@ export const getFavorite = createAsyncThunk(
                 },
             })
             if (!response.ok) {
-                // if (response.status === 401) {
-                //     const refresh = getState().main.refresh;
-                //     dispatch(refreshToken(refresh));
-                //     const newAccess = getState().main.access;
-                //     return await dispatch(getFavorite({ accessToken: newAccess}));
-                // }
+                if (response.status === 401) {
+                    const refresh = getState().main.refresh;
+                    await dispatch(refreshToken(refresh));
+                    const newAccess = getState().main.access;
+                    return await dispatch(getFavorite({ accessToken: newAccess}));
+                }
                 throw new Error('Server Error!');
             }
             const data = await response.json();
@@ -125,7 +124,7 @@ export const fetchFavorite = createAsyncThunk(
             if (!response.ok) {
                 if (response.status === 401) {
                     const refresh = getState().main.refresh;
-                    dispatch(refreshToken(refresh));
+                    await dispatch(refreshToken(refresh));
                     const newAccess = getState().main.access;
                     return await dispatch(fetchFavorite({ accessToken: newAccess}));
                 }
@@ -269,7 +268,6 @@ export const registration = createAsyncThunk(
         const InputPasswordRepeat = document.getElementById("input_password_repeat");
         const url = "https://skypro-music-api.skyeng.tech/user/signup/";
         try {
-            console.log("InputPassword", InputPassword.value, "InputPasswordRepeat", InputPasswordRepeat.value);
             if (InputPassword.value && InputPassword.value !== InputPasswordRepeat.value) {
                 set_email_password_error({password: "Пароли не совпадают"}, dispatch);
                 throw new Error("Пароли не совпадают");
@@ -467,12 +465,6 @@ export const Slice = createSlice({
             state.all_genres.sort();
         },
         filter_search: (state, action) => {
-            // if (state.filtred_flag) {
-            //     state.filtred_tracks = state.filtred_tracks.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
-            // }
-            // else if (state.tracks_page) {
-            //     state.filtred_tracks = state.tracks_page.filter((element) => element.name.toLowerCase().includes(action.payload.inputValue.toLowerCase()));
-            // }
             if (!state.filter_obj.arr) {return ;}
             for (let i = 0; i <  state.filter_obj.arr.length; i++) {
                 if (state.filter_obj.arr[i].filter) {
@@ -546,7 +538,6 @@ export const Slice = createSlice({
                     }
                 }
                 else {
-                    console.log("2");
                     for (let i = 0; i < state.filter_obj.arr.length; i++) {
                         if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && state.filter_obj.arr[i].filter) {
                             state.filter_obj.arr[i].filter = false;

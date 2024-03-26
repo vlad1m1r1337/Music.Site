@@ -20,7 +20,6 @@ export default function SearchTimePopup({ name, filter, setFilter }) {
     useClickOutside(menuRef, () => {
         waitForDelayAndRun();
     });
-    console.log("name", name);
     return (
         <div style={{position: "relative"}}>
             <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>

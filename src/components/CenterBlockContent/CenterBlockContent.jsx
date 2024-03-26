@@ -37,7 +37,7 @@ export default function CenterBlockContent({header}) {
 							)
 					})
 				}
-				{!tracks.length && <S.NoTracksInPlaylist>В данном плейлисте нет треков</S.NoTracksInPlaylist>}
+				{!tracks.length && <S.NoTracksInPlaylist>Ничего не найдено *_*</S.NoTracksInPlaylist>}
 			</S.ContentPlayList>
 			</S.CenterBlockContent>
 	)
