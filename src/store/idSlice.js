@@ -503,6 +503,9 @@ export const Slice = createSlice({
             state.login = storage.email;
         },
         create_filter_obj: state => {
+            // if (state.filter_obj.entries(state.filter_obj).length !== 0) {return ;}
+            console.log("ent", Object.keys(state.filter_obj).length);
+            if (state.filter_obj.arr) {return ;}
             const arr  = state.tracks_page?.map((element) => ({
                 ...element,
                 filter: true,
@@ -511,6 +514,23 @@ export const Slice = createSlice({
                 "case": "all",
                 arr,
             }
+        },
+        sort_by_date_old: state => {
+            state.tracks_page.sort((a, b) => {
+                if (a.release_date < b.release_date) return -1;
+                if (a.release_date > b.release_date) return 1;
+                return 0;
+            });
+        },
+        sort_by_date_new: state => {
+            state.tracks_page.sort((a, b) => {
+                if (a.release_date < b.release_date) return 1;
+                if (a.release_date > b.release_date) return -1;
+                return 0;
+            });
+        },
+        sort_by_date_id: state => {
+            state.tracks_page.sort((a, b) => a.id - b.id);
         },
         filter_by_attr: (state, action) => {
             //if all are true
@@ -638,6 +658,9 @@ export const Slice = createSlice({
 
 
 export const {
+    sort_by_date_id,
+    sort_by_date_new,
+    sort_by_date_old,
     filter_by_attr,
     create_filter_obj,
     fill_redux_by_storage,

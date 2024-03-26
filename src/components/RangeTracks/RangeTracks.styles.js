@@ -31,3 +31,12 @@ export const FilterTitle = styled.div`
     line-height: 24px;
     margin-right: 15px;
 `
+
+export const FiltersDiv = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+export const SortP = styled.p`
+    margin-right: 15px;
+`

@@ -51,8 +51,6 @@ export default function SearchPopup({ name }) {
         scroll = arr.length > 3 ? 1 : 0;
     }
 
-    console.log("counter", counter);
-
     return (
       <div style={{position: "relative"}}>
         <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>

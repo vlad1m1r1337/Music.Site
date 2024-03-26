@@ -13,6 +13,8 @@ export default function SearchTimePopup({ name }) {
     const {theme} = useThemeContext();
     const [counter, setCounter] = useState(0)
 
+    const [filter, setFilter] = useState(0);
+
     function waitForDelayAndRun() {
         if (isOpen) setTimeout(() => setOpen(false), 100);
     }
@@ -23,8 +25,6 @@ export default function SearchTimePopup({ name }) {
 
     let scroll = 0;
 
-    console.log("counter", counter);
-
     return (
         <div style={{position: "relative"}}>
             <S.BtnText $theme={theme} onClick={() => setOpen(!isOpen)}>
@@ -32,12 +32,12 @@ export default function SearchTimePopup({ name }) {
             </S.BtnText>
             <S.SearchPopupMenu $theme={theme} $isOpen={isOpen} ref={menuRef}>
                 <S.PopMenuFind $theme={theme}>
-                    <SearchTimePopupElement setCounter={setCounter}  item={"По умолчанию"} attr={name}/>
-                    <SearchTimePopupElement setCounter={setCounter}  item={"Сначала старые"} attr={name}/>
-                    <SearchTimePopupElement setCounter={setCounter}  item={"Сначала новые"} attr={name}/>
+                    <SearchTimePopupElement setCounter={setCounter} item={"По умолчанию"} setFilter={setFilter} stateFilter={filter}/>
+                    <SearchTimePopupElement setCounter={setCounter} item={"Сначала старые"} setFilter={setFilter} stateFilter={filter}/>
+                    <SearchTimePopupElement setCounter={setCounter} item={"Сначала новые"} setFilter={setFilter} stateFilter={filter}/>
                 </S.PopMenuFind>
             </S.SearchPopupMenu>
-            {counter > 0 && <S.PopupCounterParagraph>{counter}</S.PopupCounterParagraph>}
+            {filter > 1  && <S.PopupCounterParagraph>1</S.PopupCounterParagraph>}
         </div>
     );
 }
