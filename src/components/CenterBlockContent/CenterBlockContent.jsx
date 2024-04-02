@@ -5,7 +5,6 @@ import {useSelector} from "react-redux";
 export default function CenterBlockContent({header}) {
 	let tracks = useSelector(state => state.main.tracks_page);
 	const filter_obj = useSelector(state => state.main.filter_obj);
-
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>

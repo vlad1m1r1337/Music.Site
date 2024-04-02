@@ -295,6 +295,25 @@ export const registration = createAsyncThunk(
     }
 )
 
+function handleFiltering(state, payload) {
+    const { attr, item, filter } = payload;
+    const arr = state.filter_obj.arr;
+
+    arr.forEach(el => {
+        if (el[attr] === item && !el.filter && filter) {
+            el.filter = true;
+        } else if (el[attr] === item && el.filter && !filter) {
+            el.filter = false;
+        }
+    });
+
+    if (!filter && arr.find(el => el.filter)) {
+        arr.forEach(el => {
+            el.filter = true;
+        });
+    }
+}
+
 export const Slice = createSlice({
     name: 'id',
     initialState: {
@@ -325,8 +344,22 @@ export const Slice = createSlice({
         filter_obj: [],
 
         rerender_flag: true,
+        count_author: 0,
+        count_genre: 0,
+        cross_count_author_genre: 0,
     },
     reducers: {
+        handle_cross_count_author_genre: state => {
+          if ((state.count_author === 1 && state.count_genre !== 0) || state.count_genre === 1 && state.count_author !== 0)  {
+              state.cross_count_author_genre = 1;
+          }
+        },
+        change_count_author: (state, action) => {
+            state.count_author = action.payload;
+        },
+        change_count_genre: (state, action) => {
+            state.count_genre = action.payload;
+        },
         increment: state => {
             const tr = JSON.parse(JSON.stringify(state.tracks));
             const foundIndex = tr.findIndex((el) => el.id === state.id);
@@ -529,46 +562,51 @@ export const Slice = createSlice({
         filter_by_attr: (state, action) => {
             //if all are true
             if (!state.filter_obj.arr.find(el => el.filter === false)) {
-                //filter is on
+                //filter is on we do active
                 if (action.payload.filter) {
-                    for (let i = 0; i < state.filter_obj.arr.length; i++) {
-                        if (state.filter_obj.arr[i][action.payload.attr] !== action.payload.item) {
-                            state.filter_obj.arr[i].filter = false;
+                    state.filter_obj.arr.forEach(el => {
+                        if (el[action.payload.attr] !== action.payload.item) {
+                            el.filter = false;
                         }
-                    }
-                }
-                else {
-                    for (let i = 0; i < state.filter_obj.arr.length; i++) {
-                        if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && state.filter_obj.arr[i].filter) {
-                            state.filter_obj.arr[i].filter = false;
-                        }
-                    }
-                    if (state.filter_obj.arr.filter(el => el.filter === true).length === 0) {
-                        for (let i = 0; i < state.filter_obj.arr.length; i++) {
-                            state.filter_obj.arr[i].filter = true;
-                        }
-                    }
+                    })
                 }
             }
             // if there are some false
             else {
                 if (action.payload.filter) {
-                    for (let i = 0; i < state.filter_obj.arr.length; i++) {
-                        if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && !state.filter_obj.arr[i].filter) {
-                            state.filter_obj.arr[i].filter = true;
-                        }
+                    if (state.cross_count_author_genre) {
+                        state.filter_obj.arr.forEach(el => {
+                            if (el[action.payload.attr] === action.payload.item && el.filter) {
+                                el.filter = false;
+                            }
+                        })
+                        state.cross_count_author_genre = false;
                     }
+                    state.filter_obj.arr.forEach(el => {
+                        if (el[action.payload.attr] === action.payload.item && !el.filter) {
+                            el.filter = true;
+                        }
+                    })
                 }
                 else {
-                    for (let i = 0; i < state.filter_obj.arr.length; i++) {
-                        if (state.filter_obj.arr[i][action.payload.attr] === action.payload.item && state.filter_obj.arr[i].filter) {
-                            state.filter_obj.arr[i].filter = false;
-                        }
+                    if (state.cross_count_author_genre) {
+                        state.filter_obj.arr.forEach(el => {
+                            if (el[action.payload.attr] === action.payload.item && !el.filter) {
+                                el.filter = true;
+                            }
+                        })
+                        state.cross_count_author_genre = false;
                     }
-                    if (state.filter_obj.arr.filter(el => el.filter === true).length === 0) {
-                        for (let i = 0; i < state.filter_obj.arr.length; i++) {
-                            state.filter_obj.arr[i].filter = true;
+                    state.filter_obj.arr.forEach(el => {
+                        if (el[action.payload.attr] === action.payload.item && el.filter) {
+                            el.filter = false;
                         }
+                    })
+
+                    if (state.filter_obj.arr.find(el => el.filter === true) === undefined) {
+                        state.filter_obj.arr.forEach(el => {
+                            el.filter = true;
+                        })
                     }
                 }
             }
@@ -648,6 +686,9 @@ export const Slice = createSlice({
 
 
 export const {
+    handle_cross_count_author_genre,
+    change_count_author,
+    change_count_genre,
     sort_by_date_id,
     sort_by_date_new,
     sort_by_date_old,
