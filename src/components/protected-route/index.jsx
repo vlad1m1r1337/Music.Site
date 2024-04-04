@@ -11,6 +11,7 @@ export const ProtectedRoute = ({ redirectPath = "/login"}) => {
         dispatch(fill_redux_by_storage());
         dispatch(set_allow({allowed: true}));
         dispatch(set_rerender({rerender: true}));
+        console.log("1");
         return <Outlet />
     }
     else if (!allowed) {

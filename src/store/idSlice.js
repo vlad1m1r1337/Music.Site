@@ -48,7 +48,6 @@ export const addFavoriteTrack = createAsyncThunk(
             }
         }
         catch(error) {
-            console.log("error", error);
             return rejectWithValue(error.message);
         }
     }
@@ -530,7 +529,6 @@ export const Slice = createSlice({
             state.login = storage.email;
         },
         create_filter_obj: state => {
-            // if (state.filter_obj.entries(state.filter_obj).length !== 0) {return ;}
             if (state.filter_obj.arr) {return ;}
             const arr  = state.tracks_page?.map((element) => ({
                 ...element,
@@ -651,6 +649,7 @@ export const Slice = createSlice({
                     state.tracks_page = action.payload.data[0].items;
                 }
                 state.loading = false;
+                console.log("data", state.tracks_page);
             })
             .addCase(getToken.fulfilled, (state, action) => {
                 state.access = action.payload.access;

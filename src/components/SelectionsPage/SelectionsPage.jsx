@@ -10,7 +10,13 @@ import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {fetchFavorite, getFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
+import {
+    create_filter_obj,
+    fetchFavorite,
+    getFavorite,
+    set_amount_id_tracks,
+    set_def_shuffle_arr
+} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchSelectionTracks, setIsLoading} from "../../store/idSlice";
 import {set_rerender} from "../../store/rerender";
@@ -35,8 +41,14 @@ export const  SelectionsPage = ({header}) => {
     const accessToken = useSelector(state => state.main.access);
     const rerender = useSelector(state => state.rerender.rerender);
     const id = useSelector(state => state.main.id);
+    const tracks_page = useSelector(state => state.main.tracks_page);
 
     useEffect(() => {
+        dispatch(create_filter_obj());
+    }, [tracks_page]);
+
+    useEffect(() => {
+        console.log("2");
         if (id !== -1 && rerender) {
             dispatch(set_rerender({rerender: false}));
             return ;
@@ -47,6 +59,7 @@ export const  SelectionsPage = ({header}) => {
     useEffect(() => {
         dispatch(getFavorite({accessToken}));
         if (header !== MyTracks) {
+            console.log("3");
             dispatch(fetchSelectionTracks({param}));
         }
         else {

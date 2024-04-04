@@ -11,7 +11,7 @@ import {
 	set_amount_id_tracks,
 	set_shuffle_def,
 	set_shuffle_first,
-	fetchFavorite,
+	fetchFavorite, remove_track_from_favorite,
 } from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
 import {useEffect, useState} from "react";
@@ -54,6 +54,7 @@ export default function Track({id, track, track_add, executor, album, time, head
 		else {
 			try {
 				await dispatch(removeFavoriteTrack({ access: access, id: id }));
+				dispatch(remove_track_from_favorite());
 				if (header === MyTracks) {
 					dispatch(fetchFavorite({accessToken: access}));
 				}

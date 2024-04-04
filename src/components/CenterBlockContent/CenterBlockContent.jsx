@@ -1,10 +1,16 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
 import {useSelector} from "react-redux";
+import {useEffect} from "react";
 
 export default function CenterBlockContent({header}) {
 	let tracks = useSelector(state => state.main.tracks_page);
 	const filter_obj = useSelector(state => state.main.filter_obj);
+
+	useEffect(() => {
+		console.log("Tracks", tracks);
+	}, []);
+
 	return (
 		<S.CenterBlockContent>
 			<S.ContentTitle>
