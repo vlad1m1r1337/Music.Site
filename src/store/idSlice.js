@@ -340,7 +340,7 @@ export const Slice = createSlice({
         all_authors: [],
         all_release_dates: [],
         all_genres: [],
-        filter_obj: [],
+        filter_obj: {},
 
         rerender_flag: true,
         count_author: 0,
@@ -529,7 +529,7 @@ export const Slice = createSlice({
             state.login = storage.email;
         },
         create_filter_obj: state => {
-            if (state.filter_obj.arr) {return ;}
+            // if (state.filter_obj.arr && state.filter_obj.arr.length !== 28) {return ;}
             const arr  = state.tracks_page?.map((element) => ({
                 ...element,
                 filter: true,
@@ -649,7 +649,6 @@ export const Slice = createSlice({
                     state.tracks_page = action.payload.data[0].items;
                 }
                 state.loading = false;
-                console.log("data", state.tracks_page);
             })
             .addCase(getToken.fulfilled, (state, action) => {
                 state.access = action.payload.access;

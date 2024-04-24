@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
+import {Navigate, Outlet, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {set_allow, fill_redux_by_storage} from "../../store/idSlice";
@@ -7,11 +7,12 @@ import {set_rerender} from "../../store/rerender";
 export const ProtectedRoute = ({ redirectPath = "/login"}) => {
     const dispatch = useDispatch();
     const allowed = useSelector(state => state.main.isAllowed);
+
     if (!allowed && localStorage.getItem("auth")) {
+        const page = window.location.href.split("/").pop();
         dispatch(fill_redux_by_storage());
         dispatch(set_allow({allowed: true}));
         dispatch(set_rerender({rerender: true}));
-        console.log("1");
         return <Outlet />
     }
     else if (!allowed) {

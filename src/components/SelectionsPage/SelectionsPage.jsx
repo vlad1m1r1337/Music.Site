@@ -43,23 +43,21 @@ export const  SelectionsPage = ({header}) => {
     const id = useSelector(state => state.main.id);
     const tracks_page = useSelector(state => state.main.tracks_page);
 
-    useEffect(() => {
-        dispatch(create_filter_obj());
-    }, [tracks_page]);
+    // useEffect(() => {
+    //     dispatch(create_filter_obj());
+    // }, [tracks_page]);
 
     useEffect(() => {
-        console.log("2");
         if (id !== -1 && rerender) {
             dispatch(set_rerender({rerender: false}));
             return ;
         }
         dispatch(setIsLoading({loading: true}));
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(getFavorite({accessToken}));
         if (header !== MyTracks) {
-            console.log("3");
             dispatch(fetchSelectionTracks({param}));
         }
         else {

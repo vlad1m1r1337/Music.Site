@@ -1,15 +1,11 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
 import {useSelector} from "react-redux";
-import {useEffect} from "react";
+import {isEmpty} from "../../utils/isEmpty";
 
 export default function CenterBlockContent({header}) {
 	let tracks = useSelector(state => state.main.tracks_page);
 	const filter_obj = useSelector(state => state.main.filter_obj);
-
-	useEffect(() => {
-		console.log("Tracks", tracks);
-	}, []);
 
 	return (
 		<S.CenterBlockContent>
@@ -35,11 +31,11 @@ export default function CenterBlockContent({header}) {
 						const time = minutes + ":" + seconds;
 
 						const filter = filter_obj.arr?.find(el => el.id === id);
-						if (!filter?.filter || !filter?.filter_search) {return ;}
-
-						return (
+						if ((filter?.filter && filter?.filter_search) || isEmpty(filter_obj)) {
+							return (
 								<Track key={id} id={id} track={name} executor={author} album={album} time={time} header={header}/>
 							)
+						}
 					})
 				}
 				{!tracks.length && <S.NoTracksInPlaylist>Ничего не найдено *_*</S.NoTracksInPlaylist>}

@@ -18,7 +18,6 @@ export const useEffects =  (isLoading) => {
     const rerender = useSelector(state => state.rerender.rerender);
     const id = useSelector(state => state.main.id);
     const tracks_page = useSelector(state => state.main.tracks_page);
-    const filter_obj = useSelector(state => state.main.filter_obj);
 
     useEffect(() => {
         if (id !== -1 && rerender) {
@@ -26,7 +25,7 @@ export const useEffects =  (isLoading) => {
             return ;
         }
         dispatch(setIsLoading({loading: true}));
-    }, []);
+    }, [dispatch, id, rerender]);
 
     useEffect(() => {
         dispatch(fetchMainTracks());
@@ -43,5 +42,5 @@ export const useEffects =  (isLoading) => {
 
     useEffect(() => {
         dispatch(create_filter_obj());
-    }, [tracks_page]);
+    }, [dispatch, tracks_page]);
 }
