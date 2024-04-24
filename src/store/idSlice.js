@@ -1,5 +1,4 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {PopupFilter} from "../services/constants";
 import {set_rerender} from "./rerender";
 
 export const refreshToken = createAsyncThunk(
@@ -294,24 +293,24 @@ export const registration = createAsyncThunk(
     }
 )
 
-function handleFiltering(state, payload) {
-    const { attr, item, filter } = payload;
-    const arr = state.filter_obj.arr;
-
-    arr.forEach(el => {
-        if (el[attr] === item && !el.filter && filter) {
-            el.filter = true;
-        } else if (el[attr] === item && el.filter && !filter) {
-            el.filter = false;
-        }
-    });
-
-    if (!filter && arr.find(el => el.filter)) {
-        arr.forEach(el => {
-            el.filter = true;
-        });
-    }
-}
+// function handleFiltering(state, payload) {
+//     const { attr, item, filter } = payload;
+//     const arr = state.filter_obj.arr;
+//
+//     arr.forEach(el => {
+//         if (el[attr] === item && !el.filter && filter) {
+//             el.filter = true;
+//         } else if (el[attr] === item && el.filter && !filter) {
+//             el.filter = false;
+//         }
+//     });
+//
+//     if (!filter && arr.find(el => el.filter)) {
+//         arr.forEach(el => {
+//             el.filter = true;
+//         });
+//     }
+// }
 
 export const Slice = createSlice({
     name: 'id',

@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
 import {
-	remove_track_from_favorite_by_id,
 	add_track_to_favorite_by_id,
 	addFavoriteTrack,
 	chose,

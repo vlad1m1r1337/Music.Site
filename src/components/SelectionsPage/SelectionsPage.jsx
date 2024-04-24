@@ -41,11 +41,6 @@ export const  SelectionsPage = ({header}) => {
     const accessToken = useSelector(state => state.main.access);
     const rerender = useSelector(state => state.rerender.rerender);
     const id = useSelector(state => state.main.id);
-    const tracks_page = useSelector(state => state.main.tracks_page);
-
-    // useEffect(() => {
-    //     dispatch(create_filter_obj());
-    // }, [tracks_page]);
 
     useEffect(() => {
         if (id !== -1 && rerender) {

@@ -9,7 +9,6 @@ export default function SearchTimePopup({ name, filter, setFilter }) {
     const dispatch = useDispatch();
     const [isOpen, setOpen] = useState(false);
     const menuRef = useRef(null);
-    const tracks_page = useSelector(state => state.main.tracks_page);
     const {theme} = useThemeContext();
     const [counter, setCounter] = useState(0)
 
