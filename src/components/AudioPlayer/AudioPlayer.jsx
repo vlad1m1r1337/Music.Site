@@ -27,6 +27,7 @@ export default function AudioPlayer() {
 	let sound;
 
 	useEffect(() => {
+		if (!track_favorites) return ;
 		const founded = track_favorites.find(el => el.id === id);
 		if (founded) {
 			setAudioLike(true);

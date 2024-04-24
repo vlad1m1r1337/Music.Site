@@ -6,8 +6,8 @@ import {set_allow} from "../../store/idSlice";
 export default function NavMenuCatalog() {
 	const dispatch = useDispatch();
 	const signOut = () => {
-		localStorage.removeItem('user');
 		dispatch(set_allow({allowed: false}));
+		localStorage.clear();
 	}
 	const {toggleTheme} = useThemeContext();
 

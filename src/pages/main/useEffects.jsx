@@ -25,7 +25,7 @@ export const useEffects =  (isLoading) => {
             return ;
         }
         dispatch(setIsLoading({loading: true}));
-    }, [dispatch, id, rerender]);
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(fetchMainTracks());
