@@ -3,18 +3,21 @@ import {useNavigate} from "react-router-dom";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch, useSelector} from "react-redux";
 import {
+	add_track_to_favorite_by_id,
 	addFavoriteTrack,
 	chose,
 	copy_tracks, removeFavoriteTrack,
 	set_amount_id_tracks,
 	set_shuffle_def,
-	set_shuffle_first
+	set_shuffle_first,
+	fetchFavorite, remove_track_from_favorite,
 } from "../../store/idSlice";
 import {set_track} from "../../store/idSlice";
 import {useEffect, useState} from "react";
 import {TrackTimeDiv} from "./Track.styles";
+import {MyTracks} from "../../services/constants";
 
-export default function Track({id, track, track_add, executor, album, time}) {
+export default function Track({id, track, track_add, executor, album, time, header}) {
 	const [like, setLike] = useState(false);
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
@@ -25,12 +28,13 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	const tr = useSelector(state => state.main.tracks);
 	const access = useSelector(state => state.main.access);
 
+
 	const handleClick = (id) => {
 		dispatch(set_amount_id_tracks());
 		dispatch(copy_tracks());
 		dispatch(chose({ id: id }));
 		dispatch(set_shuffle_def({ id: id }));
-		dispatch(set_track({track: tr.find((el, index, array) => el.id === id)}));
+		dispatch(set_track({track: tr?.find(el => el.id === id)}));
 		dispatch(set_shuffle_first({ flag: id }));
 	};
 	const navigate = useNavigate();
@@ -39,6 +43,7 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		if (!like) {
 			try {
 				await dispatch(addFavoriteTrack({ access: access, id: id }));
+				dispatch(add_track_to_favorite_by_id({ id: id }));
 			}
 			catch(error) {
 				navigate("/login", { replace: true });
@@ -48,6 +53,10 @@ export default function Track({id, track, track_add, executor, album, time}) {
 		else {
 			try {
 				await dispatch(removeFavoriteTrack({ access: access, id: id }));
+				dispatch(remove_track_from_favorite());
+				if (header === MyTracks) {
+					dispatch(fetchFavorite({accessToken: access}));
+				}
 			}
 			catch (error) {
 				navigate("/login", { replace: true });
@@ -60,13 +69,14 @@ export default function Track({id, track, track_add, executor, album, time}) {
 	const track_favorites = useSelector(state => state.main.track_favorites);
 
 	useEffect(() => {
-		if ( track_favorites && track_favorites.find((el, index, array) => el.id === id)) {
+		if ( Array.isArray(track_favorites) && track_favorites?.find(el => el.id === id)) {
 			setLike(true);
 		}
 		else {
 			setLike(false);
 		}
 	}, [track_favorites, id]);
+
 
 	return (
 		<S.PlayListItem>

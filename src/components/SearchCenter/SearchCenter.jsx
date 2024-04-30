@@ -2,19 +2,15 @@ import * as S from "./SearchCenter.styles";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
-import {change_filtr_flag, filter_search} from "../../store/idSlice";
+import {filter_search} from "../../store/idSlice";
 
 export default function SearchCenter() {
 	const {theme} = useThemeContext();
 	const dispatch = useDispatch();
-
 	const [inputValue, setInputValue] = useState('');
 
 	useEffect(() => {
 		dispatch(filter_search({inputValue: inputValue}));
-		if (inputValue !== '') {
-			dispatch(change_filtr_flag({flag: true}));
-		}
 	}, [dispatch, inputValue]);
 
 	const handleInputChange = (event) => {

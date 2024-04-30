@@ -163,5 +163,5 @@ export const TrackTimeDiv = styled.div`
     margin-left: -2px;
     margin-top: -2px;
     padding: 4px;
-}
+    cursor: pointer;
 `

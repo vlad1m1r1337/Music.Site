@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const CenterBlockContent = styled.div`
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
 	flex-direction: column;
-    //min-height: 0;
+    min-height: 0;
+	//display: -webkit-box;
+	//display: -ms-flexbox;
+	//-webkit-box-orient: vertical;
+	//-webkit-box-direction: normal;
+	//-ms-flex-direction: column;
 `
 export const ContentTitle = styled.div`
 	display: -webkit-box;
@@ -60,18 +60,11 @@ export const PlayListTitleSvg = styled.svg`
 	stroke: #696969;
 `
 export const ContentPlayList = styled.div`
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
 	flex-direction: column;
 	overflow-y: auto;
-    height: 500px;
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    scrollbar-width: none;
+    padding-bottom: 60px;
 `
 
 export const NoTracksInPlaylist = styled.p`

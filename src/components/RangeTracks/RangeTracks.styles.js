@@ -13,6 +13,7 @@ export const CenterBlockFilter = styled.div`
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    justify-content: space-between;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
@@ -28,5 +29,14 @@ export const FilterTitle = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+    margin-right: 15px;
+`
+
+export const FiltersDiv = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+export const SortP = styled.p`
     margin-right: 15px;
 `

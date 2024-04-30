@@ -6,11 +6,12 @@ export function SideBarIconBlack() {
     const dispatch = useDispatch();
     const signOut = () => {
         dispatch(set_allow({allowed: false}));
+        localStorage.clear();
     }
     return (
         <S.SideBarIcon>
-            <S.SideBarSvg onClick={signOut} >
-                <use xlinkHref="./img/icon/sprite.svg#logout"></use>
+            <S.SideBarSvg onClick={signOut} alt={"logout"}>
+                <use xlinkHref="/img/icon/sprite.svg#logout"></use>
             </S.SideBarSvg>
         </S.SideBarIcon>
     )

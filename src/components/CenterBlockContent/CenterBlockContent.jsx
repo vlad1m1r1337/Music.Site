@@ -1,17 +1,11 @@
 import Track from '../Track/Track';
 import * as S from './CenterBlockContent.styles';
 import {useSelector} from "react-redux";
+import {isEmpty} from "../../utils/isEmpty";
 
-export default function CenterBlockContent() {
+export default function CenterBlockContent({header}) {
 	let tracks = useSelector(state => state.main.tracks_page);
-	const filtred_tracks = useSelector(state => state.main.filtred_tracks);
-	const filtred_flag = useSelector(state => state.main.filtred_flag);
-
-	if (filtred_flag) {
-		tracks = filtred_tracks;
-	}
-
-	console.log("tracks", tracks);
+	const filter_obj = useSelector(state => state.main.filter_obj);
 
 	return (
 		<S.CenterBlockContent>
@@ -26,8 +20,7 @@ export default function CenterBlockContent() {
 				</S.Col04>
 			</S.ContentTitle>
 			<S.ContentPlayList>
-				{tracks &&
-					tracks.map((track) => {
+				{tracks?.map((track) => {
 						const id = track.id;
 						const name = track.name;
 						const author = track.author;
@@ -36,12 +29,16 @@ export default function CenterBlockContent() {
 						const minutes = Math.floor(dur_in_sec / 60);
 						const seconds = dur_in_sec % 60 < 10 ? "0" + dur_in_sec % 60 : dur_in_sec % 60;
 						const time = minutes + ":" + seconds;
-						return (
-								<Track key={id} id={id} track={name} executor={author} album={album} time={time}/>
+
+						const filter = filter_obj.arr?.find(el => el.id === id);
+						if ((filter?.filter && filter?.filter_search) || isEmpty(filter_obj)) {
+							return (
+								<Track key={id} id={id} track={name} executor={author} album={album} time={time} header={header}/>
 							)
+						}
 					})
 				}
-				{!tracks.length && <S.NoTracksInPlaylist>В данном плейлисте нет треков</S.NoTracksInPlaylist>}
+				{!tracks.length && <S.NoTracksInPlaylist>Ничего не найдено *_*</S.NoTracksInPlaylist>}
 			</S.ContentPlayList>
 			</S.CenterBlockContent>
 	)

@@ -10,9 +10,17 @@ import CenterBlockContent from "../CenterBlockContent/CenterBlockContent";
 import SelectionPageWithPlaceholders from "../SelectionPageWithPlacaholders/SelectionPageWithPlaceholders";
 import {useThemeContext} from "../../contexts/color_theme";
 import {useSelector} from "react-redux";
-import {fetchFavorite, getFavorite, set_amount_id_tracks, set_def_shuffle_arr} from "../../store/idSlice";
+import {
+    create_filter_obj,
+    fetchFavorite,
+    getFavorite,
+    set_amount_id_tracks,
+    set_def_shuffle_arr
+} from "../../store/idSlice";
 import {useDispatch} from "react-redux";
 import {fetchSelectionTracks, setIsLoading} from "../../store/idSlice";
+import {set_rerender} from "../../store/rerender";
+import {MyTracks} from "../../services/constants";
 
 const StyledH = styled.h1`
   width: 706px;
@@ -31,15 +39,20 @@ export const  SelectionsPage = ({header}) => {
     const amount_id_tracks = useSelector(state => state.main.amount_id_tracks);
     const param = useParams();
     const accessToken = useSelector(state => state.main.access);
-
+    const rerender = useSelector(state => state.rerender.rerender);
+    const id = useSelector(state => state.main.id);
 
     useEffect(() => {
+        if (id !== -1 && rerender) {
+            dispatch(set_rerender({rerender: false}));
+            return ;
+        }
         dispatch(setIsLoading({loading: true}));
     }, [dispatch]);
 
     useEffect(() => {
         dispatch(getFavorite({accessToken}));
-        if (header !== "Мои треки") {
+        if (header !== MyTracks) {
             dispatch(fetchSelectionTracks({param}));
         }
         else {
@@ -83,7 +96,7 @@ export const  SelectionsPage = ({header}) => {
                             <SS.MainCenterBlock>
                                 <SearchCenter/>
                                 <StyledH>{header}</StyledH>
-                                <CenterBlockContent tracks={tracks}/>
+                                <CenterBlockContent header={header} tracks={tracks}/>
                             </SS.MainCenterBlock>
                             <SideBarAuth/>
                         </S.Main>

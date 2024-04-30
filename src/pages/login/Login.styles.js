@@ -5,8 +5,8 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 321px auto 0 auto;
-  width: 366px;
-  height: 439px;
+  min-width: 366px;
+  min-height: 439px;
   background-color: #FFFFFF;
   border-radius: 12px;
 `
@@ -16,10 +16,11 @@ export const Input = styled.input`
     font-weight: 400;
     line-height: 24px;
     border: none;
-    border-bottom: 2px solid #D0CECE;
-    width: 279px;
+  border-bottom: 2px solid ${prop => prop.$error ? "red" : "#D0CECE"};
+
+  width: 279px;
     &:focus {
-    outline: none; /* Remove outline on focus */
+    outline: none;
     }
     &:last-child {
     margin: 38px 0 60px 0;
@@ -41,6 +42,7 @@ export const ButtonWhite = styled.button`
   transition: 0.2s;
   &:hover {
     background-color: #D9D9D9;
+    cursor: pointer;
   }
   &:active {
     background-color: #D0CECE;
@@ -57,6 +59,7 @@ export const ButtonPurpl = styled.button`
   transition: 0.2s;
   &:hover {
     background-color: #3F007D;
+    cursor: pointer;
   }
   &:active {
     background-color: #271A58;
@@ -68,6 +71,7 @@ export const DivInput = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
 `
 
 export const ParagraphErrorLog = styled.p`
@@ -75,4 +79,8 @@ export const ParagraphErrorLog = styled.p`
     font-size: 1rem;
     position: absolute;
     top: 520px;
+`
+
+export const LoginWrapper = styled.div`
+    display: flex;
 `

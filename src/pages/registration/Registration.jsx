@@ -3,8 +3,8 @@ import * as S from "./Registration.styles"
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {registration, reset_to_zero_auth_errors} from "../../store/idSlice";
-import {DivErrorLogs, ParagraphErrorLog, ParagraphErrorLogEmail} from "./Registration.styles";
-import {useEffect} from "react";
+import {LoginLogs} from "../../components/LoginLogs/LoginLogs";
+import {PasswordLogs} from "../../components/PasswordLogs/PasswordLogs";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -29,34 +29,32 @@ export const Registration = () => {
             .catch((error) => {
                 setTimeout(() => {
                     dispatch(reset_to_zero_auth_errors());
-                }, 3000)
+                }, 4000)
             })
     }
     return (
         <>
             <GlobalStyle/>
-            <S.DivErrorLogs>
-                {auth_email_error[0] && <S.ParagraphErrorLogEmail>{auth_email_error[1]}</S.ParagraphErrorLogEmail>}
-            </S.DivErrorLogs>
-            <S.DivErrorLogs>
-                {auth_password_error[0] && <S.ParagraphErrorLogPassword>{auth_password_error[1]}</S.ParagraphErrorLogPassword>}
-            </S.DivErrorLogs>
-            <S.StyledDiv>
-                <S.StyledImg src="/img/SkyPro_logo.png" alt="SkyPro"/>
-                <S.StyledDivInput>
-                    <S.StyledInput $error={auth_email_error[0]}
-                                   data-testid={"input_mail"}
-                                   id="input_mail"
-                                   placeholder="Почта"
-                                   type="text"/>
-                    <S.StyledInput $error={auth_password_error[0]} data-testid={"input_password"}
-                                   id="input_password"
-                                   placeholder="Пароль"
-                                   type="password"/>
-                    <S.StyledInput id="input_password_repeat" placeholder="Повторите пароль" type="password"/>
-                </S.StyledDivInput>
-                <S.StyledButtonPurple onClick={reg}>Зарегистрироваться</S.StyledButtonPurple>
-            </S.StyledDiv>
+            <S.RegistrationWrapper>
+                <S.StyledDiv>
+                    <S.StyledImg src="/img/SkyPro_logo.png" alt="SkyPro"/>
+                    <S.StyledDivInput>
+                        <LoginLogs/>
+                        <S.StyledInput $error={auth_email_error[0]}
+                                       data-testid={"input_mail"}
+                                       id="input_mail"
+                                       placeholder="Почта"
+                                       type="text"/>
+                        <PasswordLogs/>
+                        <S.StyledInput $error={auth_password_error[0]} data-testid={"input_password"}
+                                       id="input_password"
+                                       placeholder="Пароль"
+                                       type="password"/>
+                        <S.StyledInputRepeat $error={auth_password_error[1]} id="input_password_repeat" placeholder="Повторите пароль" type="password"/>
+                    </S.StyledDivInput>
+                    <S.StyledButtonPurple onClick={reg}>Зарегистрироваться</S.StyledButtonPurple>
+                </S.StyledDiv>
+            </S.RegistrationWrapper>
         </>
     )
 }
